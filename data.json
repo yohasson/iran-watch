@@ -1,0 +1,602 @@
+{
+ "schema": 1,
+ "updated_utc": "2026-11-23T18:42:00Z",
+ "summary": "No new risk signals since the 19:26 check. The betting market on a full Iranian airspace closure by 30 Nov slipped from 5% to 4%, so the main estimate eased to 1.14%. No alert sent.",
+ "message_sent": "none",
+ "major": {
+  "F": 1.14,
+  "prev_F": 1.28,
+  "E": 2.3,
+  "M": 0.56,
+  "threshold": 7
+ },
+ "limited": {
+  "L": 25.05,
+  "prev_L": 25.05
+ },
+ "alert": {
+  "active": false,
+  "last_alerted_pct": null,
+  "last_alert_utc": null,
+  "hard_triggers": []
+ },
+ "flight": {
+  "active": true,
+  "label": "Wizz Air Tel Aviv → London, Fri 27 Nov (afternoon)",
+  "R": 10.71,
+  "prev_R": 10.89,
+  "baseline": 17,
+  "alert_at": 25,
+  "C1": 1.92,
+  "C2": 3.81,
+  "W": 7,
+  "triggers": [],
+  "status_note": "Wizz Air Tel Aviv flights running normally; no foreign-airline suspensions; no new EASA warning for Israel; Ben Gurion open."
+ },
+ "model": {
+  "E": 2.3,
+  "P_iran_nov30": 0.04,
+  "P_iran_dec31": 0.13,
+  "P_il_nov30": 0.0375,
+  "W": 7,
+  "F_floor": null,
+  "R_floor": null
+ },
+ "markets": [
+  {
+   "label": "Iran full airspace closure by 30 Nov",
+   "now": 4,
+   "prev": 5,
+   "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
+  },
+  {
+   "label": "Iran full airspace closure by 31 Dec",
+   "now": 13,
+   "prev": 15,
+   "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
+  },
+  {
+   "label": "Israeli airspace closed by 30 Nov",
+   "now": 3.75,
+   "prev": 3.75,
+   "url": "https://polymarket.com/event/israeli-airspace-closed-by"
+  },
+  {
+   "label": "Israeli airspace closed by 31 Dec",
+   "now": 17,
+   "prev": 17,
+   "url": "https://polymarket.com/event/israeli-airspace-closed-by"
+  },
+  {
+   "label": "Israel–Iran ceasefire holds through 30 Nov",
+   "now": 94,
+   "prev": 94,
+   "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "label": "Israel–Iran ceasefire holds through 31 Dec",
+   "now": 75,
+   "prev": 75,
+   "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
+  },
+  {
+   "label": "US–Iran 2-week pause begins by 30 Nov",
+   "now": 57.5,
+   "prev": 57.5,
+   "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
+  },
+  {
+   "label": "US–Iran 2-week pause begins by 31 Dec",
+   "now": 76,
+   "prev": 76,
+   "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
+  }
+ ],
+ "brent": {
+  "usd": 90.04,
+  "prev_usd": 89.57,
+  "change_pct_day": -2.73,
+  "read_utc": "2026-11-23T18:23:00Z"
+ },
+ "items": [
+  {
+   "time_utc": "2026-11-23T18:38:00Z",
+   "source": "Polymarket",
+   "text": "Iran full airspace closure by 30 Nov: 5% → 4%; by 31 Dec: 15% → 13%.",
+   "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+   "effect": "Market part 0.70% → 0.56%"
+  },
+  {
+   "time_utc": "2026-11-23T17:49:00Z",
+   "source": "Reuters via Times of Israel",
+   "text": "US Treasury issues new Iran-related sanctions on at least 8 people and 22 companies (UAE, Türkiye, Hong Kong).",
+   "link": "https://www.timesofisrael.com/liveblog_entry/us-issues-new-iran-related-sanctions-treasury-website-shows/",
+   "effect": "No change – economic pressure already counted"
+  },
+  {
+   "time_utc": "2026-11-23T18:00:00Z",
+   "source": "Al Jazeera live",
+   "text": "Iran's Foreign Ministry: Hormuz security can return quickly if the US meets Iran's conditions; Iran 'will not back down'.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/22/iran-war-live-tankers-set-ablaze-in-hormuz-as-irgc-warns-of-unrest-threat",
+   "effect": "No change – statement"
+  },
+  {
+   "time_utc": "2026-11-23T16:45:00Z",
+   "source": "Fars via Al Jazeera (Iranian claim, unconfirmed)",
+   "text": "Iranian army claims it shot down a US 'LUCAS' drone east of the Strait of Hormuz.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/22/iran-war-live-tankers-set-ablaze-in-hormuz-as-irgc-warns-of-unrest-threat",
+   "effect": "Counted at the 19:26 check (small rise)"
+  },
+  {
+   "time_utc": "2026-11-23T12:45:00Z",
+   "source": "flight-status.com",
+   "text": "Wizz Air departures from Tel Aviv running normally today (Sofia, Budapest, Kraków, Warsaw).",
+   "link": "https://flight-status.com/wizz-air/tlv-departures/",
+   "effect": "Flight risk unchanged"
+  }
+ ],
+ "open_items": [
+  "Outcome of Rubio's meeting with Qatar's prime minister in Washington (21:00 Israel time, 23 Nov).",
+  "Iranian claim that a US drone was shot down – not confirmed by the US.",
+  "Iranian TV claim that 'US-linked ships' were seized – not confirmed.",
+  "A quiet-day reduction for 24 Nov can apply after about 18:45 Israel time if there is no new Iranian fire."
+ ],
+ "history": [
+  {
+   "utc": "2026-11-20T23:50:00Z",
+   "F": 1.47,
+   "E": 2.31,
+   "M": 0.94,
+   "L": 14.53,
+   "R": 16.1
+  },
+  {
+   "utc": "2026-11-21T00:56:00Z",
+   "F": 1.39,
+   "E": 2.31,
+   "M": 0.83,
+   "L": 14.53,
+   "R": 15.84
+  },
+  {
+   "utc": "2026-11-21T02:05:00Z",
+   "F": 1.39,
+   "E": 2.31,
+   "M": 0.84,
+   "L": 14.53,
+   "R": 15.81
+  },
+  {
+   "utc": "2026-11-21T03:15:00Z",
+   "F": 1.4,
+   "E": 2.31,
+   "M": 0.84,
+   "L": 14.53,
+   "R": 15.78
+  },
+  {
+   "utc": "2026-11-21T05:35:00Z",
+   "F": 1.42,
+   "E": 2.31,
+   "M": 0.85,
+   "L": 14.53,
+   "R": 15.42
+  },
+  {
+   "utc": "2026-11-21T06:52:00Z",
+   "F": 1.42,
+   "E": 2.36,
+   "M": 0.85,
+   "L": 14.9,
+   "R": 15.39
+  },
+  {
+   "utc": "2026-11-21T07:56:00Z",
+   "F": 1.46,
+   "E": 2.36,
+   "M": 0.86,
+   "L": 14.9,
+   "R": 15.45
+  },
+  {
+   "utc": "2026-11-21T09:06:00Z",
+   "F": 1.51,
+   "E": 2.64,
+   "M": 0.86,
+   "L": 17.38,
+   "R": 15.54
+  },
+  {
+   "utc": "2026-11-21T10:16:00Z",
+   "F": 1.52,
+   "E": 2.64,
+   "M": 0.87,
+   "L": 17.38,
+   "R": 15.51
+  },
+  {
+   "utc": "2026-11-21T11:30:00Z",
+   "F": 1.62,
+   "E": 2.64,
+   "M": 0.99,
+   "L": 17.38,
+   "R": 15.7
+  },
+  {
+   "utc": "2026-11-21T12:37:00Z",
+   "F": 1.64,
+   "E": 2.64,
+   "M": 0.99,
+   "L": 17.38,
+   "R": 15.71
+  },
+  {
+   "utc": "2026-11-21T13:55:00Z",
+   "F": 1.64,
+   "E": 2.69,
+   "M": 1.0,
+   "L": 17.81,
+   "R": 15.67
+  },
+  {
+   "utc": "2026-11-21T15:00:00Z",
+   "F": 1.58,
+   "E": 2.47,
+   "M": 1.0,
+   "L": 17.49,
+   "R": 15.49
+  },
+  {
+   "utc": "2026-11-21T16:15:00Z",
+   "F": 1.58,
+   "E": 2.47,
+   "M": 1.01,
+   "L": 17.49,
+   "R": 15.45
+  },
+  {
+   "utc": "2026-11-21T17:25:00Z",
+   "F": 1.58,
+   "E": 2.47,
+   "M": 1.01,
+   "L": 17.49,
+   "R": 15.42
+  },
+  {
+   "utc": "2026-11-21T18:30:00Z",
+   "F": 1.74,
+   "E": 2.47,
+   "M": 1.02,
+   "L": 17.49,
+   "R": 15.72
+  },
+  {
+   "utc": "2026-11-21T19:45:00Z",
+   "F": 1.78,
+   "E": 2.95,
+   "M": 1.02,
+   "L": 22.88,
+   "R": 15.76
+  },
+  {
+   "utc": "2026-11-21T20:50:00Z",
+   "F": 1.8,
+   "E": 2.95,
+   "M": 1.03,
+   "L": 22.88,
+   "R": 15.77
+  },
+  {
+   "utc": "2026-11-21T22:05:00Z",
+   "F": 1.81,
+   "E": 3.14,
+   "M": 1.03,
+   "L": 24.64,
+   "R": 15.73
+  },
+  {
+   "utc": "2026-11-21T23:10:00Z",
+   "F": 1.81,
+   "E": 3.14,
+   "M": 1.04,
+   "L": 24.64,
+   "R": 15.7
+  },
+  {
+   "utc": "2026-11-22T00:30:00Z",
+   "F": 1.82,
+   "E": 3.14,
+   "M": 1.04,
+   "L": 24.64,
+   "R": 14.92
+  },
+  {
+   "utc": "2026-11-22T01:31:00Z",
+   "F": 1.82,
+   "E": 3.14,
+   "M": 1.05,
+   "L": 24.64,
+   "R": 14.89
+  },
+  {
+   "utc": "2026-11-22T02:55:00Z",
+   "F": 1.86,
+   "E": 3.26,
+   "M": 1.06,
+   "L": 25.38,
+   "R": 14.92
+  },
+  {
+   "utc": "2026-11-22T03:52:00Z",
+   "F": 1.87,
+   "E": 3.26,
+   "M": 1.06,
+   "L": 25.38,
+   "R": 14.89
+  },
+  {
+   "utc": "2026-11-22T05:03:00Z",
+   "F": 1.87,
+   "E": 3.26,
+   "M": 1.07,
+   "L": 25.38,
+   "R": 14.86
+  },
+  {
+   "utc": "2026-11-22T06:12:00Z",
+   "F": 1.75,
+   "E": 3.2,
+   "M": 0.95,
+   "L": 24.82,
+   "R": 14.59
+  },
+  {
+   "utc": "2026-11-22T07:23:00Z",
+   "F": 1.64,
+   "E": 3.2,
+   "M": 0.83,
+   "L": 24.82,
+   "R": 14.35
+  },
+  {
+   "utc": "2026-11-22T08:33:00Z",
+   "F": 1.64,
+   "E": 3.2,
+   "M": 0.84,
+   "L": 24.82,
+   "R": 14.31
+  },
+  {
+   "utc": "2026-11-22T09:52:00Z",
+   "F": 1.66,
+   "E": 3.2,
+   "M": 0.84,
+   "L": 24.82,
+   "R": 14.31
+  },
+  {
+   "utc": "2026-11-22T10:54:00Z",
+   "F": 1.67,
+   "E": 3.26,
+   "M": 0.85,
+   "L": 24.82,
+   "R": 14.28
+  },
+  {
+   "utc": "2026-11-22T12:12:00Z",
+   "F": 1.67,
+   "E": 3.26,
+   "M": 0.85,
+   "L": 25.76,
+   "R": 14.24
+  },
+  {
+   "utc": "2026-11-22T13:15:00Z",
+   "F": 1.68,
+   "E": 3.26,
+   "M": 0.86,
+   "L": 25.76,
+   "R": 14.21
+  },
+  {
+   "utc": "2026-11-22T14:26:00Z",
+   "F": 1.64,
+   "E": 3.26,
+   "M": 0.86,
+   "L": 25.76,
+   "R": 14.1
+  },
+  {
+   "utc": "2026-11-22T15:36:00Z",
+   "F": 1.64,
+   "E": 3.1,
+   "M": 0.87,
+   "L": 25.76,
+   "R": 14.07
+  },
+  {
+   "utc": "2026-11-22T16:50:00Z",
+   "F": 1.69,
+   "E": 3.1,
+   "M": 0.87,
+   "L": 25.76,
+   "R": 14.1
+  },
+  {
+   "utc": "2026-11-22T17:58:00Z",
+   "F": 1.69,
+   "E": 3.25,
+   "M": 0.88,
+   "L": 27.26,
+   "R": 13.72
+  },
+  {
+   "utc": "2026-11-22T19:09:00Z",
+   "F": 1.59,
+   "E": 3.34,
+   "M": 0.75,
+   "L": 28.25,
+   "R": 13.51
+  },
+  {
+   "utc": "2026-11-22T20:18:00Z",
+   "F": 1.6,
+   "E": 3.34,
+   "M": 0.76,
+   "L": 28.25,
+   "R": 13.48
+  },
+  {
+   "utc": "2026-11-22T21:35:00Z",
+   "F": 1.46,
+   "E": 3.34,
+   "M": 0.63,
+   "L": 28.25,
+   "R": 13.2
+  },
+  {
+   "utc": "2026-11-22T22:45:00Z",
+   "F": 1.46,
+   "E": 3.34,
+   "M": 0.64,
+   "L": 28.45,
+   "R": 13.17
+  },
+  {
+   "utc": "2026-11-22T23:55:00Z",
+   "F": 1.47,
+   "E": 3.34,
+   "M": 0.64,
+   "L": 28.45,
+   "R": 13.14
+  },
+  {
+   "utc": "2026-11-23T01:00:00Z",
+   "F": 1.47,
+   "E": 3.34,
+   "M": 0.64,
+   "L": 28.45,
+   "R": 13.11
+  },
+  {
+   "utc": "2026-11-23T02:10:00Z",
+   "F": 1.48,
+   "E": 3.34,
+   "M": 0.65,
+   "L": 28.45,
+   "R": 13.08
+  },
+  {
+   "utc": "2026-11-23T03:25:00Z",
+   "F": 1.48,
+   "E": 3.34,
+   "M": 0.65,
+   "L": 28.45,
+   "R": 13.05
+  },
+  {
+   "utc": "2026-11-23T04:30:00Z",
+   "F": 1.49,
+   "E": 3.34,
+   "M": 0.66,
+   "L": 28.45,
+   "R": 12.69
+  },
+  {
+   "utc": "2026-11-23T05:52:00Z",
+   "F": 1.4,
+   "E": 2.94,
+   "M": 0.66,
+   "L": 28.04,
+   "R": 12.51
+  },
+  {
+   "utc": "2026-11-23T06:53:00Z",
+   "F": 1.4,
+   "E": 2.94,
+   "M": 0.66,
+   "L": 28.04,
+   "R": 12.48
+  },
+  {
+   "utc": "2026-11-23T08:10:00Z",
+   "F": 1.34,
+   "E": 2.65,
+   "M": 0.67,
+   "L": 27.43,
+   "R": 11.47
+  },
+  {
+   "utc": "2026-11-23T09:15:00Z",
+   "F": 1.34,
+   "E": 2.65,
+   "M": 0.67,
+   "L": 27.43,
+   "R": 11.45
+  },
+  {
+   "utc": "2026-11-23T10:25:00Z",
+   "F": 1.34,
+   "E": 2.65,
+   "M": 0.68,
+   "L": 27.43,
+   "R": 11.43
+  },
+  {
+   "utc": "2026-11-23T11:40:00Z",
+   "F": 1.35,
+   "E": 2.65,
+   "M": 0.68,
+   "L": 27.43,
+   "R": 11.4
+  },
+  {
+   "utc": "2026-11-23T12:45:00Z",
+   "F": 1.35,
+   "E": 2.65,
+   "M": 0.68,
+   "L": 27.43,
+   "R": 11.38
+  },
+  {
+   "utc": "2026-11-23T13:55:00Z",
+   "F": 1.36,
+   "E": 2.65,
+   "M": 0.69,
+   "L": 27.43,
+   "R": 11.06
+  },
+  {
+   "utc": "2026-11-23T15:10:00Z",
+   "F": 1.26,
+   "E": 2.26,
+   "M": 0.69,
+   "L": 24.5,
+   "R": 10.92
+  },
+  {
+   "utc": "2026-11-23T16:20:00Z",
+   "F": 1.26,
+   "E": 2.26,
+   "M": 0.7,
+   "L": 24.5,
+   "R": 10.9
+  },
+  {
+   "utc": "2026-11-23T17:26:00Z",
+   "F": 1.28,
+   "E": 2.3,
+   "M": 0.7,
+   "L": 25.05,
+   "R": 10.89
+  },
+  {
+   "utc": "2026-11-23T18:42:00Z",
+   "F": 1.14,
+   "E": 2.3,
+   "M": 0.56,
+   "L": 25.05,
+   "R": 10.71
+  }
+ ]
+}

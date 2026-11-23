@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Hourly Iran strike-risk watch with a flight-risk check. Estimates only.">
+<title>Iran strike-risk watch</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bg:#f3f4f6; --card:#ffffff; --ink:#17202a; --muted:#5c6777; --line:#e2e5ea;
+    --green:#17804a; --green-bg:#e6f4ec; --amber:#a86200; --amber-bg:#fff3df;
+    --red:#c0262d; --red-bg:#fdeaea; --blue:#1a5bb8; --blue-bg:#e9f0fb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.45;font-size:15px}
+  a{color:var(--blue)}
+  .wrap{max-width:1120px;margin:0 auto;padding:22px 16px 48px}
+  header{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-bottom:16px}
+  h1{font-size:1.65rem;margin:0;letter-spacing:-.3px}
+  .sub{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .btn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-size:.95rem;font-weight:600;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+  .btn:hover{filter:brightness(1.08)}
+  .btn:disabled{opacity:.65;cursor:progress}
+  .btn .spin{width:14px;height:14px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;display:none}
+  .btn.busy .spin{display:inline-block;animation:sp 0.8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .tick{font-size:.8rem;color:var(--muted);text-align:right}
+  .banner{border-radius:10px;padding:12px 16px;margin-bottom:14px;display:flex;gap:12px;align-items:flex-start;font-weight:600}
+  .banner .dot{width:12px;height:12px;border-radius:50%;background:currentColor;flex:0 0 auto;margin-top:5px}
+  .ok{background:var(--green-bg);color:var(--green)}
+  .warn{background:var(--amber-bg);color:var(--amber)}
+  .bad{background:var(--red-bg);color:var(--red)}
+  .info{background:var(--blue-bg);color:var(--blue)}
+  .banner small{display:block;font-weight:500;opacity:.9;margin-top:2px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+  .panel h3{margin:0 0 8px;font-size:1rem}
+  .meta{color:var(--muted);font-size:.85rem}
+  .live{display:none}
+  .live.show{display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px;margin-bottom:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column}
+  .card h2{font-size:.92rem;margin:0 0 4px;color:var(--muted);font-weight:600}
+  .big{font-size:2.35rem;font-weight:700;letter-spacing:-.6px;line-height:1.1;margin-top:4px}
+  .big.g{color:var(--green)} .big.a{color:var(--amber)} .big.r{color:var(--red)}
+  .delta{font-size:.86rem;color:var(--muted);margin-top:2px}
+  .note{font-size:.82rem;color:var(--muted);margin-top:auto;padding-top:10px}
+  .bar{position:relative;height:10px;background:#eceef2;border-radius:6px;margin:14px 0 4px}
+  .bar .fill{position:absolute;left:0;top:0;height:100%;border-radius:6px;background:var(--green)}
+  .bar .mark{position:absolute;top:-5px;width:2px;height:20px;background:var(--red)}
+  .barlbl{position:relative;height:16px;font-size:.74rem;color:var(--muted)}
+  .barlbl span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+  .barlbl span.l{left:0;transform:none}
+  .tag{display:inline-block;font-size:.74rem;font-weight:600;border-radius:999px;padding:2px 8px;margin-top:8px;align-self:flex-start}
+  .parts{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.9rem}
+  .parts b{font-size:1.05rem}
+  .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-bottom:14px}
+  svg.chart{width:100%;height:auto;display:block}
+  ul.items{list-style:none;margin:0;padding:0}
+  ul.items li{padding:10px 0;border-top:1px solid var(--line)}
+  ul.items li:first-child{border-top:0;padding-top:2px}
+  .it-top{font-size:.8rem;color:var(--muted)}
+  .it-eff{font-size:.8rem;color:var(--blue);margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:.9rem}
+  th,td{text-align:left;padding:7px 6px;border-top:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600;font-size:.8rem;border-top:0}
+  td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+  .up{color:var(--red)} .down{color:var(--green)}
+  ul.open{margin:0;padding-left:18px}
+  ul.open li{margin:4px 0}
+  footer{color:var(--muted);font-size:.8rem;margin-top:22px;line-height:1.55}
+  .err{color:var(--red)}
+  @media (max-width:560px){ .big{font-size:2rem} .actions{align-items:flex-start} .tick{text-align:left} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Iran strike-risk watch</h1>
+      <div class="sub" id="sub">Hourly check · all times in Israel time</div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
+      <div class="tick" id="tick">Loading…</div>
+    </div>
+  </header>
+
+  <div id="banner" class="banner info" role="status" aria-live="polite"><span class="dot"></span><div>Loading the latest check…</div></div>
+
+  <div class="panel">
+    <h3>Latest check</h3>
+    <div id="summary">–</div>
+    <div class="meta" id="summaryMeta"></div>
+  </div>
+
+  <div class="panel live" id="livePanel" aria-live="polite">
+    <h3>Live market refresh</h3>
+    <div id="liveText"></div>
+  </div>
+
+  <div class="grid">
+    <div class="card" id="cardF">
+      <h2>Major US/Israeli strike campaign on Iran – next 24 hours</h2>
+      <div class="big" id="fVal">–</div>
+      <div class="delta" id="fDelta"></div>
+      <div class="bar"><div class="fill" id="fFill"></div><div class="mark" id="fMark"></div></div>
+      <div class="barlbl" id="fLbl"></div>
+      <div class="note">Alert level 7%. Sustained, multi-target campaign like 13 Jun 2025 or 28 Feb 2026.</div>
+    </div>
+    <div class="card" id="cardL">
+      <h2>Any US/Israeli strike on Iranian soil – next 24 hours</h2>
+      <div class="big" id="lVal">–</div>
+      <div class="delta" id="lDelta"></div>
+      <div class="note">Includes limited "defensive" strikes, such as the November strikes on Qeshm and Sirik. No alert is set on this figure.</div>
+    </div>
+    <div class="card" id="cardR">
+      <h2 id="rTitle">Flight cancellation risk</h2>
+      <div class="big" id="rVal">–</div>
+      <div class="delta" id="rDelta"></div>
+      <div class="bar"><div class="fill" id="rFill"></div><div class="mark" id="rMark"></div></div>
+      <div class="barlbl" id="rLbl"></div>
+      <div class="note" id="rNote"></div>
+    </div>
+    <div class="card" id="cardM">
+      <h2>Market: Iran fully closes its airspace by 30 Nov</h2>
+      <div class="big" id="mVal">–</div>
+      <div class="delta" id="mDelta"></div>
+      <div class="note">Polymarket price. Feeds the market part of the main estimate.</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>How the main estimate is built</h3>
+    <div class="parts" id="parts"></div>
+    <div class="meta" style="margin-top:6px">The main estimate averages the news-based and market-based estimates on a log-odds scale. The news part moves only when the hourly check finds new signals; the market part follows Polymarket.</div>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Main estimate over time</h3>
+      <svg class="chart" id="chartF" viewBox="0 0 640 210" role="img" aria-label="Main estimate over time"></svg>
+    </div>
+    <div class="panel">
+      <h3 id="chartRTitle">Flight cancellation risk over time</h3>
+      <svg class="chart" id="chartR" viewBox="0 0 640 210" role="img" aria-label="Flight risk over time"></svg>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>What the latest check found</h3>
+      <ul class="items" id="items"></ul>
+    </div>
+    <div class="panel">
+      <h3>Markets (context)</h3>
+      <table>
+        <thead><tr><th>Polymarket question</th><th class="n">Now</th><th class="n">Before</th></tr></thead>
+        <tbody id="markets"></tbody>
+      </table>
+      <div class="meta" id="brent" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Watching next</h3>
+    <ul class="open" id="open"></ul>
+  </div>
+
+  <footer>
+    <div><b>How this works.</b> An automated check runs every hour. It reads official sources (Israel Home Front Command, IDF, US Embassy Jerusalem, CENTCOM, White House), major news outlets and prediction markets, and updates this page. Iranian state media and social-media posts count only as claims until a second independent source confirms them. Alerts go out by Teams and email when the main estimate reaches 7% or a hard trigger occurs (a strike order, an embassy departure order, a Home Front Command change, an airspace closure, US casualties or a confirmed large-scale strike).</div>
+    <div style="margin-top:6px"><b>Why 7%.</b> It is the lower of the estimates made on the eves of the last two attacks (12 Jun 2025: 14%; 27 Feb 2026: 7%).</div>
+    <div style="margin-top:6px"><b>Update now</b> reloads the newest hourly check and re-reads live Polymarket prices to recalculate the market part and the flight risk. A full news re-check happens on the hourly run.</div>
+    <div style="margin-top:6px">Estimates only, not predictions or advice. Not affiliated with Polymarket, Wizz Air or any government.</div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var OWNER = 'yohasson', REPO = 'iran-watch';
+  var API_URL = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/data.json?ref=main';
+  var GAMMA = 'https://gamma-api.polymarket.com/events?slug=';
+  var SLUG_IRAN = 'iran-full-airspace-closure-byptptpt-20260625195253028';
+  var SLUG_IL = 'israeli-airspace-closed-by';
+  var DATA_POLL_MS = 5 * 60 * 1000;
+  var LIVE_POLL_MS = 60 * 60 * 1000;
+  var TZ = 'Asia/Jerusalem';
+  var NOV30_END = Date.UTC(2026, 10, 30, 23, 59);
+  var DEC31_END = Date.UTC(2026, 11, 31, 23, 59);
+  var FLIGHT_T = Date.UTC(2026, 10, 27, 13, 0);
+  var FLIGHT_END = Date.UTC(2026, 10, 27, 15, 0);
+  var H_END = Date.UTC(2026, 11, 1, 4, 59);
+
+  var data = null, live = null, nextDataAt = 0, nextLiveAt = 0, busy = false;
+
+  function $(id) { return document.getElementById(id); }
+  function isNum(v) { return typeof v === 'number' && isFinite(v); }
+  function fmt(iso, opts) {
+    var o = { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false };
+    for (var k in (opts || {})) o[k] = opts[k];
+    return new Intl.DateTimeFormat('en-GB', o).format(new Date(iso));
+  }
+  function fmtFull(iso) { return fmt(iso, { weekday: 'short', day: 'numeric', month: 'short' }); }
+  function pct(v, dp) {
+    if (!isNum(v)) return '–';
+    if (dp == null) dp = v < 10 ? 2 : 1;
+    return v.toFixed(dp) + '%';
+  }
+  function ago(ms) {
+    var m = Math.round((Date.now() - ms) / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + ' min ago';
+    var h = Math.floor(m / 60);
+    return h + ' h ' + (m % 60) + ' min ago';
+  }
+  function safeUrl(u) { return (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : null; }
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+  function add(parent, tag, text, cls) {
+    var n = document.createElement(tag);
+    if (text != null) n.textContent = text;
+    if (cls) n.className = cls;
+    parent.appendChild(n);
+    return n;
+  }
+  function deltaText(now, prev, unit) {
+    if (!isNum(now) || !isNum(prev)) return '';
+    var d = now - prev;
+    if (Math.abs(d) < 0.005) return 'No change since the previous check';
+    return (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(2) + (unit || ' points') + ' (was ' + pct(prev) + ')';
+  }
+
+  /* ---------- model (same formulas as the hourly check) ---------- */
+  function clampP(p) { return Math.min(0.9999, Math.max(0.0001, p)); }
+  function lo(p) { p = clampP(p); return Math.log(p / (1 - p)); }
+  function inv(x) { return 1 / (1 + Math.exp(-x)); }
+  function computeModel(Epct, Piran, endMs, Pil, Wpct, now, floors) {
+    var d = Math.max(1, (endMs - now) / 864e5);
+    var M = 1 - Math.pow(1 - Piran, 1 / d);
+    var F = inv((lo(Epct / 100) + lo(M)) / 2);
+    if (floors && isNum(floors.F)) F = Math.max(F, floors.F / 100);
+    var out = { M: M * 100, F: F * 100, R: null, C1: null, C2: null, d: d };
+    var h = (FLIGHT_T - now) / 36e5, H = (H_END - now) / 36e5;
+    if (now < FLIGHT_T && h > 0 && isNum(Pil) && isNum(Wpct)) {
+      var C1 = 1 - Math.pow(1 - Pil, h / H);
+      var C2 = 0.9 * (1 - Math.pow(1 - F, h / 24));
+      var C = inv((lo(C1) + lo(C2)) / 2);
+      var R = C + 0.01 + Wpct / 100;
+      if (floors && isNum(floors.R)) R = Math.max(R, floors.R / 100);
+      out.R = R * 100; out.C1 = C1 * 100; out.C2 = C2 * 100;
+    }
+    return out;
+  }
+
+  /* ---------- data loading ---------- */
+  function fetchJson(url, headers) {
+    return fetch(url, { cache: 'no-store', headers: headers || {} }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  function loadData() {
+    return fetchJson(API_URL, { 'Accept': 'application/vnd.github.raw+json' })
+      .catch(function () { return fetchJson('data.json?t=' + Date.now()); });
+  }
+  function gammaMarkets(slug) {
+    return fetchJson(GAMMA + encodeURIComponent(slug)).then(function (j) {
+      var ev = Array.isArray(j) ? j[0] : j;
+      if (!ev || !Array.isArray(ev.markets)) throw new Error('No market data');
+      return ev.markets;
+    });
+  }
+  function yesPrice(markets, re) {
+    for (var i = 0; i < markets.length; i++) {
+      var m = markets[i];
+      var title = (m.groupItemTitle || '') + ' ' + (m.question || '');
+      if (!re.test(title) || m.closed) continue;
+      try {
+        var p = parseFloat(JSON.parse(m.outcomePrices)[0]);
+        if (isFinite(p)) return p;
+      } catch (e) { /* ignore */ }
+    }
+    return null;
+  }
+  var RE_NOV30 = /nov(ember)?\.?\s*30/i, RE_DEC31 = /dec(ember)?\.?\s*31/i;
+
+  function loadLive() {
+    if (!data) return Promise.resolve();
+    return Promise.all([gammaMarkets(SLUG_IRAN), gammaMarkets(SLUG_IL).catch(function () { return null; })])
+      .then(function (res) {
+        var now = Date.now();
+        var pNov = yesPrice(res[0], RE_NOV30), pDec = yesPrice(res[0], RE_DEC31);
+        var Piran, endMs, label;
+        if (isNum(pNov) && now < NOV30_END) { Piran = pNov; endMs = NOV30_END; label = '30 Nov'; }
+        else if (isNum(pDec)) { Piran = pDec; endMs = DEC31_END; label = '31 Dec'; }
+        else throw new Error('Iran airspace price not found');
+        var Pil = res[1] ? yesPrice(res[1], RE_NOV30) : null;
+        if (!isNum(Pil)) Pil = data.model && data.model.P_il_nov30;
+        var md = data.model || {};
+        var r = computeModel(md.E != null ? md.E : data.major.E, Piran, endMs, Pil, md.W, now, { F: md.F_floor, R: md.R_floor });
+        live = { at: now, Piran: Piran, label: label, Pil: Pil, M: r.M, F: r.F, R: r.R, C1: r.C1, C2: r.C2, error: null };
+      })
+      .catch(function (e) {
+        live = { at: Date.now(), error: e && e.message ? e.message : 'unavailable' };
+      });
+  }
+
+  /* ---------- rendering ---------- */
+  function band(v, warnAt, badAt) { return v >= badAt ? 'r' : (v >= warnAt ? 'a' : 'g'); }
+  function setBar(fillId, markId, lblId, value, threshold, max, ticks) {
+    var f = $(fillId), m = $(markId), l = $(lblId);
+    var w = Math.max(0, Math.min(100, value / max * 100));
+    f.style.width = w + '%';
+    f.style.background = value >= threshold ? 'var(--red)' : (value >= threshold * 0.7 ? 'var(--amber)' : 'var(--green)');
+    m.style.left = (threshold / max * 100) + '%';
+    clear(l);
+    ticks.forEach(function (t) {
+      var s = add(l, 'span', t.text, t.v === 0 ? 'l' : '');
+      if (t.v !== 0) s.style.left = (t.v / max * 100) + '%';
+    });
+  }
+
+  function render() {
+    if (!data) return;
+    var upd = Date.parse(data.updated_utc);
+    var useLive = live && !live.error && live.at > upd;
+    var F = useLive ? live.F : data.major.F;
+    var M = useLive ? live.M : data.major.M;
+    var flightActive = data.flight && data.flight.active && Date.now() < FLIGHT_END;
+    var R = flightActive ? (useLive && isNum(live.R) ? live.R : data.flight.R) : null;
+
+    // banner
+    var b = $('banner'), alertOn = data.alert && data.alert.active;
+    var stale = Date.now() - upd > 150 * 60000;
+    var cls, head, small;
+    if (alertOn) {
+      cls = 'bad'; head = 'ALERT ACTIVE – main estimate ' + pct(F);
+      small = data.alert.last_alert_utc ? 'Alert sent ' + fmtFull(data.alert.last_alert_utc) + ' at ' + pct(data.alert.last_alerted_pct) : '';
+    } else if (F >= 5) {
+      cls = 'warn'; head = 'Elevated – main estimate ' + pct(F) + ', alert level 7%'; small = '';
+    } else {
+      cls = 'ok'; head = 'No alert – main estimate ' + pct(F) + ', well below the 7% alert level'; small = '';
+    }
+    var trig = (data.alert && data.alert.hard_triggers) || [];
+    if (trig.length) small += (small ? ' · ' : '') + 'Hard triggers: ' + trig.map(function (t) { return t.text || t; }).join('; ');
+    if (stale) small += (small ? ' · ' : '') + 'No new hourly check for ' + ago(upd).replace(' ago', '') + ' – the hourly watch may be paused.';
+    b.className = 'banner ' + (stale && !alertOn ? 'warn' : cls);
+    clear(b);
+    add(b, 'span', null, 'dot');
+    var bd = add(b, 'div', head);
+    if (small) add(bd, 'small', small);
+
+    // summary
+    $('summary').textContent = data.summary || '';
+    var msg = data.message_sent && data.message_sent !== 'none' ? ' · Message sent: ' + data.message_sent : ' · No message sent';
+    $('summaryMeta').textContent = 'Checked ' + fmtFull(data.updated_utc) + ' (' + ago(upd) + ')' + msg;
+
+    // live panel
+    var lp = $('livePanel'), lt = $('liveText');
+    if (live) {
+      lp.className = 'panel live show';
+      clear(lt);
+      if (live.error) {
+        add(lt, 'div', 'Live market prices could not be read at ' + fmt(live.at) + ' (' + live.error + '). The figures below are from the latest hourly check.', 'err');
+      } else {
+        var t = 'At ' + fmt(live.at) + ': Iran full airspace closure by ' + live.label + ' = ' + pct(live.Piran * 100, 1) +
+          (isNum(live.Pil) ? '; Israeli airspace closed by 30 Nov = ' + pct(live.Pil * 100, 1) : '') +
+          '. Recalculated main estimate ' + pct(live.F) + (isNum(live.R) && flightActive ? ', flight risk ' + pct(live.R, 1) : '') + '.';
+        add(lt, 'div', t);
+        add(lt, 'div', 'The news-based part (' + pct(data.major.E) + ') and the any-strike figure stay as of the ' + fmt(data.updated_utc) + ' check until the next hourly run.', 'meta');
+      }
+    }
+
+    // card F
+    var fv = $('fVal'); fv.textContent = pct(F); fv.className = 'big ' + band(F, 5, 7);
+    $('fDelta').textContent = useLive ? 'Live recalculation · hourly check said ' + pct(data.major.F) : deltaText(data.major.F, data.major.prev_F);
+    var fMax = Math.max(10, Math.ceil(F * 1.2));
+    setBar('fFill', 'fMark', 'fLbl', F, 7, fMax, [{ v: 0, text: '0%' }, { v: 7, text: '7% alert' }, { v: fMax, text: fMax + '%' }].filter(function (t) { return t.v === 0 || t.v / fMax < 0.92 || t.v === 7; }));
+
+    // card L
+    var lv = $('lVal'); lv.textContent = pct(data.limited.L, 1); lv.className = 'big';
+    $('lDelta').textContent = deltaText(data.limited.L, data.limited.prev_L);
+
+    // card R
+    var cr = $('cardR');
+    if (data.flight && data.flight.active !== undefined) {
+      cr.style.display = '';
+      $('rTitle').textContent = 'Flight cancellation risk – ' + (data.flight.label || 'flight watch');
+      if (flightActive && isNum(R)) {
+        var rv = $('rVal'); rv.textContent = pct(R, 1); rv.className = 'big ' + band(R, 15, 25);
+        $('rDelta').textContent = 'About ' + Math.round(100 - R) + '% chance it flies · ' +
+          (useLive && isNum(live.R) ? 'live recalculation (hourly check ' + pct(data.flight.R, 1) + ')' : deltaText(data.flight.R, data.flight.prev_R));
+        setBar('rFill', 'rMark', 'rLbl', R, 25, 40, [{ v: 0, text: '0%' }, { v: 17, text: '17%' }, { v: 25, text: '25% alert' }]);
+        $('rNote').textContent = (data.flight.status_note || '') + ' Started at 17% on 20 Nov; alert at 25%.';
+      } else {
+        $('rVal').textContent = 'Ended'; $('rVal').className = 'big';
+        $('rDelta').textContent = 'The flight watch closed on 27 Nov at 17:00 Israel time.';
+        $('rNote').textContent = '';
+        $('rFill').style.width = '0';
+      }
+    } else { cr.style.display = 'none'; }
+
+    // card M (market)
+    var mk = (data.markets || [])[0] || {};
+    var mNow = useLive ? live.Piran * 100 : mk.now;
+    $('mVal').textContent = pct(mNow, 1); $('mVal').className = 'big';
+    $('mDelta').textContent = useLive ? 'Live price · hourly check ' + pct(mk.now, 1) : deltaText(mk.now, mk.prev, ' points');
+
+    // parts
+    var parts = $('parts'); clear(parts);
+    [['News-based', data.major.E], ['Market-based', M], ['Main estimate', F]].forEach(function (p) {
+      var s = add(parts, 'div', p[0] + ': ');
+      add(s, 'b', pct(p[1]));
+    });
+
+    // items
+    var ul = $('items'); clear(ul);
+    (data.items || []).forEach(function (it) {
+      var li = add(ul, 'li');
+      add(li, 'div', (it.time_utc ? fmtFull(it.time_utc) + ' · ' : '') + (it.source || ''), 'it-top');
+      var tx = add(li, 'div', it.text || '');
+      var u = safeUrl(it.link);
+      if (u) { tx.appendChild(document.createTextNode(' ')); var a = add(tx, 'a', 'Source ↗'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+      if (it.effect) add(li, 'div', it.effect, 'it-eff');
+    });
+    if (!(data.items || []).length) add(ul, 'li', 'No notable items in the latest check.');
+
+    // markets
+    var tb = $('markets'); clear(tb);
+    (data.markets || []).forEach(function (m) {
+      var tr = add(tb, 'tr');
+      var td = add(tr, 'td'); var u = safeUrl(m.url);
+      if (u) { var a = add(td, 'a', m.label); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else td.textContent = m.label;
+      var arrow = (isNum(m.prev) && isNum(m.now) && Math.abs(m.now - m.prev) >= 0.05) ? (m.now > m.prev ? ' ▲' : ' ▼') : '';
+      add(tr, 'td', pct(m.now, 1) + arrow, 'n');
+      add(tr, 'td', pct(m.prev, 1), 'n');
+    });
+    if (data.brent && isNum(data.brent.usd)) {
+      $('brent').textContent = 'Brent crude: $' + data.brent.usd.toFixed(2) +
+        (isNum(data.brent.change_pct_day) ? ' (' + (data.brent.change_pct_day > 0 ? '+' : '') + data.brent.change_pct_day.toFixed(1) + '% on the day)' : '') +
+        (data.brent.read_utc ? ' · ' + fmt(data.brent.read_utc) : '') + '.';
+    }
+
+    // open items
+    var op = $('open'); clear(op);
+    (data.open_items || []).forEach(function (t) { add(op, 'li', t); });
+    if (!(data.open_items || []).length) add(op, 'li', 'Nothing specific.');
+
+    // charts
+    var hist = (data.history || []).slice();
+    drawChart($('chartF'), hist, 'F', 7, '7% alert', live && !live.error && live.at > upd ? { t: live.at, v: live.F } : null);
+    if (data.flight && hist.some(function (h) { return isNum(h.R); })) {
+      drawChart($('chartR'), hist, 'R', 25, '25% alert', live && !live.error && isNum(live.R) && live.at > upd ? { t: live.at, v: live.R } : null);
+    }
+  }
+
+  function drawChart(svg, hist, key, thr, thrLabel, livePt) {
+    var pts = hist.filter(function (h) { return isNum(h[key]); }).map(function (h) { return { t: Date.parse(h.utc), v: h[key] }; });
+    if (livePt) pts.push({ t: livePt.t, v: livePt.v, live: true });
+    var W = 640, H = 210, pl = 42, pr = 14, pt = 14, pb = 30;
+    var s = '';
+    if (pts.length < 2) { svg.innerHTML = '<text x="20" y="100" fill="#5c6777" font-size="13">Not enough history yet</text>'; return; }
+    var t0 = pts[0].t, t1 = pts[pts.length - 1].t;
+    if (t1 === t0) t1 = t0 + 3600e3;
+    var vmax = Math.max(thr * 1.25, Math.max.apply(null, pts.map(function (p) { return p.v; })) * 1.15);
+    var step = vmax <= 12 ? 2 : (vmax <= 40 ? 5 : 10);
+    vmax = Math.ceil(vmax / step) * step;
+    function X(t) { return pl + (t - t0) / (t1 - t0) * (W - pl - pr); }
+    function Y(v) { return pt + (1 - v / vmax) * (H - pt - pb); }
+    for (var v = 0; v <= vmax + 1e-9; v += step) {
+      s += '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(v).toFixed(1) + '" y2="' + Y(v).toFixed(1) + '" stroke="#eceef2"/>';
+      s += '<text x="' + (pl - 6) + '" y="' + (Y(v) + 4).toFixed(1) + '" text-anchor="end" font-size="11" fill="#5c6777">' + v + '%</text>';
+    }
+    // day ticks at Israel midnight
+    var dayFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, day: 'numeric', month: 'short' });
+    var hourFmt = new Intl.DateTimeFormat('en-GB', { timeZone: TZ, hour: '2-digit', hour12: false });
+    for (var tt = Math.ceil(t0 / 3600e3) * 3600e3; tt <= t1; tt += 3600e3) {
+      if (hourFmt.format(new Date(tt)).replace(/\D/g, '') === '00') {
+        var x = X(tt).toFixed(1);
+        s += '<line x1="' + x + '" x2="' + x + '" y1="' + pt + '" y2="' + (H - pb) + '" stroke="#e2e5ea" stroke-dasharray="2 3"/>';
+        s += '<text x="' + x + '" y="' + (H - 10) + '" text-anchor="middle" font-size="11" fill="#5c6777">' + dayFmt.format(new Date(tt)) + '</text>';
+      }
+    }
+    s += '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + Y(thr).toFixed(1) + '" y2="' + Y(thr).toFixed(1) + '" stroke="#c0262d" stroke-dasharray="6 4" stroke-width="1.5"/>';
+    s += '<text x="' + (W - pr) + '" y="' + (Y(thr) - 5).toFixed(1) + '" text-anchor="end" font-size="11" fill="#c0262d">' + thrLabel + '</text>';
+    var official = pts.filter(function (p) { return !p.live; });
+    var d = official.map(function (p, i) { return (i ? 'L' : 'M') + X(p.t).toFixed(1) + ' ' + Y(p.v).toFixed(1); }).join(' ');
+    s += '<path d="' + d + '" fill="none" stroke="#1a5bb8" stroke-width="2.2" stroke-linejoin="round"/>';
+    var last = official[official.length - 1];
+    s += '<circle cx="' + X(last.t).toFixed(1) + '" cy="' + Y(last.v).toFixed(1) + '" r="4" fill="#1a5bb8"/>';
+    s += '<text x="' + Math.min(X(last.t) - 6, W - pr - 4).toFixed(1) + '" y="' + (Y(last.v) - 9).toFixed(1) + '" text-anchor="end" font-size="12" font-weight="600" fill="#1a5bb8">' + last.v.toFixed(2) + '%</text>';
+    if (livePt) {
+      var lp = pts[pts.length - 1];
+      s += '<line x1="' + X(last.t).toFixed(1) + '" y1="' + Y(last.v).toFixed(1) + '" x2="' + X(lp.t).toFixed(1) + '" y2="' + Y(lp.v).toFixed(1) + '" stroke="#1a5bb8" stroke-dasharray="3 3"/>';
+      s += '<circle cx="' + X(lp.t).toFixed(1) + '" cy="' + Y(lp.v).toFixed(1) + '" r="4" fill="#fff" stroke="#1a5bb8" stroke-width="2"/>';
+    }
+    svg.innerHTML = s;
+  }
+
+  /* ---------- refresh loop ---------- */
+  function setBusy(on) {
+    busy = on;
+    var btn = $('refreshBtn');
+    btn.disabled = on;
+    btn.className = 'btn' + (on ? ' busy' : '');
+    $('refreshLbl').textContent = on ? 'Updating…' : 'Update now';
+  }
+  function refreshData() {
+    return loadData().then(function (d) {
+      if (d && d.major) {
+        var isNew = !data || d.updated_utc !== data.updated_utc;
+        data = d;
+        if (isNew && live && live.at < Date.parse(d.updated_utc)) live = null;
+      }
+    }).catch(function () {
+      if (!data) {
+        var b = $('banner'); b.className = 'banner bad'; clear(b);
+        add(b, 'span', null, 'dot'); add(b, 'div', 'The latest check could not be loaded. Try "Update now" again in a minute.');
+      }
+    }).then(function () { nextDataAt = Date.now() + DATA_POLL_MS; });
+  }
+  function refreshAll() {
+    if (busy) return Promise.resolve();
+    setBusy(true);
+    return refreshData()
+      .then(function () { return loadLive(); })
+      .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; render(); })
+      .then(function () { setBusy(false); }, function () { setBusy(false); });
+  }
+  function tick() {
+    var now = Date.now();
+    if (!busy && nextLiveAt && now >= nextLiveAt) { refreshAll(); return; }
+    if (!busy && nextDataAt && now >= nextDataAt) { refreshData().then(render); }
+    var txt = '';
+    if (data) {
+      var upd = Date.parse(data.updated_utc);
+      txt = 'Last hourly check ' + fmt(data.updated_utc) + ' (' + ago(upd) + ')';
+      var nx = Math.max(0, Math.round((nextDataAt - now) / 1000));
+      txt += ' · page refreshes in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2);
+      $('summaryMeta').textContent = 'Checked ' + fmtFull(data.updated_utc) + ' (' + ago(upd) + ')' +
+        (data.message_sent && data.message_sent !== 'none' ? ' · Message sent: ' + data.message_sent : ' · No message sent');
+    }
+    $('tick').textContent = txt || 'Loading…';
+  }
+
+  $('refreshBtn').addEventListener('click', function () { refreshAll(); });
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible' && data && Date.now() - Date.parse(data.updated_utc) > 65 * 60000) refreshData().then(render);
+  });
+
+  refreshAll();
+  setInterval(tick, 1000);
+
+  window.__iranWatch = { computeModel: computeModel };
+})();
+</script>
+</body>
+</html>
