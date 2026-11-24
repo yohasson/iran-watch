@@ -1,14 +1,1 @@
-{
- "started_utc": "2026-11-24T19:19:15Z",
- "updated_utc": "2026-11-24T19:47:00Z",
- "stage": "done",
- "sources_planned": 16,
- "sources_done": 14,
- "searches_planned": 8,
- "searches_done": 4,
- "markets_planned": 4,
- "markets_done": 4,
- "steps_total": 20,
- "steps_done": 20,
- "current": "check complete"
-}
+{"started_utc": "2026-11-24T21:22:26Z", "updated_utc": "2026-11-24T21:22:26Z", "stage": "started", "current": "Planning the check", "plan": [], "log": [{"t": "2026-11-24T21:22:26Z", "msg": "Check started – planning the sources"}]}
