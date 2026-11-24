@@ -44,7 +44,10 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 .btn{background:#fff;color:#1b2b4b;border:0;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.75;cursor:progress;transform:none}
 .btn{white-space:nowrap}.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:pointer}.btn.full:hover{background:#f1c7c7;color:#8a1c1c}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
-.fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fprog .fl{display:flex;justify-content:space-between;align-items:flex-start;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.e{opacity:1;background:rgba(255,211,106,.35)}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.65);color:#fff}.fprog .fs span.a{animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.35)}}
+.fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fnow{margin-top:8px;font-size:.82rem;font-weight:700;display:flex;gap:6px;align-items:center}.fnow .dotp{width:8px;height:8px;border-radius:50%;background:#ffd36a;animation:pz 1s infinite}
+.fplan{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:3px 10px;max-height:150px;overflow:auto;font-size:.72rem}.fplan li{opacity:.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fplan li.d{opacity:1}.fplan li.a{opacity:1;font-weight:700;color:#ffd36a}.fplan li.x{opacity:1;color:#fca5a5}
+.flog{margin-top:6px;max-height:120px;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.68rem;line-height:1.45;background:rgba(0,0,0,.18);border-radius:8px;padding:6px 8px}.flog div{white-space:normal}.flog b{opacity:.7;font-weight:400;margin-inline-end:6px}
+.fprog .fl{display:flex;justify-content:space-between;align-items:flex-start;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.e{opacity:1;background:rgba(255,211,106,.35)}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.65);color:#fff}.fprog .fs span.a{animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.35)}}
 .btn .spin{width:14px;height:14px;border:2px solid rgba(27,43,75,.3);border-top-color:#1b2b4b;border-radius:50%;display:none}
 .btn.busy .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .ibtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:10px;width:40px;height:40px;cursor:pointer;font-size:1.1rem}
@@ -218,9 +221,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
-      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
+      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fnow" id="fnow"></div><ul class="fplan" id="fplan"></ul><div class="flog" id="flog"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 22:10 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:08 Israel time</div>
     </div>
   </div>
 </header>
@@ -941,7 +944,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     return unlock(pw).then(function (key) { lsSet('iw-key', key); return key; }, function () { step('⚠ Wrong password. Press Update now to try again.', 'fail'); return ''; });
   }
   /* ---- full check progress ---- */
-  var PROG_URL = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/progress.json';
+  var PROG_URL = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/progress.json?ref=main', PROG_RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/progress.json';
   var STAGES = [['sent', 'Request sent', 5], ['started', 'Check started', 15], ['sources', 'Reading sources', 45], ['estimates', 'Calculating', 70], ['publishing', 'Publishing', 88], ['done', 'Done', 100]];
   var full = null; // {t0, before, stage, pct}
   function stageIdx(k) { for (var i = 0; i < STAGES.length; i++) if (STAGES[i][0] === k) return i; return 0; }
@@ -952,7 +955,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!full) { p.className = 'fprog'; btn.classList.remove('full'); if (!busy) { btn.disabled = false; $('refreshLbl').textContent = T('upd'); } return; }
     var el = Math.max(0, Math.round((Date.now() - full.t0) / 1000)), mm = Math.floor(el / 60), ss = el % 60, done = full.stage === 'done', pg = full.pg || {};
     var ci = stageIdx(full.stage), pctv = STAGES[ci][2];
-    if (isNum(pg.steps_total) && pg.steps_total > 0 && isNum(pg.steps_done)) pctv = Math.max(pctv, Math.round(100 * pg.steps_done / pg.steps_total));
+    if (isNum(pg.steps_total) && pg.steps_total > 0 && isNum(pg.steps_done)) pctv = Math.round(8 + 90 * Math.min(1, pg.steps_done / pg.steps_total));
+    else if (Array.isArray(pg.plan) && pg.plan.length) pctv = Math.round(8 + 90 * pg.plan.filter(function (x) { return /done|failed|skipped/.test(x.status || ''); }).length / pg.plan.length);
     if (done) pctv = 100;
     full.pct = Math.max(full.pct || 0, Math.min(100, pctv));
     p.className = 'fprog on'; $('fbar').style.width = full.pct + '%'; $('fpct').textContent = full.pct + '% · ' + mm + ':' + (ss < 10 ? '0' : '') + ss;
@@ -963,12 +967,24 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       if (isNum(pg.searches_planned)) bits.push('searches ' + (pg.searches_done || 0) + ' of ' + pg.searches_planned);
       if (isNum(pg.markets_planned)) bits.push('markets ' + (pg.markets_done || 0) + ' of ' + pg.markets_planned);
       if (bits.length) line += ' · ' + bits.join(' · ');
-      if (pg.current) line += ' · now: ' + priv(pg.current);
     }
     if (!done && full.stage === 'sent' && el > 180) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot.';
     $('fstage').textContent = line;
     var f = $('fsteps'); clear(f);
     STAGES.slice(1).forEach(function (st, j) { var idx = j + 1, cls = done || idx < ci ? 'd' : idx === ci ? 'd a' : ''; add(f, 'span', st[1], cls); });
+    var plan = (pg && Array.isArray(pg.plan)) ? pg.plan : [], pu = $('fplan'); clear(pu);
+    plan.forEach(function (it) { var st = it.status || 'todo', ic = st === 'done' ? '✅ ' : st === 'doing' ? '🔄 ' : st === 'failed' ? '⚠️ ' : st === 'skipped' ? '⏭️ ' : '⏳ ';
+      add(pu, 'li', ic + priv(it.label || it.id), st === 'done' ? 'd' : st === 'doing' ? 'a' : (st === 'failed' || st === 'skipped') ? 'x' : ''); });
+    var nowTxt = '';
+    if (done) nowTxt = '';
+    else if (pg && pg.current) { var since = pg.updated_utc ? Math.max(0, Math.round((Date.now() - Date.parse(pg.updated_utc)) / 1000)) : null; nowTxt = 'Now: ' + priv(pg.current) + (since != null ? ' (' + (since < 60 ? since + ' s' : Math.round(since / 60) + ' min') + ')' : ''); }
+    else if (full.stage === 'sent') nowTxt = 'Now: waiting for the automation to start the check';
+    var fn = $('fnow'); clear(fn); if (nowTxt) { add(fn, 'span', null, 'dotp'); add(fn, 'span', nowTxt); }
+    var lg = (full.local || []).concat(pg && Array.isArray(pg.log) ? pg.log : []).filter(function (x) { return !pg || !pg.started_utc || x.local || true; });
+    lg.sort(function (a, b) { return Date.parse(a.t) - Date.parse(b.t); });
+    var lb = $('flog'), atBottom = lb.scrollTop + lb.clientHeight >= lb.scrollHeight - 4; clear(lb);
+    lg.forEach(function (x) { var d = add(lb, 'div'); add(d, 'b', fmt(Date.parse(x.t), { second: '2-digit' })); add(d, 'span', priv(x.msg)); });
+    lb.style.display = lg.length ? '' : 'none'; if (atBottom) lb.scrollTop = lb.scrollHeight;
     var EXP = 8 * 60, left;
     if (isNum(pg.steps_total) && pg.steps_total > 0 && pg.steps_done > 0 && full.seen) left = Math.max(0, Math.round(el / pg.steps_done * (pg.steps_total - pg.steps_done)));
     else left = EXP - el;
@@ -990,12 +1006,12 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   }
   function fullTick() {
     if (!full) return;
-    fetchJson(PROG_URL + '?t=' + Date.now()).then(function (pg) {
+    fetchJson(PROG_URL, { 'Accept': 'application/vnd.github.raw+json' }).catch(function () { return fetchJson(PROG_RAW + '?t=' + Date.now()); }).then(function (pg) {
       if (full && pg && Date.parse(pg.started_utc) > full.t0 - 90000) {
         full.seen = Date.now(); full.pg = pg;
         if (pg.stage === 'cancelled') { fullEnd('Check cancelled.', ''); return; }
         if (pg.stage === 'skipped') { full.skipped = true; }
-        else if (stageIdx(pg.stage) > stageIdx(full.stage)) full.stage = pg.stage;
+        else if (stageIdx(pg.stage) > stageIdx(full.stage)) { if (full.stage === 'sent') flog('The check has started and is reporting progress'); full.stage = pg.stage; }
       }
     }).catch(function () {}).then(function () { return refreshData(); }).then(function () {
       if (!full) return;
@@ -1009,13 +1025,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       fullUi(); step('Full check running – this page will update by itself. You can leave it open.');
     });
   }
+  function flog(msg) { if (!full) return; full.local = full.local || []; full.local.push({ t: new Date().toISOString(), msg: msg }); fullSave(); }
   function waitFull(before, t0) {
-    full = { t0: t0, before: before, stage: 'sent', pct: 5 }; fullSave(); fullUi();
+    full = { t0: t0, before: before, stage: 'sent', pct: 5, local: [{ t: new Date(t0).toISOString(), msg: 'You pressed Update now' }, { t: new Date().toISOString(), msg: 'Request accepted by the automation service – waiting for the check to start (usually 20–60 s)' }] }; fullSave(); fullUi();
     $('topbar').className = 'topbar on';
     if (fullPoll) clearInterval(fullPoll);
     fullPoll = setInterval(function () { fullUi(); }, 1000);
-    var tk = setInterval(function () { if (!full) { clearInterval(tk); return; } fullTick(); }, 10000);
-    setTimeout(fullTick, 5000);
+    var tk = setInterval(function () { if (!full) { clearInterval(tk); return; } fullTick(); }, 8000);
+    setTimeout(fullTick, 3000);
   }
   function resumeFull() {
     var j = lsGet('iw-full'); if (!j) return; try { var f = JSON.parse(j); } catch (e) { lsSet('iw-full', ''); return; }
