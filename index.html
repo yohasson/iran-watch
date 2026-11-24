@@ -43,6 +43,8 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 .btnrow{display:flex;gap:8px;align-items:center}
 .btn{background:#fff;color:#1b2b4b;border:0;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.75;cursor:progress;transform:none}
+.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:not-allowed}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
+.fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fprog .fl{display:flex;justify-content:space-between;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.45)}.fprog .fs span.a{opacity:1;background:rgba(255,211,106,.55);color:#1b2b4b}
 .btn .spin{width:14px;height:14px;border:2px solid rgba(27,43,75,.3);border-top-color:#1b2b4b;border-radius:50%;display:none}
 .btn.busy .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .ibtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:10px;width:40px;height:40px;cursor:pointer;font-size:1.1rem}
@@ -96,6 +98,7 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .cd div{background:var(--soft);border-radius:8px;padding:4px 8px;text-align:center;font-variant-numeric:tabular-nums}
 .cd b{display:block;font-size:1.05rem}.cd span{font-size:.68rem;color:var(--muted)}
 /* charts */
+.stack{display:flex;flex-direction:column;gap:14px}.stack .panel{margin-bottom:0;flex:1}.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:14px}
 .chartwrap{position:relative}
 svg.chart{width:100%;max-width:100%;display:block;touch-action:pan-y;overflow:visible}
@@ -212,7 +215,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
+      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div></div>
       <div class="lastchk" id="tick">Loading…</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:13 Israel time</div>
     </div>
   </div>
 </header>
@@ -247,24 +252,22 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
 <div id="banner" class="banner info" role="status" aria-live="polite"><span class="dot"></span><div>Loading the latest check…</div></div>
 
-<div class="two fade">
-  <div class="panel"><h3>☀️ <span data-i18n="sumT">Last 24 hours at a glance</span></h3><div class="sum" id="sum"></div><div class="meta" id="sumNote" style="margin-top:8px"></div><h4 class="glh">📰 <span data-i18n="glNews">Latest updates</span></h4><ul class="gln" id="glNews"></ul><h4 class="glh">👀 <span data-i18n="glWatch">What to watch next</span></h4><ul class="gln glw" id="glWatch"></ul></div>
-  <div class="panel"><h3>🚦 <span data-i18n="chkT">Warning signs that came before real attacks</span></h3><div class="lights" id="lights"></div><div class="meta" style="margin-top:8px" data-i18n="chkNote">Green = not seen · amber = partial or reported · red = seen and confirmed. In past attacks these appeared 1–4 days before.</div></div>
-</div>
+<div class="panel fade" id="watchPanel"><h3>👀 <span data-i18n="glWatch">What to watch next</span></h3><ul class="gln glw" id="open"></ul><div class="meta" id="sumNote" style="margin-top:8px"></div></div>
 
-<div class="grid fade">
-  <div class="card" data-k="F" style="--c:var(--cF)"><span class="more">Details ›</span>
-    <h2 data-i18n="cF">Major campaign – next 24 h</h2><div class="big" id="vF">–</div><div class="delta" id="dF"></div><svg id="sF" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
-    <div class="note">Sustained, multi-target campaign like 13 Jun 2025 or 28 Feb 2026.</div></div>
+<div class="two fade">
+  <div class="panel"><h3>🚦 <span data-i18n="chkT">Warning signs that came before real attacks</span></h3><div class="lights" id="lights"></div><div class="meta" style="margin-top:8px" data-i18n="chkNote">Green = not seen · amber = partial or reported · red = seen and confirmed. In past attacks these appeared 1–4 days before.</div></div>
+
+  <div class="stack">
+    <div class="grid2">
   <div class="card" data-k="L" style="--c:var(--cL)"><span class="more">Details ›</span>
     <h2 data-i18n="cL">Any US/Israeli strike on Iranian soil – 24 h</h2><div class="big" id="vL">–</div><div class="delta" id="dL"></div><svg id="sL" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note">Includes limited "defensive" strikes (Qeshm, Sirik). No alert on this figure.</div></div>
   <div class="card" data-k="R" id="cardR" style="--c:var(--cR)"><span class="more">Details ›</span>
-    <h2 id="rTitle">Flight cancellation risk</h2><div class="big" id="vR">–</div><div class="delta" id="dR"></div>
+    <h2 id="rTitle">Flight cancellation risk</h2><div class="big" id="vR">–</div><div class="delta" id="dR"></div><svg id="sR" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="cd" id="cd"></div><div class="note" id="rNote"></div></div>
-  <div class="card" data-k="M" style="--c:var(--cM)"><span class="more">Details ›</span>
-    <h2 data-i18n="cM">Market part (from Iran airspace-closure price)</h2><div class="big" id="vM">–</div><div class="delta" id="dM"></div><svg id="sM" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
-    <div class="note" id="mNote"></div></div>
+    </div>
+    <div class="panel" id="flPanel"><h3>✈️ <span data-i18n="flT">Your flight – what to do</span></h3><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div>
+  </div>
 </div>
 
 <div class="panel fade">
@@ -276,15 +279,6 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div class="pinned" id="pinned"></div>
 </div>
 
-<div class="two fade">
-  <div class="panel" id="flPanel"><h3>✈️ <span data-i18n="flT">Your flight – what to do</span></h3><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div>
-  <div class="panel"><h3>📊 <span data-i18n="cmpT">Today vs. the eves of past attacks</span></h3><div class="cmp" id="cmp"></div><div class="meta" style="margin-top:8px" data-i18n="cmpNote">24-hour estimates made with the same method. Red bars = an attack started the next day; grey = false alarm. The method could not reliably tell them apart, so read this as context, not a signal.</div></div>
-</div>
-
-<div class="panel fade">
-  <h3>🗞️ <span data-i18n="tlT">Timeline of what changed</span><span class="sp"></span><span class="seg" id="tlSeg"><button data-v="all" class="on">All</button><button data-v="up">Rises</button><button data-v="down">Falls</button><button data-v="flat">No change</button></span></h3>
-  <div id="timeline"></div><button class="lnk" id="tlMore" style="margin-top:8px"></button>
-</div>
 
 <div class="two fade">
   <div class="panel">
@@ -292,6 +286,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     <div class="parts" id="parts"></div>
     <div class="meta">Main estimate = average of the news-based (E) and market-based (M) parts on a log-odds scale. E moves only when the hourly check finds new signals; M follows Polymarket.</div>
   </div>
+  <div class="panel">
+    <h3>💹 Markets<span class="sp"></span><span class="meta">Click a column to sort</span></h3>
+    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Now</th><th class="n" data-s="chg">Change</th></tr></thead><tbody id="markets"></tbody></table>
+    <div class="meta" id="brent" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<div class="two fade">
   <div class="panel">
     <h3>🎛️ What if…<span class="sp"></span><button class="lnk" id="wiReset">Reset to current</button></h3>
     <div class="wi">
@@ -302,23 +304,27 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     </div>
     <div class="wiout" id="wiOut"></div>
   </div>
+  <div class="panel"><h3>📊 <span data-i18n="cmpT">Today vs. the eves of past attacks</span></h3><div class="cmp" id="cmp"></div><div class="meta" style="margin-top:8px" data-i18n="cmpNote">24-hour estimates made with the same method. Red bars = an attack started the next day; grey = false alarm. The method could not reliably tell them apart, so read this as context, not a signal.</div></div>
 </div>
 
-<div class="two fade">
+<div class="panel fade">
+  <h3>🗞️ <span data-i18n="tlT">Timeline of what changed</span><span class="sp"></span><span class="seg" id="tlSeg"><button data-v="all" class="on">All</button><button data-v="up">Rises</button><button data-v="down">Falls</button><button data-v="flat">No change</button></span></h3>
+  <div id="timeline"></div><button class="lnk" id="tlMore" style="margin-top:8px"></button>
+</div>
+
+
+<div id="retired" hidden style="display:none">
+  <div class="sum" id="sum"></div><ul id="glNews"></ul><ul id="glWatch"></ul>
+  <div class="card" data-k="F" style="--c:var(--cF)"><span class="more">Details ›</span>
+    <h2 data-i18n="cF">Major campaign – next 24 h</h2><div class="big" id="vF">–</div><div class="delta" id="dF"></div><svg id="sF" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
+    <div class="note">Sustained, multi-target campaign like 13 Jun 2025 or 28 Feb 2026.</div></div>
+  <div class="card" data-k="M" style="--c:var(--cM)"><span class="more">Details ›</span>
+    <h2 data-i18n="cM">Market part (from Iran airspace-closure price)</h2><div class="big" id="vM">–</div><div class="delta" id="dM"></div><svg id="sM" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
+    <div class="note" id="mNote"></div></div>
   <div class="panel">
     <h3>📰 What the latest check found<span class="sp"></span><span class="seg" id="itemSeg"><button data-v="all" class="on">All</button><button data-v="up">Rises</button><button data-v="down">Falls</button><button data-v="flat">No change</button></span></h3>
     <ul class="items" id="items"></ul>
   </div>
-  <div class="panel">
-    <h3>💹 Markets<span class="sp"></span><span class="meta">Click a column to sort</span></h3>
-    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Now</th><th class="n" data-s="chg">Change</th></tr></thead><tbody id="markets"></tbody></table>
-    <div class="meta" id="brent" style="margin-top:10px"></div>
-  </div>
-</div>
-
-<div class="panel fade">
-  <h3>🔭 Watching next</h3>
-  <ul class="open" id="open"></ul>
 </div>
 
 <footer>
@@ -567,6 +573,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     setCard('F', c.F, data.major.prev_F, thr); setCard('L', c.L, data.limited.prev_L); setCard('M', c.M, data.history && data.history.length > 1 ? data.history[data.history.length - 2].M : null);
     $('mNote').textContent = 'Iran full airspace closure by ' + (c.useLive ? live.label + ' = ' + pct(live.Piran * 100, 1) + ' (live)' : '30 Nov = ' + pct((data.model.P_iran_nov30 || 0) * 100, 1)) + '.';
     var fl = data.flight || {}, FT = flightT();
+    if ($('sR')) { $('sR').style.display = c.fa ? '' : 'none'; if (c.fa) spark($('sR'), histPts('R', rangeDays(view.main), true), css(SERIES.R.c), thrR); }
     if (c.fa) {
       $('rTitle').textContent = '✈️ ' + (FT && S.flNo ? S.flNo : T('yourFlight')) + ' – ' + T('cancelRisk');
       $('vR').textContent = pct(c.R, 1); $('vR').style.color = bandCol(c.R, thrR);
@@ -661,7 +668,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var he = S.lang === 'he'; document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr'; document.body.classList.toggle('rtl', he);
     $('langBtn').textContent = he ? 'EN' : 'עב';
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (el) { var k = el.getAttribute('data-i18n'); if (!(k in I18N_EN)) I18N_EN[k] = el.textContent; el.textContent = he && I18N.he[k] ? I18N.he[k] : I18N_EN[k]; });
-    if (!busy) $('refreshLbl').textContent = T('upd');
+    if (!busy && !full) $('refreshLbl').textContent = T('upd');
   }
 
   /* ---------- new sections ---------- */
@@ -788,7 +795,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     Array.prototype.forEach.call($('sAuto').querySelectorAll('button'), function (b) { b.className = b.getAttribute('data-v') === S.auto ? 'on' : ''; }); }
 
   /* refresh */
-  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on; btn.className = 'btn' + (on ? ' busy' : ''); $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on ? ' on' : ''); document.body.classList.toggle('updating', on); }
+  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on || !!full; btn.className = 'btn' + (on ? ' busy' : ''); if (!full) $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on || full ? ' on' : ''); document.body.classList.toggle('updating', on); }
   function step(t, cls) { var e = $('step'); e.textContent = t; e.className = 'step' + (cls ? ' ' + cls : ''); }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function refreshData() {
@@ -796,27 +803,25 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       .catch(function () { if (!data) { var b = $('banner'); b.className = 'banner bad'; clear(b); add(b, 'span', null, 'dot'); add(b, 'div', 'The latest check could not be loaded. Try "Update now" again in a minute.'); } })
       .then(function () { nextDataAt = Date.now() + DATA_POLL_MS; });
   }
-  function noteCheck(how) { if (!data) return; var t = Math.max(Date.parse(data.updated_utc), live && !live.error ? live.at : 0, how === 'automated' ? 0 : Date.now()); lastCheck = { at: t, how: how }; }
+  function noteCheck(how) { if (!data) return; var t = Date.parse(data.updated_utc); lastCheck = { at: t, how: /on-demand/i.test(data.summary || '') ? 'manual' : 'automated' }; }
   function refreshAll(manual) {
-    if (busy) return Promise.resolve(); setBusy(true); var t0 = Date.now();
-    step('Step 1 of 3 – loading the latest check…');
-    return refreshData().then(function () { step('Step 2 of 3 – reading live Polymarket prices…'); return loadLive(); })
-      .then(function () { step('Step 3 of 3 – recalculating…'); nextLiveAt = Date.now() + LIVE_POLL_MS; view.wi = null; render(); })
-      .then(function () { var l = 900 - (Date.now() - t0); return l > 0 ? wait(l) : null; })
-      .then(function () { setBusy(false); }, function () { setBusy(false); })
+    if (busy) return Promise.resolve(); var quiet = !manual; if (!quiet) setBusy(true); else busy = true; var t0 = Date.now();
+    if (!quiet) step('Loading the latest saved check…');
+    return refreshData().then(function () { if (!quiet) step('Reading live market prices…'); return loadLive(); })
+      .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; view.wi = null; render(); })
+      .then(function () { var l = quiet ? 0 : 600 - (Date.now() - t0); return l > 0 ? wait(l) : null; })
+      .then(function () { if (quiet) busy = false; else setBusy(false); }, function () { if (quiet) busy = false; else setBusy(false); })
       .then(function () {
         noteCheck(manual ? 'manual' : 'auto');
-        if (live && !live.error) step('✓ Updated ' + fmt(Date.now()) + ' – main estimate ' + pct(cur().F), 'done');
-        else if (live && live.error) step('⚠ Live prices unavailable (' + live.error + ') – showing the latest saved check', 'fail');
-        else step('✓ Loaded the latest check', 'done');
-        tick(); if (!manual) setTimeout(function () { if (!busy) step(''); }, 15000);
+        if (!quiet && !full) { if (live && live.error) step('Live market prices unavailable – showing the latest saved check', 'fail'); else step(''); }
+        tick();
       });
   }
   function tick() {
     var now = Date.now();
     if (S.auto === 'on') { if (!busy && nextLiveAt && now >= nextLiveAt) { refreshAll(false); return; } if (!busy && nextDataAt && now >= nextDataAt) { refreshData().then(function () { noteCheck('auto'); render(); }); } }
     if (data) {
-      var upd = Date.parse(data.updated_utc); if (upd > lastCheck.at) lastCheck = { at: upd, how: 'automated' };
+      noteCheck();
       var txt = T('lastCheck') + ' ' + fmtFull(lastCheck.at) + ' (' + ago(lastCheck.at) + ', ' + lastCheck.how + ')';
       if (S.auto === 'on') { var nx = Math.max(0, Math.round((nextDataAt - now) / 1000)); txt += ' · next in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2); }
       $('tick').textContent = txt;
@@ -846,6 +851,10 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'), function (th) { th.onclick = function () { var k = th.getAttribute('data-s'); view.sortD = view.sortK === k ? -view.sortD : (k === 'label' ? 1 : -1); view.sortK = k; renderMarkets(cur()); }; });
   ['E', 'P', 'I', 'W'].forEach(function (k) { $('wi' + k).oninput = function () { view.wi[k] = parseFloat(this.value); wiCalc(); }; });
   $('wiReset').onclick = function () { wiReset(); };
+  ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
+  (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
+  ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
+  (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
   Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.onclick = function () { openDrill(c.getAttribute('data-k')); }; });
   Array.prototype.forEach.call(document.querySelectorAll('.ov'), function (o) { o.onclick = function (e) { if (e.target === o || e.target.hasAttribute('data-close')) { o.className = 'ov'; if (o.id === 'ovD') view.drillK = null; } }; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { $('ovD').className = 'ov'; $('ovS').className = 'ov'; view.drillK = null; } });
@@ -870,20 +879,60 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     step('Checking password…');
     return unlock(pw).then(function (key) { lsSet('iw-key', key); return key; }, function () { step('⚠ Wrong password. Press Update now to try again.', 'fail'); return ''; });
   }
+  /* ---- full check progress ---- */
+  var PROG_URL = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/progress.json';
+  var STAGES = [['sent', 'Request sent', 5], ['started', 'Check started', 15], ['sources', 'Reading sources', 45], ['estimates', 'Calculating', 70], ['publishing', 'Publishing', 88], ['done', 'Done', 100]];
+  var full = null; // {t0, before, stage, pct}
+  function stageIdx(k) { for (var i = 0; i < STAGES.length; i++) if (STAGES[i][0] === k) return i; return 0; }
+  function fullSave() { lsSet('iw-full', full ? JSON.stringify(full) : ''); }
+  function fullUi() {
+    var p = $('fprog'), btn = $('refreshBtn');
+    if (!full) { p.className = 'fprog'; btn.classList.remove('full'); if (!busy) { btn.disabled = false; $('refreshLbl').textContent = T('upd'); } return; }
+    var el = Math.max(0, Math.round((Date.now() - full.t0) / 1000)), mm = Math.floor(el / 60), ss = el % 60;
+    var est = Math.min(85, 5 + el / 480 * 80), i = stageIdx(full.stage), pctv = Math.max(STAGES[i][2], full.stage === 'done' ? 100 : Math.min(est, (STAGES[Math.min(i + 1, STAGES.length - 1)][2]) - 2));
+    full.pct = Math.max(full.pct || 0, Math.round(pctv));
+    p.className = 'fprog on'; $('fbar').style.width = full.pct + '%'; $('fpct').textContent = full.pct + '% · ' + mm + ':' + (ss < 10 ? '0' : '') + ss;
+    $('fstage').textContent = STAGES[i][1] + (full.stage === 'done' ? '' : '…');
+    var f = $('fsteps'); clear(f); STAGES.slice(1).forEach(function (st, j) { add(f, 'span', st[1], j + 1 < i ? 'd' : j + 1 === i ? (full.stage === 'done' ? 'd' : 'a') : ''); });
+    btn.disabled = true; btn.classList.add('full'); $('refreshLbl').textContent = full.stage === 'done' ? T('upd') : 'Checking… ' + mm + ' min';
+  }
+  function fullEnd(msg, cls) {
+    if (fullPoll) { clearInterval(fullPoll); fullPoll = null; }
+    $('topbar').className = 'topbar'; step(msg, cls);
+    if (cls === 'done' && full) { full.stage = 'done'; full.pct = 100; fullUi(); }
+    var keep = full; full = null; fullSave(); setTimeout(function () { if (!full) fullUi(); }, keep && cls === 'done' ? 4000 : 0);
+  }
+  function fullTick() {
+    if (!full) return;
+    fetchJson(PROG_URL + '?t=' + Date.now()).then(function (pg) {
+      if (full && pg && Date.parse(pg.started_utc) > full.t0 - 90000) {
+        if (pg.stage === 'skipped') { full.skipped = true; }
+        else if (stageIdx(pg.stage) > stageIdx(full.stage)) full.stage = pg.stage;
+      }
+    }).catch(function () {}).then(function () { return refreshData(); }).then(function () {
+      if (!full) return;
+      var upd = data ? Date.parse(data.updated_utc) : 0;
+      if (data && data.updated_utc !== full.before && upd > full.t0 - 15 * 60000) {
+        noteCheck('manual'); view.wi = null; render();
+        fullEnd('✓ Full check done ' + fmt(upd) + ' – main estimate ' + pct(cur().F), 'done'); return;
+      }
+      if (full.skipped) { fullEnd('✓ A full check finished minutes ago – showing it (results are already current).', 'done'); return; }
+      if (Date.now() - full.t0 > 20 * 60000) { fullEnd('⚠ No full-check result after 20 minutes. The hourly check will still run.', 'fail'); return; }
+      fullUi(); step('Full check running – this page will update by itself. You can leave it open.');
+    });
+  }
   function waitFull(before, t0) {
-    $('topbar').className = 'topbar on'; if (fullPoll) clearInterval(fullPoll);
-    fullPoll = setInterval(function () {
-      var el = Math.round((Date.now() - t0) / 60000);
-      refreshData().then(function () {
-        if (data && data.updated_utc !== before && Date.parse(data.updated_utc) > t0 - 120000) {
-          clearInterval(fullPoll); fullPoll = null; $('topbar').className = 'topbar'; noteCheck('manual'); render();
-          step('✓ Full check done ' + fmt(Date.parse(data.updated_utc)) + ' – main estimate ' + pct(cur().F), 'done');
-        } else if (Date.now() - t0 > 20 * 60000) {
-          clearInterval(fullPoll); fullPoll = null; $('topbar').className = 'topbar';
-          step('⚠ No full-check result after 20 minutes. The hourly check will still run.', 'fail');
-        } else step('Full check running… ' + el + ' min so far (usually 3–10 min). Keep this page open.');
-      });
-    }, 30000);
+    full = { t0: t0, before: before, stage: 'sent', pct: 5 }; fullSave(); fullUi();
+    $('topbar').className = 'topbar on';
+    if (fullPoll) clearInterval(fullPoll);
+    fullPoll = setInterval(function () { fullUi(); }, 1000);
+    var tk = setInterval(function () { if (!full) { clearInterval(tk); return; } fullTick(); }, 20000);
+    setTimeout(fullTick, 8000);
+  }
+  function resumeFull() {
+    var j = lsGet('iw-full'); if (!j) return; try { var f = JSON.parse(j); } catch (e) { lsSet('iw-full', ''); return; }
+    if (!f || Date.now() - f.t0 > 20 * 60000) { lsSet('iw-full', ''); return; }
+    waitFull(f.before, f.t0); full.stage = f.stage || 'sent'; full.pct = f.pct || 5; fullUi(); fullTick();
   }
   function emailFallback(before, t0) {
     var m = lsGet('iw-mail'); if (!m) { m = (window.prompt('The direct trigger could not be reached from this browser. Enter your work email once to use the email route instead (saved only on this device).') || '').trim(); if (m.indexOf('@') < 0) return; lsSet('iw-mail', m); }
@@ -891,16 +940,16 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     step('Press Send on the email to start the full check. This page will update by itself.'); waitFull(before, t0);
   }
   function requestFull() {
-    if (busy || fullPoll) return;
+    if (busy || full) return;
     var before = data ? data.updated_utc : '', t0 = Date.now(), key = '';
     fullKey().then(function (k) { key = k; return refreshAll(true); }).then(function () {
       if (!key) return;
-      step('Starting the full check…');
+      $('refreshBtn').disabled = true; $('refreshBtn').classList.add('full'); step('Starting the full check…');
       return fetch(HOOK, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json', 'X-Trigger-Secret': key }, body: JSON.stringify({ source: 'dashboard', at: new Date().toISOString() }) })
         .then(function (r) {
-          if (r.status === 401 || r.status === 403) { lsSet('iw-key', ''); step('⚠ The saved key was not accepted. Press Update now and enter your password again.', 'fail'); return; }
-          if (!r.ok && r.status !== 202) { step('⚠ Full check could not start (' + r.status + '). Try again in a minute.', 'fail'); return; }
-          step('Full check started. Results usually arrive in 3–10 minutes; this page will update by itself.'); waitFull(before, t0);
+          if (r.status === 401 || r.status === 403) { lsSet('iw-key', ''); $('refreshBtn').classList.remove('full'); $('refreshBtn').disabled = false; step('⚠ The saved key was not accepted. Press Update now and enter your password again.', 'fail'); return; }
+          if (!r.ok && r.status !== 202) { $('refreshBtn').classList.remove('full'); $('refreshBtn').disabled = false; step('⚠ Full check could not start (' + r.status + '). Try again in a minute.', 'fail'); return; }
+          waitFull(before, t0); step('Full check started – this page will update by itself.');
         }, function () { emailFallback(before, t0); });
     });
   }
@@ -909,7 +958,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addListener && matchMedia('(prefers-color-scheme: dark)').addListener(function () { if (S.dark == null) { applyTheme(); render(); } });
   window.addEventListener('resize', function () { if (data) render(); });
 
-  refreshAll(false);
+  refreshAll(false).then(resumeFull);
   setInterval(tick, 1000);
   window.__iranWatch = { computeModel: computeModel, f7: f7 };
 })();
