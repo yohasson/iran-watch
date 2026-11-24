@@ -324,7 +324,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <details><summary>How this works</summary>
     <p>An automated check runs about every hour. It reads official sources (Israel Home Front Command, IDF, US Embassy Jerusalem, CENTCOM, White House), major news outlets and prediction markets. Iranian state media and social-media posts count only as claims until a second independent source confirms them. Alerts go out by Teams and email when the main estimate reaches 7% or a hard trigger occurs (strike order, embassy departure order, Home Front Command change, airspace closure, US casualties or a confirmed large-scale strike).</p>
     <p><b>Why 7%.</b> It is the lower of the estimates made on the eves of the last two attacks (12 Jun 2025: 14%; 27 Feb 2026: 7%). Your personal alert line in Settings only changes this page, not the Teams/email alerts.</p>
-    <p><b>Update now</b> reloads the newest check and re-reads live Polymarket prices to recalculate the market part and the flight risk. A full news re-check happens on the hourly run.</p>
+    <p><b>Update now</b> starts a full check: it opens a ready email to yourself (press Send), which triggers the complete news, market and flight check. Meanwhile the page shows the latest saved check and live market prices, and updates by itself when the full check finishes (usually 3–10 minutes). The full check also runs every hour on its own.</p>
     <p>Estimates only, not predictions or advice. Not affiliated with Polymarket, Wizz Air or any government.</p>
   </details>
 </footer>
@@ -839,7 +839,34 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.onclick = function () { openDrill(c.getAttribute('data-k')); }; });
   Array.prototype.forEach.call(document.querySelectorAll('.ov'), function (o) { o.onclick = function (e) { if (e.target === o || e.target.hasAttribute('data-close')) { o.className = 'ov'; if (o.id === 'ovD') view.drillK = null; } }; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { $('ovD').className = 'ov'; $('ovS').className = 'ov'; view.drillK = null; } });
-  $('refreshBtn').addEventListener('click', function () { refreshAll(true); });
+  /* full check on demand: opens a pre-filled email to yourself; an email trigger then runs the full check */
+  var FULL_SUBJ = 'IRAN-WATCH CHECK NOW', fullPoll = null;
+  function fullEmail() { var m = ''; try { m = localStorage.getItem('iw-mail') || ''; } catch (e) {}
+    if (!m) { m = (window.prompt('Full check: enter your work email (stored only on this device). The page opens a ready email to yourself – just press Send.') || '').trim(); if (m.indexOf('@') < 0) return ''; try { localStorage.setItem('iw-mail', m); } catch (e) {} }
+    return m; }
+  function requestFull() {
+    var m = fullEmail(); if (!m) { refreshAll(true); return; }
+    var before = data ? data.updated_utc : '', t0 = Date.now();
+    location.href = 'mailto:' + encodeURIComponent(m) + '?subject=' + encodeURIComponent(FULL_SUBJ + ' ' + new Date().toISOString().slice(0, 16)) + '&body=' + encodeURIComponent('Run a full Iran watch check now.');
+    refreshAll(true).then(function () {
+      step('Full check requested – press Send on the email. Results usually arrive in 3–10 minutes; this page will update by itself.');
+      $('topbar').className = 'topbar on';
+      if (fullPoll) clearInterval(fullPoll);
+      fullPoll = setInterval(function () {
+        var el = Math.round((Date.now() - t0) / 60000);
+        refreshData().then(function () {
+          if (data && data.updated_utc !== before && Date.parse(data.updated_utc) > t0 - 120000) {
+            clearInterval(fullPoll); fullPoll = null; $('topbar').className = 'topbar'; noteCheck('manual'); render();
+            step('✓ Full check done ' + fmt(Date.parse(data.updated_utc)) + ' – main estimate ' + pct(cur().F), 'done');
+          } else if (Date.now() - t0 > 20 * 60000) {
+            clearInterval(fullPoll); fullPoll = null; $('topbar').className = 'topbar';
+            step('⚠ No full-check result after 20 minutes – was the email sent? The hourly check will still run.', 'fail');
+          } else step('Full check running… ' + el + ' min so far (usually 3–10 min). Keep this page open.');
+        });
+      }, 30000);
+    });
+  }
+  $('refreshBtn').addEventListener('click', requestFull);
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && data && S.auto === 'on' && Date.now() - lastCheck.at > 10 * 60000) refreshAll(false); });
   if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addListener && matchMedia('(prefers-color-scheme: dark)').addListener(function () { if (S.dark == null) { applyTheme(); render(); } });
   window.addEventListener('resize', function () { if (data) render(); });
