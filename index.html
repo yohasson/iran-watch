@@ -325,7 +325,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <details><summary>How this works</summary>
     <p>An automated check runs about every hour. It reads official sources (Israel Home Front Command, IDF, US Embassy Jerusalem, CENTCOM, White House), major news outlets and prediction markets. Iranian state media and social-media posts count only as claims until a second independent source confirms them. Alerts go out by Teams and email when the main estimate reaches 7% or a hard trigger occurs (strike order, embassy departure order, Home Front Command change, airspace closure, US casualties or a confirmed large-scale strike).</p>
     <p><b>Why 7%.</b> It is the lower of the estimates made on the eves of the last two attacks (12 Jun 2025: 14%; 27 Feb 2026: 7%). Your personal alert line in Settings only changes this page, not the Teams/email alerts.</p>
-    <p><b>Update now</b> starts a full check of news, official sources, markets and your flight. The first time on each device it asks for your full-check key, saved only on that device. The page updates by itself when the check finishes (usually 3–10 minutes). The full check also runs every hour on its own.</p>
+    <p><b>Update now</b> starts a full check of news, official sources, markets and your flight. The first time on each device it asks for your password; after that it does not ask again on that device. The page updates by itself when the check finishes (usually 3–10 minutes). The full check also runs every hour on its own.</p>
     <p>Estimates only, not predictions or advice. Not affiliated with Polymarket, Wizz Air or any government.</p>
   </details>
 </footer>
@@ -854,9 +854,22 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   var FULL_SUBJ = 'IRAN-WATCH CHECK NOW', fullPoll = null;
   function lsGet(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
   function lsSet(k, v) { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} }
-  function fullKey() { var k = lsGet('iw-key'); if (k) return k;
-    k = (window.prompt('Full check – one-time setup on this device.\nPaste the full-check key you received from Copilot. It is saved only on this device and you will not be asked again.') || '').trim();
-    if (k.length < 20) return ''; lsSet('iw-key', k); return k; }
+  var LOCK = {"s": "My8bmXk0xQr5y61kVH0Ylw==", "i": "8+6CdVx/4uVDC1Gd", "c": "T9x+6CIuZdChmP1PMoKG0kCZBsAT4LhYm9PNZ19RUVSVXLyqNshrJb3OXyjbZ95i8NPBgInIPCW/bWw="};
+  function b64(x) { return Uint8Array.from(atob(x), function (ch) { return ch.charCodeAt(0); }); }
+  function unlock(pw) {
+    var e = new TextEncoder();
+    return crypto.subtle.importKey('raw', e.encode(pw), 'PBKDF2', false, ['deriveKey'])
+      .then(function (base) { return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64(LOCK.s), iterations: 600000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']); })
+      .then(function (k) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(LOCK.i) }, k, b64(LOCK.c)); })
+      .then(function (buf) { return new TextDecoder().decode(buf); });
+  }
+  function fullKey() {
+    var k = lsGet('iw-key'); if (k) return Promise.resolve(k);
+    var pw = (window.prompt('Full check – one-time setup on this device.\nEnter your Iran watch password. You will not be asked again on this device.') || '').trim();
+    if (!pw) return Promise.resolve('');
+    step('Checking password…');
+    return unlock(pw).then(function (key) { lsSet('iw-key', key); return key; }, function () { step('⚠ Wrong password. Press Update now to try again.', 'fail'); return ''; });
+  }
   function waitFull(before, t0) {
     $('topbar').className = 'topbar on'; if (fullPoll) clearInterval(fullPoll);
     fullPoll = setInterval(function () {
@@ -879,13 +892,13 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   }
   function requestFull() {
     if (busy || fullPoll) return;
-    var key = fullKey(), before = data ? data.updated_utc : '', t0 = Date.now();
-    if (!key) { refreshAll(true); return; }
-    refreshAll(true).then(function () {
+    var before = data ? data.updated_utc : '', t0 = Date.now(), key = '';
+    fullKey().then(function (k) { key = k; return refreshAll(true); }).then(function () {
+      if (!key) return;
       step('Starting the full check…');
       return fetch(HOOK, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json', 'X-Trigger-Secret': key }, body: JSON.stringify({ source: 'dashboard', at: new Date().toISOString() }) })
         .then(function (r) {
-          if (r.status === 401 || r.status === 403) { lsSet('iw-key', ''); step('⚠ The full-check key was not accepted. Press Update now again to re-enter it.', 'fail'); return; }
+          if (r.status === 401 || r.status === 403) { lsSet('iw-key', ''); step('⚠ The saved key was not accepted. Press Update now and enter your password again.', 'fail'); return; }
           if (!r.ok && r.status !== 202) { step('⚠ Full check could not start (' + r.status + '). Try again in a minute.', 'fail'); return; }
           step('Full check started. Results usually arrive in 3–10 minutes; this page will update by itself.'); waitFull(before, t0);
         }, function () { emailFallback(before, t0); });
