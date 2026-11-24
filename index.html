@@ -237,7 +237,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:24 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:31 Israel time</div>
     </div>
   </div>
 </header>
@@ -324,7 +324,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div class="panel">
     <h3>💹 Markets vs. our predictions<span class="sp"></span><span class="meta">Tap a row for the reasoning and track record · tap a column to sort</span></h3>
     <div class="score" id="score"></div>
-    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th><th class="n hide-s" data-s="up">Next 24 h</th><th data-s="call">Call</th><th class="n" data-s="pl">$100 since first call</th></tr></thead><tbody id="markets"></tbody></table>
+    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th><th class="n hide-s" data-s="up">Next 24 h (experimental)</th><th data-s="call">Call</th><th class="n" data-s="pl">$100 since first call</th></tr></thead><tbody id="markets"></tbody></table>
     <div class="meta" id="brent" style="margin-top:10px"></div>
   </div>
   <div class="panel" id="histPanel">
@@ -333,6 +333,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     <div id="hChart"></div>
     <div class="meta" id="hVal"></div>
     <table class="tk" id="hTab"></table>
+  </div>
+  <div class="panel" id="btPanel">
+    <h3>🧪 Hindsight test of our bet calls<span class="sp"></span><span class="meta" id="btMeta"></span></h3>
+    <div class="score" id="btKpi"></div>
+    <div class="meta" id="btVerdict" style="margin:4px 0 10px;font-size:.9rem"></div>
+    <table class="tk" id="btKind"></table>
+    <table class="tk" id="btDate" style="margin-top:12px"></table>
+    <div class="meta" id="btCave" style="margin-top:10px"></div>
   </div>
 </div>
 
@@ -576,7 +584,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!data) return;
     var c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
     renderHero(c, thr); renderBanner(c, thr); renderCards(c, thr, thrR); renderMain(thr); renderParts(c); if (!view.wi) wiReset(); else wiCalc();
-    renderItems(); renderMarkets(c); renderOpen(); try { histRender(); } catch (e) {} renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); txAll(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
+    renderItems(); renderMarkets(c); renderOpen(); try { histRender(); } catch (e) {} try { renderBacktest(); } catch (e) {} renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); txAll(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
     var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
@@ -732,7 +740,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       var gc = add(tr, 'td', null, 'n'), g = Math.abs(r.gap) < 0.5 ? '≈' : (r.gap > 0 ? '+' : '−') + Math.abs(r.gap).toFixed(1), gb = add(gc, 'span', g, 'gapb');
       var big = Math.abs(r.gap) >= Math.max(2, 0.25 * Math.max(r.now, r.ours, 1));
       gb.style.background = Math.abs(r.gap) < 0.5 ? 'var(--soft)' : big ? 'rgba(234,88,12,.15)' : 'var(--blue-bg)'; gb.style.color = Math.abs(r.gap) < 0.5 ? 'var(--muted)' : big ? '#c2410c' : 'var(--blue)';
-      var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); }
+      var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); t24.title = 'Experimental – no proven skill in the hindsight test'; t24.style.opacity = '.6'; }
       var tc = add(tr, 'td'), cl = (p.trade || {}).call || '–'; add(tc, 'span', cl, 'call ' + (/^Buy/.test(cl) ? 'buy' : /^Lean/.test(cl) ? 'lean' : 'out')); if ((p.trade || {}).ev_pct != null && /^(Buy|Lean)/.test(cl)) add(tc, 'small', ' +' + p.trade.ev_pct + '% exp.');
       var sc0 = p.score || {}, tp = add(tr, 'td', null, 'n'); if (isNum(sc0.first_pl)) add(tp, 'span', (sc0.first_pl >= 0 ? '+$' : '−$') + Math.abs(sc0.first_pl).toFixed(2), sc0.first_pl >= 0 ? 'plp' : 'pln'); else tp.textContent = '–';
       tr.onclick = function () { view.prOpen[p.key] = !view.prOpen[p.key]; renderMarkets(cur()); };
@@ -1005,6 +1013,25 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     return unlock(pw).then(function (key) { lsSet('iw-key', key); return key; }, function () { step('⚠ Wrong password. Press Update now to try again.', 'fail'); return ''; });
   }
 
+
+  var BT = null; setTimeout(function () { fetchJson('https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/backtest.json?t=' + Date.now(), null, 20000).catch(function () { return fetchJson('backtest.json?t=' + Date.now()); }).then(function (j) { BT = j; renderBacktest(); }).catch(function () {}); }, 1200);
+  function renderBacktest() {
+    var b = BT, k = $('btKpi'); if (!k) return; clear(k); clear($('btKind')); clear($('btDate'));
+    if (!b) { $('btPanel').style.display = 'none'; return; } $('btPanel').style.display = '';
+    $('btMeta').textContent = b.n_preds + ' past predictions · ' + b.dates.length + ' dates (' + b.dates[0] + ' to ' + b.dates[b.dates.length - 1] + ') · official Polymarket prices';
+    var m = function (v) { return (v >= 0 ? '+$' : '−$') + Math.abs(v).toFixed(0); };
+    [[b.brier_ours.toFixed(3) + ' vs ' + b.brier_market.toFixed(3), 'Accuracy on ' + b.n_resolved + ' settled bets – ours vs market (lower is better)'],
+     [b.ours_final_resolved[2] + ' of ' + b.ours_final_resolved[1] + ' won', 'Our Buy/Lean calls on settled bets: ' + m(b.ours_final_resolved[0]) + ' on $' + (b.ours_final_resolved[1] * 100) + ' staked'],
+     ['+$' + b.ours_7d_rate.toFixed(1) + ' vs +$' + b.calm_7d_rate.toFixed(1), 'Average 7-day result per $100 call – ours vs "always bet on calm"'],
+     [b.dir_hit_pct + '%', '24-hour up/down calls right (guessing "up" every time: ' + b.dir_always_up_pct + '%)']].forEach(function (x) { var d = add(k, 'div'); add(d, 'b', x[0]); add(d, 'span', x[1]); });
+    $('btVerdict').textContent = b.verdict || '';
+    var t = $('btKind'), h = add(add(t, 'thead'), 'tr'); ['Bet type', 'Calls', 'Won', 'Result on $100 each'].forEach(function (x) { add(h, 'th', x); }); var bd = add(t, 'tbody');
+    var NM = { iran_air: 'Iran airspace closure', il_air: 'Israeli airspace closure', ceasefire: 'Israel–Iran ceasefire holds', pause: 'US–Iran 2-week pause', airlines: 'Airlines halt Israel flights', saudi: 'Saudi airspace closure', invade: 'US ground offensive' };
+    Object.keys(b.by_kind).forEach(function (kk) { var v = b.by_kind[kk], r = add(bd, 'tr'); add(r, 'td', NM[kk] || kk); add(r, 'td', v.calls); add(r, 'td', v.winning + ' (' + Math.round(100 * v.winning / v.calls) + '%)'); add(add(r, 'td'), 'span', m(v.pl_final), v.pl_final >= 0 ? 'plp' : 'pln'); });
+    var t2 = $('btDate'), h2 = add(add(t2, 'thead'), 'tr'); ['Replay date', '24-h calls right', '7-day result of calls'].forEach(function (x) { add(h2, 'th', x); }); var bd2 = add(t2, 'tbody');
+    Object.keys(b.by_date).forEach(function (d) { var v = b.by_date[d], r = add(bd2, 'tr'); add(r, 'td', d); add(r, 'td', v.dir[1] + ' of ' + v.dir[0]); add(add(r, 'td'), 'span', m(v.pl7[0]) + ' on ' + v.pl7[1], v.pl7[0] >= 0 ? 'plp' : 'pln'); });
+    $('btCave').textContent = b.caveats || '';
+  }
   /* ---- price history (official Polymarket CLOB prices-history, fetched by the browser) ---- */
   var CLOB = 'https://clob.polymarket.com/prices-history?interval=max&fidelity=360&market=', HIST = {}, histBusy = false;
   function normO(t) { return String(t || '').toLowerCase().replace(/,?\s*20\d\d/, '').replace(/\s+/g, ' ').trim(); }
