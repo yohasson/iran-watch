@@ -1,14 +1,14 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-24T19:42:00Z",
- "summary": "On-demand check: since the 20:40 Israel-time check, Iran's Revolutionary Guards claimed (about 20:15) they targeted a container ship in Hormuz – not confirmed – and Iran's security chief repeated threats (about 21:15). No US embassy, Home Front or airspace change; no strike order. Small rise: 24-hour chance 1.35%, well under the 7% alert line. No alert sent.",
+ "updated_utc": "2026-11-24T19:45:00Z",
+ "summary": "On-demand check: since the 20:40 Israel-time check, Iran's Revolutionary Guards claimed they targeted a container ship in Hormuz (about 20:15, unconfirmed) and Iran's security chief repeated threats of a 'full force' response (about 21:15); no strike order, embassy, Home Front or airspace change. 24-hour chance 1.35% (was 1.34%), well under the 7% alert line. No alert sent.",
  "message_sent": "none",
  "major": {
   "F": 1.35,
   "prev_F": 1.34,
-  "E": 2.73,
+  "E": 2.71,
   "M": 0.67,
-  "F7": 9.2,
+  "F7": 9.16,
   "threshold": 7
  },
  "limited": {
@@ -24,20 +24,20 @@
  "flight": {
   "active": true,
   "label": "Your flight to London",
-  "R": 8.21,
+  "R": 8.2,
   "prev_R": 8.22,
   "baseline": 17,
   "alert_at": 25,
   "C1": 1.47,
-  "C2": 3.3,
+  "C2": 3.28,
   "W": 5,
   "triggers": [],
-  "status_note": "Your flight's route operated every day 12–24 Nov and the next days are scheduled; no Wizz Air or other airline suspensions; Ben Gurion open."
+  "status_note": "Your flight's route has operated every day this month with no cancellations and the coming days are scheduled; no Wizz Air or other airline suspensions found; Ben Gurion open."
  },
  "model": {
-  "E": 2.73,
+  "E": 2.71,
   "P_iran_nov30": 0.0405,
-  "P_iran_dec31": 0.15,
+  "P_iran_dec31": 0.145,
   "P_il_nov30": 0.034,
   "W": 5,
   "F_floor": null,
@@ -101,32 +101,39 @@
  },
  "items": [
   {
-   "time_utc": "2026-11-24T19:42:00Z",
+   "time_utc": "2026-11-24T19:45:00Z",
    "source": "Polymarket",
-   "text": "All tracked markets near-unchanged; Iran full airspace closure by 30 Nov holds at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%.",
+   "text": "Iran full airspace closure by 30 Nov unchanged at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%; other markets flat.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "effect": "No change"
   },
   {
    "time_utc": "2026-11-24T19:15:00Z",
-   "source": "Al Jazeera (Iran security chief Mohsen Rezaei)",
-   "text": "Iran's security chief says Tehran will break the US blockade and respond with 'full force' to any new aggression (rhetoric).",
+   "source": "Al Jazeera (Iran security chief on X)",
+   "text": "Iran's Supreme National Security Council secretary says Tehran will break the US blockade and respond with 'full force' to any new aggression (rhetoric).",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "No change"
   },
   {
    "time_utc": "2026-11-24T18:15:00Z",
    "source": "IRGC Navy via Al Jazeera (claim)",
-   "text": "Iran's Revolutionary Guards say they targeted a container ship in the Strait of Hormuz for switching off its tracking systems and using a restricted route; not independently confirmed.",
+   "text": "Revolutionary Guards say they targeted a 'non-compliant' container ship in a restricted area of Hormuz; not independently confirmed.",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "Small rise"
+  },
+  {
+   "time_utc": "2026-11-24T18:00:00Z",
+   "source": "CBS News (US Central Command)",
+   "text": "US officials say tanker traffic through Hormuz keeps rising under US protection despite more attacks; Brent near $90, lowest since late August.",
+   "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/",
+   "effect": "No change"
   }
  ],
  "open_items": [
   "Whether Trump picks one of the options NBC reported (leadership strikes or renewed large-scale strikes) – any order would be a hard trigger.",
-  "Confirmation of the Revolutionary Guards' container-ship claim, and any US response in Hormuz (would raise the limited-strike figure first).",
   "Follow-up to Katz's chemical-weapons claim – IDF or US confirmation, or gas-mask distribution, would raise the figures.",
-  "Iran's reply to Qatar's latest mediation draft – any new US–Iran talks would lower the figures.",
+  "More Iranian attacks on ships in Hormuz – a US response would raise the limited-strike figure first.",
+  "Iran's reply to Qatar's mediation – any new US–Iran talks would lower the figures.",
   "Your flight status in the Wizz Air app as Friday approaches."
  ],
  "history": [
@@ -761,27 +768,27 @@
    "F7": 9.07
   },
   {
-   "utc": "2026-11-24T19:42:00Z",
+   "utc": "2026-11-24T19:45:00Z",
    "F": 1.35,
-   "E": 2.73,
+   "E": 2.71,
    "M": 0.67,
    "L": 28.52,
-   "R": 8.21,
-   "F7": 9.2
+   "R": 8.2,
+   "F7": 9.16
   }
  ],
  "events": [
   {
-   "time_utc": "2026-11-24T19:42:00Z",
+   "time_utc": "2026-11-24T19:45:00Z",
    "source": "Polymarket",
-   "text": "All tracked markets near-unchanged; Iran full airspace closure by 30 Nov holds at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%.",
+   "text": "Iran full airspace closure by 30 Nov unchanged at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%; other markets flat.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "effect": "No change"
   },
   {
    "time_utc": "2026-11-24T19:15:00Z",
-   "source": "Al Jazeera (Iran security chief Mohsen Rezaei)",
-   "text": "Iran's security chief says Tehran will break the US blockade and respond with 'full force' to any new aggression (rhetoric).",
+   "source": "Al Jazeera (Iran security chief on X)",
+   "text": "Iran's Supreme National Security Council secretary says Tehran will break the US blockade and respond with 'full force' to any new aggression (rhetoric).",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "No change"
   },
@@ -795,9 +802,16 @@
   {
    "time_utc": "2026-11-24T18:15:00Z",
    "source": "IRGC Navy via Al Jazeera (claim)",
-   "text": "Iran's Revolutionary Guards say they targeted a container ship in the Strait of Hormuz for switching off its tracking systems and using a restricted route; not independently confirmed.",
+   "text": "Revolutionary Guards say they targeted a 'non-compliant' container ship in a restricted area of Hormuz; not independently confirmed.",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "Small rise"
+  },
+  {
+   "time_utc": "2026-11-24T18:00:00Z",
+   "source": "CBS News (US Central Command)",
+   "text": "US officials say tanker traffic through Hormuz keeps rising under US protection despite more attacks; Brent near $90, lowest since late August.",
+   "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/",
+   "effect": "No change"
   },
   {
    "time_utc": "2026-11-24T17:38:00Z",
