@@ -74,9 +74,29 @@
   footer{color:var(--muted);font-size:.8rem;margin-top:22px;line-height:1.55}
   .err{color:var(--red)}
   @media (max-width:560px){ .big{font-size:2rem} .actions{align-items:flex-start} .tick{text-align:left} }
+  .hero{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:14px;display:grid;grid-template-columns:minmax(260px,1fr) minmax(280px,1.2fr);gap:18px 28px;align-items:center}
+  .hero .lbl{font-size:.95rem;color:var(--muted);font-weight:600}
+  .hero .num{font-size:5.2rem;font-weight:800;letter-spacing:-2px;line-height:1;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+  .hero .num.g{color:var(--green)} .hero .num.a{color:var(--amber)} .hero .num.r{color:var(--red)}
+  .hero .dist{font-size:1.15rem;font-weight:700;margin-top:4px}
+  .hero .hbar{position:relative;height:14px;background:#eceef2;border-radius:8px;margin:12px 0 4px}
+  .hero .hbar .f{position:absolute;left:0;top:0;height:100%;border-radius:8px}
+  .hero .hbar .m{position:absolute;top:-6px;width:3px;height:26px;background:var(--red);border-radius:2px}
+  .hero .hbl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+  .hero .trend{font-size:1.05rem;font-weight:700;margin-bottom:4px}
+  .hero .tsub{font-size:.82rem;color:var(--muted);margin-top:4px}
+  @media (max-width:640px){ .hero{grid-template-columns:1fr} .hero .num{font-size:4rem} }
+  .topbar{position:fixed;left:0;top:0;height:4px;width:100%;background:transparent;z-index:50;overflow:hidden;display:none}
+  .topbar.on{display:block}
+  .topbar i{position:absolute;top:0;height:100%;width:35%;background:var(--blue);animation:tb 1.1s ease-in-out infinite}
+  @keyframes tb{0%{left:-35%}100%{left:100%}}
+  body.updating .hero,body.updating .grid,body.updating .two{opacity:.45;transition:opacity .2s}
+  .step{font-size:.85rem;font-weight:600;color:var(--blue);text-align:right;min-height:1.2em}
+  .step.done{color:var(--green)} .step.fail{color:var(--red)}
 </style>
 </head>
 <body>
+<div class="topbar" id="topbar"><i></i></div>
 <div class="wrap">
   <header>
     <div>
@@ -85,9 +105,25 @@
     </div>
     <div class="actions">
       <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
+      <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="tick" id="tick">Loading…</div>
     </div>
   </header>
+
+  <div class="hero" id="hero">
+    <div>
+      <div class="lbl">Chance a major US/Israeli strike campaign on Iran starts in the next 24 hours</div>
+      <div class="num" id="hNum">–</div>
+      <div class="dist" id="hDist"></div>
+      <div class="hbar"><div class="f" id="hFill"></div><div class="m" id="hMark"></div></div>
+      <div class="hbl"><span>0%</span><span id="hThrLbl">7% alert</span><span id="hMaxLbl"></span></div>
+    </div>
+    <div>
+      <div class="trend" id="hTrend"></div>
+      <svg class="chart" id="hSpark" viewBox="0 0 520 150" preserveAspectRatio="none" role="img" aria-label="Last 7 days"></svg>
+      <div class="tsub" id="hTsub"></div>
+    </div>
+  </div>
 
   <div id="banner" class="banner info" role="status" aria-live="polite"><span class="dot"></span><div>Loading the latest check…</div></div>
 
@@ -330,6 +366,45 @@
     });
   }
 
+  function renderHero(F, useLive) {
+    var thr = (data.major && data.major.threshold) || 7;
+    var max = Math.max(10, Math.ceil(F * 1.2));
+    var n = $('hNum'); n.textContent = pct(F); n.className = 'num ' + band(F, thr * 0.7, thr);
+    var gap = thr - F;
+    $('hDist').textContent = gap > 0 ? (gap.toFixed(1) + ' points below the ' + thr + '% alert line (' + Math.round(F / thr * 100) + '% of the way)')
+                                     : ('ABOVE the ' + thr + '% alert line by ' + (-gap).toFixed(1) + ' points');
+    $('hDist').style.color = gap > 0 ? (F >= thr * 0.7 ? 'var(--amber)' : 'var(--green)') : 'var(--red)';
+    var f = $('hFill'); f.style.width = Math.min(100, F / max * 100) + '%';
+    f.style.background = F >= thr ? 'var(--red)' : (F >= thr * 0.7 ? 'var(--amber)' : 'var(--green)');
+    $('hMark').style.left = (thr / max * 100) + '%';
+    $('hThrLbl').textContent = thr + '% alert'; $('hMaxLbl').textContent = max + '%';
+    var now = Date.now(), from = now - 7 * 864e5;
+    var pts = (data.history || []).map(function (h) { return { t: Date.parse(h.utc), v: h.F }; })
+      .filter(function (p) { return isNum(p.v) && p.t >= from; });
+    if (useLive) pts.push({ t: now, v: F });
+    else if (!pts.length || pts[pts.length - 1].t < Date.parse(data.updated_utc)) pts.push({ t: Date.parse(data.updated_utc), v: F });
+    var tr = $('hTrend'), ts = $('hTsub'), svg = $('hSpark');
+    if (pts.length < 2) { tr.textContent = 'Trend: not enough history yet'; svg.innerHTML = ''; ts.textContent = ''; return; }
+    var first = pts[0], d = F - first.v, rel = first.v ? d / first.v * 100 : 0;
+    var arrow = Math.abs(d) < 0.05 ? '→ flat' : (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(2) + ' pts (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)';
+    var span = (now - first.t) / 864e5;
+    tr.textContent = 'Trend: ' + arrow + ' since ' + fmt(new Date(first.t).toISOString(), { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + (span < 6.5 ? ' (watch started then)' : ' (7 days)');
+    tr.style.color = Math.abs(d) < 0.05 ? 'var(--muted)' : (d > 0 ? 'var(--red)' : 'var(--green)');
+    var vs = pts.map(function (p) { return p.v; }), hi = Math.max.apply(null, vs), lo = Math.min.apply(null, vs);
+    ts.textContent = 'Range: low ' + pct(lo) + ', high ' + pct(hi) + ' · dashed line = ' + thr + '% alert';
+    var W = 520, H = 150, P = 6, top = Math.max(thr * 1.1, hi * 1.15), t0 = Math.min(first.t, from), t1 = now;
+    function x(t) { return P + (t - t0) / (t1 - t0) * (W - 2 * P); }
+    function y(v) { return H - P - v / top * (H - 2 * P); }
+    var dPath = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p.t).toFixed(1) + ' ' + y(p.v).toFixed(1); }).join(' ');
+    var area = dPath + ' L' + x(pts[pts.length - 1].t).toFixed(1) + ' ' + (H - P) + ' L' + x(first.t).toFixed(1) + ' ' + (H - P) + ' Z';
+    var col = F >= thr ? '#c0262d' : (F >= thr * 0.7 ? '#a86200' : '#17804a');
+    var last = pts[pts.length - 1];
+    svg.innerHTML = '<line x1="' + P + '" x2="' + (W - P) + '" y1="' + y(thr) + '" y2="' + y(thr) + '" stroke="#c0262d" stroke-width="1.5" stroke-dasharray="6 5"/>' +
+      '<text x="' + (W - P - 4) + '" y="' + (y(thr) - 5) + '" text-anchor="end" font-size="12" fill="#c0262d">' + thr + '% alert</text>' +
+      '<path d="' + area + '" fill="' + col + '" fill-opacity="0.12"/>' +
+      '<path d="' + dPath + '" fill="none" stroke="' + col + '" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<circle cx="' + x(last.t) + '" cy="' + y(last.v) + '" r="4.5" fill="' + col + '"/>';
+  }
   function render() {
     if (!data) return;
     var upd = Date.parse(data.updated_utc);
@@ -338,6 +413,7 @@
     var M = useLive ? live.M : data.major.M;
     var flightActive = data.flight && data.flight.active && Date.now() < FLIGHT_END;
     var R = flightActive ? (useLive && isNum(live.R) ? live.R : data.flight.R) : null;
+    try { renderHero(F, useLive); } catch (e) { $('hDist').textContent = ''; }
 
     // banner
     var b = $('banner'), alertOn = data.alert && data.alert.active;
@@ -514,7 +590,11 @@
     btn.disabled = on;
     btn.className = 'btn' + (on ? ' busy' : '');
     $('refreshLbl').textContent = on ? 'Updating…' : 'Update now';
+    $('topbar').className = 'topbar' + (on ? ' on' : '');
+    document.body.className = on ? 'updating' : '';
   }
+  function step(text, cls) { var e = $('step'); e.textContent = text; e.className = 'step' + (cls ? ' ' + cls : ''); }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function refreshData() {
     return loadData().then(function (d) {
       if (d && d.major) {
@@ -529,17 +609,21 @@
       }
     }).then(function () { nextDataAt = Date.now() + DATA_POLL_MS; });
   }
-  function refreshAll() {
+  function refreshAll(manual) {
     if (busy) return Promise.resolve();
     setBusy(true);
+    var t0 = Date.now();
+    step('Step 1 of 3 – loading the latest hourly check…');
     return refreshData()
-      .then(function () { return loadLive(); })
-      .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; render(); })
+      .then(function () { step('Step 2 of 3 – reading live Polymarket prices…'); return loadLive(); })
+      .then(function () { step('Step 3 of 3 – recalculating…'); nextLiveAt = Date.now() + LIVE_POLL_MS; render(); })
+      .then(function () { var left = 900 - (Date.now() - t0); return left > 0 ? wait(left) : null; })
       .then(function () { setBusy(false); }, function () { setBusy(false); })
       .then(function () {
-        var b = $('refreshLbl');
-        b.textContent = (live && !live.error) ? 'Updated ' + fmt(Date.now()) : (live && live.error ? 'Prices unavailable – retry' : 'Update now');
-        setTimeout(function () { if (!busy) b.textContent = 'Update now'; }, 8000);
+        if (live && !live.error) step('✓ Updated at ' + fmt(new Date().toISOString()) + ' – main estimate ' + pct(live.F), 'done');
+        else if (live && live.error) step('⚠ Live prices unavailable (' + live.error + ') – showing the ' + fmt(data.updated_utc) + ' hourly check', 'fail');
+        else step('✓ Loaded the ' + (data ? fmt(data.updated_utc) : '') + ' hourly check', 'done');
+        if (!manual) setTimeout(function () { if (!busy) step(''); }, 15000);
       });
   }
   function tick() {
@@ -558,7 +642,7 @@
     $('tick').textContent = txt || 'Loading…';
   }
 
-  $('refreshBtn').addEventListener('click', function () { refreshAll(); });
+  $('refreshBtn').addEventListener('click', function () { refreshAll(true); });
   document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'visible' && data && Date.now() - Date.parse(data.updated_utc) > 65 * 60000) refreshData().then(render);
   });
