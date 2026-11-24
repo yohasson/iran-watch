@@ -237,7 +237,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:25 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:31 Israel time</div>
     </div>
   </div>
 </header>
@@ -324,15 +324,23 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div class="panel">
     <h3>💹 Markets vs. our predictions<span class="sp"></span><span class="meta">Tap a row for the reasoning and track record · tap a column to sort</span></h3>
     <div class="score" id="score"></div>
-    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th><th class="n hide-s" data-s="up">Next 24 h</th><th data-s="call">Call</th><th class="n" data-s="pl">$100 since first call</th></tr></thead><tbody id="markets"></tbody></table>
+    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th><th class="n hide-s" data-s="up">Next 24 h (experimental)</th><th data-s="call">Call</th><th class="n" data-s="pl">$100 since first call</th></tr></thead><tbody id="markets"></tbody></table>
     <div class="meta" id="brent" style="margin-top:10px"></div>
   </div>
   <div class="panel" id="histPanel">
-    <h3>📈 Price history &amp; hindsight check<span class="sp"></span><span class="meta">Official Polymarket price history, loaded in your browser</span></h3>
+    <h3>📈 Price history &amp; hindsight check<span class="sp"></span><span class="meta">Official Polymarket price history, updated automatically</span></h3>
     <div class="hrow"><select id="hSel"></select><button class="fmore2" id="hLoad" type="button">Load price history</button><button class="fmore2" id="hCsv" type="button" hidden>Download CSV (all bets)</button><span class="meta" id="hStat"></span></div>
     <div id="hChart"></div>
     <div class="meta" id="hVal"></div>
     <table class="tk" id="hTab"></table>
+  </div>
+  <div class="panel" id="btPanel">
+    <h3>🧪 Hindsight test of our bet calls<span class="sp"></span><span class="meta" id="btMeta"></span></h3>
+    <div class="score" id="btKpi"></div>
+    <div class="meta" id="btVerdict" style="margin:4px 0 10px;font-size:.9rem"></div>
+    <table class="tk" id="btKind"></table>
+    <table class="tk" id="btDate" style="margin-top:12px"></table>
+    <div class="meta" id="btCave" style="margin-top:10px"></div>
   </div>
 </div>
 
@@ -576,7 +584,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!data) return;
     var c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
     renderHero(c, thr); renderBanner(c, thr); renderCards(c, thr, thrR); renderMain(thr); renderParts(c); if (!view.wi) wiReset(); else wiCalc();
-    renderItems(); renderMarkets(c); renderOpen(); try { histRender(); } catch (e) {} renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); txAll(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
+    renderItems(); renderMarkets(c); renderOpen(); try { histRender(); } catch (e) {} try { renderBacktest(); } catch (e) {} renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); txAll(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
     var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
@@ -732,7 +740,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       var gc = add(tr, 'td', null, 'n'), g = Math.abs(r.gap) < 0.5 ? '≈' : (r.gap > 0 ? '+' : '−') + Math.abs(r.gap).toFixed(1), gb = add(gc, 'span', g, 'gapb');
       var big = Math.abs(r.gap) >= Math.max(2, 0.25 * Math.max(r.now, r.ours, 1));
       gb.style.background = Math.abs(r.gap) < 0.5 ? 'var(--soft)' : big ? 'rgba(234,88,12,.15)' : 'var(--blue-bg)'; gb.style.color = Math.abs(r.gap) < 0.5 ? 'var(--muted)' : big ? '#c2410c' : 'var(--blue)';
-      var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); }
+      var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); t24.title = 'Experimental – no proven skill in the hindsight test'; t24.style.opacity = '.6'; }
       var tc = add(tr, 'td'), cl = (p.trade || {}).call || '–'; add(tc, 'span', cl, 'call ' + (/^Buy/.test(cl) ? 'buy' : /^Lean/.test(cl) ? 'lean' : 'out')); if ((p.trade || {}).ev_pct != null && /^(Buy|Lean)/.test(cl)) add(tc, 'small', ' +' + p.trade.ev_pct + '% exp.');
       var sc0 = p.score || {}, tp = add(tr, 'td', null, 'n'); if (isNum(sc0.first_pl)) add(tp, 'span', (sc0.first_pl >= 0 ? '+$' : '−$') + Math.abs(sc0.first_pl).toFixed(2), sc0.first_pl >= 0 ? 'plp' : 'pln'); else tp.textContent = '–';
       tr.onclick = function () { view.prOpen[p.key] = !view.prOpen[p.key]; renderMarkets(cur()); };
@@ -764,7 +772,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', priv(t)); }); }
 
   /* ---------- i18n ---------- */
-  var HE_TX = {"Markets vs. our predictions": "השווקים מול התחזית שלנו", "Tap a row for the reasoning · tap a column to sort": "הקש על שורה להסבר · על עמודה למיון", "Market": "שוק", "Our view": "התחזית שלנו", "Gap": "פער", "Polymarket question": "שאלה ב-Polymarket", "Date passed – awaiting result": "התאריך עבר – ממתין לתוצאה", "Range": "טווח", "ours was": "שלנו היה", "models": "מודלים", "sources": "מקורות", "updated": "עודכן", "open on Polymarket": "פתח ב-Polymarket", "new": "חדש", "Predictions will appear after the next check.": "התחזיות יופיעו אחרי הבדיקה הבאה.", "* live price. ": "* מחיר חי. ", "Iran full airspace closure by": "סגירה מלאה של המרחב האווירי של איראן עד", "Israeli airspace closed by": "סגירת המרחב האווירי של ישראל עד", "Israel–Iran ceasefire holds through": "הפסקת האש ישראל–איראן נמשכת עד", "US–Iran 2-week pause begins by": "הפסקה של שבועיים ארה״ב–איראן מתחילה עד", "Airlines halt Israel flights": "חברות תעופה מפסיקות טיסות לישראל", "Saudi airspace closed": "סגירת המרחב האווירי של סעודיה", "US ground offensive in Iran": "מתקפה קרקעית אמריקאית באיראן", "Nov": "נוב׳", "Dec": "דצמ׳", "Jan": "ינו׳", "by": "עד", "Request sent": "הבקשה נשלחה", "Check started": "הבדיקה התחילה", "Reading sources": "קורא מקורות", "Calculating": "מחשב", "Publishing": "מפרסם", "Done": "הסתיים", "✕ Cancel check": "✕ ביטול בדיקה", "Now: waiting for the automation to start the check": "עכשיו: ממתין שהאוטומציה תתחיל את הבדיקה", "Now: ": "עכשיו: ", "You pressed Update now": "לחצת על עדכן עכשיו", "Request accepted by the automation service – waiting for the check to start (usually 1–3 min)": "הבקשה התקבלה – ממתין שהבדיקה תתחיל (בדרך כלל 1–3 דקות)", "The check has started and is reporting progress": "הבדיקה התחילה ומדווחת התקדמות", "Usually takes about 8 min": "בדרך כלל לוקח כ-8 דקות", "Full check running – this page will update by itself. You can leave it open.": "בדיקה מלאה רצה – הדף יתעדכן לבד. אפשר להשאיר אותו פתוח.", "Check cancelled. You can start a new one now.": "הבדיקה בוטלה. אפשר להתחיל בדיקה חדשה.", "Starting the full check…": "מתחיל בדיקה מלאה…", "Scenarios – tap to add or remove a new signal (same weights the hourly check uses):": "תרחישים – הקש כדי להוסיף או להסיר אות חדש (אותם משקלים כמו בבדיקה השעתית):", "Major campaign – 24 h": "מתקפה רחבה – 24 שעות", "Major campaign – 7 days": "מתקפה רחבה – 7 ימים", "Any strike – 24 h": "כל תקיפה – 24 שעות", "Flight risk": "סיכון לטיסה", "Market part": "רכיב השוק", "from Iran airspace price": "ממחיר המרחב האווירי של איראן", "vs now": "לעומת עכשיו", "⚠ alert": "⚠ התרעה", "⚠ flight alert": "⚠ התרעת טיסה", "it flies": "שהטיסה תצא", "about": "בערך", "Move the sliders or tap scenarios to see how the figures would change.": "הזז את המחוונים או הקש על תרחישים כדי לראות איך המספרים ישתנו.", "🎯 Strike go-order reported": "🎯 דווח על פקודת תקיפה", "✈️ Tankers / AWACS massing": "✈️ ריכוז מטוסי תדלוק / AWACS", "🏛️ US embassy departure order": "🏛️ הוראת עזיבה של שגרירות ארה״ב", "🚨 Home Front guideline change": "🚨 שינוי בהנחיות פיקוד העורף", "🛑 Regional airspace closure": "🛑 סגירת מרחב אווירי אזורי", "💥 US casualties / jet downed": "💥 נפגעים אמריקאים / מטוס הופל", "🚀 Iran hits US base or ship": "🚀 איראן פוגעת בבסיס או ספינה אמריקאית", "🎯 US limited strike on Iran": "🎯 תקיפה אמריקאית מוגבלת באיראן", "🛫 Foreign airlines cancel Israel": "🛫 חברות זרות מבטלות טיסות לישראל", "🔥 Major campaign begins": "🔥 מתקפה רחבה מתחילה", "🕊️ Talks announced / calming": "🕊️ הוכרזו שיחות / הרגעה", "😴 Quiet 24 hours": "😴 24 שעות שקטות", "Any US/Israeli strike, 24 h (L)": "כל תקיפה אמריקאית/ישראלית, 24 שעות (L)", "Reset to current": "איפוס למצב הנוכחי"};
+  var HE_TX = {"Markets vs. our predictions": "השווקים מול התחזית שלנו", "Tap a row for the reasoning · tap a column to sort": "הקש על שורה להסבר · על עמודה למיון", "Market": "שוק", "Our view": "התחזית שלנו", "Gap": "פער", "Polymarket question": "שאלה ב-Polymarket", "Date passed – awaiting result": "התאריך עבר – ממתין לתוצאה", "Range": "טווח", "ours was": "שלנו היה", "models": "מודלים", "sources": "מקורות", "updated": "עודכן", "open on Polymarket": "פתח ב-Polymarket", "new": "חדש", "Predictions will appear after the next check.": "התחזיות יופיעו אחרי הבדיקה הבאה.", "* live price. ": "* מחיר חי. ", "Iran full airspace closure by": "סגירה מלאה של המרחב האווירי של איראן עד", "Israeli airspace closed by": "סגירת המרחב האווירי של ישראל עד", "Israel–Iran ceasefire holds through": "הפסקת האש ישראל–איראן נמשכת עד", "US–Iran 2-week pause begins by": "הפסקה של שבועיים ארה״ב–איראן מתחילה עד", "Airlines halt Israel flights": "חברות תעופה מפסיקות טיסות לישראל", "Saudi airspace closed": "סגירת המרחב האווירי של סעודיה", "US ground offensive in Iran": "מתקפה קרקעית אמריקאית באיראן", "Nov": "נוב׳", "Dec": "דצמ׳", "Jan": "ינו׳", "by": "עד", "Request sent": "הבקשה נשלחה", "Check started": "הבדיקה התחילה", "Reading sources": "קורא מקורות", "Calculating": "מחשב", "Publishing": "מפרסם", "Done": "הסתיים", "✕ Cancel check": "✕ ביטול בדיקה", "Now: waiting for the automation to start the check": "עכשיו: ממתין שהאוטומציה תתחיל את הבדיקה", "Now: ": "עכשיו: ", "You pressed Update now": "לחצת על עדכן עכשיו", "Request accepted by the automation service – waiting for the check to start (usually 20–60 s)": "הבקשה התקבלה – ממתין שהבדיקה תתחיל (בדרך כלל 20–60 שניות)", "The check has started and is reporting progress": "הבדיקה התחילה ומדווחת התקדמות", "Usually takes about 8 min": "בדרך כלל לוקח כ-8 דקות", "Full check running – this page will update by itself. You can leave it open.": "בדיקה מלאה רצה – הדף יתעדכן לבד. אפשר להשאיר אותו פתוח.", "Check cancelled. You can start a new one now.": "הבדיקה בוטלה. אפשר להתחיל בדיקה חדשה.", "Starting the full check…": "מתחיל בדיקה מלאה…", "Scenarios – tap to add or remove a new signal (same weights the hourly check uses):": "תרחישים – הקש כדי להוסיף או להסיר אות חדש (אותם משקלים כמו בבדיקה השעתית):", "Major campaign – 24 h": "מתקפה רחבה – 24 שעות", "Major campaign – 7 days": "מתקפה רחבה – 7 ימים", "Any strike – 24 h": "כל תקיפה – 24 שעות", "Flight risk": "סיכון לטיסה", "Market part": "רכיב השוק", "from Iran airspace price": "ממחיר המרחב האווירי של איראן", "vs now": "לעומת עכשיו", "⚠ alert": "⚠ התרעה", "⚠ flight alert": "⚠ התרעת טיסה", "it flies": "שהטיסה תצא", "about": "בערך", "Move the sliders or tap scenarios to see how the figures would change.": "הזז את המחוונים או הקש על תרחישים כדי לראות איך המספרים ישתנו.", "🎯 Strike go-order reported": "🎯 דווח על פקודת תקיפה", "✈️ Tankers / AWACS massing": "✈️ ריכוז מטוסי תדלוק / AWACS", "🏛️ US embassy departure order": "🏛️ הוראת עזיבה של שגרירות ארה״ב", "🚨 Home Front guideline change": "🚨 שינוי בהנחיות פיקוד העורף", "🛑 Regional airspace closure": "🛑 סגירת מרחב אווירי אזורי", "💥 US casualties / jet downed": "💥 נפגעים אמריקאים / מטוס הופל", "🚀 Iran hits US base or ship": "🚀 איראן פוגעת בבסיס או ספינה אמריקאית", "🎯 US limited strike on Iran": "🎯 תקיפה אמריקאית מוגבלת באיראן", "🛫 Foreign airlines cancel Israel": "🛫 חברות זרות מבטלות טיסות לישראל", "🔥 Major campaign begins": "🔥 מתקפה רחבה מתחילה", "🕊️ Talks announced / calming": "🕊️ הוכרזו שיחות / הרגעה", "😴 Quiet 24 hours": "😴 24 שעות שקטות", "Any US/Israeli strike, 24 h (L)": "כל תקיפה אמריקאית/ישראלית, 24 שעות (L)", "Reset to current": "איפוס למצב הנוכחי"};
   function tx(t) { if (S.lang !== 'he' || t == null) return t; t = String(t); if (HE_TX[t]) return HE_TX[t];
     var keys = Object.keys(HE_TX).filter(function (k) { return k.length > 3; }).sort(function (a, b) { return b.length - a.length; });
     for (var i = 0; i < keys.length; i++) { if (t.indexOf(keys[i]) >= 0) t = t.split(keys[i]).join(HE_TX[keys[i]]); }
@@ -1005,9 +1013,35 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     return unlock(pw).then(function (key) { lsSet('iw-key', key); return key; }, function () { step('⚠ Wrong password. Press Update now to try again.', 'fail'); return ''; });
   }
 
+
+  var BT = null; setTimeout(function () { fetchJson('https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/backtest.json?t=' + Date.now(), null, 20000).catch(function () { return fetchJson('backtest.json?t=' + Date.now()); }).then(function (j) { BT = j; renderBacktest(); }).catch(function () {}); }, 1200);
+  function renderBacktest() {
+    var b = BT, k = $('btKpi'); if (!k) return; clear(k); clear($('btKind')); clear($('btDate'));
+    if (!b) { $('btPanel').style.display = 'none'; return; } $('btPanel').style.display = '';
+    $('btMeta').textContent = b.n_preds + ' past predictions · ' + b.dates.length + ' dates (' + b.dates[0] + ' to ' + b.dates[b.dates.length - 1] + ') · official Polymarket prices';
+    var m = function (v) { return (v >= 0 ? '+$' : '−$') + Math.abs(v).toFixed(0); };
+    [[b.brier_ours.toFixed(3) + ' vs ' + b.brier_market.toFixed(3), 'Accuracy on ' + b.n_resolved + ' settled bets – ours vs market (lower is better)'],
+     [b.ours_final_resolved[2] + ' of ' + b.ours_final_resolved[1] + ' won', 'Our Buy/Lean calls on settled bets: ' + m(b.ours_final_resolved[0]) + ' on $' + (b.ours_final_resolved[1] * 100) + ' staked'],
+     ['+$' + b.ours_7d_rate.toFixed(1) + ' vs +$' + b.calm_7d_rate.toFixed(1), 'Average 7-day result per $100 call – ours vs "always bet on calm"'],
+     [b.dir_hit_pct + '%', '24-hour up/down calls right (guessing "up" every time: ' + b.dir_always_up_pct + '%)']].forEach(function (x) { var d = add(k, 'div'); add(d, 'b', x[0]); add(d, 'span', x[1]); });
+    $('btVerdict').textContent = b.verdict || '';
+    var t = $('btKind'), h = add(add(t, 'thead'), 'tr'); ['Bet type', 'Calls', 'Won', 'Result on $100 each'].forEach(function (x) { add(h, 'th', x); }); var bd = add(t, 'tbody');
+    var NM = { iran_air: 'Iran airspace closure', il_air: 'Israeli airspace closure', ceasefire: 'Israel–Iran ceasefire holds', pause: 'US–Iran 2-week pause', airlines: 'Airlines halt Israel flights', saudi: 'Saudi airspace closure', invade: 'US ground offensive' };
+    Object.keys(b.by_kind).forEach(function (kk) { var v = b.by_kind[kk], r = add(bd, 'tr'); add(r, 'td', NM[kk] || kk); add(r, 'td', v.calls); add(r, 'td', v.winning + ' (' + Math.round(100 * v.winning / v.calls) + '%)'); add(add(r, 'td'), 'span', m(v.pl_final), v.pl_final >= 0 ? 'plp' : 'pln'); });
+    var t2 = $('btDate'), h2 = add(add(t2, 'thead'), 'tr'); ['Replay date', '24-h calls right', '7-day result of calls'].forEach(function (x) { add(h2, 'th', x); }); var bd2 = add(t2, 'tbody');
+    Object.keys(b.by_date).forEach(function (d) { var v = b.by_date[d], r = add(bd2, 'tr'); add(r, 'td', d); add(r, 'td', v.dir[1] + ' of ' + v.dir[0]); add(add(r, 'td'), 'span', m(v.pl7[0]) + ' on ' + v.pl7[1], v.pl7[0] >= 0 ? 'plp' : 'pln'); });
+    $('btCave').textContent = b.caveats || '';
+  }
   /* ---- price history (official Polymarket CLOB prices-history, fetched by the browser) ---- */
   var CLOB = 'https://clob.polymarket.com/prices-history?interval=max&fidelity=360&market=', HIST = {}, histBusy = false;
   function normO(t) { return String(t || '').toLowerCase().replace(/,?\s*20\d\d/, '').replace(/\s+/g, ' ').trim(); }
+  function histLoadAuto() {
+    if (histBusy || Object.keys(HIST).length) return; histBusy = true; var st = $('hStat'); st.textContent = 'Loading price history…';
+    fetchJson('https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/history.json?t=' + Date.now(), null, 20000).catch(function () { return fetchJson('history.json?t=' + Date.now(), null, 20000); }).then(function (j) {
+      var n = 0; Object.keys(j.events || {}).forEach(function (sl) { (j.events[sl].markets || []).forEach(function (m) { HIST[sl + '|' + normO(m.outcome)] = { slug: sl, outcome: m.outcome, closed: !!m.closed, final: m.final_prices, pts: (m.pts || []).map(function (q) { return [q[0] * 1000, q[1]]; }) }; n++; }); });
+      histBusy = false; st.textContent = n + ' price series · official Polymarket history, refreshed automatically every 3 hours (last ' + fmtFull(Date.parse(j.generated_utc)) + ')'; $('hLoad').hidden = true; histRender();
+    }).catch(function () { histBusy = false; st.textContent = ''; $('hLoad').hidden = false; histRender(); });
+  }
   function histLoad() {
     if (histBusy) return; histBusy = true; var P = (data.predictions || []), slugs = {}; P.forEach(function (p) { if (p.slug) slugs[p.slug] = 1; });
     var st = $('hStat'); st.textContent = 'Loading…'; var n = 0, fails = [];
@@ -1026,7 +1060,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function histRender() {
     var P = (data.predictions || []), sel = $('hSel'); if (!sel.options.length) P.forEach(function (p, i) { var o = add(sel, 'option', priv(p.label)); o.value = i; });
     var p = P[+sel.value || 0], h = histFor(p), box = $('hChart'); clear(box); var tb = $('hTab'); clear(tb); $('hVal').textContent = '';
-    if (!h) { add(box, 'div', Object.keys(HIST).length ? 'No price history found for this bet.' : 'Press "Load price history" to fetch the full daily price history of every bet from Polymarket.', 'meta'); return; }
+    if (!h) { add(box, 'div', Object.keys(HIST).length ? 'No price history found for this bet.' : 'Loading the price history…', 'meta'); return; }
     var pts = h.pts; if (!pts.length) { add(box, 'div', 'Polymarket returned no price points for this bet.', 'meta'); return; }
     var W = 800, Hh = 240, pad = 34, t0 = pts[0][0], t1 = Math.max(pts[pts.length - 1][0], Date.now()), mx = Math.max(10, Math.ceil(Math.max.apply(null, pts.map(function (q) { return q[1]; }).concat((p.snaps || []).map(function (q) { return q.o || 0; }))) / 10) * 10);
     var X = function (t) { return pad + (W - pad - 8) * (t - t0) / Math.max(1, t1 - t0); }, Y = function (v) { return Hh - 20 - (Hh - 30) * v / mx; };
@@ -1050,7 +1084,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     Object.keys(HIST).forEach(function (k) { var h = HIST[k]; h.pts.forEach(function (q) { rows.push('"' + h.slug + '","' + h.outcome + '",' + new Date(q[0]).toISOString() + ',' + q[1].toFixed(2)); }); });
     var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' })); a.download = 'polymarket_price_history.csv'; document.body.appendChild(a); a.click(); a.remove();
   }
-  $('hLoad').onclick = histLoad; $('hCsv').onclick = histCsv; $('hSel').onchange = histRender;
+  $('hLoad').onclick = histLoad; $('hLoad').hidden = true; setTimeout(histLoadAuto, 1500); $('hCsv').onclick = histCsv; $('hSel').onchange = histRender;
 
   /* ---- full check progress ---- */
   var PROG_URL = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/progress.json?ref=main', PROG_RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/progress.json';
@@ -1076,7 +1110,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       [['📰 Sources', pg.sources_done, pg.sources_planned], ['🔍 Searches', pg.searches_done, pg.searches_planned], ['💹 Markets', pg.markets_done, pg.markets_planned]].forEach(function (c) {
         if (isNum(c[2])) { var sp = add(fc, 'span', c[0] + ' '); add(sp, 'b', (c[1] || 0) + ' / ' + c[2]); } });
     }
-    if (!done && full.stage === 'sent' && el > 240) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot automations.';
+    if (!done && full.stage === 'sent' && el > 180) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot automations.';
     $('fstage').textContent = line;
     var f = $('fsteps'); clear(f);
     STAGES.slice(1).forEach(function (st, j) { var idx = j + 1, cls = done || idx < ci ? 'd' : idx === ci ? 'd a' : ''; add(f, 'span', st[1], cls); });
@@ -1099,14 +1133,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else left = EXP - el;
     var eta = 'Usually takes about 8 min';
     if (done) eta = 'Finished in ' + mm + ' min ' + ss + ' s';
-    else if (full.stage === 'sent' && el > 240) eta = 'Expected about 8 min – now ' + mm + ' min with no start';
+    else if (full.stage === 'sent' && el > 180) eta = 'Expected about 8 min – now ' + mm + ' min with no start';
     else if (left > 60) eta += ' · about ' + Math.round(left / 60) + ' min left';
     else if (left > 0) eta += ' · under a minute left';
     else eta += ' · running longer than usual';
     $('ftime').textContent = (done ? '' : 'Running ' + mm + ':' + (ss < 10 ? '0' : '') + ss + ' · ') + eta.replace('Usually takes about 8 min · ', '').replace('Usually takes about 8 min', 'usually ~8 min');
     $('feta').textContent = done ? '' : 'You can leave this page open – it updates by itself every few seconds.';
     setTimeout(txAll, 0); btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check';
-    if (!done && full.stage === 'sent' && el > 480) fullEnd('⚠ The check did not start within 8 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
+    if (!done && full.stage === 'sent' && el > 300) fullEnd('⚠ The check did not start within 5 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
   }
   function fullEnd(msg, cls) {
     if (fullPoll) { clearInterval(fullPoll); fullPoll = null; }
@@ -1137,7 +1171,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   }
   function flog(msg) { if (!full) return; full.local = full.local || []; full.local.push({ t: new Date().toISOString(), msg: msg }); fullSave(); }
   function waitFull(before, t0) {
-    full = { t0: t0, before: before, stage: 'sent', pct: 5, local: [{ t: new Date(t0).toISOString(), msg: 'You pressed Update now' }, { t: new Date().toISOString(), msg: 'Request accepted by the automation service – waiting for the check to start (usually 1–3 min)' }] }; fullSave(); fullUi();
+    full = { t0: t0, before: before, stage: 'sent', pct: 5, local: [{ t: new Date(t0).toISOString(), msg: 'You pressed Update now' }, { t: new Date().toISOString(), msg: 'Request accepted by the automation service – waiting for the check to start (usually 20–60 s)' }] }; fullSave(); fullUi();
     $('topbar').className = 'topbar on';
     if (fullPoll) clearInterval(fullPoll);
     fullPoll = setInterval(function () { fullUi(); }, 1000);
