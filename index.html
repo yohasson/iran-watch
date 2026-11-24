@@ -223,7 +223,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fnow" id="fnow"></div><ul class="fplan" id="fplan"></ul><div class="flog" id="flog"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:15 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:42 Israel time</div>
     </div>
   </div>
 </header>
@@ -387,6 +387,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
   var data = null, live = null, nextDataAt = 0, nextLiveAt = 0, busy = false, lastCheck = { at: 0, how: '' };
   var S = loadSettings();
+  (function () { if (S.mig1 || !S.flDep) return; var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(S.flDep); if (m && +m[3] === 27 && +m[2] === 11 && (+m[4]) * 60 + (+m[5]) === 980) { var t = 920; S.flDep = m[1] + '-' + m[2] + '-' + m[3] + 'T' + ('0' + Math.floor(t / 60)).slice(-2) + ':' + ('0' + t % 60).slice(-2); } S.mig1 = 1; saveSettings(); })();
   var view = { hero: S.range, main: S.range, drill: S.range, scale: 'lin', on: { F: true, F7: false, E: false, M: false, L: false, R: true }, tlF: 'all', tlN: 25, pinned: null, drillK: null, itemF: 'all', sortK: null, sortD: 1, wi: null };
 
   function loadSettings() { var d = { thr: 7, thr7: 15, thrR: 25, range: '7d', auto: 'on', dark: null, flNo: '', flDep: '', lang: 'en', notif: false }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
@@ -538,7 +539,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!data) return;
     var c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
     renderHero(c, thr); renderBanner(c, thr); renderCards(c, thr, thrR); renderMain(thr); renderParts(c); if (!view.wi) wiReset(); else wiCalc();
-    renderItems(); renderMarkets(c); renderOpen(); renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
+    renderItems(); renderMarkets(c); renderOpen(); renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); txAll(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
     var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
@@ -660,7 +661,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     box('Market part', pct(r.M), null, 'from Iran airspace price');
     var n = Object.keys(sc).filter(function (k) { return sc[k]; }).length;
     var hint = add(o, 'div', n ? n + ' scenario' + (n > 1 ? 's' : '') + ' applied. News part ×' + (oddsE >= 100 ? 'floor' : oddsE.toFixed(2)) + ' in odds' + (floor ? '; a confirmed major campaign sets the 24-h figure to at least 25%' : '') + '.' : 'Move the sliders or tap scenarios to see how the figures would change.', 'meta');
-    hint.style.gridColumn = '1 / -1';
+    hint.style.gridColumn = '1 / -1'; txAll();
   }
   function effClass(e) { e = (e || '').toLowerCase(); if (/rise|up|increase|higher/.test(e)) return 'up'; if (/fall|down|lower|decrease|eased/.test(e)) return 'down'; return 'flat'; }
   function renderItems() {
@@ -714,6 +715,11 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', priv(t)); }); }
 
   /* ---------- i18n ---------- */
+  var HE_TX = {"Markets vs. our predictions": "השווקים מול התחזית שלנו", "Tap a row for the reasoning · tap a column to sort": "הקש על שורה להסבר · על עמודה למיון", "Market": "שוק", "Our view": "התחזית שלנו", "Gap": "פער", "Polymarket question": "שאלה ב-Polymarket", "Date passed – awaiting result": "התאריך עבר – ממתין לתוצאה", "Range": "טווח", "ours was": "שלנו היה", "models": "מודלים", "sources": "מקורות", "updated": "עודכן", "open on Polymarket": "פתח ב-Polymarket", "new": "חדש", "Predictions will appear after the next check.": "התחזיות יופיעו אחרי הבדיקה הבאה.", "* live price. ": "* מחיר חי. ", "Iran full airspace closure by": "סגירה מלאה של המרחב האווירי של איראן עד", "Israeli airspace closed by": "סגירת המרחב האווירי של ישראל עד", "Israel–Iran ceasefire holds through": "הפסקת האש ישראל–איראן נמשכת עד", "US–Iran 2-week pause begins by": "הפסקה של שבועיים ארה״ב–איראן מתחילה עד", "Airlines halt Israel flights": "חברות תעופה מפסיקות טיסות לישראל", "Saudi airspace closed": "סגירת המרחב האווירי של סעודיה", "US ground offensive in Iran": "מתקפה קרקעית אמריקאית באיראן", "Nov": "נוב׳", "Dec": "דצמ׳", "Jan": "ינו׳", "by": "עד", "Request sent": "הבקשה נשלחה", "Check started": "הבדיקה התחילה", "Reading sources": "קורא מקורות", "Calculating": "מחשב", "Publishing": "מפרסם", "Done": "הסתיים", "✕ Cancel check": "✕ ביטול בדיקה", "Now: waiting for the automation to start the check": "עכשיו: ממתין שהאוטומציה תתחיל את הבדיקה", "Now: ": "עכשיו: ", "You pressed Update now": "לחצת על עדכן עכשיו", "Request accepted by the automation service – waiting for the check to start (usually 20–60 s)": "הבקשה התקבלה – ממתין שהבדיקה תתחיל (בדרך כלל 20–60 שניות)", "The check has started and is reporting progress": "הבדיקה התחילה ומדווחת התקדמות", "Usually takes about 8 min": "בדרך כלל לוקח כ-8 דקות", "Full check running – this page will update by itself. You can leave it open.": "בדיקה מלאה רצה – הדף יתעדכן לבד. אפשר להשאיר אותו פתוח.", "Check cancelled. You can start a new one now.": "הבדיקה בוטלה. אפשר להתחיל בדיקה חדשה.", "Starting the full check…": "מתחיל בדיקה מלאה…", "Scenarios – tap to add or remove a new signal (same weights the hourly check uses):": "תרחישים – הקש כדי להוסיף או להסיר אות חדש (אותם משקלים כמו בבדיקה השעתית):", "Major campaign – 24 h": "מתקפה רחבה – 24 שעות", "Major campaign – 7 days": "מתקפה רחבה – 7 ימים", "Any strike – 24 h": "כל תקיפה – 24 שעות", "Flight risk": "סיכון לטיסה", "Market part": "רכיב השוק", "from Iran airspace price": "ממחיר המרחב האווירי של איראן", "vs now": "לעומת עכשיו", "⚠ alert": "⚠ התרעה", "⚠ flight alert": "⚠ התרעת טיסה", "it flies": "שהטיסה תצא", "about": "בערך", "Move the sliders or tap scenarios to see how the figures would change.": "הזז את המחוונים או הקש על תרחישים כדי לראות איך המספרים ישתנו.", "🎯 Strike go-order reported": "🎯 דווח על פקודת תקיפה", "✈️ Tankers / AWACS massing": "✈️ ריכוז מטוסי תדלוק / AWACS", "🏛️ US embassy departure order": "🏛️ הוראת עזיבה של שגרירות ארה״ב", "🚨 Home Front guideline change": "🚨 שינוי בהנחיות פיקוד העורף", "🛑 Regional airspace closure": "🛑 סגירת מרחב אווירי אזורי", "💥 US casualties / jet downed": "💥 נפגעים אמריקאים / מטוס הופל", "🚀 Iran hits US base or ship": "🚀 איראן פוגעת בבסיס או ספינה אמריקאית", "🎯 US limited strike on Iran": "🎯 תקיפה אמריקאית מוגבלת באיראן", "🛫 Foreign airlines cancel Israel": "🛫 חברות זרות מבטלות טיסות לישראל", "🔥 Major campaign begins": "🔥 מתקפה רחבה מתחילה", "🕊️ Talks announced / calming": "🕊️ הוכרזו שיחות / הרגעה", "😴 Quiet 24 hours": "😴 24 שעות שקטות", "Any US/Israeli strike, 24 h (L)": "כל תקיפה אמריקאית/ישראלית, 24 שעות (L)", "Reset to current": "איפוס למצב הנוכחי"};
+  function tx(t) { if (S.lang !== 'he' || t == null) return t; t = String(t); if (HE_TX[t]) return HE_TX[t];
+    var keys = Object.keys(HE_TX).filter(function (k) { return k.length > 3; }).sort(function (a, b) { return b.length - a.length; });
+    for (var i = 0; i < keys.length; i++) { if (t.indexOf(keys[i]) >= 0) t = t.split(keys[i]).join(HE_TX[keys[i]]); }
+    return t.replace(/\bNov\b/g, 'נוב׳').replace(/\bDec\b/g, 'דצמ׳').replace(/\bJan\b/g, 'ינו׳'); }
   var I18N = { he: {
     title: '🛰️ מעקב סיכון תקיפה באיראן', tz: 'כל השעות לפי שעון ישראל', heroLbl: 'הסיכוי שתתחיל מערכה גדולה של ארה״ב/ישראל נגד איראן ב-24 השעות הקרובות',
     h7Lbl2: 'הסיכוי שתתחיל בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', glNews: 'עדכונים אחרונים', glWatch: 'למה לשים לב בהמשך', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
@@ -727,6 +733,11 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     below: 'points below the', ofway: 'of the way', above: 'Above the', stBelow: 'Below alert line', stElev: 'Elevated – approaching', stAbove: 'Above alert line', upd: 'Update now', lastCheck: 'Last check', since: 'since', flat: '→ Flat', upW: '▲ Up', downW: '▼ Down', pts: 'pts', wstart: 'watch start' };
     return (S.lang === 'he' && I18N.he[k]) || en[k] || k; }
   var I18N_EN = {};
+  function txTree(root) { if (S.lang !== 'he' || !root) return; (function walk(n) { if (n.nodeType === 3) { var v = n.nodeValue; if (v && v.trim()) { var t2 = tx(v); if (t2 !== v) n.nodeValue = t2; } } else if (n.childNodes) for (var i = 0; i < n.childNodes.length; i++) walk(n.childNodes[i]); })(root); }
+  function txAll() { ['markets', 'fprog', 'step', 'refreshLbl', 'wiSc', 'wiOut', 'wiReset'].forEach(function (id) { txTree($(id)); });
+    Array.prototype.forEach.call(document.querySelectorAll('.wi label, .wisc .meta, #markets'), txTree);
+    var th = document.querySelectorAll('th[data-s]'); Array.prototype.forEach.call(th, txTree);
+    var h = document.querySelector('#markets') && document.querySelector('#markets').closest ? document.querySelector('#markets').closest('.panel') : null; if (h) txTree(h.querySelector('h3')); }
   function applyLang() {
     var he = S.lang === 'he'; document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr'; document.body.classList.toggle('rtl', he);
     $('langBtn').textContent = he ? 'EN' : 'עב';
@@ -859,7 +870,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
   /* refresh */
   function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on && !full; btn.className = 'btn' + (on ? ' busy' : ''); if (!full) $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on || full ? ' on' : ''); document.body.classList.toggle('updating', on); }
-  function step(t, cls) { var e = $('step'); e.textContent = t; e.className = 'step' + (cls ? ' ' + cls : ''); }
+  function step(t, cls) { var e = $('step'); e.textContent = tx(t); e.className = 'step' + (cls ? ' ' + cls : ''); }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function refreshData() {
     return loadData().then(function (d) { if (d && d.major) { var isNew = !data || d.updated_utc !== data.updated_utc; data = d; if (isNew && live && live.at < Date.parse(d.updated_utc)) live = null; } })
@@ -996,7 +1007,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else if (left > 0) eta += ' · under a minute left';
     else eta += ' · running longer than usual';
     $('feta').textContent = eta;
-    btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check';
+    setTimeout(txAll, 0); btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check';
     if (!done && full.stage === 'sent' && el > 300) fullEnd('⚠ The check did not start within 5 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
   }
   function fullEnd(msg, cls) {
