@@ -43,7 +43,7 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 .btnrow{display:flex;gap:8px;align-items:center}
 .btn{background:#fff;color:#1b2b4b;border:0;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.75;cursor:progress;transform:none}
-.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:pointer}.btn.full:hover{background:#f1c7c7;color:#8a1c1c}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
+.btn{white-space:nowrap}.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:pointer}.btn.full:hover{background:#f1c7c7;color:#8a1c1c}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
 .fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fprog .fl{display:flex;justify-content:space-between;align-items:flex-start;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.e{opacity:1;background:rgba(255,211,106,.35)}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.65);color:#fff}.fprog .fs span.a{animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.35)}}
 .btn .spin{width:14px;height:14px;border:2px solid rgba(27,43,75,.3);border-top-color:#1b2b4b;border-radius:50%;display:none}
 .btn.busy .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
@@ -116,6 +116,7 @@ svg.chart{width:100%;max-width:100%;display:block;touch-action:pan-y;overflow:vi
 .part{background:var(--soft);border-radius:10px;padding:10px 12px;border-left:4px solid var(--c)}
 .part b{display:block;font-size:1.35rem;color:var(--c)}
 .part span{font-size:.78rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{border:1px solid var(--line);background:transparent;color:inherit;border-radius:14px;padding:4px 10px;font-size:.8rem;cursor:pointer}.chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}.chips button.dn.on{background:var(--green);border-color:var(--green)}
 .wi{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px}
 .wi label{font-size:.85rem;font-weight:600;display:flex;justify-content:space-between}
 .wi input[type=range]{width:100%;accent-color:var(--blue)}
@@ -218,7 +219,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:52 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:55 Israel time</div>
     </div>
   </div>
 </header>
@@ -302,7 +303,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div><label>Iran airspace closure by 30 Nov <span id="wiPv"></span></label><input type="range" id="wiP" min="0.5" max="80" step="0.5"></div>
       <div><label>Israeli airspace closed by 30 Nov <span id="wiIv"></span></label><input type="range" id="wiI" min="0.5" max="80" step="0.5"></div>
       <div><label>Wizz Air cancels on its own (W) <span id="wiWv"></span></label><input type="range" id="wiW" min="0" max="40" step="1"></div>
+      <div><label>Any US/Israeli strike, 24 h (L) <span id="wiLv"></span></label><input type="range" id="wiL" min="1" max="95" step="0.5"></div>
     </div>
+    <div class="wisc"><div class="meta" style="margin:10px 0 6px">Scenarios – tap to add or remove a new signal (same weights the hourly check uses):</div><div class="chips" id="wiSc"></div></div>
     <div class="wiout" id="wiOut"></div>
   </div>
   <div class="panel"><h3>📊 <span data-i18n="cmpT">Today vs. the eves of past attacks</span></h3><div class="cmp" id="cmp"></div><div class="meta" style="margin-top:8px" data-i18n="cmpNote">24-hour estimates made with the same method. Red bars = an attack started the next day; grey = false alarm. The method could not reliably tell them apart, so read this as context, not a signal.</div></div>
@@ -607,19 +610,53 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var p = $('parts'); clear(p);
     [['E', 'News-based part (E)', c.E], ['M', 'Market-based part (M)', c.M], ['F', 'Main estimate (F)', c.F]].forEach(function (a) { var d = add(p, 'div', null, 'part'); d.style.setProperty('--c', css(SERIES[a[0]].c)); add(d, 'b', pct(a[2])); add(d, 'span', a[1]); });
   }
+  var WISC = [
+    ['order', '🎯 Strike go-order reported', 10, 2.0, null],
+    ['tankers', '✈️ Tankers / AWACS massing', 8, 1.8, null],
+    ['embassy', '🏛️ US embassy departure order', 5, 1.5, null],
+    ['homefront', '🚨 Home Front guideline change', 8, 1.6, null],
+    ['airspace', '🛑 Regional airspace closure', 8, 1.6, 'air'],
+    ['casualties', '💥 US casualties / jet downed', 4, 2.5, null],
+    ['iranfire', '🚀 Iran hits US base or ship', 1.75, 1.8, null],
+    ['limited', '🎯 US limited strike on Iran', 1.5, 1.0, null],
+    ['airlines', '🛫 Foreign airlines cancel Israel', 1.3, 1.1, 'W20'],
+    ['majorstart', '🔥 Major campaign begins', 0, 0, 'floor'],
+    ['calm', '🕊️ Talks announced / calming', 0.8, 0.85, null],
+    ['quiet', '😴 Quiet 24 hours', 0.8, 0.8, null]];
+  function wiScUi() {
+    var box = $('wiSc'); clear(box); view.wiSc = view.wiSc || {};
+    WISC.forEach(function (x) { var b = add(box, 'button', x[1], (x[2] && x[2] < 1 ? 'dn' : '') + (view.wiSc[x[0]] ? ' on' : '')); b.type = 'button';
+      b.onclick = function () { view.wiSc[x[0]] = !view.wiSc[x[0]]; wiScUi(); wiCalc(); }; });
+  }
   function wiReset() {
     var c = cur(), md = data.model || {};
-    view.wi = { E: c.E, P: (c.useLive ? live.Piran : md.P_iran_nov30) * 100, I: (c.useLive && isNum(live.Pil) ? live.Pil : md.P_il_nov30) * 100, W: md.W != null ? md.W : 5 };
+    view.wi = { E: c.E, P: (c.useLive ? live.Piran : md.P_iran_nov30) * 100, I: (c.useLive && isNum(live.Pil) ? live.Pil : md.P_il_nov30) * 100, W: md.W != null ? md.W : 5, L: c.L };
+    view.wiSc = {}; wiScUi(); $('wiL').value = view.wi.L;
     $('wiE').value = view.wi.E; $('wiP').value = view.wi.P; $('wiI').value = view.wi.I; $('wiW').value = view.wi.W; wiCalc();
   }
   function wiCalc() {
-    var w = view.wi, now = Date.now(), c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
-    $('wiEv').textContent = pct(w.E, 1); $('wiPv').textContent = pct(w.P, 1); $('wiIv').textContent = pct(w.I, 1); $('wiWv').textContent = w.W + '%';
-    var r = computeModel(w.E, w.P / 100, now < NOV30_END ? NOV30_END : DEC31_END, w.I / 100, w.W, now, {});
+    var w = view.wi, now = Date.now(), c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25, thr7 = +S.thr7 || 15, sc = view.wiSc || {};
+    var oddsE = 1, oddsL = 1, W = w.W, floor = null, P = w.P / 100, I = w.I / 100;
+    WISC.forEach(function (x) { if (!sc[x[0]]) return; if (x[2]) oddsE *= x[2]; if (x[3]) oddsL *= x[3];
+      if (x[4] === 'W20') W = Math.max(W, 20); if (x[4] === 'floor') floor = 25; if (x[4] === 'air') { P = Math.max(P, 0.5); I = Math.max(I, 0.3); } });
+    oddsE = Math.min(oddsE, sc.majorstart ? 1e9 : 20);
+    var E = inv(lo(Math.min(99.9, Math.max(0.01, w.E)) / 100) + Math.log(oddsE)) * 100;
+    $('wiEv').textContent = pct(w.E, 1) + (oddsE !== 1 ? ' → ' + pct(E, 1) : ''); $('wiPv').textContent = pct(w.P, 1) + (P * 100 !== w.P ? ' → ' + pct(P * 100, 0) : '');
+    $('wiIv').textContent = pct(w.I, 1) + (I * 100 !== w.I ? ' → ' + pct(I * 100, 0) : ''); $('wiWv').textContent = w.W + '%' + (W !== w.W ? ' → ' + W + '%' : '');
+    var Lw = inv(lo(Math.min(99, Math.max(0.5, w.L)) / 100) + Math.log(oddsL)) * 100; $('wiLv').textContent = pct(w.L, 1) + (oddsL !== 1 ? ' → ' + pct(Lw, 1) : '');
+    var r = computeModel(E, P, now < NOV30_END ? NOV30_END : DEC31_END, I, W, now, floor ? { F: floor } : {});
+    var F7v = f7(E, r.M); if (floor) F7v = Math.max(F7v, 60); Lw = Math.max(Lw, r.F + 5);
     var o = $('wiOut'); clear(o);
-    var a = add(o, 'div'); add(a, 'div', 'Main estimate', 'meta'); var b = add(a, 'b', pct(r.F)); b.style.color = bandCol(r.F, thr); add(a, 'div', (r.F - c.F >= 0 ? '+' : '') + (r.F - c.F).toFixed(2) + ' vs now', 'meta');
-    if (isNum(r.R)) { var z = add(o, 'div'); add(z, 'div', 'Flight risk', 'meta'); var q = add(z, 'b', pct(r.R, 1)); q.style.color = bandCol(r.R, thrR); add(z, 'div', 'about ' + Math.round(100 - r.R) + '% it flies', 'meta'); }
-    var m = add(o, 'div'); add(m, 'div', 'Market part', 'meta'); add(m, 'b', pct(r.M)); add(m, 'div', r.F >= thr ? '⚠ would trigger an alert' : 'no alert', 'meta');
+    function box(t, v, col, sub) { var a = add(o, 'div'); add(a, 'div', t, 'meta'); var b = add(a, 'b', v); if (col) b.style.color = col; add(a, 'div', sub, 'meta'); }
+    function dl(x, y) { return (x - y >= 0 ? '+' : '') + (x - y).toFixed(2) + ' vs now'; }
+    box('Major campaign – 24 h', pct(r.F), bandCol(r.F, thr), dl(r.F, c.F) + (r.F >= thr ? ' · ⚠ alert' : ''));
+    box('Major campaign – 7 days', pct(F7v, 1), bandCol(F7v, thr7), dl(F7v, c.F7 || f7(c.E, c.M)));
+    box('Any strike – 24 h', pct(Lw, 1), null, dl(Lw, c.L));
+    if (isNum(r.R)) box('Flight risk', pct(r.R, 1), bandCol(r.R, thrR), 'about ' + Math.round(100 - r.R) + '% it flies' + (r.R >= thrR ? ' · ⚠ flight alert' : ''));
+    box('Market part', pct(r.M), null, 'from Iran airspace price');
+    var n = Object.keys(sc).filter(function (k) { return sc[k]; }).length;
+    var hint = add(o, 'div', n ? n + ' scenario' + (n > 1 ? 's' : '') + ' applied. News part ×' + (oddsE >= 100 ? 'floor' : oddsE.toFixed(2)) + ' in odds' + (floor ? '; a confirmed major campaign sets the 24-h figure to at least 25%' : '') + '.' : 'Move the sliders or tap scenarios to see how the figures would change.', 'meta');
+    hint.style.gridColumn = '1 / -1';
   }
   function effClass(e) { e = (e || '').toLowerCase(); if (/rise|up|increase|higher/.test(e)) return 'up'; if (/fall|down|lower|decrease|eased/.test(e)) return 'down'; return 'flat'; }
   function renderItems() {
@@ -850,7 +887,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   segPick('scaleSeg', function (v) { view.scale = v; renderMain(+S.thr || 7); });
   segPick('itemSeg', function (v) { view.itemF = v; renderItems(); });
   Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'), function (th) { th.onclick = function () { var k = th.getAttribute('data-s'); view.sortD = view.sortK === k ? -view.sortD : (k === 'label' ? 1 : -1); view.sortK = k; renderMarkets(cur()); }; });
-  ['E', 'P', 'I', 'W'].forEach(function (k) { $('wi' + k).oninput = function () { view.wi[k] = parseFloat(this.value); wiCalc(); }; });
+  ['E', 'P', 'I', 'W', 'L'].forEach(function (k) { $('wi' + k).oninput = function () { view.wi[k] = parseFloat(this.value); wiCalc(); }; });
   $('wiReset').onclick = function () { wiReset(); };
   ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
   (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
@@ -920,7 +957,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else if (left > 0) eta += ' · under a minute left';
     else eta += ' · running longer than usual';
     $('feta').textContent = eta;
-    btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check (' + mm + ' min)';
+    btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check';
     if (!done && full.stage === 'sent' && el > 300) fullEnd('⚠ The check did not start within 5 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
   }
   function fullEnd(msg, cls) {
