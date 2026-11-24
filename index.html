@@ -218,7 +218,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:47 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:51 Israel time</div>
     </div>
   </div>
 </header>
@@ -986,7 +986,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       return fetch(HOOK, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json', 'X-Trigger-Secret': key }, body: JSON.stringify({ source: 'dashboard', at: new Date().toISOString() }) })
         .then(function (r) {
           if (r.status === 401 || r.status === 403) { lsSet('iw-key', ''); $('refreshBtn').classList.remove('full'); $('refreshBtn').disabled = false; step('⚠ The saved key was not accepted. Press Update now and enter your password again.', 'fail'); return; }
-          if (!r.ok && r.status !== 202) { $('refreshBtn').classList.remove('full'); $('refreshBtn').disabled = false; step('⚠ Full check could not start (' + r.status + '). Try again in a minute.', 'fail'); return; }
+          if (!r.ok && r.status !== 202) { $('refreshBtn').classList.remove('full'); $('refreshBtn').disabled = false; step(r.status === 410 || r.status === 404 ? '⚠ The on-demand check is switched off. Turn on "Iran watch – full check (dashboard button)" in Copilot automations, then press Update now again. The hourly check keeps running.' : '⚠ Full check could not start (' + r.status + '). Try again in a minute.', 'fail'); return; }
           waitFull(before, t0); step('Full check started – this page will update by itself.');
         }, function () { emailFallback(before, t0); });
     });
