@@ -215,9 +215,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
-      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div></div>
+      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:23 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:26 Israel time</div>
     </div>
   </div>
 </header>
@@ -823,7 +823,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (data) {
       noteCheck();
       var txt = T('lastCheck') + ' ' + fmtFull(lastCheck.at) + ' (' + ago(lastCheck.at) + ', ' + lastCheck.how + ')';
-      if (S.auto === 'on') { var nx = Math.max(0, Math.round((nextDataAt - now) / 1000)); txt += ' · next in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2); }
+      if (S.auto === 'on') { var nx = Math.max(0, Math.round((nextDataAt - now) / 1000)); txt += ' · page refresh in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2); }
       $('tick').textContent = txt;
       var fl = data.flight, FT = flightT(); if (fl && fl.active && FT && now < FT && now % 60000 < 1000) renderCards(cur(), +S.thr || 7, +S.thrR || 25);
     }
@@ -908,6 +908,16 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     $('fstage').textContent = line;
     var f = $('fsteps'); clear(f);
     STAGES.slice(1).forEach(function (st, j) { var idx = j + 1, cls = done || idx < ci ? 'd' : idx === ci ? 'd a' : ''; add(f, 'span', st[1], cls); });
+    var EXP = 8 * 60, left;
+    if (isNum(pg.steps_total) && pg.steps_total > 0 && pg.steps_done > 0 && full.seen) left = Math.max(0, Math.round(el / pg.steps_done * (pg.steps_total - pg.steps_done)));
+    else left = EXP - el;
+    var eta = 'Usually takes about 8 min';
+    if (done) eta = 'Finished in ' + mm + ' min ' + ss + ' s';
+    else if (full.stage === 'sent' && el > 180) eta = 'Expected about 8 min – now ' + mm + ' min with no start';
+    else if (left > 60) eta += ' · about ' + Math.round(left / 60) + ' min left';
+    else if (left > 0) eta += ' · under a minute left';
+    else eta += ' · running longer than usual';
+    $('feta').textContent = eta;
     btn.disabled = true; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : 'Checking… ' + mm + ' min';
   }
   function fullEnd(msg, cls) {
@@ -969,6 +979,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     });
   }
   $('refreshBtn').addEventListener('click', requestFull);
+  $('fstop').addEventListener('click', function () { fullEnd('Stopped waiting. If the check finishes later, the page will still show its result.', ''); });
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && data && S.auto === 'on' && Date.now() - lastCheck.at > 10 * 60000) refreshAll(false); });
   if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addListener && matchMedia('(prefers-color-scheme: dark)').addListener(function () { if (S.dark == null) { applyTheme(); render(); } });
   window.addEventListener('resize', function () { if (data) render(); });
