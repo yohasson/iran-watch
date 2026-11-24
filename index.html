@@ -70,7 +70,8 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .hbar .f{position:absolute;left:0;top:0;height:100%;border-radius:9px;transition:width .6s ease}
 .hbar .m{position:absolute;top:-6px;width:3px;height:28px;background:var(--red);border-radius:2px}
 .hbar .pin{position:absolute;top:-7px;width:30px;height:30px;margin-left:-15px;border-radius:50%;border:3px solid var(--card);box-shadow:var(--shadow);transition:left .6s ease}
-.hbl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.hbl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);direction:ltr}
+.hbar,.chartwrap,.cmp .tr,.mbar,svg{direction:ltr}
 .hero .trend{font-size:1.06rem;font-weight:700;margin-bottom:6px}
 .hero .tsub{font-size:.82rem;color:var(--muted);margin-top:4px}
 /* segmented controls */
@@ -97,7 +98,8 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 /* charts */
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:14px}
 .chartwrap{position:relative}
-svg.chart{width:100%;height:auto;display:block;touch-action:pan-y}
+svg.chart{width:100%;max-width:100%;display:block;touch-action:pan-y;overflow:visible}
+.ctitle{font-size:.82rem;font-weight:700;color:var(--muted);margin:2px 0 4px}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--card);border-radius:8px;padding:8px 10px;font-size:.78rem;line-height:1.4;box-shadow:var(--shadow);display:none;z-index:5;white-space:nowrap}
 .tip b{font-size:.82rem}
 .tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
@@ -232,7 +234,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div>
     <div class="ctl" style="justify-content:space-between"><div class="trend" id="hTrend"></div>
       <div class="seg rangeSeg" data-target="hero"></div></div>
-    <div class="chartwrap"><svg class="chart" id="hSpark" viewBox="0 0 560 160" preserveAspectRatio="none"></svg><div class="tip" id="hTip"></div></div>
+    <div class="chartwrap"><div class="ctitle" id="hCT"></div><svg class="chart" id="hSpark" data-h="170"></svg><div class="tip" id="hTip"></div></div>
     <div class="tsub" id="hTsub"></div>
   </div>
 </div>
@@ -264,7 +266,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div class="ctl" id="togs"></div>
   <div class="ctl"><span class="meta">Scale:</span><span class="seg" id="scaleSeg"><button data-v="lin" class="on">Linear</button><button data-v="log">Log</button></span>
     <span class="meta" style="margin-left:6px">Hover or tap the chart for exact values; click to pin a check. Dots along the bottom are news events.</span></div>
-  <div class="chartwrap"><svg class="chart" id="mainChart" viewBox="0 0 900 300"></svg><div class="tip" id="mTip"></div></div>
+  <div class="chartwrap"><svg class="chart" id="mainChart" data-h="300"></svg><div class="tip" id="mTip"></div></div>
   <div class="pinned" id="pinned"></div>
 </div>
 
@@ -326,7 +328,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 <div class="ov" id="ovD"><div class="modal">
   <div class="mh"><h3 id="dTitle"></h3><span class="sp"></span><span class="seg rangeSeg" data-target="drill"></span><button class="x" data-close>✕</button></div>
   <div class="stats" id="dStats"></div>
-  <div class="chartwrap"><svg class="chart" id="dChart" viewBox="0 0 800 260"></svg><div class="tip" id="dTip"></div></div>
+  <div class="chartwrap"><svg class="chart" id="dChart" data-h="250"></svg><div class="tip" id="dTip"></div></div>
   <div class="scroll"><table><thead><tr><th>Check (Israel time)</th><th class="n">Value</th><th class="n">Change</th></tr></thead><tbody id="dRows"></tbody></table></div>
 </div></div>
 
@@ -446,7 +448,10 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
   /* generic SVG line chart with hover */
   function lineChart(svg, tip, series, opts) {
-    var vb = svg.viewBox.baseVal, W = vb.width, H = vb.height, PL = opts.padL || 44, PR = 14, PT = 14, PB = 26;
+    var W = Math.round((svg.parentNode && svg.parentNode.clientWidth) || svg.getBoundingClientRect().width || 600); if (W < 200) W = 600;
+    var H = +(svg.getAttribute('data-h') || 260); if (W < 480) H = Math.round(H * 0.85);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.setAttribute('width', W); svg.setAttribute('height', H);
+    var PL = opts.padL || 44, PR = 14, PT = 20, PB = 26;
     var all = []; series.forEach(function (s) { all = all.concat(s.pts); });
     if (!all.length) { svg.innerHTML = '<text x="' + W / 2 + '" y="' + H / 2 + '" text-anchor="middle" fill="' + css('--muted') + '" font-size="14">No data in this range</text>'; svg.onmousemove = null; return; }
     var t0 = Math.min.apply(null, all.map(function (p) { return p.t; })), t1 = Math.max.apply(null, all.map(function (p) { return p.t; })); if (t1 - t0 < 36e5) { t0 -= 18e5; t1 += 18e5; }
@@ -457,9 +462,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var g = css('--line'), mu = css('--muted'), s = '';
     var ticks = opts.log ? [0.5, 1, 2, 5, 10, 20, 50].filter(function (v) { return v >= vmin && v <= vmax; }) : [0, .25, .5, .75, 1].map(function (f) { return vmax * f; });
     ticks.forEach(function (v) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="' + g + '"/><text x="' + (PL - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="' + mu + '">' + (v < 10 ? v.toFixed(1) : Math.round(v)) + '%</text>'; });
-    var span = t1 - t0, step = span > 4 * 864e5 ? 864e5 : (span > 864e5 ? 6 * 36e5 : 3 * 36e5), tt = Math.ceil(t0 / step) * step;
-    for (; tt <= t1; tt += step) s += '<text x="' + x(tt) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="' + mu + '">' + (step >= 864e5 ? fmt(tt, { day: 'numeric', month: 'short', hour: undefined, minute: undefined }) : fmt(tt)) + '</text>';
-    (opts.lines || []).forEach(function (l) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(l.v) + '" y2="' + y(l.v) + '" stroke="' + l.c + '" stroke-width="1.5" stroke-dasharray="6 5"/><text x="' + (W - PR - 4) + '" y="' + (y(l.v) - 5) + '" text-anchor="end" font-size="11" font-weight="700" fill="' + l.c + '">' + esc(l.label) + '</text>'; });
+    var span = t1 - t0, maxT = Math.max(3, Math.floor((W - PL - PR) / 60)), steps = [36e5, 3 * 36e5, 6 * 36e5, 12 * 36e5, 864e5, 2 * 864e5], step = steps.filter(function (q) { return span / q <= maxT; })[0] || 2 * 864e5, tt = Math.ceil(t0 / step) * step;
+    for (; tt <= t1; tt += step) s += '<text x="' + x(tt) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="' + mu + '">' + (step >= 864e5 || (step >= 12 * 36e5) ? fmt(tt, { day: 'numeric', month: 'short', hour: undefined, minute: undefined }) + (step < 864e5 ? ' ' + fmt(tt) : '') : fmt(tt)) + '</text>';
+    (opts.lines || []).forEach(function (l) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(l.v) + '" y2="' + y(l.v) + '" stroke="' + l.c + '" stroke-width="1.5" stroke-dasharray="6 5"/><text x="' + (PL + 6) + '" y="' + (y(l.v) - 5) + '" text-anchor="start" font-size="12" font-weight="700" fill="' + l.c + '">' + esc(l.label) + '</text>'; });
     series.forEach(function (se) {
       if (!se.pts.length) return;
       var d = se.pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p.t).toFixed(1) + ' ' + y(p.v).toFixed(1); }).join(' ');
@@ -512,7 +517,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     renderItems(); renderMarkets(c); renderOpen(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
-    var F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
+    var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
     $('hero').style.setProperty('--hc', col);
     var n = $('hNum'); n.textContent = pct(F);
     var st = $('hStatus'); st.textContent = F >= thr ? T('stAbove') : (F >= thr * 0.7 ? T('stElev') : T('stBelow')); st.className = 'status ' + (F >= thr ? 'bad' : F >= thr * 0.7 ? 'warn' : 'ok');
@@ -524,13 +529,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var f = $('hFill'); f.style.width = Math.min(100, F / max * 100) + '%'; f.style.background = col;
     $('hPin').style.left = Math.min(100, F / max * 100) + '%'; $('hPin').style.background = col;
     $('hMark').style.left = (thr / max * 100) + '%'; $('hThrLbl').textContent = thr + '% alert'; $('hMaxLbl').textContent = max + '%';
+    $('hCT').textContent = he ? 'מגמת הסיכוי ל-24 שעות' : 'Trend of the 24-hour chance';
     var pts = histPts('F', rangeDays(view.hero), true), tr = $('hTrend');
     if (pts.length < 2) { tr.textContent = 'Trend: not enough history yet'; $('hSpark').innerHTML = ''; $('hTsub').textContent = ''; return; }
     var first = pts[0], d = F - first.v, rel = first.v ? d / first.v * 100 : 0, wanted = rangeDays(view.hero), span = (Date.now() - first.t) / 864e5;
-    tr.innerHTML = '<span class="' + (Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down') + '">' + (Math.abs(d) < 0.05 ? '→ Flat' : (d > 0 ? '▲ Up ' : '▼ Down ') + Math.abs(d).toFixed(2) + ' pts (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)') + '</span> <span class="meta">since ' + fmtFull(first.t) + (wanted && span < wanted - 0.2 ? ' (watch start)' : '') + '</span>';
+    tr.innerHTML = '<span class="' + (Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down') + '">' + (he ? '24 שעות: ' : '24-hour: ') + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(2) + ' ' + T('pts') + ' (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)') + '</span> <span class="meta">' + T('since') + ' ' + fmtFull(first.t) + (wanted && span < wanted - 0.2 ? ' (' + T('wstart') + ')' : '') + '</span>';
     var vs = pts.map(function (p) { return p.v; });
-    $('hTsub').textContent = 'Low ' + pct(Math.min.apply(null, vs)) + ' · high ' + pct(Math.max.apply(null, vs)) + ' · ' + pts.length + ' checks · dashed line = your ' + thr + '% alert';
-    lineChart($('hSpark'), $('hTip'), [{ name: 'Main estimate', c: col, pts: pts }], { lines: [{ v: thr, c: css('--red'), label: thr + '% alert' }], area: true, padL: 34 });
+    $('hTsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs)) + ' · גבוה ' + pct(Math.max.apply(null, vs)) + ' · ' + pts.length + ' בדיקות · קו מקווקו = קו ההתרעה ' + thr + '%' : 'Low ' + pct(Math.min.apply(null, vs)) + ' · high ' + pct(Math.max.apply(null, vs)) + ' · ' + pts.length + ' checks · dashed line = your ' + thr + '% alert';
+    lineChart($('hSpark'), $('hTip'), [{ name: he ? '24 שעות' : '24-hour chance', c: col, pts: pts }], { lines: [{ v: thr, c: css('--red'), label: (he ? 'התרעה ' : 'Alert ') + thr + '%' }], area: true, padL: 40 });
   }
   function renderBanner(c, thr) {
     var b = $('banner'), alertOn = data.alert && data.alert.active, stale = Date.now() - c.upd > 150 * 60000, cls, head, small = '';
@@ -627,9 +633,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     flT: 'הטיסה שלך – מה לעשות', cmpT: 'היום מול ערבי תקיפות קודמות', cmpNote: 'הערכות 24 שעות באותה שיטה. אדום = תקיפה התחילה למחרת; אפור = אזעקת שווא. השיטה לא הבחינה ביניהן היטב – הקשר בלבד.',
     tlT: 'ציר זמן של מה שהשתנה', trT: 'מגמות', noAlert: 'אין התרעה', yourFlight: 'הטיסה שלך', cancelRisk: 'סיכון ביטול', about: 'כ-', itFlies: 'שהיא תמריא',
     yourLine: 'הקו שלך', flightWatch: 'מעקב טיסה', ended: 'הסתיים', below: 'נקודות מתחת לקו ההתרעה של', ofway: 'מהדרך', above: 'מעל קו ההתרעה של',
-    stBelow: 'מתחת לקו ההתרעה', stElev: 'מוגבר – מתקרב', stAbove: 'מעל קו ההתרעה', upd: 'עדכן עכשיו', lastCheck: 'בדיקה אחרונה', since: 'מאז' } };
+    stBelow: 'מתחת לקו ההתרעה', stElev: 'מוגבר – מתקרב', stAbove: 'מעל קו ההתרעה', upd: 'עדכן עכשיו', lastCheck: 'בדיקה אחרונה', since: 'מאז', flat: '→ ללא שינוי', upW: '▲ עלייה של', downW: '▼ ירידה של', pts: 'נק׳', wstart: 'תחילת המעקב' } };
   function T(k) { var en = { noAlert: 'No alert', yourFlight: 'Your flight', cancelRisk: 'cancellation risk', about: 'about', itFlies: 'it flies', yourLine: 'Your alert line', flightWatch: 'Flight watch', ended: 'Ended',
-    below: 'points below the', ofway: 'of the way', above: 'Above the', stBelow: 'Below alert line', stElev: 'Elevated – approaching', stAbove: 'Above alert line', upd: 'Update now', lastCheck: 'Last check', since: 'since' };
+    below: 'points below the', ofway: 'of the way', above: 'Above the', stBelow: 'Below alert line', stElev: 'Elevated – approaching', stAbove: 'Above alert line', upd: 'Update now', lastCheck: 'Last check', since: 'since', flat: '→ Flat', upW: '▲ Up', downW: '▼ Down', pts: 'pts', wstart: 'watch start' };
     return (S.lang === 'he' && I18N.he[k]) || en[k] || k; }
   var I18N_EN = {};
   function applyLang() {
@@ -655,7 +661,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     $('h7Pin').style.left = Math.min(100, v / max * 100) + '%'; $('h7Pin').style.background = col;
     $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = he ? '15% פבר׳ 26' : '15% Feb-26 ref'; $('h7MaxLbl').textContent = max + '%';
     var pts = histPts('F7', rangeDays(view.hero), true), d = pts.length > 1 ? v - pts[0].v : null;
-    $('h7Delta').textContent = d == null ? '' : (Math.abs(d) < 0.05 ? '→ flat' : (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(1) + ' pts') + ' ' + T('since') + ' ' + fmtFull(pts[0].t);
+    $('h7Delta').textContent = d == null ? '' : (he ? '7 ימים: ' : '7-day: ') + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(1) + ' ' + T('pts')) + ' ' + T('since') + ' ' + fmtFull(pts[0].t);
     $('h7Delta').className = d == null || Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down';
     spark($('s7'), pts, css('--violet'));
   }
