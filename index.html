@@ -461,13 +461,16 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var all = []; series.forEach(function (s) { all = all.concat(s.pts); });
     if (!all.length) { svg.innerHTML = '<text x="' + W / 2 + '" y="' + H / 2 + '" text-anchor="middle" fill="' + css('--muted') + '" font-size="14">No data in this range</text>'; svg.onmousemove = null; return; }
     var t0 = Math.min.apply(null, all.map(function (p) { return p.t; })), t1 = Math.max.apply(null, all.map(function (p) { return p.t; })); if (t1 - t0 < 36e5) { t0 -= 18e5; t1 += 18e5; }
-    var vmax = Math.max.apply(null, all.map(function (p) { return p.v; })); (opts.lines || []).forEach(function (l) { vmax = Math.max(vmax, l.v); }); vmax *= 1.12;
+    var vmax = Math.max.apply(null, all.map(function (p) { return p.v; })); (opts.lines || []).forEach(function (l) { vmax = Math.max(vmax, l.v); }); vmax *= 1.08;
+    var tstep = [0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10, 20, 25, 50].filter(function (q) { return vmax / q <= 5; })[0] || 50;
+    if (!opts.log) vmax = Math.max(tstep, Math.ceil(vmax / tstep) * tstep);
     var vmin = opts.log ? Math.max(0.1, Math.min.apply(null, all.map(function (p) { return p.v; })) * 0.8) : 0;
     function x(t) { return PL + (t - t0) / (t1 - t0) * (W - PL - PR); }
     function y(v) { if (opts.log) { var a = Math.log(vmin), b = Math.log(vmax); return H - PB - (Math.log(Math.max(v, vmin)) - a) / (b - a) * (H - PT - PB); } return H - PB - (v - vmin) / (vmax - vmin) * (H - PT - PB); }
     var g = css('--line'), mu = css('--muted'), s = '';
-    var ticks = opts.log ? [0.5, 1, 2, 5, 10, 20, 50].filter(function (v) { return v >= vmin && v <= vmax; }) : [0, .25, .5, .75, 1].map(function (f) { return vmax * f; });
-    ticks.forEach(function (v) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="' + g + '"/><text x="' + (PL - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="' + mu + '">' + (v < 10 ? v.toFixed(1) : Math.round(v)) + '%</text>'; });
+    var ticks = []; if (opts.log) ticks = [0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50].filter(function (v) { return v >= vmin && v <= vmax; }); else for (var tv = 0; tv <= vmax + 1e-9; tv += tstep) ticks.push(Math.round(tv * 100) / 100);
+    var tdp = opts.log ? 1 : (tstep < 1 ? (tstep === 0.25 ? 2 : 1) : 0);
+    ticks.forEach(function (v) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="' + g + '"/><text x="' + (PL - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="11" fill="' + mu + '">' + (opts.log ? (v < 1 ? v.toFixed(1) : String(v)) : v.toFixed(tdp)) + '%</text>'; });
     var span = t1 - t0, maxT = Math.max(3, Math.floor((W - PL - PR) / 60)), steps = [36e5, 3 * 36e5, 6 * 36e5, 12 * 36e5, 864e5, 2 * 864e5], step = steps.filter(function (q) { return span / q <= maxT; })[0] || 2 * 864e5, tt = Math.ceil(t0 / step) * step;
     for (; tt <= t1; tt += step) s += '<text x="' + x(tt) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="11" fill="' + mu + '">' + (step >= 864e5 || (step >= 12 * 36e5) ? fmt(tt, { day: 'numeric', month: 'short', hour: undefined, minute: undefined }) + (step < 864e5 ? ' ' + fmt(tt) : '') : fmt(tt)) + '</text>';
     (opts.lines || []).forEach(function (l) { s += '<line x1="' + PL + '" x2="' + (W - PR) + '" y1="' + y(l.v) + '" y2="' + y(l.v) + '" stroke="' + l.c + '" stroke-width="1.5" stroke-dasharray="6 5"/><text x="' + (PL + 6) + '" y="' + (y(l.v) - 5) + '" text-anchor="start" font-size="12" font-weight="700" fill="' + l.c + '">' + esc(l.label) + '</text>'; });
