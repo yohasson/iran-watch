@@ -1,18 +1,18 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-24T07:15:00Z",
- "summary": "Quiet morning. No new escalation signals; Iran's parliament speaker repeated that there are no talks until Iran's conditions are met (rhetoric). Airspace-closure markets edged around 4%. 24-hour chance 1.23%, well under the 7% alert line. No alert sent.",
+ "updated_utc": "2026-11-24T13:10:00Z",
+ "summary": "UKMTO confirmed that three ships were hit by projectiles in Hormuz on Monday evening, and Iran claims more tankers hit mines today; still no sign of a US or Israeli strike order. 24-hour chance 1.26%, well under the 7% alert line. No alert sent.",
  "message_sent": "none",
  "major": {
-  "F": 1.23,
-  "prev_F": 1.19,
-  "E": 2.34,
+  "F": 1.26,
+  "prev_F": 1.23,
+  "E": 2.48,
   "M": 0.64,
-  "F7": 8.34,
+  "F7": 8.59,
   "threshold": 7
  },
  "limited": {
-  "L": 25.42,
+  "L": 27.52,
   "prev_L": 25.42
  },
  "alert": {
@@ -24,21 +24,21 @@
  "flight": {
   "active": true,
   "label": "Your flight to London",
-  "R": 8.41,
-  "prev_R": 8.51,
+  "R": 8.29,
+  "prev_R": 8.41,
   "baseline": 17,
   "alert_at": 25,
-  "C1": 1.64,
-  "C2": 3.54,
+  "C1": 1.55,
+  "C2": 3.38,
   "W": 5,
   "triggers": [],
   "status_note": "Your flight's route has operated every day 12–23 Nov and the next days are scheduled; no Wizz Air or other airline suspensions; Ben Gurion open."
  },
  "model": {
-  "E": 2.34,
-  "P_iran_nov30": 0.042,
+  "E": 2.48,
+  "P_iran_nov30": 0.0405,
   "P_iran_dec31": 0.145,
-  "P_il_nov30": 0.0345,
+  "P_il_nov30": 0.034,
   "W": 5,
   "F_floor": null,
   "R_floor": null
@@ -46,8 +46,8 @@
  "markets": [
   {
    "label": "Iran full airspace closure by 30 Nov",
-   "now": 4.2,
-   "prev": 4,
+   "now": 4.05,
+   "prev": 4.2,
    "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
   },
   {
@@ -58,96 +58,95 @@
   },
   {
    "label": "Israeli airspace closed by 30 Nov",
-   "now": 3.45,
-   "prev": 3.75,
+   "now": 3.4,
+   "prev": 3.45,
    "url": "https://polymarket.com/event/israeli-airspace-closed-by"
   },
   {
    "label": "Israeli airspace closed by 31 Dec",
    "now": 17.5,
-   "prev": 17,
+   "prev": 17.5,
    "url": "https://polymarket.com/event/israeli-airspace-closed-by"
   },
   {
    "label": "Israel–Iran ceasefire holds through 30 Nov",
-   "now": 91.5,
+   "now": 92.5,
    "prev": 91.5,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
    "label": "Israel–Iran ceasefire holds through 31 Dec",
-   "now": 72.5,
+   "now": 73.5,
    "prev": 72.5,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
    "label": "US–Iran 2-week pause begins by 30 Nov",
-   "now": 63,
+   "now": 64.5,
    "prev": 63,
    "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
   },
   {
    "label": "US–Iran 2-week pause begins by 31 Dec",
-   "now": 75.5,
+   "now": 79,
    "prev": 75.5,
    "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
   }
  ],
  "brent": {
-  "usd": 88.97,
-  "prev_usd": 90.04,
-  "change_pct_day": -0.45,
-  "read_utc": "2026-11-24T01:47:00Z"
+  "usd": 89.2,
+  "prev_usd": 88.97,
+  "change_pct_day": -0.2,
+  "read_utc": "2026-11-24T10:43:00Z"
  },
  "items": [
   {
-   "time_utc": "2026-11-24T07:00:00Z",
-   "source": "ISNA via Al Jazeera",
-   "text": "IRGC Navy chief warns ships against 'unauthorised routes' through Hormuz after the mine claims.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "No change"
-  },
-  {
-   "time_utc": "2026-11-24T06:45:00Z",
-   "source": "Fars via Al Jazeera",
-   "text": "Iran's chief negotiator Ghalibaf: no talks or actions until Iran's seven conditions are met; warns of a decisive response to any miscalculation.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "No change"
-  },
-  {
-   "time_utc": "2026-11-24T07:12:00Z",
-   "source": "Polymarket",
-   "text": "Iran full airspace closure by 30 Nov: 4.0% → 4.2%; Israeli airspace closed by 30 Nov: 3.75% → 3.45%.",
-   "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
-   "effect": "No change"
-  },
-  {
-   "time_utc": "2026-11-24T05:15:00Z",
-   "source": "Qatar Foreign Ministry via Al Jazeera",
-   "text": "Qatar and US co-chaired strategic dialogue; discussed joint efforts to de-escalate regional tensions.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "No change – talks already counted"
-  },
-  {
-   "time_utc": "2026-11-24T04:20:00Z",
-   "source": "IRGC via Al Jazeera (Iranian claim, unconfirmed)",
-   "text": "IRGC says three 'violating' oil tankers caught fire after hitting mines in the Strait of Hormuz.",
+   "time_utc": "2026-11-24T12:30:00Z",
+   "source": "UKMTO via Al Jazeera",
+   "text": "UK maritime agency confirms three ships were hit by unidentified projectiles while sailing east through Hormuz on Monday evening; all continued, crews safe.",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "Small rise"
   },
   {
-   "time_utc": "2026-11-24T01:47:00Z",
-   "source": "Reuters via Al Jazeera",
-   "text": "Brent crude near a three-month low at $88.97.",
+   "time_utc": "2026-11-24T12:21:00Z",
+   "source": "IRGC Navy via IRNA / Al Jazeera (claim)",
+   "text": "Iran's Revolutionary Guards say a fourth tanker hit a mine on an 'unauthorised' route in Hormuz; not independently confirmed.",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "No change – context"
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T11:27:00Z",
+   "source": "Mehr via ABC News",
+   "text": "Iran's army chief threatens an 'unimaginable' response if Iranian infrastructure is struck again (rhetoric).",
+   "link": "https://abcnews.com/International/live-updates/iran-live-updates-tehran-strait-hormuz-safe-demands/?id=138369648",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T11:15:00Z",
+   "source": "Qatar Foreign Ministry via Al Jazeera",
+   "text": "Qatar urges Iran and the US to exercise restraint and says it keeps talking to both sides.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T09:46:00Z",
+   "source": "US–Qatar joint statement via Al Jazeera",
+   "text": "US and Qatar reaffirm safe and unimpeded passage through Hormuz after the Rubio–Al Thani strategic dialogue.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T09:17:00Z",
+   "source": "Iranian army via Al Jazeera (claim)",
+   "text": "Iran's army says two more oil tankers hit a mine in Hormuz this morning and caught fire; not confirmed by maritime authorities.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "Small rise"
   }
  ],
  "open_items": [
-  "Iranian claim of three tankers hitting mines – no maritime authority confirmation yet.",
-  "Iranian claim that a US LUCAS drone was shot down – not confirmed by the US.",
+  "More Iranian attacks on ships in Hormuz – a US response would raise the limited-strike figure first.",
   "Follow-up from Qatar's mediation after the Rubio meeting.",
-  "A quiet-day reduction for 24 Nov can apply after about 18:45 Israel time if there is no new Iranian fire.",
+  "Whether CENTCOM confirms any US strike near Hormuz today (only unverified online claims so far).",
   "Your flight status in the Wizz Air app as Friday approaches."
  ],
  "history": [
@@ -708,9 +707,81 @@
    "L": 25.42,
    "R": 8.41,
    "F7": 8.34
+  },
+  {
+   "utc": "2026-11-24T13:10:00Z",
+   "F": 1.26,
+   "E": 2.48,
+   "M": 0.64,
+   "L": 27.52,
+   "R": 8.29,
+   "F7": 8.59
   }
  ],
  "events": [
+  {
+   "time_utc": "2026-11-24T12:30:00Z",
+   "source": "UKMTO via Al Jazeera",
+   "text": "UK maritime agency confirms three ships were hit by unidentified projectiles while sailing east through Hormuz on Monday evening; all continued, crews safe.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "Small rise"
+  },
+  {
+   "time_utc": "2026-11-24T12:21:00Z",
+   "source": "IRGC Navy via IRNA / Al Jazeera (claim)",
+   "text": "Iran's Revolutionary Guards say a fourth tanker hit a mine on an 'unauthorised' route in Hormuz; not independently confirmed.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T11:27:00Z",
+   "source": "Mehr via ABC News",
+   "text": "Iran's army chief threatens an 'unimaginable' response if Iranian infrastructure is struck again (rhetoric).",
+   "link": "https://abcnews.com/International/live-updates/iran-live-updates-tehran-strait-hormuz-safe-demands/?id=138369648",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T11:15:00Z",
+   "source": "Qatar Foreign Ministry via Al Jazeera",
+   "text": "Qatar urges Iran and the US to exercise restraint and says it keeps talking to both sides.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T10:00:00Z",
+   "source": "Iranian army chief via Al Jazeera",
+   "text": "Iran's army chief says Hormuz must become 'more restricted day by day' (rhetoric).",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T09:46:00Z",
+   "source": "US–Qatar joint statement via Al Jazeera",
+   "text": "US and Qatar reaffirm safe and unimpeded passage through Hormuz after the Rubio–Al Thani strategic dialogue.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T09:17:00Z",
+   "source": "Iranian army via Al Jazeera (claim)",
+   "text": "Iran's army says two more oil tankers hit a mine in Hormuz this morning and caught fire; not confirmed by maritime authorities.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "Small rise"
+  },
+  {
+   "time_utc": "2026-11-24T09:00:00Z",
+   "source": "ISNA via Al Jazeera / ABC News",
+   "text": "Iran's foreign minister says a US land blockade is 'virtually impossible' but the diplomatic path is still ongoing.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T08:53:00Z",
+   "source": "UKMTO via Al Jazeera / ABC News",
+   "text": "Late report: a bulk carrier was hit by an unknown projectile off Khor Fakkan, UAE, on Sunday; fire, no injuries.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
   {
    "time_utc": "2026-11-24T07:12:00Z",
    "source": "Polymarket",
