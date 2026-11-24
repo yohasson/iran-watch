@@ -98,6 +98,7 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .cd div{background:var(--soft);border-radius:8px;padding:4px 8px;text-align:center;font-variant-numeric:tabular-nums}
 .cd b{display:block;font-size:1.05rem}.cd span{font-size:.68rem;color:var(--muted)}
 /* charts */
+.flmerge{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}.flmerge .advice{margin-bottom:8px}
 .stack{display:flex;flex-direction:column;gap:14px}.stack .panel{margin-bottom:0;flex:1}.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;margin-bottom:14px}
 .chartwrap{position:relative}
@@ -217,7 +218,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:26 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:44 Israel time</div>
     </div>
   </div>
 </header>
@@ -258,15 +259,15 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <div class="panel"><h3>🚦 <span data-i18n="chkT">Warning signs that came before real attacks</span></h3><div class="lights" id="lights"></div><div class="meta" style="margin-top:8px" data-i18n="chkNote">Green = not seen · amber = partial or reported · red = seen and confirmed. In past attacks these appeared 1–4 days before.</div></div>
 
   <div class="stack">
-    <div class="grid2">
+    <div class="stack">
   <div class="card" data-k="L" style="--c:var(--cL)"><span class="more">Details ›</span>
     <h2 data-i18n="cL">Any US/Israeli strike on Iranian soil – 24 h</h2><div class="big" id="vL">–</div><div class="delta" id="dL"></div><svg id="sL" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note">Includes limited "defensive" strikes (Qeshm, Sirik). No alert on this figure.</div></div>
   <div class="card" data-k="R" id="cardR" style="--c:var(--cR)"><span class="more">Details ›</span>
     <h2 id="rTitle">Flight cancellation risk</h2><div class="big" id="vR">–</div><div class="delta" id="dR"></div><svg id="sR" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
-    <div class="cd" id="cd"></div><div class="note" id="rNote"></div></div>
+    <div class="cd" id="cd"></div><div class="note" id="rNote"></div><div id="flPanel" class="flmerge"><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div></div>
     </div>
-    <div class="panel" id="flPanel"><h3>✈️ <span data-i18n="flT">Your flight – what to do</span></h3><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div>
+    
   </div>
 </div>
 
@@ -389,7 +390,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function fmt(t, opts) { var o = { timeZone: TZ, hour: '2-digit', minute: '2-digit', hour12: false }; for (var k in (opts || {})) o[k] = opts[k]; return new Intl.DateTimeFormat('en-GB', o).format(new Date(t)); }
   function fmtFull(t) { return fmt(t, { weekday: 'short', day: 'numeric', month: 'short' }); }
   function pct(v, dp) { if (!isNum(v)) return '–'; if (dp == null) dp = v < 10 ? 2 : 1; return v.toFixed(dp) + '%'; }
-  function ago(ms) { var m = Math.round((Date.now() - ms) / 60000); if (m < 1) return 'just now'; if (m < 60) return m + ' min ago'; var h = Math.floor(m / 60); return h + ' h ' + (m % 60) + ' min ago'; }
+  function ago(ms) { var m = Math.max(0, Math.round((Date.now() - ms) / 60000)); if (m < 1) return 'just now'; if (m < 60) return m + ' min ago'; var h = Math.floor(m / 60); return h + ' h ' + (m % 60) + ' min ago'; }
   function safeUrl(u) { return (typeof u === 'string' && /^https?:\/\//i.test(u)) ? u : null; }
   function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
   function add(p, tag, text, cls) { var n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; p.appendChild(n); return n; }
@@ -855,6 +856,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
   ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
   (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
+  $('flPanel').addEventListener('click', function (e) { e.stopPropagation(); });
   Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.onclick = function () { openDrill(c.getAttribute('data-k')); }; });
   Array.prototype.forEach.call(document.querySelectorAll('.ov'), function (o) { o.onclick = function (e) { if (e.target === o || e.target.hasAttribute('data-close')) { o.className = 'ov'; if (o.id === 'ovD') view.drillK = null; } }; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { $('ovD').className = 'ov'; $('ovS').className = 'ov'; view.drillK = null; } });
