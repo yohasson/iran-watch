@@ -44,10 +44,17 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 .btn{background:#fff;color:#1b2b4b;border:0;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.75;cursor:progress;transform:none}
 .btn{white-space:nowrap}.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:pointer}.btn.full:hover{background:#f1c7c7;color:#8a1c1c}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
-.fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fnow{margin-top:8px;font-size:.82rem;font-weight:700;display:flex;gap:6px;align-items:center}.fnow .dotp{width:8px;height:8px;border-radius:50%;background:#ffd36a;animation:pz 1s infinite}
-.fplan{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:3px 10px;max-height:150px;overflow:auto;font-size:.72rem}.fplan li{opacity:.55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fplan li.d{opacity:1}.fplan li.a{opacity:1;font-weight:700;color:#ffd36a}.fplan li.x{opacity:1;color:#fca5a5}
-.flog{margin-top:6px;max-height:120px;overflow:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.68rem;line-height:1.45;background:rgba(0,0,0,.18);border-radius:8px;padding:6px 8px}.flog div{white-space:normal}.flog b{opacity:.7;font-weight:400;margin-inline-end:6px}
-.fprog .fl{display:flex;justify-content:space-between;align-items:flex-start;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.e{opacity:1;background:rgba(255,211,106,.35)}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.65);color:#fff}.fprog .fs span.a{animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.35)}}
+.fprog{display:none;margin:14px 0 18px;background:linear-gradient(135deg,#1f2b4d,#3a2f6b);color:#fff;border-radius:18px;padding:18px 22px;box-shadow:var(--shadow)}.fprog.on{display:block}
+.fhead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}.ftitle{font-size:1.15rem;font-weight:800}.fsub{font-size:.95rem;opacity:.9;margin-top:3px}.fhr{text-align:end}.fpct{font-size:1.6rem;font-weight:800;line-height:1}.ftime{font-size:.85rem;opacity:.85;margin-top:4px}
+.fprog .fb{height:12px;background:rgba(255,255,255,.2);border-radius:8px;overflow:hidden;margin-top:12px}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:8px;transition:width .8s ease}
+.fprog .fs{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.fprog .fs span{font-size:.8rem;padding:3px 10px;border-radius:10px;background:rgba(255,255,255,.12);opacity:.6}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.7)}.fprog .fs span.a{background:rgba(255,211,106,.9);color:#1b2b4b;font-weight:700;animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.2)}}
+.fnow{margin-top:14px;font-size:1.05rem;font-weight:700;display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.1);border-radius:12px;padding:10px 14px}.fnow:empty{display:none}.fnow .dotp{flex:none;width:10px;height:10px;border-radius:50%;background:#ffd36a;animation:pz 1s infinite}
+.fcnt{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.fcnt span{font-size:.85rem;background:rgba(255,255,255,.1);border-radius:10px;padding:4px 10px}.fcnt b{font-weight:800}
+.fcols{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:22px;margin-top:16px}.fcol h4{margin:0 0 8px;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;opacity:.75}.fnew{text-transform:none;letter-spacing:0;font-weight:400;opacity:.8}
+.fplan{list-style:none;margin:0;padding:0;font-size:.9rem;line-height:1.35}.fplan li{display:flex;gap:8px;padding:4px 0;opacity:.55}.fplan li .ic{flex:none;width:20px}.fplan li.d{opacity:.95}.fplan li.a{opacity:1;font-weight:800;color:#ffd36a}.fplan li.x{opacity:1;color:#fca5a5}
+.flog{font-size:.92rem;line-height:1.45}.flog div{display:grid;grid-template-columns:62px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.1)}.flog div:first-child{font-weight:700}.flog b{opacity:.7;font-weight:500;font-variant-numeric:tabular-nums}
+.fmore{background:none;border:0;color:#ffd36a;text-decoration:underline;cursor:pointer;font:inherit;font-size:.85rem;padding:6px 0}.ffoot{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font-size:.88rem;opacity:.9}
+@media(max-width:760px){.fcols{grid-template-columns:1fr}.fprog{padding:14px}.fpct{font-size:1.3rem}}
 .btn .spin{width:14px;height:14px;border:2px solid rgba(27,43,75,.3);border-top-color:#1b2b4b;border-radius:50%;display:none}
 .btn.busy .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 .ibtn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:10px;width:40px;height:40px;cursor:pointer;font-size:1.1rem}
@@ -61,6 +68,12 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 body.updating .fade{opacity:.45;transition:opacity .2s}
 .card,.panel,.hero{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
 .panel{padding:16px 18px;margin-bottom:14px}
+.score{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 12px}.score div{background:var(--soft);border-radius:12px;padding:8px 12px;min-width:150px}.score b{display:block;font-size:1.15rem}.score span{font-size:.78rem;color:var(--muted)}
+.call{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:9px;white-space:nowrap}.call.buy{background:rgba(22,163,74,.15);color:#15803d}.call.lean{background:var(--blue-bg);color:var(--blue)}.call.out{background:var(--soft);color:var(--muted)}
+.n24{font-size:.8rem;white-space:nowrap}.n24 .u{color:#c2410c}.n24 .d{color:#15803d}.plp{color:#15803d;font-weight:700}.pln{color:#b91c1c;font-weight:700}
+.tk{width:100%;font-size:.82rem;margin-top:8px;border-collapse:collapse}.tk td,.tk th{padding:3px 6px;border-bottom:1px solid var(--line);text-align:start}
+@media(max-width:760px){.hide-s{display:none}}
+
 .panel h3{margin:0 0 10px;font-size:1.02rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .panel h3 .sp{flex:1}
 .meta{color:var(--muted);font-size:.85rem}
@@ -221,12 +234,26 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
-      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fnow" id="fnow"></div><ul class="fplan" id="fplan"></ul><div class="flog" id="flog"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:02 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:06 Israel time</div>
     </div>
   </div>
 </header>
+<section class="fprog" id="fprog" aria-live="polite">
+  <div class="fhead">
+    <div class="fhl"><div class="ftitle">🔎 Full check in progress</div><div class="fsub" id="fstage">Starting…</div></div>
+    <div class="fhr"><div class="fpct" id="fpct">0%</div><div class="ftime" id="ftime"></div></div>
+  </div>
+  <div class="fb"><i id="fbar"></i></div>
+  <div class="fs" id="fsteps"></div>
+  <div class="fnow" id="fnow"></div>
+  <div class="fcnt" id="fcnt"></div>
+  <div class="fcols">
+    <div class="fcol"><h4>Steps</h4><ol class="fplan" id="fplan"></ol></div>
+    <div class="fcol"><h4>What the check found <span class="fnew">newest first</span></h4><div class="flog" id="flog"></div><button class="fmore" id="fmore" type="button" hidden>Show all</button></div>
+  </div>
+  <div class="ffoot"><span id="feta"></span><button hidden class="fmore" id="fstop" type="button">Stop waiting</button></div>
+</section>
 
 <div class="hero fade" id="hero">
   <div class="hhead"><span class="ctitle" id="hRangeLbl">Trend range</span><span class="seg rangeSeg" data-target="hero"></span></div>
@@ -286,15 +313,16 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 </div>
 
 
-<div class="two fade">
+<div class="fade">
   <div class="panel">
     <h3>🧮 How the main estimate is built</h3>
     <div class="parts" id="parts"></div>
     <div class="meta">Main estimate = average of the news-based (E) and market-based (M) parts on a log-odds scale. E moves only when the hourly check finds new signals; M follows Polymarket.</div>
   </div>
   <div class="panel">
-    <h3>💹 Markets vs. our predictions<span class="sp"></span><span class="meta">Tap a row for the reasoning · tap a column to sort</span></h3>
-    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th></tr></thead><tbody id="markets"></tbody></table>
+    <h3>💹 Markets vs. our predictions<span class="sp"></span><span class="meta">Tap a row for the reasoning and track record · tap a column to sort</span></h3>
+    <div class="score" id="score"></div>
+    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th><th class="n hide-s" data-s="up">Next 24 h</th><th data-s="call">Call</th><th class="n" data-s="pl">$100 since first call</th></tr></thead><tbody id="markets"></tbody></table>
     <div class="meta" id="brent" style="margin-top:10px"></div>
   </div>
 </div>
@@ -675,11 +703,15 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function renderMarkets(c) {
     var P = (data.predictions || []).filter(function (p) { return !p.hidden; });
     var tb = $('markets'); clear(tb); view.prOpen = view.prOpen || {};
-    if (!P.length) { add(add(tb, 'tr'), 'td', 'Predictions will appear after the next check.', 'meta').colSpan = 4; }
+    if (!P.length) { add(add(tb, 'tr'), 'td', 'Predictions will appear after the next check.', 'meta').colSpan = 7; }
+    var scd = $('score'); clear(scd); var tot = 0, nt = 0, hit = 0, calls = 0, buyPl = 0;
+    P.forEach(function (p) { var s2 = p.score || {}; if (isNum(s2.pl_all)) { tot += s2.pl_all; nt += s2.n_tickets || 0; } hit += s2.dir_hits || 0; calls += s2.dir_calls || 0; if (isNum(s2.pl_buy_only)) buyPl += s2.pl_buy_only; });
+    [[(tot >= 0 ? '+$' : '−$') + Math.abs(tot).toFixed(2), 'All $100 tickets (' + nt + ') – profit/loss now'], [(buyPl >= 0 ? '+$' : '−$') + Math.abs(buyPl).toFixed(2), 'Only "Buy" calls – profit/loss now'], [calls ? hit + ' of ' + calls + ' (' + Math.round(100 * hit / calls) + '%)' : 'from tomorrow', '24-hour up/down calls right'], ['started 24 Nov', 'One $100 paper ticket per bet per day, on our side']].forEach(function (x) { var d0 = add(scd, 'div'); add(d0, 'b', x[0]); add(d0, 'span', x[1]); });
     var rows = P.map(function (p) { var mk = p.market_pct, live1 = false;
       if (p.kind === 'iran_air' && /Nov 30/.test(p.label) && c.useLive && live.label === '30 Nov') { mk = live.Piran * 100; live1 = true; }
       var passed = p.date_utc && Date.parse(p.date_utc) < Date.now();
-      return { p: p, label: p.label, now: mk, ours: p.watch_pct, gap: isNum(p.watch_pct) && isNum(mk) ? p.watch_pct - mk : 0, passed: passed, live: live1 }; });
+      var sc = p.score || {}, tr = p.trade || {}, n2 = p.next24 || {};
+      return { p: p, label: p.label, now: mk, ours: p.watch_pct, gap: isNum(p.watch_pct) && isNum(mk) ? p.watch_pct - mk : 0, passed: passed, live: live1, up: isNum(n2.up) ? n2.up - (n2.down || 0) : 0, call: tr.call || '', pl: isNum(sc.first_pl) ? sc.first_pl : -999 }; });
     if (view.sortK) rows.sort(function (a, b) { var x = a[view.sortK], y = b[view.sortK]; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * view.sortD; });
     rows.forEach(function (r) {
       var p = r.p, tr = add(tb, 'tr', null, 'pr-row'), td = add(tr, 'td'), u = safeUrl(p.slug ? 'https://polymarket.com/event/' + p.slug : '');
@@ -691,12 +723,20 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       var gc = add(tr, 'td', null, 'n'), g = Math.abs(r.gap) < 0.5 ? '≈' : (r.gap > 0 ? '+' : '−') + Math.abs(r.gap).toFixed(1), gb = add(gc, 'span', g, 'gapb');
       var big = Math.abs(r.gap) >= Math.max(2, 0.25 * Math.max(r.now, r.ours, 1));
       gb.style.background = Math.abs(r.gap) < 0.5 ? 'var(--soft)' : big ? 'rgba(234,88,12,.15)' : 'var(--blue-bg)'; gb.style.color = Math.abs(r.gap) < 0.5 ? 'var(--muted)' : big ? '#c2410c' : 'var(--blue)';
+      var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); }
+      var tc = add(tr, 'td'), cl = (p.trade || {}).call || '–'; add(tc, 'span', cl, 'call ' + (/^Buy/.test(cl) ? 'buy' : /^Lean/.test(cl) ? 'lean' : 'out')); if ((p.trade || {}).ev_pct != null && /^(Buy|Lean)/.test(cl)) add(tc, 'small', ' +' + p.trade.ev_pct + '% exp.');
+      var sc0 = p.score || {}, tp = add(tr, 'td', null, 'n'); if (isNum(sc0.first_pl)) add(tp, 'span', (sc0.first_pl >= 0 ? '+$' : '−$') + Math.abs(sc0.first_pl).toFixed(2), sc0.first_pl >= 0 ? 'plp' : 'pln'); else tp.textContent = '–';
       tr.onclick = function () { view.prOpen[p.key] = !view.prOpen[p.key]; renderMarkets(cur()); };
       if (view.prOpen[p.key]) {
-        var ex = add(add(tb, 'tr', null, 'pr-ex'), 'td'); ex.colSpan = 4;
+        var ex = add(add(tb, 'tr', null, 'pr-ex'), 'td'); ex.colSpan = 7;
         add(ex, 'div', priv(p.why || ''));
         var md = add(ex, 'div', null, 'mods'); (p.models || []).forEach(function (m) { add(md, 'span', m.name + ': ' + pct(m.pct, 1)); });
         if ((p.key_inputs || []).length) { var ul = add(ex, 'ul'); p.key_inputs.slice(0, 5).forEach(function (k) { add(ul, 'li', priv(k)); }); }
+        var trd = p.trade || {}, nx = p.next24 || {};
+        if (trd.call) add(ex, 'div', 'Call: ' + trd.call + (trd.side ? ' (buy ' + trd.side + ' at ' + trd.price + '¢, expected return ' + (trd.ev_pct >= 0 ? '+' : '') + trd.ev_pct + '% if our view is right)' : '') + '. Next 24 h: price up ' + nx.up + '%, down ' + nx.down + '%, about flat ' + nx.flat + '%. ' + (trd.note || ''), 'meta');
+        var K = p.tickets || []; if (K.length) { var tk = add(ex, 'table', null, 'tk'), hr = add(add(tk, 'thead'), 'tr'); ['Day', 'Ticket', 'Entry', 'Worth now', 'Profit/loss'].forEach(function (h) { add(hr, 'th', h); }); var tbd = add(tk, 'tbody');
+          K.slice().reverse().forEach(function (k) { var rr = add(tbd, 'tr'); add(rr, 'td', k.day); add(rr, 'td', '$100 on ' + k.side + ' (' + k.call + ')'); add(rr, 'td', k.entry + '¢'); add(rr, 'td', isNum(k.value) ? '$' + k.value.toFixed(2) : '–'); var pc = add(rr, 'td'); if (isNum(k.pl)) add(pc, 'span', (k.pl >= 0 ? '+$' : '−$') + Math.abs(k.pl).toFixed(2), k.pl >= 0 ? 'plp' : 'pln'); }); }
+        var sc1 = p.score || {}; if (sc1.dir_calls) add(ex, 'div', '24-hour calls right: ' + sc1.dir_hits + ' of ' + sc1.dir_calls, 'meta');
         var ft = add(ex, 'div', (p.models || []).length + ' models · ' + (p.sources_count || '–') + ' sources' + (p.updated_utc ? ' · updated ' + fmtFull(p.updated_utc) : '') + ' · ', 'meta');
         if (u) { var a = add(ft, 'a', 'open on Polymarket'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.onclick = function (e) { e.stopPropagation(); }; }
       }
@@ -971,14 +1011,13 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else if (Array.isArray(pg.plan) && pg.plan.length) pctv = Math.round(8 + 90 * pg.plan.filter(function (x) { return /done|failed|skipped/.test(x.status || ''); }).length / pg.plan.length);
     if (done) pctv = 100;
     full.pct = Math.max(full.pct || 0, Math.min(100, pctv));
-    p.className = 'fprog on'; $('fbar').style.width = full.pct + '%'; $('fpct').textContent = full.pct + '% · ' + mm + ':' + (ss < 10 ? '0' : '') + ss;
+    p.className = 'fprog on'; $('fbar').style.width = full.pct + '%'; $('fpct').textContent = full.pct + '%';
     var line = STAGES[ci][1] + (done ? '' : '…');
+    if (!done && full.stage !== 'sent' && isNum(pg.steps_total) && pg.steps_total > 0) line = 'Step ' + Math.min(pg.steps_total, (pg.steps_done || 0) + 1) + ' of ' + pg.steps_total + ' · ' + STAGES[ci][1];
+    var fc = $('fcnt'); clear(fc);
     if (!done && full.stage !== 'sent') {
-      var bits = [];
-      if (isNum(pg.sources_planned)) bits.push('sources ' + (pg.sources_done || 0) + ' of ' + pg.sources_planned);
-      if (isNum(pg.searches_planned)) bits.push('searches ' + (pg.searches_done || 0) + ' of ' + pg.searches_planned);
-      if (isNum(pg.markets_planned)) bits.push('markets ' + (pg.markets_done || 0) + ' of ' + pg.markets_planned);
-      if (bits.length) line += ' · ' + bits.join(' · ');
+      [['📰 Sources', pg.sources_done, pg.sources_planned], ['🔍 Searches', pg.searches_done, pg.searches_planned], ['💹 Markets', pg.markets_done, pg.markets_planned]].forEach(function (c) {
+        if (isNum(c[2])) { var sp = add(fc, 'span', c[0] + ' '); add(sp, 'b', (c[1] || 0) + ' / ' + c[2]); } });
     }
     if (!done && full.stage === 'sent' && el > 180) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot automations.';
     $('fstage').textContent = line;
@@ -986,17 +1025,18 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     STAGES.slice(1).forEach(function (st, j) { var idx = j + 1, cls = done || idx < ci ? 'd' : idx === ci ? 'd a' : ''; add(f, 'span', st[1], cls); });
     var plan = (pg && Array.isArray(pg.plan)) ? pg.plan : [], pu = $('fplan'); clear(pu);
     plan.forEach(function (it) { var st = it.status || 'todo', ic = st === 'done' ? '✅ ' : st === 'doing' ? '🔄 ' : st === 'failed' ? '⚠️ ' : st === 'skipped' ? '⏭️ ' : '⏳ ';
-      add(pu, 'li', ic + priv(it.label || it.id), st === 'done' ? 'd' : st === 'doing' ? 'a' : (st === 'failed' || st === 'skipped') ? 'x' : ''); });
+      var li = add(pu, 'li', null, st === 'done' ? 'd' : st === 'doing' ? 'a' : (st === 'failed' || st === 'skipped') ? 'x' : ''); add(li, 'span', ic.trim(), 'ic'); add(li, 'span', priv(it.label || it.id)); });
+    if (!plan.length) { var li0 = add(pu, 'li', null, 'a'); add(li0, 'span', '🔄', 'ic'); add(li0, 'span', full.stage === 'sent' ? 'Waiting for the check to start and post its plan' : 'Planning the sources'); }
     var nowTxt = '';
     if (done) nowTxt = '';
     else if (pg && pg.current) { var since = pg.updated_utc ? Math.max(0, Math.round((Date.now() - Date.parse(pg.updated_utc)) / 1000)) : null; nowTxt = 'Now: ' + priv(pg.current) + (since != null ? ' (' + (since < 60 ? since + ' s' : Math.round(since / 60) + ' min') + ')' : ''); }
     else if (full.stage === 'sent') nowTxt = 'Now: waiting for the automation to start the check';
     var fn = $('fnow'); clear(fn); if (nowTxt) { add(fn, 'span', null, 'dotp'); add(fn, 'span', nowTxt); }
     var lg = (full.local || []).concat(pg && Array.isArray(pg.log) ? pg.log : []).filter(function (x) { return !pg || !pg.started_utc || x.local || true; });
-    lg.sort(function (a, b) { return Date.parse(a.t) - Date.parse(b.t); });
-    var lb = $('flog'), atBottom = lb.scrollTop + lb.clientHeight >= lb.scrollHeight - 4; clear(lb);
-    lg.forEach(function (x) { var d = add(lb, 'div'); add(d, 'b', fmt(Date.parse(x.t), { second: '2-digit' })); add(d, 'span', priv(x.msg)); });
-    lb.style.display = lg.length ? '' : 'none'; if (atBottom) lb.scrollTop = lb.scrollHeight;
+    lg.sort(function (a, b) { return Date.parse(b.t) - Date.parse(a.t); });
+    var lb = $('flog'), lim = view.flogAll ? lg.length : 8; clear(lb);
+    lg.slice(0, lim).forEach(function (x) { var d = add(lb, 'div'); add(d, 'b', fmt(Date.parse(x.t))); add(d, 'span', priv(x.msg)); });
+    var mb = $('fmore'); mb.hidden = lg.length <= 8; mb.textContent = view.flogAll ? 'Show fewer' : 'Show all ' + lg.length + ' updates'; mb.onclick = function () { view.flogAll = !view.flogAll; fullUi(); };
     var EXP = 8 * 60, left;
     if (isNum(pg.steps_total) && pg.steps_total > 0 && pg.steps_done > 0 && full.seen) left = Math.max(0, Math.round(el / pg.steps_done * (pg.steps_total - pg.steps_done)));
     else left = EXP - el;
@@ -1006,7 +1046,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else if (left > 60) eta += ' · about ' + Math.round(left / 60) + ' min left';
     else if (left > 0) eta += ' · under a minute left';
     else eta += ' · running longer than usual';
-    $('feta').textContent = eta;
+    $('ftime').textContent = (done ? '' : 'Running ' + mm + ':' + (ss < 10 ? '0' : '') + ss + ' · ') + eta.replace('Usually takes about 8 min · ', '').replace('Usually takes about 8 min', 'usually ~8 min');
+    $('feta').textContent = done ? '' : 'You can leave this page open – it updates by itself every few seconds.';
     setTimeout(txAll, 0); btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check';
     if (!done && full.stage === 'sent' && el > 300) fullEnd('⚠ The check did not start within 5 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
   }
