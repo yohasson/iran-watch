@@ -1,0 +1,31 @@
+name: Polymarket price history
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["tools/fetch_history.py", "tools/run.txt", ".github/workflows/history.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: history
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/fetch_history.py
+      - name: Commit history.json to main and gh-pages
+        run: |
+          git config user.name "iran-watch-bot"
+          git config user.email "iran-watch-bot@users.noreply.github.com"
+          cp history.json /tmp/history.json
+          git add history.json
+          git commit -m "Price history $(date -u +%FT%TZ)" || echo "no change"
+          for i in 1 2 3; do git pull --rebase -X theirs origin main && git push origin HEAD:main && break; sleep 5; done
+          git fetch origin gh-pages && git checkout -B gh-pages origin/gh-pages
+          cp /tmp/history.json history.json && git add history.json
+          git commit -m "Price history $(date -u +%FT%TZ)" || echo "no change"
+          for i in 1 2 3; do git push origin gh-pages && break; git pull --rebase -X theirs origin gh-pages; sleep 5; done
