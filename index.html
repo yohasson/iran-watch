@@ -223,7 +223,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fnow" id="fnow"></div><ul class="fplan" id="fplan"></ul><div class="flog" id="flog"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:08 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:15 Israel time</div>
     </div>
   </div>
 </header>
@@ -923,11 +923,11 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   Array.prototype.forEach.call(document.querySelectorAll('.ov'), function (o) { o.onclick = function (e) { if (e.target === o || e.target.hasAttribute('data-close')) { o.className = 'ov'; if (o.id === 'ovD') view.drillK = null; } }; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { $('ovD').className = 'ov'; $('ovS').className = 'ov'; view.drillK = null; } });
   /* full check on demand: the button calls a private trigger; the key is asked once per device and kept only on it */
-  var HOOK = 'https://coworkrouting.svc.cloud.microsoft/v1/triggers/route/72f988bf-86f1-41af-91ab-2d7cd011db47/8c87749a-8eea-4f12-b8d1-c0fea205b874/europe/europe.108.neu/3d4b3397-0caf-44ab-993d-2f2505142928/fire';
+  var HOOK = 'https://coworkrouting.svc.cloud.microsoft/v1/triggers/route/72f988bf-86f1-41af-91ab-2d7cd011db47/8c87749a-8eea-4f12-b8d1-c0fea205b874/europe/europe.108.neu/570877b0-4d9c-4c1e-b2e6-ecba37322b14/fire';
   var FULL_SUBJ = 'IRAN-WATCH CHECK NOW', fullPoll = null;
   function lsGet(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } }
   function lsSet(k, v) { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} }
-  var LOCK = {"s": "My8bmXk0xQr5y61kVH0Ylw==", "i": "8+6CdVx/4uVDC1Gd", "c": "T9x+6CIuZdChmP1PMoKG0kCZBsAT4LhYm9PNZ19RUVSVXLyqNshrJb3OXyjbZ95i8NPBgInIPCW/bWw="};
+  var LOCK = {"s": "EgtR5JAgNwhfkxNLQRz3FA==", "i": "aj/Xmm6k4NVKKf6O", "c": "UhlCbAuMDo00xVtS6dx4ZRJWcItbGpnIXuvWjLeBXeJiERrcWtH0Vs6tCY5FvxkM4KQHonhVsi0PhQ0="}; var LOCK_V = 2;
   function b64(x) { return Uint8Array.from(atob(x), function (ch) { return ch.charCodeAt(0); }); }
   function unlock(pw) {
     var e = new TextEncoder();
@@ -937,6 +937,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       .then(function (buf) { return new TextDecoder().decode(buf); });
   }
   function fullKey() {
+    if (lsGet('iw-keyv') !== '2') { lsSet('iw-key', ''); lsSet('iw-keyv', '2'); }
     var k = lsGet('iw-key'); if (k) return Promise.resolve(k);
     var pw = (window.prompt('Full check – one-time setup on this device.\nEnter your Iran watch password. You will not be asked again on this device.') || '').trim();
     if (!pw) return Promise.resolve('');
@@ -968,7 +969,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       if (isNum(pg.markets_planned)) bits.push('markets ' + (pg.markets_done || 0) + ' of ' + pg.markets_planned);
       if (bits.length) line += ' · ' + bits.join(' · ');
     }
-    if (!done && full.stage === 'sent' && el > 180) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot.';
+    if (!done && full.stage === 'sent' && el > 180) line = 'No word from the check yet (' + mm + ' min). It may be waiting for an approval in Copilot automations.';
     $('fstage').textContent = line;
     var f = $('fsteps'); clear(f);
     STAGES.slice(1).forEach(function (st, j) { var idx = j + 1, cls = done || idx < ci ? 'd' : idx === ci ? 'd a' : ''; add(f, 'span', st[1], cls); });
