@@ -1,19 +1,19 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-24T17:30:00Z",
- "summary": "Since the 18:20 Israel-time check: NBC News reported (about 18:37) that the Trump administration is debating strikes on senior Iranian leaders, with no decision yet; UKMTO confirmed a late report of a tanker hit on Sunday. Small rise: 24-hour chance 1.31%, well under the 7% alert line. No alert sent.",
+ "updated_utc": "2026-11-24T18:40:00Z",
+ "summary": "Since the 19:30 Israel-time check: Defence Minister Katz told reporters (about 19:00) that Iran is developing chemical weapons and Israel will act, preferably with US Central Command, once Washington is ready; the IDF did not endorse the claim and no Home Front change was announced. Small rise: 24-hour chance 1.34%, well under the 7% alert line. No alert sent.",
  "message_sent": "none",
  "major": {
-  "F": 1.31,
-  "prev_F": 1.29,
-  "E": 2.6,
+  "F": 1.34,
+  "prev_F": 1.31,
+  "E": 2.68,
   "M": 0.66,
-  "F7": 8.91,
+  "F7": 9.07,
   "threshold": 7
  },
  "limited": {
-  "L": 27.92,
-  "prev_L": 27.52
+  "L": 28.12,
+  "prev_L": 27.92
  },
  "alert": {
   "active": false,
@@ -24,18 +24,18 @@
  "flight": {
   "active": true,
   "label": "Your flight to London",
-  "R": 8.23,
-  "prev_R": 8.24,
+  "R": 8.22,
+  "prev_R": 8.23,
   "baseline": 17,
   "alert_at": 25,
-  "C1": 1.5,
+  "C1": 1.48,
   "C2": 3.3,
   "W": 5,
   "triggers": [],
-  "status_note": "Your flight's route has operated every day 12–24 Nov (today's departure left on time) and the next days are scheduled; no Wizz Air or other airline suspensions; Ben Gurion open."
+  "status_note": "Your flight's route has operated every day 12–24 Nov (today's departure left on time) and the next days are scheduled; no Wizz Air or other airline suspensions (flydubai cleared to return to Israel); Ben Gurion open."
  },
  "model": {
-  "E": 2.6,
+  "E": 2.68,
   "P_iran_nov30": 0.0405,
   "P_iran_dec31": 0.145,
   "P_il_nov30": 0.034,
@@ -47,7 +47,7 @@
   {
    "label": "Iran full airspace closure by 30 Nov",
    "now": 4.05,
-   "prev": 4.15,
+   "prev": 4.05,
    "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
   },
   {
@@ -77,7 +77,7 @@
   {
    "label": "Israel–Iran ceasefire holds through 31 Dec",
    "now": 69.5,
-   "prev": 70.5,
+   "prev": 69.5,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
@@ -94,53 +94,46 @@
   }
  ],
  "brent": {
-  "usd": 90.22,
-  "prev_usd": 89.5,
-  "change_pct_day": 0.95,
-  "read_utc": "2026-11-24T17:12:00Z"
+  "usd": 90.75,
+  "prev_usd": 90.22,
+  "change_pct_day": 1.54,
+  "read_utc": "2026-11-24T17:38:00Z"
  },
  "items": [
   {
-   "time_utc": "2026-11-24T17:30:00Z",
+   "time_utc": "2026-11-24T18:40:00Z",
    "source": "Polymarket",
-   "text": "Iran full airspace closure by 30 Nov: 4.15% → 4.05%; Israel–Iran ceasefire through 31 Dec: 70.5% → 69.5%; other markets flat.",
+   "text": "All tracked markets unchanged since the last check; Iran full airspace closure by 30 Nov holds at 4.05%.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-24T17:12:00Z",
+   "time_utc": "2026-11-24T17:38:00Z",
    "source": "FT markets",
-   "text": "Brent crude at $90.22, up about 0.95% on the day but still near a three-month low.",
+   "text": "Brent crude at $90.75, up about 1.5% on the day, still near a three-month low.",
    "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-24T16:45:00Z",
-   "source": "UKMTO via Al Jazeera",
-   "text": "Late report: UK maritime agency verifies a tanker was hit by an unknown projectile in Hormuz on Sunday 22 Nov (22:32 Israel time); crew safe.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "No change"
-  },
-  {
-   "time_utc": "2026-11-24T16:37:00Z",
-   "source": "NBC News via Jerusalem Post / Times of Israel",
-   "text": "Trump administration debating strikes on senior Iranian leaders; Trump has made no decision, and options also include renewed large-scale strikes.",
-   "link": "https://www.jpost.com/middle-east/iran-news/article-915997",
+   "time_utc": "2026-11-24T17:00:00Z",
+   "source": "Jerusalem Post / Times of Israel / ynet",
+   "text": "Defence Minister Katz says Iran is developing chemical weapons and Israel will not allow it; action more urgent, preferably with US Central Command when the Trump administration is ready. IDF did not endorse the claim; Knesset defence committee chair Liberman says there is no basis to attack before a new government forms.",
+   "link": "https://www.jpost.com/israel-news/defense-news/article-915994",
    "effect": "Small rise"
   },
   {
-   "time_utc": "2026-11-24T16:30:00Z",
-   "source": "Iran's Hormuz authority via Al Jazeera",
-   "text": "Iran adds 26 tugboats to its Hormuz 'non-compliance list' for serving ships that ignore its rules (pressure on shipping, no new attack).",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "time_utc": "2026-11-24T14:57:00Z",
+   "source": "Simple Flying via Wego travel blog",
+   "text": "flydubai cleared to resume flights to Israel, ending its suspension early (airline service to Israel expanding, not shrinking).",
+   "link": "https://blog.wego.com/middle-east-air-travel-disruptions-live-blog/",
    "effect": "No change"
   }
  ],
  "open_items": [
   "Whether Trump picks one of the options NBC reported (leadership strikes or renewed large-scale strikes) – any order would be a hard trigger.",
+  "Follow-up to Katz's chemical-weapons claim – IDF or US confirmation, or gas-mask distribution, would raise the figures.",
   "More Iranian attacks on ships in Hormuz – a US response would raise the limited-strike figure first.",
   "Iran's reply to Qatar's mediation – any new US–Iran talks would lower the figures.",
-  "Netanyahu's push for a strike vs IDF and US caution – watch for a direct Trump–Netanyahu call.",
   "Your flight status in the Wizz Air app as Friday approaches."
  ],
  "history": [
@@ -764,9 +757,32 @@
    "L": 27.92,
    "R": 8.23,
    "F7": 8.91
+  },
+  {
+   "utc": "2026-11-24T18:40:00Z",
+   "F": 1.34,
+   "E": 2.68,
+   "M": 0.66,
+   "L": 28.12,
+   "R": 8.22,
+   "F7": 9.07
   }
  ],
  "events": [
+  {
+   "time_utc": "2026-11-24T18:40:00Z",
+   "source": "Polymarket",
+   "text": "All tracked markets unchanged since the last check; Iran full airspace closure by 30 Nov holds at 4.05%.",
+   "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T17:38:00Z",
+   "source": "FT markets",
+   "text": "Brent crude at $90.75, up about 1.5% on the day, still near a three-month low.",
+   "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
+   "effect": "No change"
+  },
   {
    "time_utc": "2026-11-24T17:30:00Z",
    "source": "Polymarket",
@@ -780,6 +796,13 @@
    "text": "Brent crude at $90.22, up about 0.95% on the day but still near a three-month low.",
    "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
    "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T17:00:00Z",
+   "source": "Jerusalem Post / Times of Israel / ynet",
+   "text": "Defence Minister Katz says Iran is developing chemical weapons and Israel will not allow it; action more urgent, preferably with US Central Command when the Trump administration is ready. IDF did not endorse the claim; Knesset defence committee chair Liberman says there is no basis to attack before a new government forms.",
+   "link": "https://www.jpost.com/israel-news/defense-news/article-915994",
+   "effect": "Small rise"
   },
   {
    "time_utc": "2026-11-24T16:45:00Z",
@@ -814,6 +837,13 @@
    "source": "Saudi Civil Defence via Al Jazeera",
    "text": "Houthi attack on a tower in Riyadh's financial district injures 11 (Saudi–Houthi front, not a US/Israel–Iran move).",
    "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T14:57:00Z",
+   "source": "Simple Flying via Wego travel blog",
+   "text": "flydubai cleared to resume flights to Israel, ending its suspension early (airline service to Israel expanding, not shrinking).",
+   "link": "https://blog.wego.com/middle-east-air-travel-disruptions-live-blog/",
    "effect": "No change"
   },
   {
