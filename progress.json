@@ -1,1 +1,14 @@
-{"started_utc": "2026-11-24T19:29:00Z", "updated_utc": "2026-11-24T19:38:00Z", "stage": "sources", "sources_planned": 12, "sources_done": 9, "searches_planned": 6, "searches_done": 4, "markets_planned": 4, "markets_done": 4, "steps_total": 16, "steps_done": 9, "current": "Flight and airline checks"}
+{
+ "started_utc": "2026-11-24T19:19:15Z",
+ "updated_utc": "2026-11-24T19:33:00Z",
+ "stage": "started",
+ "sources_planned": 16,
+ "sources_done": 0,
+ "searches_planned": 8,
+ "searches_done": 0,
+ "markets_planned": 4,
+ "markets_done": 0,
+ "steps_total": 20,
+ "steps_done": 0,
+ "current": "planning the source list"
+}
