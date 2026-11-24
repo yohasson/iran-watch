@@ -1,17 +1,17 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-23T18:42:00Z",
- "summary": "No new risk signals since the 19:26 check. The betting market on a full Iranian airspace closure by 30 Nov slipped from 5% to 4%, so the main estimate eased to 1.14%. No alert sent.",
+ "updated_utc": "2026-11-24T06:05:00Z",
+ "summary": "Quiet night. Iran's unconfirmed claim that three tankers hit mines in Hormuz nudged the news-based part up slightly; the airspace-closure market for 30 Nov eased to 4%. Main estimate 1.19%, well under the 7% alert line. No alert sent.",
  "message_sent": "none",
  "major": {
-  "F": 1.14,
-  "prev_F": 1.28,
-  "E": 2.3,
-  "M": 0.56,
+  "F": 1.19,
+  "prev_F": 1.14,
+  "E": 2.34,
+  "M": 0.6,
   "threshold": 7
  },
  "limited": {
-  "L": 25.05,
+  "L": 25.42,
   "prev_L": 25.05
  },
  "alert": {
@@ -22,23 +22,23 @@
  },
  "flight": {
   "active": true,
-  "label": "Wizz Air Tel Aviv → London, Fri 27 Nov (afternoon)",
-  "R": 10.71,
-  "prev_R": 10.89,
+  "label": "Wizz Air W95302 Tel Aviv → London, Fri 27 Nov 15:20",
+  "R": 8.51,
+  "prev_R": 10.71,
   "baseline": 17,
   "alert_at": 25,
-  "C1": 1.92,
-  "C2": 3.81,
-  "W": 7,
+  "C1": 1.8,
+  "C2": 3.49,
+  "W": 5,
   "triggers": [],
-  "status_note": "Wizz Air Tel Aviv flights running normally; no foreign-airline suspensions; no new EASA warning for Israel; Ben Gurion open."
+  "status_note": "W95302 has flown every day 12–23 Nov; 24 and 25 Nov scheduled. No Wizz Air or other airline suspensions; Ben Gurion open."
  },
  "model": {
-  "E": 2.3,
+  "E": 2.34,
   "P_iran_nov30": 0.04,
-  "P_iran_dec31": 0.13,
+  "P_iran_dec31": 0.145,
   "P_il_nov30": 0.0375,
-  "W": 7,
+  "W": 5,
   "F_floor": null,
   "R_floor": null
  },
@@ -46,13 +46,13 @@
   {
    "label": "Iran full airspace closure by 30 Nov",
    "now": 4,
-   "prev": 5,
+   "prev": 4,
    "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
   },
   {
    "label": "Iran full airspace closure by 31 Dec",
-   "now": 13,
-   "prev": 15,
+   "now": 14.5,
+   "prev": 13,
    "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
   },
   {
@@ -69,77 +69,85 @@
   },
   {
    "label": "Israel–Iran ceasefire holds through 30 Nov",
-   "now": 94,
+   "now": 91.5,
    "prev": 94,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
    "label": "Israel–Iran ceasefire holds through 31 Dec",
-   "now": 75,
+   "now": 72.5,
    "prev": 75,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
    "label": "US–Iran 2-week pause begins by 30 Nov",
-   "now": 57.5,
+   "now": 63,
    "prev": 57.5,
    "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
   },
   {
    "label": "US–Iran 2-week pause begins by 31 Dec",
-   "now": 76,
+   "now": 75.5,
    "prev": 76,
    "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
   }
  ],
  "brent": {
-  "usd": 90.04,
-  "prev_usd": 89.57,
-  "change_pct_day": -2.73,
-  "read_utc": "2026-11-23T18:23:00Z"
+  "usd": 88.97,
+  "prev_usd": 90.04,
+  "change_pct_day": -0.45,
+  "read_utc": "2026-11-24T01:47:00Z"
  },
  "items": [
   {
-   "time_utc": "2026-11-23T18:38:00Z",
+   "time_utc": "2026-11-24T05:15:00Z",
+   "source": "Qatar Foreign Ministry via Al Jazeera",
+   "text": "Qatar and US co-chaired strategic dialogue; discussed joint efforts to de-escalate regional tensions.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change – talks already counted"
+  },
+  {
+   "time_utc": "2026-11-24T04:20:00Z",
+   "source": "IRGC via Al Jazeera (Iranian claim, unconfirmed)",
+   "text": "IRGC says three 'violating' oil tankers caught fire after hitting mines in the Strait of Hormuz.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "Small rise"
+  },
+  {
+   "time_utc": "2026-11-24T01:47:00Z",
+   "source": "Reuters via Al Jazeera",
+   "text": "Brent crude near a three-month low at $88.97.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change – context"
+  },
+  {
+   "time_utc": "2026-11-24T01:30:00Z",
+   "source": "Wall Street Journal via Al Jazeera",
+   "text": "US investigating Iran as a prime suspect in cyberattacks on up to 50 energy tankers; an official says no evidence yet.",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-23T20:48:00Z",
+   "source": "US State Department / Times of Israel",
+   "text": "Rubio met Qatar's prime minister; readout praised Qatar's mediation, no breakthrough announced.",
+   "link": "https://www.timesofisrael.com/liveblog_entry/rubio-qatari-pm-meet-in-washington-with-iran-on-the-agenda/",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T06:00:00Z",
    "source": "Polymarket",
-   "text": "Iran full airspace closure by 30 Nov: 5% → 4%; by 31 Dec: 15% → 13%.",
+   "text": "Iran full airspace closure by 30 Nov: 4.65% → 4%.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
-   "effect": "Market part 0.70% → 0.56%"
-  },
-  {
-   "time_utc": "2026-11-23T17:49:00Z",
-   "source": "Reuters via Times of Israel",
-   "text": "US Treasury issues new Iran-related sanctions on at least 8 people and 22 companies (UAE, Türkiye, Hong Kong).",
-   "link": "https://www.timesofisrael.com/liveblog_entry/us-issues-new-iran-related-sanctions-treasury-website-shows/",
-   "effect": "No change – economic pressure already counted"
-  },
-  {
-   "time_utc": "2026-11-23T18:00:00Z",
-   "source": "Al Jazeera live",
-   "text": "Iran's Foreign Ministry: Hormuz security can return quickly if the US meets Iran's conditions; Iran 'will not back down'.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/22/iran-war-live-tankers-set-ablaze-in-hormuz-as-irgc-warns-of-unrest-threat",
-   "effect": "No change – statement"
-  },
-  {
-   "time_utc": "2026-11-23T16:45:00Z",
-   "source": "Fars via Al Jazeera (Iranian claim, unconfirmed)",
-   "text": "Iranian army claims it shot down a US 'LUCAS' drone east of the Strait of Hormuz.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/22/iran-war-live-tankers-set-ablaze-in-hormuz-as-irgc-warns-of-unrest-threat",
-   "effect": "Counted at the 19:26 check (small rise)"
-  },
-  {
-   "time_utc": "2026-11-23T12:45:00Z",
-   "source": "flight-status.com",
-   "text": "Wizz Air departures from Tel Aviv running normally today (Sofia, Budapest, Kraków, Warsaw).",
-   "link": "https://flight-status.com/wizz-air/tlv-departures/",
-   "effect": "Flight risk unchanged"
+   "effect": "Small fall"
   }
  ],
  "open_items": [
-  "Outcome of Rubio's meeting with Qatar's prime minister in Washington (21:00 Israel time, 23 Nov).",
-  "Iranian claim that a US drone was shot down – not confirmed by the US.",
-  "Iranian TV claim that 'US-linked ships' were seized – not confirmed.",
-  "A quiet-day reduction for 24 Nov can apply after about 18:45 Israel time if there is no new Iranian fire."
+  "Iranian claim of three tankers hitting mines – no maritime authority confirmation yet.",
+  "Iranian claim that a US LUCAS drone was shot down – not confirmed by the US.",
+  "Follow-up from Qatar's mediation after the Rubio meeting.",
+  "A quiet-day reduction for 24 Nov can apply after about 18:45 Israel time if there is no new Iranian fire.",
+  "W95302 status in the Wizz Air app as Friday approaches."
  ],
  "history": [
   {
@@ -597,6 +605,38 @@
    "M": 0.56,
    "L": 25.05,
    "R": 10.71
+  },
+  {
+   "utc": "2026-11-23T22:15:00Z",
+   "F": 1.24,
+   "E": 2.3,
+   "M": 0.66,
+   "L": 25.05,
+   "R": 8.75
+  },
+  {
+   "utc": "2026-11-23T23:20:00Z",
+   "F": 1.26,
+   "E": 2.3,
+   "M": 0.68,
+   "L": 25.05,
+   "R": 8.74
+  },
+  {
+   "utc": "2026-11-24T01:40:00Z",
+   "F": 1.27,
+   "E": 2.34,
+   "M": 0.68,
+   "L": 25.42,
+   "R": 8.7
+  },
+  {
+   "utc": "2026-11-24T06:05:00Z",
+   "F": 1.19,
+   "E": 2.34,
+   "M": 0.6,
+   "L": 25.42,
+   "R": 8.51
   }
  ]
 }
