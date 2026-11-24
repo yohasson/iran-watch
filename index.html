@@ -43,7 +43,7 @@ h1{font-size:1.55rem;margin:0;letter-spacing:-.3px}
 .btnrow{display:flex;gap:8px;align-items:center}
 .btn{background:#fff;color:#1b2b4b;border:0;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:700;cursor:pointer;display:inline-flex;gap:8px;align-items:center;box-shadow:0 2px 6px rgba(0,0,0,.15)}
 .btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.75;cursor:progress;transform:none}
-.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:not-allowed}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
+.btn.full,.btn.full:disabled{background:#c9ced8;color:#5b6475;box-shadow:none;opacity:1;cursor:pointer}.btn.full:hover{background:#f1c7c7;color:#8a1c1c}.btn.full .spin{display:inline-block;animation:sp .8s linear infinite;border-color:rgba(91,100,117,.3);border-top-color:#5b6475}
 .fprog{display:none;margin-top:8px;min-width:260px;max-width:360px;background:rgba(255,255,255,.14);border-radius:10px;padding:8px 10px}.fprog.on{display:block}.fprog .fb{height:8px;background:rgba(255,255,255,.25);border-radius:6px;overflow:hidden}.fprog .fb i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd36a,#ff6a3d);border-radius:6px;transition:width .8s ease}.fprog .fl{display:flex;justify-content:space-between;align-items:flex-start;font-size:.78rem;font-weight:600;margin-top:5px;gap:8px}.fprog .fs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}.fprog .fs span{font-size:.7rem;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);opacity:.6}.fprog .fs span.e{opacity:1;background:rgba(255,211,106,.35)}.fprog .fs span.d{opacity:1;background:rgba(34,197,94,.65);color:#fff}.fprog .fs span.a{animation:pz 1.4s ease-in-out infinite}@keyframes pz{50%{filter:brightness(1.35)}}
 .btn .spin{width:14px;height:14px;border:2px solid rgba(27,43,75,.3);border-top-color:#1b2b4b;border-radius:50%;display:none}
 .btn.busy .spin{display:inline-block;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
@@ -216,9 +216,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
       </div>
       <div class="step" id="step" role="status" aria-live="polite"></div>
-      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
+      <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:44 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:47 Israel time</div>
     </div>
   </div>
 </header>
@@ -796,7 +796,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     Array.prototype.forEach.call($('sAuto').querySelectorAll('button'), function (b) { b.className = b.getAttribute('data-v') === S.auto ? 'on' : ''; }); }
 
   /* refresh */
-  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on || !!full; btn.className = 'btn' + (on ? ' busy' : ''); if (!full) $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on || full ? ' on' : ''); document.body.classList.toggle('updating', on); }
+  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on && !full; btn.className = 'btn' + (on ? ' busy' : ''); if (!full) $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on || full ? ' on' : ''); document.body.classList.toggle('updating', on); }
   function step(t, cls) { var e = $('step'); e.textContent = t; e.className = 'step' + (cls ? ' ' + cls : ''); }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function refreshData() {
@@ -920,7 +920,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     else if (left > 0) eta += ' · under a minute left';
     else eta += ' · running longer than usual';
     $('feta').textContent = eta;
-    btn.disabled = true; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : 'Checking… ' + mm + ' min';
+    btn.disabled = done; btn.classList.add('full'); $('refreshLbl').textContent = done ? T('upd') : '✕ Cancel check (' + mm + ' min)';
+    if (!done && full.stage === 'sent' && el > 300) fullEnd('⚠ The check did not start within 5 minutes, so the page stopped waiting. You can press Update now to try again.', 'fail');
   }
   function fullEnd(msg, cls) {
     if (fullPoll) { clearInterval(fullPoll); fullPoll = null; }
@@ -933,6 +934,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     fetchJson(PROG_URL + '?t=' + Date.now()).then(function (pg) {
       if (full && pg && Date.parse(pg.started_utc) > full.t0 - 90000) {
         full.seen = Date.now(); full.pg = pg;
+        if (pg.stage === 'cancelled') { fullEnd('Check cancelled.', ''); return; }
         if (pg.stage === 'skipped') { full.skipped = true; }
         else if (stageIdx(pg.stage) > stageIdx(full.stage)) full.stage = pg.stage;
       }
@@ -966,8 +968,17 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     location.href = 'mailto:' + encodeURIComponent(m) + '?subject=' + encodeURIComponent(FULL_SUBJ + ' ' + new Date().toISOString().slice(0, 16)) + '&body=' + encodeURIComponent('Run a full Iran watch check now.');
     step('Press Send on the email to start the full check. This page will update by itself.'); waitFull(before, t0);
   }
+  function cancelFull() {
+    if (!full) return;
+    if (!window.confirm('Cancel the running check? It will stop at its next step and publish nothing.')) return;
+    var key = lsGet('iw-key'), started = new Date(full.t0).toISOString();
+    if (key) fetch(HOOK, { method: 'POST', mode: 'cors', headers: { 'Content-Type': 'application/json', 'X-Trigger-Secret': key }, body: JSON.stringify({ action: 'cancel', run_started: started, at: new Date().toISOString() }) }).catch(function () {});
+    lsSet('iw-cancel', String(Date.now()));
+    fullEnd('Check cancelled. You can start a new one now.', '');
+  }
   function requestFull() {
-    if (busy || full) return;
+    if (full) { cancelFull(); return; }
+    if (busy) return;
     var before = data ? data.updated_utc : '', t0 = Date.now(), key = '';
     fullKey().then(function (k) { key = k; return refreshAll(true); }).then(function () {
       if (!key) return;
