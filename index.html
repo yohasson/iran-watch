@@ -60,7 +60,7 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .panel h3 .sp{flex:1}
 .meta{color:var(--muted);font-size:.85rem}
 /* hero */
-.hero{padding:22px 24px;margin-bottom:14px;display:grid;grid-template-columns:minmax(270px,1fr) minmax(300px,1.3fr);gap:18px 30px;align-items:center;position:relative;overflow:hidden}
+.hero{padding:22px 24px;margin-bottom:14px;display:grid;grid-template-columns:minmax(300px,1.25fr) minmax(300px,1fr);gap:18px 30px;align-items:center;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--hc,var(--green))}
 .hero .lbl{font-size:.95rem;color:var(--muted);font-weight:600}
 .hero .num{font-size:5.4rem;font-weight:800;letter-spacing:-2px;line-height:1;margin:8px 0 6px;font-variant-numeric:tabular-nums;color:var(--hc,var(--green))}
@@ -153,9 +153,12 @@ ul.open li:before{content:"👁 ";}
 .set label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 4px}
 .set input[type=number]{width:110px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font-size:.95rem}
 .set .hint{font-size:.8rem;color:var(--muted)}
-.h7{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.h7 b{font-size:2.1rem;font-weight:800;font-variant-numeric:tabular-nums}
-.h7 .meta{flex:1;min-width:160px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}
+.duo>div{min-width:0}
+.duo .sep{border-left:1px dashed var(--line);padding-left:22px}
+.duo .num{font-size:4.6rem}
+.h7meta{font-size:.85rem;margin-top:6px}
+@media (max-width:640px){.duo{grid-template-columns:1fr}.duo .sep{border-left:0;padding-left:0;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}.duo .num{font-size:3.8rem}}
 .lights{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
 .light{display:flex;gap:10px;align-items:flex-start;background:var(--soft);border-radius:10px;padding:9px 11px}
 .light .l{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:3px}
@@ -207,14 +210,24 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 </header>
 
 <div class="hero fade" id="hero">
-  <div>
+  <div class="duo">
+   <div>
     <div class="lbl" data-i18n="heroLbl">Chance a major US/Israeli strike campaign on Iran starts in the next 24 hours</div>
     <div class="num" id="hNum">–</div>
     <span class="status" id="hStatus"></span>
     <div class="dist" id="hDist"></div>
     <div class="hbar"><div class="f" id="hFill"></div><div class="m" id="hMark"></div><div class="pin" id="hPin"></div></div>
     <div class="hbl"><span>0%</span><span id="hThrLbl">alert</span><span id="hMaxLbl"></span></div>
-    <div class="h7"><b id="h7Num">–</b><div class="meta"><span data-i18n="h7Lbl">Within the next 7 days (rough)</span><br><span id="h7Delta"></span></div><svg id="s7" viewBox="0 0 200 46" preserveAspectRatio="none" style="width:150px;height:40px"></svg></div>
+   </div>
+   <div class="sep">
+    <div class="lbl" data-i18n="h7Lbl2">Chance it starts within the next 7 days (rough)</div>
+    <div class="num" id="h7Num">–</div>
+    <span class="status" id="h7Status"></span>
+    <div class="dist" id="h7Dist"></div>
+    <div class="hbar"><div class="f" id="h7Fill"></div><div class="m" id="h7Mark" style="background:var(--violet)"></div><div class="pin" id="h7Pin"></div></div>
+    <div class="hbl"><span>0%</span><span id="h7RefLbl"></span><span id="h7MaxLbl"></span></div>
+    <div class="h7meta"><span id="h7Delta"></span> <svg id="s7" viewBox="0 0 200 46" preserveAspectRatio="none" style="width:130px;height:30px;vertical-align:middle"></svg></div>
+   </div>
   </div>
   <div>
     <div class="ctl" style="justify-content:space-between"><div class="trend" id="hTrend"></div>
@@ -608,7 +621,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   /* ---------- i18n ---------- */
   var I18N = { he: {
     title: '🛰️ מעקב סיכון תקיפה באיראן', tz: 'כל השעות לפי שעון ישראל', heroLbl: 'הסיכוי שתתחיל מערכה גדולה של ארה״ב/ישראל נגד איראן ב-24 השעות הקרובות',
-    h7Lbl: 'בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
+    h7Lbl2: 'הסיכוי שתתחיל בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
     chkNote: 'ירוק = לא נראה · כתום = חלקי או מדווח · אדום = נראה ואושר. בתקיפות קודמות הם הופיעו 1–4 ימים לפני.',
     cF: 'מערכה גדולה – 24 שעות', cL: 'כל תקיפה של ארה״ב/ישראל בשטח איראן – 24 שעות', cM: 'רכיב השוק (ממחיר סגירת המרחב האווירי באיראן)',
     flT: 'הטיסה שלך – מה לעשות', cmpT: 'היום מול ערבי תקיפות קודמות', cmpNote: 'הערכות 24 שעות באותה שיטה. אדום = תקיפה התחילה למחרת; אפור = אזעקת שווא. השיטה לא הבחינה ביניהן היטב – הקשר בלבד.',
@@ -630,10 +643,19 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function evList() {
     return (data.events || data.items || []).map(function (e) { var ec = effClass(e.effect); return { t: Date.parse(e.time_utc), c: ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--muted'), text: priv(e.text || '') }; }).filter(function (e) { return isNum(e.t); });
   }
+  var REF7 = 15;
   function renderH7(c) {
-    var v = c.F7, n = $('h7Num'); n.textContent = pct(v, 1); n.style.color = bandCol(v, (+S.thr || 7) * 3);
+    var v = c.F7, he = S.lang === 'he', n = $('h7Num'); if (!isNum(v)) { n.textContent = '–'; return; }
+    var col = v >= REF7 ? css('--red') : (v >= REF7 * 0.6 ? css('--amber') : css('--green')); n.textContent = pct(v, 1); n.style.color = col;
+    var st = $('h7Status'); st.textContent = v >= REF7 ? (he ? 'ברמת ערב תקיפה' : 'At pre-attack level') : (v >= REF7 * 0.6 ? (he ? 'מוגבר' : 'Elevated') : (he ? 'נמוך' : 'Low')); st.className = 'status ' + (v >= REF7 ? 'bad' : v >= REF7 * 0.6 ? 'warn' : 'ok');
+    var max = Math.max(25, Math.ceil(v * 1.25)), gap = REF7 - v;
+    $('h7Dist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת ל-15% (7 ימים לפני התקיפה בפברואר 2026)' : gap.toFixed(1) + ' points below 15% – the level 7 days before the Feb 2026 attack') : (he ? 'מעל הרמה של 7 ימים לפני פברואר 2026' : 'Above the level seen 7 days before the Feb 2026 attack');
+    $('h7Dist').style.color = col;
+    var f = $('h7Fill'); f.style.width = Math.min(100, v / max * 100) + '%'; f.style.background = col;
+    $('h7Pin').style.left = Math.min(100, v / max * 100) + '%'; $('h7Pin').style.background = col;
+    $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = he ? '15% פבר׳ 26' : '15% Feb-26 ref'; $('h7MaxLbl').textContent = max + '%';
     var pts = histPts('F7', rangeDays(view.hero), true), d = pts.length > 1 ? v - pts[0].v : null;
-    $('h7Delta').textContent = d == null ? '' : (Math.abs(d) < 0.05 ? '→ ' : d > 0 ? '▲ ' : '▼ ') + Math.abs(d).toFixed(1) + ' pts ' + T('since') + ' ' + fmtFull(pts[0].t);
+    $('h7Delta').textContent = d == null ? '' : (Math.abs(d) < 0.05 ? '→ flat' : (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(1) + ' pts') + ' ' + T('since') + ' ' + fmtFull(pts[0].t);
     $('h7Delta').className = d == null || Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down';
     spark($('s7'), pts, css('--violet'));
   }
