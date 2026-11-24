@@ -1,11 +1,11 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-24T19:45:00Z",
- "summary": "On-demand check: since the 20:40 Israel-time check, Iran's Revolutionary Guards claimed they targeted a container ship in Hormuz (about 20:15, unconfirmed) and Iran's security chief repeated threats of a 'full force' response (about 21:15); no strike order, embassy, Home Front or airspace change. 24-hour chance 1.35% (was 1.34%), well under the 7% alert line. No alert sent.",
+ "updated_utc": "2026-11-24T19:50:00Z",
+ "summary": "Hourly check: since the 21:45 Israel-time check, no strike order, embassy, Home Front, airspace or airline change; US Secretary of State Rubio and the Saudi foreign minister discussed Houthi attacks and Hormuz navigation (about 21:40); prediction markets unchanged; Brent $91.22. 24-hour chance 1.35% (was 1.35%), well under the 7% alert line. No alert sent.",
  "message_sent": "none",
  "major": {
   "F": 1.35,
-  "prev_F": 1.34,
+  "prev_F": 1.35,
   "E": 2.71,
   "M": 0.67,
   "F7": 9.16,
@@ -13,7 +13,7 @@
  },
  "limited": {
   "L": 28.52,
-  "prev_L": 28.12
+  "prev_L": 28.52
  },
  "alert": {
   "active": false,
@@ -25,7 +25,7 @@
   "active": true,
   "label": "Your flight to London",
   "R": 8.2,
-  "prev_R": 8.22,
+  "prev_R": 8.2,
   "baseline": 17,
   "alert_at": 25,
   "C1": 1.47,
@@ -77,7 +77,7 @@
   {
    "label": "Israel–Iran ceasefire holds through 31 Dec",
    "now": 70.5,
-   "prev": 69.5,
+   "prev": 70.5,
    "url": "https://polymarket.com/event/israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963"
   },
   {
@@ -94,38 +94,38 @@
   }
  ],
  "brent": {
-  "usd": 90.75,
+  "usd": 91.22,
   "prev_usd": 90.75,
-  "change_pct_day": 1.54,
-  "read_utc": "2026-11-24T17:38:00Z"
+  "change_pct_day": 2.07,
+  "read_utc": "2026-11-24T19:38:00Z"
  },
  "items": [
   {
-   "time_utc": "2026-11-24T19:45:00Z",
+   "time_utc": "2026-11-24T19:50:00Z",
    "source": "Polymarket",
-   "text": "Iran full airspace closure by 30 Nov unchanged at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%; other markets flat.",
+   "text": "All tracked markets unchanged since the last check; Iran full airspace closure by 30 Nov holds at 4.05%.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-24T19:15:00Z",
-   "source": "Al Jazeera (Iran security chief on X)",
-   "text": "Iran's Supreme National Security Council secretary says Tehran will break the US blockade and respond with 'full force' to any new aggression (rhetoric).",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
+   "time_utc": "2026-11-24T19:40:00Z",
+   "source": "CBS News (State Department readout)",
+   "text": "Rubio and Saudi Foreign Minister Prince Faisal discussed Houthi attacks on Saudi Arabia and freedom of navigation in Hormuz and Bab al-Mandeb (diplomatic, no Iran strike signal).",
+   "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-24T18:15:00Z",
-   "source": "IRGC Navy via Al Jazeera (claim)",
-   "text": "Revolutionary Guards say they targeted a 'non-compliant' container ship in a restricted area of Hormuz; not independently confirmed.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
-   "effect": "Small rise"
+   "time_utc": "2026-11-24T19:38:00Z",
+   "source": "FT markets",
+   "text": "Brent crude at $91.22, up about 2.1% on the day, still near a three-month low.",
+   "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
+   "effect": "No change"
   },
   {
-   "time_utc": "2026-11-24T18:00:00Z",
-   "source": "CBS News (US Central Command)",
-   "text": "US officials say tanker traffic through Hormuz keeps rising under US protection despite more attacks; Brent near $90, lowest since late August.",
-   "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/",
+   "time_utc": "2026-11-24T19:30:00Z",
+   "source": "Houthi spokesman via Al Jazeera",
+   "text": "Houthis accuse Saudi Arabia of 72 air strikes in Yemen in 24 hours (Saudi–Houthi front, not a US/Israel–Iran move).",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "No change"
   }
  ],
@@ -775,14 +775,51 @@
    "L": 28.52,
    "R": 8.2,
    "F7": 9.16
+  },
+  {
+   "utc": "2026-11-24T19:50:00Z",
+   "F": 1.35,
+   "E": 2.71,
+   "M": 0.67,
+   "L": 28.52,
+   "R": 8.2,
+   "F7": 9.16
   }
  ],
  "events": [
+  {
+   "time_utc": "2026-11-24T19:50:00Z",
+   "source": "Polymarket",
+   "text": "All tracked markets unchanged since the last check; Iran full airspace closure by 30 Nov holds at 4.05%.",
+   "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+   "effect": "No change"
+  },
   {
    "time_utc": "2026-11-24T19:45:00Z",
    "source": "Polymarket",
    "text": "Iran full airspace closure by 30 Nov unchanged at 4.05%; Israel–Iran ceasefire through 31 Dec 69.5% → 70.5%; other markets flat.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T19:40:00Z",
+   "source": "CBS News (State Department readout)",
+   "text": "Rubio and Saudi Foreign Minister Prince Faisal discussed Houthi attacks on Saudi Arabia and freedom of navigation in Hormuz and Bab al-Mandeb (diplomatic, no Iran strike signal).",
+   "link": "https://www.cbsnews.com/live-updates/iran-war-us-trump-blockade-strait-of-hormuz-ship-attacks/",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T19:38:00Z",
+   "source": "FT markets",
+   "text": "Brent crude at $91.22, up about 2.1% on the day, still near a three-month low.",
+   "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-24T19:30:00Z",
+   "source": "Houthi spokesman via Al Jazeera",
+   "text": "Houthis accuse Saudi Arabia of 72 air strikes in Yemen in 24 hours (Saudi–Houthi front, not a US/Israel–Iran move).",
+   "link": "https://www.aljazeera.com/news/liveblog/2026/11/24/iran-war-live-iran-says-three-ships-catch-fire-after-hitting-hormuz-mines",
    "effect": "No change"
   },
   {
