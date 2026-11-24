@@ -116,6 +116,7 @@ svg.chart{width:100%;max-width:100%;display:block;touch-action:pan-y;overflow:vi
 .part{background:var(--soft);border-radius:10px;padding:10px 12px;border-left:4px solid var(--c)}
 .part b{display:block;font-size:1.35rem;color:var(--c)}
 .part span{font-size:.78rem;color:var(--muted)}
+.pr-row{cursor:pointer}.pr-row td:first-child small{display:block;opacity:.65;font-size:.72rem}.pr-ex td{background:var(--soft);font-size:.8rem;line-height:1.4}.pr-ex ul{margin:4px 0 0 16px;padding:0}.pr-ex .mods{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}.pr-ex .mods span{background:var(--card,#fff);border:1px solid var(--line);border-radius:8px;padding:1px 6px;font-size:.72rem}.gapb{font-weight:700;border-radius:8px;padding:1px 6px;font-size:.75rem}.ours{font-weight:700}.prnew{font-size:.65rem;background:var(--blue);color:#fff;border-radius:6px;padding:0 5px;margin-inline-start:4px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{border:1px solid var(--line);background:transparent;color:inherit;border-radius:14px;padding:4px 10px;font-size:.8rem;cursor:pointer}.chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}.chips button.dn.on{background:var(--green);border-color:var(--green)}
 .wi{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 20px}
 .wi label{font-size:.85rem;font-weight:600;display:flex;justify-content:space-between}
@@ -219,7 +220,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 21:55 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 22:10 Israel time</div>
     </div>
   </div>
 </header>
@@ -289,8 +290,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     <div class="meta">Main estimate = average of the news-based (E) and market-based (M) parts on a log-odds scale. E moves only when the hourly check finds new signals; M follows Polymarket.</div>
   </div>
   <div class="panel">
-    <h3>💹 Markets<span class="sp"></span><span class="meta">Click a column to sort</span></h3>
-    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Now</th><th class="n" data-s="chg">Change</th></tr></thead><tbody id="markets"></tbody></table>
+    <h3>💹 Markets vs. our predictions<span class="sp"></span><span class="meta">Tap a row for the reasoning · tap a column to sort</span></h3>
+    <table><thead><tr><th data-s="label">Polymarket question</th><th class="n" data-s="now">Market</th><th class="n" data-s="ours">Our view</th><th class="n" data-s="gap">Gap</th></tr></thead><tbody id="markets"></tbody></table>
     <div class="meta" id="brent" style="margin-top:10px"></div>
   </div>
 </div>
@@ -668,14 +669,35 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       if (it.effect) add(li, 'span', it.effect, 'eff e-' + ec); });
   }
   function renderMarkets(c) {
-    var rows = (data.markets || []).map(function (m, i) { var now = m.now; if (i === 0 && c.useLive && live.label === '30 Nov') now = live.Piran * 100; return { label: m.label, now: now, prev: m.prev, chg: isNum(now) && isNum(m.prev) ? now - m.prev : 0, url: m.url }; });
+    var P = (data.predictions || []).filter(function (p) { return !p.hidden; });
+    var tb = $('markets'); clear(tb); view.prOpen = view.prOpen || {};
+    if (!P.length) { add(add(tb, 'tr'), 'td', 'Predictions will appear after the next check.', 'meta').colSpan = 4; }
+    var rows = P.map(function (p) { var mk = p.market_pct, live1 = false;
+      if (p.kind === 'iran_air' && /Nov 30/.test(p.label) && c.useLive && live.label === '30 Nov') { mk = live.Piran * 100; live1 = true; }
+      var passed = p.date_utc && Date.parse(p.date_utc) < Date.now();
+      return { p: p, label: p.label, now: mk, ours: p.watch_pct, gap: isNum(p.watch_pct) && isNum(mk) ? p.watch_pct - mk : 0, passed: passed, live: live1 }; });
     if (view.sortK) rows.sort(function (a, b) { var x = a[view.sortK], y = b[view.sortK]; return (typeof x === 'string' ? x.localeCompare(y) : x - y) * view.sortD; });
-    var tb = $('markets'); clear(tb);
-    rows.forEach(function (r) { var tr = add(tb, 'tr'), td = add(tr, 'td'), u = safeUrl(r.url); if (u) { var a = add(td, 'a', r.label); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else td.textContent = r.label;
+    rows.forEach(function (r) {
+      var p = r.p, tr = add(tb, 'tr', null, 'pr-row'), td = add(tr, 'td'), u = safeUrl(p.slug ? 'https://polymarket.com/event/' + p.slug : '');
+      add(td, 'span', priv(r.label)); if (p.is_new) add(td, 'span', 'new', 'prnew');
+      add(td, 'small', (r.passed ? 'Date passed – awaiting result' : 'Range ' + pct(p.range_pct[0], 1) + '–' + pct(p.range_pct[1], 1)) + (isNum(p.prev_watch_pct) && Math.abs(p.watch_pct - p.prev_watch_pct) >= 0.05 ? ' · ours was ' + pct(p.prev_watch_pct, 1) : ''));
       var bar = add(td, 'div', null, 'mbar'), bi = add(bar, 'i'); bi.style.width = Math.min(100, r.now) + '%';
-      add(tr, 'td', pct(r.now, 1), 'n'); var cc = add(tr, 'td', null, 'n'), bd = add(cc, 'span', Math.abs(r.chg) < 0.05 ? '–' : (r.chg > 0 ? '▲ ' : '▼ ') + Math.abs(r.chg).toFixed(1), 'badge');
-      bd.style.background = Math.abs(r.chg) < 0.05 ? 'var(--soft)' : 'var(--blue-bg)'; bd.style.color = Math.abs(r.chg) < 0.05 ? 'var(--muted)' : 'var(--blue)'; });
-    var br = data.brent; $('brent').textContent = br ? '🛢️ Brent crude $' + br.usd + (isNum(br.change_pct_day) ? ' (' + (br.change_pct_day > 0 ? '+' : '') + br.change_pct_day + '% on the day)' : '') + (br.read_utc ? ', read ' + fmtFull(br.read_utc) : '') : '';
+      add(tr, 'td', pct(r.now, 1) + (r.live ? '*' : ''), 'n');
+      add(tr, 'td', pct(r.ours, 1), 'n ours');
+      var gc = add(tr, 'td', null, 'n'), g = Math.abs(r.gap) < 0.5 ? '≈' : (r.gap > 0 ? '+' : '−') + Math.abs(r.gap).toFixed(1), gb = add(gc, 'span', g, 'gapb');
+      var big = Math.abs(r.gap) >= Math.max(2, 0.25 * Math.max(r.now, r.ours, 1));
+      gb.style.background = Math.abs(r.gap) < 0.5 ? 'var(--soft)' : big ? 'rgba(234,88,12,.15)' : 'var(--blue-bg)'; gb.style.color = Math.abs(r.gap) < 0.5 ? 'var(--muted)' : big ? '#c2410c' : 'var(--blue)';
+      tr.onclick = function () { view.prOpen[p.key] = !view.prOpen[p.key]; renderMarkets(cur()); };
+      if (view.prOpen[p.key]) {
+        var ex = add(add(tb, 'tr', null, 'pr-ex'), 'td'); ex.colSpan = 4;
+        add(ex, 'div', priv(p.why || ''));
+        var md = add(ex, 'div', null, 'mods'); (p.models || []).forEach(function (m) { add(md, 'span', m.name + ': ' + pct(m.pct, 1)); });
+        if ((p.key_inputs || []).length) { var ul = add(ex, 'ul'); p.key_inputs.slice(0, 5).forEach(function (k) { add(ul, 'li', priv(k)); }); }
+        var ft = add(ex, 'div', (p.models || []).length + ' models · ' + (p.sources_count || '–') + ' sources' + (p.updated_utc ? ' · updated ' + fmtFull(p.updated_utc) : '') + ' · ', 'meta');
+        if (u) { var a = add(ft, 'a', 'open on Polymarket'); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.onclick = function (e) { e.stopPropagation(); }; }
+      }
+    });
+    var br = data.brent; $('brent').textContent = (rows.some(function (r) { return r.live; }) ? '* live price. ' : '') + (br ? '🛢️ Brent crude $' + br.usd + (isNum(br.change_pct_day) ? ' (' + (br.change_pct_day > 0 ? '+' : '') + br.change_pct_day + '% on the day)' : '') + (br.read_utc ? ', read ' + fmtFull(br.read_utc) : '') : '');
   }
   function renderGlance() {
     var u = $('glNews'); if (!u) return; clear(u);

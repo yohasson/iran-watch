@@ -1200,5 +1200,889 @@
    "status": "amber",
    "note": "Iranian drone/missile fire at Bahrain and Kuwait last week"
   }
+ ],
+ "predictions": [
+  {
+   "key": "iran_air_nov30",
+   "kind": "iran_air",
+   "mode": "event",
+   "k": 0.4,
+   "label": "Iran full airspace closure by Nov 30",
+   "slug": "iran-full-airspace-closure-byptptpt-20260625195253028",
+   "outcome": "November 30",
+   "date_utc": "2026-12-01T04:59:00Z",
+   "market_pct": 4.05,
+   "watch_pct": 2.2,
+   "range_pct": [
+    1.2,
+    3.2
+   ],
+   "why": "Iran did not close its airspace in any of the five US strike rounds since July; a general closure now basically needs a major (likely joint Israeli) campaign to start within 6 days, which the White House has signalled is at least a week away. We sit a bit below the market, which still carries a longshot premium.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, post-June regime)",
+     "pct": 1.87
+    },
+    {
+     "name": "Scenario tree P(major)xP(close|major)",
+     "pct": 2.2
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 3.33
+    },
+    {
+     "name": "Analog/reference class (12 rounds)",
+     "pct": 1.2
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 2.89
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 1.75
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov: Nov30 Y4.2/N96.1, Dec31 Y15/N86; rules: general closure of Tehran FIR to all commercial flights, not weather, creation (26 Oct) to date 11:59 PM ET",
+    "notams.online OIIX 24 Nov: 70 NOTAMs, no FIR-wide closure",
+    "EASA CZIB-2026-04-R3 16 Nov: avoid OIIX to 31 Jan 2027 (advisory, not Iranian closure)",
+    "AInvest 15/23 Nov: all 10 earlier rungs (Jun30–Oct31) resolved No despite Jul/Sep US strike waves",
+    "AeroVigil/ISW: no general closure after Jul 7-8, Jul 29-30, Sep 1-2 US waves or Nov 2/6/17 Qeshm strikes"
+   ],
+   "sources_count": 34,
+   "relevance": "core",
+   "base_pct": 2.1,
+   "mkt0": 4.05,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 2.1,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "iran_air_dec31",
+   "kind": "iran_air",
+   "mode": "event",
+   "k": 0.4,
+   "label": "Iran full airspace closure by Dec 31",
+   "slug": "iran-full-airspace-closure-byptptpt-20260625195253028",
+   "outcome": "December 31",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 14.5,
+   "watch_pct": 10.2,
+   "range_pct": [
+    6.8,
+    13.6
+   ],
+   "why": "Trump has framed the next decision as 'after the beginning of the year', so most of the major-strike risk lies after the deadline; even if a campaign starts in December, Iran kept airspace open in the July and September US-only rounds. Only a joint Israeli strike on Tehran makes closure likely, so we are a few points below the market.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, post-June regime)",
+     "pct": 10.47
+    },
+    {
+     "name": "Scenario tree P(major)xP(close|major)",
+     "pct": 9.5
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 14.08
+    },
+    {
+     "name": "Analog/reference class (12 rounds)",
+     "pct": 7.2
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 10.68
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 8.4
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov: Nov30 Y4.2/N96.1, Dec31 Y15/N86; rules: general closure of Tehran FIR to all commercial flights, not weather, creation (26 Oct) to date 11:59 PM ET",
+    "notams.online OIIX 24 Nov: 70 NOTAMs, no FIR-wide closure",
+    "EASA CZIB-2026-04-R3 16 Nov: avoid OIIX to 31 Jan 2027 (advisory, not Iranian closure)",
+    "AInvest 15/23 Nov: all 10 earlier rungs (Jun30–Oct31) resolved No despite Jul/Sep US strike waves",
+    "AeroVigil/ISW: no general closure after Jul 7-8, Jul 29-30, Sep 1-2 US waves or Nov 2/6/17 Qeshm strikes"
+   ],
+   "sources_count": 34,
+   "relevance": "core",
+   "base_pct": 9.9,
+   "mkt0": 14.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 9.9,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "il_air_nov30",
+   "kind": "il_air",
+   "mode": "event",
+   "k": 0.42,
+   "label": "Israeli airspace closed by Nov 30",
+   "slug": "israeli-airspace-closed-by",
+   "outcome": "November 30",
+   "date_utc": "2026-12-01T04:59:00Z",
+   "market_pct": 3.4,
+   "watch_pct": 2.8,
+   "range_pct": [
+    1.1,
+    4.5
+   ],
+   "why": "Israel only closes its FIR when Iran fires heavily at Israel, which needs a major (likely joint) campaign within ~6 days, while Washington signals at least a week's delay and Israel has kept airspace open in every round since April. We sit slightly below the market's longshot price.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, since 9 Apr reopening)",
+     "pct": 1.38
+    },
+    {
+     "name": "Scenario tree P(major)xP(close|major)",
+     "pct": 3.84
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 4.8
+    },
+    {
+     "name": "Analog/reference class (10 rounds)",
+     "pct": 3.65
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 2.54
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 1.8
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~19:50 UTC: Nov30 Y3.6/N96.8 (mid 3.4%), Dec31 Y18/N83 (mid 17.5%); Dec31 fell from ~28% on 20 Nov (AInvest)",
+    "Rules: Tel Aviv FIR (LLLL) closed by NOTAM/official order generally suspending commercial flights, market creation (2 Nov) to date 11:59 PM ET; no minimum duration; excludes ground stops, subsets, airline/EASA actions",
+    "NOTAMs LLBG/LLLL 23-24 Nov: only routine runway WIP; no FIR closure; TLV normal ops (whichterminal 23 Nov)",
+    "Israel Hayom 2 Nov: plan to close BGN max 12 h if new round, then 2 flights/h -> a short closure would still count",
+    "ToI 8 Jun 2026: MoT kept airspace open despite Iranian missile volley (break from Jun 2025/Feb 2026 closures)"
+   ],
+   "sources_count": 39,
+   "relevance": "core",
+   "base_pct": 2.7,
+   "mkt0": 3.4,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 2.7,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "il_air_dec31",
+   "kind": "il_air",
+   "mode": "event",
+   "k": 0.42,
+   "label": "Israeli airspace closed by Dec 31",
+   "slug": "israeli-airspace-closed-by",
+   "outcome": "December 31",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 17.5,
+   "watch_pct": 14.3,
+   "range_pct": [
+    7.4,
+    21.2
+   ],
+   "why": "A joint US-Israeli campaign in December is plausible given Netanyahu's pressure, and if Iran hits Israel a short closure of up to 12 h would count; but Trump points to a decision after New Year and Iran avoided hitting Israel in the Jul-Sep rounds. We are a few points below the market, which already fell from ~28% to 17.5% on the delay reports.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, since 9 Apr reopening)",
+     "pct": 7.84
+    },
+    {
+     "name": "Scenario tree P(major)xP(close|major)",
+     "pct": 16.87
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 21.56
+    },
+    {
+     "name": "Analog/reference class (10 rounds)",
+     "pct": 16.01
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 13.58
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 11.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~19:50 UTC: Nov30 Y3.6/N96.8 (mid 3.4%), Dec31 Y18/N83 (mid 17.5%); Dec31 fell from ~28% on 20 Nov (AInvest)",
+    "Rules: Tel Aviv FIR (LLLL) closed by NOTAM/official order generally suspending commercial flights, market creation (2 Nov) to date 11:59 PM ET; no minimum duration; excludes ground stops, subsets, airline/EASA actions",
+    "NOTAMs LLBG/LLLL 23-24 Nov: only routine runway WIP; no FIR closure; TLV normal ops (whichterminal 23 Nov)",
+    "Israel Hayom 2 Nov: plan to close BGN max 12 h if new round, then 2 flights/h -> a short closure would still count",
+    "ToI 8 Jun 2026: MoT kept airspace open despite Iranian missile volley (break from Jun 2025/Feb 2026 closures)"
+   ],
+   "sources_count": 39,
+   "relevance": "core",
+   "base_pct": 13.9,
+   "mkt0": 17.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 13.9,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "ceasefire_nov30",
+   "kind": "ceasefire",
+   "mode": "inverse",
+   "k": 0.8,
+   "label": "Israel–Iran ceasefire holds through Nov 30",
+   "slug": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963",
+   "outcome": "November 30",
+   "date_utc": "2026-11-30T20:29:00Z",
+   "market_pct": 93.5,
+   "watch_pct": 95.7,
+   "range_pct": [
+    94.0,
+    97.5
+   ],
+   "why": "Only an Israeli or Iranian strike landing on the other's soil breaks it; US-only strikes and Iranian attacks on Gulf bases/shipping do not, and there has been no direct exchange in 5.5 months despite repeated US strike rounds. With Trump signalling after New Year, we are ~2 points above the market.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, post-April ceasefire regime)",
+     "pct": 96.16
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 93.82
+    },
+    {
+     "name": "Analog/reference class (lull durations)",
+     "pct": 97.31
+    },
+    {
+     "name": "Market, break-risk bias adjusted",
+     "pct": 95.1
+    },
+    {
+     "name": "Scenario tree",
+     "pct": 95.83
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 96.5
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y94/N7, Dec15 Y80/N21, Dec31 Y72/N29; Nov22 rung resolved Yes (99.8c)",
+    "Rules: No only if Israel or Iran initiates air/surface-to-surface strike that impacts the other's land territory, Oct 28 6:38 PM ET to date 23:59 IRST; US-only strikes, Iranian attacks on US bases/Gulf/shipping, proxies, intercepted munitions do NOT count",
+    "Last direct exchange 7-8 Jun 2026 (AP/NPR/JNS-IDF); none during US waves Jul 7-8, Jul 29-30, Sep 1-2, Nov 2/6/17",
+    "Ladder history (PolySimulator/Polywatch/W.E.T./PolyVeritas): market priced ~10-25%/month break; Aug31, Sep30, Nov22 all resolved Yes",
+    "ynet 22 Nov / Trump to Reuters 19 Nov: US delay >=1 week, renewed action discussed after start of 2027; US sees Israeli solo op unlikely"
+   ],
+   "sources_count": 46,
+   "relevance": "core",
+   "base_pct": 95.9,
+   "mkt0": 93.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 95.9,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "ceasefire_dec15",
+   "kind": "ceasefire",
+   "mode": "inverse",
+   "k": 0.8,
+   "label": "Israel–Iran ceasefire holds through Dec 15",
+   "slug": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963",
+   "outcome": "December 15",
+   "date_utc": "2026-12-15T20:29:00Z",
+   "market_pct": 79.5,
+   "watch_pct": 87.3,
+   "range_pct": [
+    82.8,
+    91.8
+   ],
+   "why": "The market keeps pricing a ~10-15%/month break hazard that has not materialised since July; the main risk is a joint US-Israeli campaign, which Washington has pushed back. We sit ~8 points above the market but keep Netanyahu/Mossad pressure and a caretaker government as real tail risks.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, post-April ceasefire regime)",
+     "pct": 87.2
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 82.01
+    },
+    {
+     "name": "Analog/reference class (lull durations)",
+     "pct": 90.91
+    },
+    {
+     "name": "Market, break-risk bias adjusted",
+     "pct": 83.96
+    },
+    {
+     "name": "Scenario tree",
+     "pct": 90.24
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 90.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y94/N7, Dec15 Y80/N21, Dec31 Y72/N29; Nov22 rung resolved Yes (99.8c)",
+    "Rules: No only if Israel or Iran initiates air/surface-to-surface strike that impacts the other's land territory, Oct 28 6:38 PM ET to date 23:59 IRST; US-only strikes, Iranian attacks on US bases/Gulf/shipping, proxies, intercepted munitions do NOT count",
+    "Last direct exchange 7-8 Jun 2026 (AP/NPR/JNS-IDF); none during US waves Jul 7-8, Jul 29-30, Sep 1-2, Nov 2/6/17",
+    "Ladder history (PolySimulator/Polywatch/W.E.T./PolyVeritas): market priced ~10-25%/month break; Aug31, Sep30, Nov22 all resolved Yes",
+    "ynet 22 Nov / Trump to Reuters 19 Nov: US delay >=1 week, renewed action discussed after start of 2027; US sees Israeli solo op unlikely"
+   ],
+   "sources_count": 46,
+   "relevance": "core",
+   "base_pct": 87.8,
+   "mkt0": 79.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 87.8,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "ceasefire_dec31",
+   "kind": "ceasefire",
+   "mode": "inverse",
+   "k": 0.8,
+   "label": "Israel–Iran ceasefire holds through Dec 31",
+   "slug": "israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963",
+   "outcome": "December 31",
+   "date_utc": "2026-12-31T20:29:00Z",
+   "market_pct": 71.5,
+   "watch_pct": 79.5,
+   "range_pct": [
+    73.0,
+    86.0
+   ],
+   "why": "Most major-strike risk sits after New Year per Trump, and Israel would most likely act jointly; Eisenkot's coalition talks and IDF's 'no urgency' briefing lower unilateral odds. We are ~9 points above the market, which has systematically overpriced breaks on earlier rungs.",
+   "models": [
+    {
+     "name": "Base rate (Jeffreys, post-April ceasefire regime)",
+     "pct": 78.56
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 71.55
+    },
+    {
+     "name": "Analog/reference class (lull durations)",
+     "pct": 84.55
+    },
+    {
+     "name": "Market, break-risk bias adjusted",
+     "pct": 77.2
+    },
+    {
+     "name": "Scenario tree",
+     "pct": 84.05
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 83.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y94/N7, Dec15 Y80/N21, Dec31 Y72/N29; Nov22 rung resolved Yes (99.8c)",
+    "Rules: No only if Israel or Iran initiates air/surface-to-surface strike that impacts the other's land territory, Oct 28 6:38 PM ET to date 23:59 IRST; US-only strikes, Iranian attacks on US bases/Gulf/shipping, proxies, intercepted munitions do NOT count",
+    "Last direct exchange 7-8 Jun 2026 (AP/NPR/JNS-IDF); none during US waves Jul 7-8, Jul 29-30, Sep 1-2, Nov 2/6/17",
+    "Ladder history (PolySimulator/Polywatch/W.E.T./PolyVeritas): market priced ~10-25%/month break; Aug31, Sep30, Nov22 all resolved Yes",
+    "ynet 22 Nov / Trump to Reuters 19 Nov: US delay >=1 week, renewed action discussed after start of 2027; US sees Israeli solo op unlikely"
+   ],
+   "sources_count": 46,
+   "relevance": "core",
+   "base_pct": 80.2,
+   "mkt0": 71.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 80.2,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "pause_nov22",
+   "kind": "pause",
+   "mode": "pause",
+   "k": null,
+   "label": "US–Iran 2-week pause begins by Nov 22",
+   "slug": "us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108",
+   "outcome": "November 22",
+   "date_utc": "2026-11-22T20:29:00Z",
+   "market_pct": 48.0,
+   "watch_pct": 47.8,
+   "range_pct": [
+    32.5,
+    63.1
+   ],
+   "why": "Last confirmed qualifying strike is Nov 17 (Qeshm); Nov 20 Qeshm/Hengam hits are Iranian claims only, and ISW/CFR show nothing Nov 21-24, so the clock likely started Nov 18 and needs ~7 more clean days to Dec 1. Hazard models say ~40% given Iran keeps hitting Bahrain bases and Hormuz shipping (the trigger for the Nov 17 strike), but lulls of this length mostly held before; we land on the market.",
+   "models": [
+    {
+     "name": "Hazard: Nov confirmed strike rate",
+     "pct": 39.08
+    },
+    {
+     "name": "Hazard: Sep-Nov regime rate",
+     "pct": 41.0
+    },
+    {
+     "name": "Watch-indicator hazard (L,F7)",
+     "pct": 42.4
+    },
+    {
+     "name": "Analog: quiet-spell survival (6 cases)",
+     "pct": 69.75
+    },
+    {
+     "name": "Market, bias-adjusted",
+     "pct": 48.16
+    },
+    {
+     "name": "Expert/political synthesis",
+     "pct": 50
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov22 ~48%, Nov30 ~64.5%, Dec31 ~79% (earlier 19:50 UTC 55/67.5/83.5); Nov 8 & Nov 15 resolved No",
+    "Rules (polymarkets.co.il/coinstats mirrors): US air/missile strike directly impacting Iranian land or internal waters; sea/airspace, naval gunfire, intercepted munitions excluded; IRST dates; day 1 = day after last qualifying action",
+    "CNN/ToI/Al Jazeera 17-18 Nov: US-confirmed self-defense strike on Qeshm = last confirmed qualifying action",
+    "Geopolitiki/Tasnim 20 Nov + AJ 21 Nov: claimed US hits on Qeshm/Hengam, CENTCOM silent - disputed (~25-30% counted)",
+    "ISW 22-23 Nov, CFR tracker, JINSA 21-23 Nov: no US strike on Iranian territory Nov 21-24"
+   ],
+   "sources_count": 31,
+   "relevance": "core",
+   "base_pct": 48.5,
+   "mkt0": 48.0,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 48.5,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "pause_nov30",
+   "kind": "pause",
+   "mode": "pause",
+   "k": null,
+   "label": "US–Iran 2-week pause begins by Nov 30",
+   "slug": "us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108",
+   "outcome": "November 30",
+   "date_utc": "2026-12-01T04:59:00Z",
+   "market_pct": 64.5,
+   "watch_pct": 61.4,
+   "range_pct": [
+    46.0,
+    76.8
+   ],
+   "why": "Adds the chance that one more limited strike happens early but a new clean 14 days still starts by Nov 30. Our hazard models are below market, analogs above; combined we sit slightly under the market.",
+   "models": [
+    {
+     "name": "Hazard: Nov confirmed strike rate",
+     "pct": 51.14
+    },
+    {
+     "name": "Hazard: Sep-Nov regime rate",
+     "pct": 53.67
+    },
+    {
+     "name": "Watch-indicator hazard (L,F7)",
+     "pct": 55.41
+    },
+    {
+     "name": "Analog: quiet-spell survival (6 cases)",
+     "pct": 81.85
+    },
+    {
+     "name": "Market, bias-adjusted",
+     "pct": 63.4
+    },
+    {
+     "name": "Expert/political synthesis",
+     "pct": 63
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov22 ~48%, Nov30 ~64.5%, Dec31 ~79% (earlier 19:50 UTC 55/67.5/83.5); Nov 8 & Nov 15 resolved No",
+    "Rules (polymarkets.co.il/coinstats mirrors): US air/missile strike directly impacting Iranian land or internal waters; sea/airspace, naval gunfire, intercepted munitions excluded; IRST dates; day 1 = day after last qualifying action",
+    "CNN/ToI/Al Jazeera 17-18 Nov: US-confirmed self-defense strike on Qeshm = last confirmed qualifying action",
+    "Geopolitiki/Tasnim 20 Nov + AJ 21 Nov: claimed US hits on Qeshm/Hengam, CENTCOM silent - disputed (~25-30% counted)",
+    "ISW 22-23 Nov, CFR tracker, JINSA 21-23 Nov: no US strike on Iranian territory Nov 21-24"
+   ],
+   "sources_count": 31,
+   "relevance": "core",
+   "base_pct": 62.2,
+   "mkt0": 64.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 62.2,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "pause_dec31",
+   "kind": "pause",
+   "mode": "pause",
+   "k": null,
+   "label": "US–Iran 2-week pause begins by Dec 31",
+   "slug": "us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108",
+   "outcome": "December 31",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 79.0,
+   "watch_pct": 87.2,
+   "range_pct": [
+    74.6,
+    99.8
+   ],
+   "why": "With 37 possible start days and Trump signalling no major decision until after New Year, almost any realistic limited-strike rate leaves room for a 14-day gap; the main risk is a December campaign or daily tit-for-tat. We are ~8 points above the market.",
+   "models": [
+    {
+     "name": "Hazard: Nov confirmed strike rate",
+     "pct": 97.28
+    },
+    {
+     "name": "Hazard: Sep-Nov regime rate",
+     "pct": 85.47
+    },
+    {
+     "name": "Watch-indicator hazard (L,F7)",
+     "pct": 85.94
+    },
+    {
+     "name": "Analog: quiet-spell survival (6 cases)",
+     "pct": 91.83
+    },
+    {
+     "name": "Market, bias-adjusted",
+     "pct": 77.19
+    },
+    {
+     "name": "Expert/political synthesis",
+     "pct": 72
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov22 ~48%, Nov30 ~64.5%, Dec31 ~79% (earlier 19:50 UTC 55/67.5/83.5); Nov 8 & Nov 15 resolved No",
+    "Rules (polymarkets.co.il/coinstats mirrors): US air/missile strike directly impacting Iranian land or internal waters; sea/airspace, naval gunfire, intercepted munitions excluded; IRST dates; day 1 = day after last qualifying action",
+    "CNN/ToI/Al Jazeera 17-18 Nov: US-confirmed self-defense strike on Qeshm = last confirmed qualifying action",
+    "Geopolitiki/Tasnim 20 Nov + AJ 21 Nov: claimed US hits on Qeshm/Hengam, CENTCOM silent - disputed (~25-30% counted)",
+    "ISW 22-23 Nov, CFR tracker, JINSA 21-23 Nov: no US strike on Iranian territory Nov 21-24"
+   ],
+   "sources_count": 31,
+   "relevance": "core",
+   "base_pct": 87.6,
+   "mkt0": 79.0,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 87.6,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "airlines_november30",
+   "kind": "airlines",
+   "mode": "event",
+   "k": 0.6,
+   "label": "Airlines halt Israel flights (by 30 Nov)",
+   "slug": "major-airlines-suspend-ben-gurion-flights-byptptpt",
+   "outcome": "November 30",
+   "date_utc": "2026-12-01T04:59:00Z",
+   "market_pct": 8.5,
+   "watch_pct": 4.5,
+   "range_pct": [
+    3.0,
+    6.0
+   ],
+   "why": "Only 6 days remain and three basket carriers would need to halt all Israel service almost at once; that basically requires a major Israel-involved war round starting this week, which the White House has signalled is unlikely. We are well below the thin market.",
+   "models": [
+    {
+     "name": "Base rate (post-June regime)",
+     "pct": 3.0
+    },
+    {
+     "name": "Scenario tree P(major 6d)xP(3 halt|major)",
+     "pct": 5.08
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 5.01
+    },
+    {
+     "name": "Analog/reference class",
+     "pct": 4.0
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 5.86
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 3.5
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y9/N92, Dec31 Y32/N80, Jan31 Y46/N62; vol $99k total (Nov30 $49k)",
+    "Rules: >=3 of 5 (Delta, United, Lufthansa, Air France, BA) each halt ALL scheduled LLBG pax service >=14 consecutive days, overlapping >=1 day (Israel time) by the date; created 29 Oct",
+    "Market context 24 Nov: Lufthansa Group crew no-overnight to 30 Nov (still flying); Delta & United resumed; BA cut extra routes; flydubai halted to 15 Dec",
+    "Analogs: Apr/Oct 2024, Jun 2025, Feb 2026 rounds -> basket carriers suspended for weeks; Jul-Sep 2026 US-only rounds -> partial/short",
+    "Watch 24 Nov 20:40 IST: F=1.3%, F7=8.6%, L=28%; Trump decision 'after beginning of year' (ynet 22 Nov)"
+   ],
+   "sources_count": 11,
+   "relevance": "high",
+   "base_pct": 4.3,
+   "mkt0": 8.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 4.3,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "airlines_december31",
+   "kind": "airlines",
+   "mode": "event",
+   "k": 0.6,
+   "label": "Airlines halt Israel flights (by 31 Dec)",
+   "slug": "major-airlines-suspend-ben-gurion-flights-byptptpt",
+   "outcome": "December 31",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 26.0,
+   "watch_pct": 18.4,
+   "range_pct": [
+    13.9,
+    22.8
+   ],
+   "why": "Most of the major-strike risk sits after New Year, and the qualifying bar (3 named carriers, full halts of 14+ days) is high. A joint US-Israel round in December would likely trigger it, so we stay meaningfully above zero but below the market.",
+   "models": [
+    {
+     "name": "Base rate (war-year rate)",
+     "pct": 14.0
+    },
+    {
+     "name": "Scenario tree P(major)xP(3 halt|major)",
+     "pct": 22.94
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 22.28
+    },
+    {
+     "name": "Analog/reference class",
+     "pct": 15.0
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 20.65
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 14.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y9/N92, Dec31 Y32/N80, Jan31 Y46/N62; vol $99k total (Nov30 $49k)",
+    "Rules: >=3 of 5 (Delta, United, Lufthansa, Air France, BA) each halt ALL scheduled LLBG pax service >=14 consecutive days, overlapping >=1 day (Israel time) by the date; created 29 Oct",
+    "Market context 24 Nov: Lufthansa Group crew no-overnight to 30 Nov (still flying); Delta & United resumed; BA cut extra routes; flydubai halted to 15 Dec",
+    "Analogs: Apr/Oct 2024, Jun 2025, Feb 2026 rounds -> basket carriers suspended for weeks; Jul-Sep 2026 US-only rounds -> partial/short",
+    "Watch 24 Nov 20:40 IST: F=1.3%, F7=8.6%, L=28%; Trump decision 'after beginning of year' (ynet 22 Nov)"
+   ],
+   "sources_count": 11,
+   "relevance": "high",
+   "base_pct": 17.8,
+   "mkt0": 26.0,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 17.8,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "airlines_january31",
+   "kind": "airlines",
+   "mode": "event",
+   "k": 0.6,
+   "label": "Airlines halt Israel flights (by 31 Jan)",
+   "slug": "major-airlines-suspend-ben-gurion-flights-byptptpt",
+   "outcome": "January 31, 2027",
+   "date_utc": "2027-02-01T04:59:00Z",
+   "market_pct": 42.0,
+   "watch_pct": 30.0,
+   "range_pct": [
+    22.9,
+    37.1
+   ],
+   "why": "January is when Trump says he will decide on major strikes, so risk rises, but even a strike round needs Israel to be hit hard enough for three Western carriers to halt for two weeks. We are below the market.",
+   "models": [
+    {
+     "name": "Base rate (war-year rate)",
+     "pct": 23.0
+    },
+    {
+     "name": "Scenario tree P(major)xP(3 halt|major)",
+     "pct": 26.6
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 35.17
+    },
+    {
+     "name": "Analog/reference class",
+     "pct": 25.0
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 37.22
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 30.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov ~20:00 UTC: Nov30 Y9/N92, Dec31 Y32/N80, Jan31 Y46/N62; vol $99k total (Nov30 $49k)",
+    "Rules: >=3 of 5 (Delta, United, Lufthansa, Air France, BA) each halt ALL scheduled LLBG pax service >=14 consecutive days, overlapping >=1 day (Israel time) by the date; created 29 Oct",
+    "Market context 24 Nov: Lufthansa Group crew no-overnight to 30 Nov (still flying); Delta & United resumed; BA cut extra routes; flydubai halted to 15 Dec",
+    "Analogs: Apr/Oct 2024, Jun 2025, Feb 2026 rounds -> basket carriers suspended for weeks; Jul-Sep 2026 US-only rounds -> partial/short",
+    "Watch 24 Nov 20:40 IST: F=1.3%, F7=8.6%, L=28%; Trump decision 'after beginning of year' (ynet 22 Nov)"
+   ],
+   "sources_count": 11,
+   "relevance": "high",
+   "base_pct": 29.2,
+   "mkt0": 42.0,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 29.2,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "saudi_december31",
+   "kind": "saudi",
+   "mode": "event",
+   "k": 0.12,
+   "label": "Saudi airspace closed (by 31 Dec)",
+   "slug": "saudi-airspace-closed-byptptpt",
+   "outcome": "December 31",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 5.5,
+   "watch_pct": 3.6,
+   "range_pct": [
+    2.4,
+    4.8
+   ],
+   "why": "Saudi Arabia kept its FIR open through every round so far, including Iranian attacks on neighbouring Gulf bases; full closure needs a broad Iranian strike on Saudi territory. We sit slightly below the market's longshot price.",
+   "models": [
+    {
+     "name": "Base rate",
+     "pct": 3.0
+    },
+    {
+     "name": "Scenario tree",
+     "pct": 4.99
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 4.16
+    },
+    {
+     "name": "Analog/reference class",
+     "pct": 2.5
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 3.75
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 3.0
+    }
+   ],
+   "key_inputs": [
+    "Polymarket 24 Nov: Dec31 Y6/N95, vol $618k (sub $318k); rules: Jeddah FIR/OEJD closed by NOTAM or official order, by 11:59 PM ET",
+    "Market context: Oct 2026 Houthi strikes on Riyadh KKIA -> airport closures, partial restrictions, no full closure",
+    "Watch 24 Nov: F7=8.6%; Iran attacks on Bahrain/Kuwait bases 13-22 Nov did not close Saudi FIR"
+   ],
+   "sources_count": 9,
+   "relevance": "medium",
+   "base_pct": 3.5,
+   "mkt0": 5.5,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 3.5,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  },
+  {
+   "key": "invade_yes",
+   "kind": "invade",
+   "mode": "event",
+   "k": 0.2,
+   "label": "US ground offensive in Iran (2026)",
+   "slug": "will-the-us-invade-iran-before-2027",
+   "outcome": "Yes",
+   "date_utc": "2027-01-01T04:59:00Z",
+   "market_pct": 5.75,
+   "watch_pct": 3.6,
+   "range_pct": [
+    1.1,
+    6.2
+   ],
+   "why": "No US ground move has happened in nine months and the related island-control markets trade near 3%. The market price carries the usual longshot premium, so we are below it.",
+   "models": [
+    {
+     "name": "Base rate",
+     "pct": 2.0
+    },
+    {
+     "name": "Scenario tree",
+     "pct": 7.15
+    },
+    {
+     "name": "Watch-indicator hazard",
+     "pct": 5.27
+    },
+    {
+     "name": "Analog/reference class",
+     "pct": 2.5
+    },
+    {
+     "name": "Market, longshot-bias adjusted",
+     "pct": 3.74
+    },
+    {
+     "name": "Expert/pundit synthesis",
+     "pct": 2.5
+    }
+   ],
+   "key_inputs": [
+    "Polymarket hub /iran 24 Nov 20:10 UTC: ~6% (Y5.5), vol $81.6M (event page blocked by Bing safety on 24 Nov 20:05 UTC)",
+    "Rules: offensive intended to establish control over any portion of Iran by 31 Dec 2026 11:59 PM ET",
+    "Polymarket: Kharg Island not under Iranian control by Dec31 3% ($78M); Farsi Island Dec31 3%",
+    "ynet 22 Nov / Solace 24 Nov: US decision after New Year"
+   ],
+   "sources_count": 10,
+   "relevance": "medium",
+   "base_pct": 3.5,
+   "mkt0": 5.75,
+   "F7_0": 8.6,
+   "L0": 27.5,
+   "created_utc": "2026-11-24T20:00:00Z",
+   "prev_watch_pct": 3.5,
+   "updated_utc": "2026-11-24T20:06:18Z"
+  }
  ]
 }
