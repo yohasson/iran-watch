@@ -340,8 +340,9 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 <div class="ov" id="ovS"><div class="modal set" style="max-width:520px">
   <div class="mh"><h3>⚙️ Settings</h3><span class="sp"></span><button class="x" data-close>✕</button></div>
   <div class="hint">Saved on this device only.</div>
-  <label>My alert line for the main estimate (%)</label><input type="number" id="sThr" min="0.5" max="50" step="0.5"> <span class="hint">Default 7 – matches the Teams/email alerts.</span>
-  <label>My alert line for the flight risk (%)</label><input type="number" id="sThrR" min="1" max="90" step="1"> <span class="hint">Default 25.</span>
+  <label>My alert line – 24-hour chance (%)</label><input type="number" id="sThr" min="0.5" max="50" step="0.5"> <span class="hint">Default 7 – matches the Teams/email alerts.</span>
+  <label>My alert line – 7-day chance (%)</label><input type="number" id="sThr7" min="1" max="90" step="0.5"> <span class="hint">Default 15 – the 7-day level 7 days before the Feb 2026 attack. Page only; not used for Teams/email.</span>
+  <label>My alert line – flight risk (%)</label><input type="number" id="sThrR" min="1" max="90" step="1"> <span class="hint">Default 25.</span>
   <label>Default time range</label><span class="seg" id="sRange"></span>
   <label>Auto-refresh</label><span class="seg" id="sAuto"><button data-v="on">On (data every 5 min, prices hourly)</button><button data-v="off">Off</button></span>
   <label>🔔 Notifications on this device</label><button class="sbtn" id="sNotif">Enable notifications</button> <span class="hint" id="sNotifSt"></span>
@@ -373,7 +374,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   var S = loadSettings();
   var view = { hero: S.range, main: S.range, drill: S.range, scale: 'lin', on: { F: true, F7: false, E: false, M: false, L: false, R: true }, tlF: 'all', tlN: 25, pinned: null, drillK: null, itemF: 'all', sortK: null, sortD: 1, wi: null };
 
-  function loadSettings() { var d = { thr: 7, thrR: 25, range: '7d', auto: 'on', dark: null, flNo: '', flDep: '', lang: 'en', notif: false }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
+  function loadSettings() { var d = { thr: 7, thr7: 15, thrR: 25, range: '7d', auto: 'on', dark: null, flNo: '', flDep: '', lang: 'en', notif: false }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
   function saveSettings() { try { localStorage.setItem('iw-set', JSON.stringify(S)); } catch (e) {} }
   function $(id) { return document.getElementById(id); }
   function css(v) { return getComputedStyle(document.body).getPropertyValue(v).trim(); }
@@ -654,24 +655,24 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function evList() {
     return (data.events || data.items || []).map(function (e) { var ec = effClass(e.effect); return { t: Date.parse(e.time_utc), c: ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--muted'), text: priv(e.text || '') }; }).filter(function (e) { return isNum(e.t); });
   }
-  var REF7 = 15;
   function renderH7(c) {
+    var REF7 = +S.thr7 || 15, isDef7 = REF7 === 15;
     var v = c.F7, he = S.lang === 'he', n = $('h7Num'); if (!isNum(v)) { n.textContent = '–'; return; }
-    var col = v >= REF7 ? css('--red') : (v >= REF7 * 0.6 ? css('--amber') : css('--green')); n.textContent = pct(v, 1); n.style.color = col;
-    var st = $('h7Status'); st.textContent = v >= REF7 ? (he ? 'ברמת ערב תקיפה' : 'At pre-attack level') : (v >= REF7 * 0.6 ? (he ? 'מוגבר' : 'Elevated') : (he ? 'נמוך' : 'Low')); st.className = 'status ' + (v >= REF7 ? 'bad' : v >= REF7 * 0.6 ? 'warn' : 'ok');
-    var max = Math.max(25, Math.ceil(v * 1.25)), gap = REF7 - v;
-    $('h7Dist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת ל-15% (7 ימים לפני התקיפה בפברואר 2026)' : gap.toFixed(1) + ' points below 15% – the level 7 days before the Feb 2026 attack') : (he ? 'מעל הרמה של 7 ימים לפני פברואר 2026' : 'Above the level seen 7 days before the Feb 2026 attack');
+    var col = bandCol(v, REF7); n.textContent = pct(v, 1); n.style.color = col;
+    var st = $('h7Status'); st.textContent = v >= REF7 ? T('stAbove') : (v >= REF7 * 0.7 ? T('stElev') : T('stBelow')); st.className = 'status ' + (v >= REF7 ? 'bad' : v >= REF7 * 0.7 ? 'warn' : 'ok');
+    var max = Math.max(Math.ceil(REF7 * 1.4), Math.ceil(Math.max(v, REF7) * 1.25)), gap = REF7 - v;
+    $('h7Dist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת לקו ההתרעה של ' + REF7 + '% · ' + Math.round(v / REF7 * 100) + '% מהדרך' : gap.toFixed(1) + ' points below the ' + REF7 + '% alert line · ' + Math.round(v / REF7 * 100) + '% of the way') : (he ? 'מעל קו ההתרעה של ' + REF7 + '% ב-' + (-gap).toFixed(1) + ' נקודות' : 'Above the ' + REF7 + '% alert line by ' + (-gap).toFixed(1) + ' points');
     $('h7Dist').style.color = col;
     var f = $('h7Fill'); f.style.width = Math.min(100, v / max * 100) + '%'; f.style.background = col;
     $('h7Pin').style.left = Math.min(100, v / max * 100) + '%'; $('h7Pin').style.background = col;
-    $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = he ? 'פבר׳ 26 15%' : 'Feb-26 15%'; $('h7MaxLbl').textContent = max + '%';
+    $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = (he ? 'התרעה ' : 'alert ') + REF7 + '%'; $('h7MaxLbl').textContent = max + '%';
     var pts = histPts('F7', rangeDays(view.hero), true), tr = $('h7Trend');
     if (pts.length < 2) { tr.textContent = ''; $('h7Chart').innerHTML = ''; $('h7Tsub').textContent = ''; return; }
     var first = pts[0], d = v - first.v, rel = first.v ? d / first.v * 100 : 0, wanted = rangeDays(view.hero), span = (Date.now() - first.t) / 864e5;
     tr.innerHTML = '<span class="' + (Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down') + '">' + (he ? '7 ימים: ' : '7-day: ') + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(2) + ' ' + T('pts') + ' (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)') + '</span> <span class="meta">' + T('since') + ' ' + fmtFull(first.t) + (wanted && span < wanted - 0.2 ? ' (' + T('wstart') + ')' : '') + '</span>';
     var vs = pts.map(function (p) { return p.v; });
-    $('h7Tsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs), 1) + ' · גבוה ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' בדיקות · קו מקווקו = 15% (7 ימים לפני פבר׳ 2026)' : 'Low ' + pct(Math.min.apply(null, vs), 1) + ' · high ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' checks · dashed line = 15% (7 days before Feb 2026)';
-    lineChart($('h7Chart'), $('h7Tip'), [{ name: he ? '7 ימים' : '7-day chance', c: col, pts: pts }], { lines: [{ v: REF7, c: css('--red'), label: (he ? 'פבר׳ 26 ' : 'Feb-26 ') + REF7 + '%' }], area: true, padL: 40 });
+    $('h7Tsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs), 1) + ' · גבוה ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' בדיקות · קו מקווקו = קו ההתרעה ' + REF7 + '%' : 'Low ' + pct(Math.min.apply(null, vs), 1) + ' · high ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' checks · dashed line = your ' + REF7 + '% alert' + (isDef7 ? ' (7 days before Feb 2026)' : '');
+    lineChart($('h7Chart'), $('h7Tip'), [{ name: he ? '7 ימים' : '7-day chance', c: col, pts: pts }], { lines: [{ v: REF7, c: css('--red'), label: (he ? 'התרעה ' : 'Alert ') + REF7 + '%' }], area: true, padL: 40 });
   }
   function valAt(k, t) { var best = null; (data.history || []).forEach(function (h) { var ht = Date.parse(h.utc); if (ht <= t && (!best || ht > Date.parse(best.utc))) best = h; }); if (!best) best = (data.history || [])[0]; return best ? (k === 'F7' ? f7(best.E, best.M) : best[k]) : null; }
   function renderSummary(c, thr, thrR) {
@@ -732,11 +733,12 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function notifSupported() { return 'Notification' in window && 'serviceWorker' in navigator; }
   function notifUi() { var st = $('sNotifSt'); if (!notifSupported()) { st.textContent = 'Not supported in this browser (on iPhone: install to Home Screen first).'; $('sNotif').style.display = 'none'; return; }
     st.textContent = Notification.permission === 'granted' && S.notif ? 'On ✓' : Notification.permission === 'denied' ? 'Blocked in browser settings' : 'Off'; $('sNotif').textContent = S.notif && Notification.permission === 'granted' ? 'Send a test' : 'Enable notifications'; }
-  function postCfg() { if (swReg && swReg.active) swReg.active.postMessage({ type: 'cfg', thr: +S.thr || 7, thrR: +S.thrR || 25 }); }
+  function postCfg() { if (swReg && swReg.active) swReg.active.postMessage({ type: 'cfg', thr: +S.thr || 7, thr7: +S.thr7 || 15, thrR: +S.thrR || 25 }); }
   function notify(title, body) { if (!S.notif || !notifSupported() || Notification.permission !== 'granted') return; (swReg ? swReg.showNotification(title, { body: body, icon: 'icon.svg', tag: 'iw', renotify: true }) : Promise.resolve(new Notification(title, { body: body }))).catch(function () {}); }
   function notifyCheck(c, thr, thrR) {
     if (!S.notif) return; var msgs = [];
-    if (c.F >= thr) msgs.push('Main estimate ' + pct(c.F) + ' – at or above your ' + thr + '% line');
+    if (c.F >= thr) msgs.push('24-hour chance ' + pct(c.F) + ' – at or above your ' + thr + '% line');
+    if (isNum(c.F7) && c.F7 >= (+S.thr7 || 15)) msgs.push('7-day chance ' + pct(c.F7, 1) + ' – at or above your ' + (+S.thr7 || 15) + '% line');
     if (c.fa && c.R >= thrR) msgs.push('Flight risk ' + pct(c.R, 1) + ' – at or above your ' + thrR + '% line');
     if (data.alert && data.alert.active) msgs.push('An alert is active');
     var key = data.updated_utc + '|' + msgs.join('|'), last = ''; try { last = localStorage.getItem('iw-lastnote') || ''; } catch (e) {}
@@ -812,7 +814,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   /* wire up */
   applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi(); applyLang();
   $('themeBtn').onclick = function () { S.dark = !document.body.classList.contains('dark'); saveSettings(); applyTheme(); render(); };
-  $('setBtn').onclick = function () { $('sThr').value = S.thr; $('sThrR').value = S.thrR; $('sFlNo').value = S.flNo || ''; $('sFlDep').value = S.flDep || ''; notifUi(); $('ovS').className = 'ov show'; };
+  $('setBtn').onclick = function () { $('sThr').value = S.thr; $('sThr7').value = S.thr7; $('sThrR').value = S.thrR; $('sFlNo').value = S.flNo || ''; $('sFlDep').value = S.flDep || ''; notifUi(); $('ovS').className = 'ov show'; };
   $('langBtn').onclick = function () { S.lang = S.lang === 'he' ? 'en' : 'he'; saveSettings(); render(); applyLang(); tick(); };
   $('sFlNo').oninput = function () { S.flNo = this.value.trim().toUpperCase(); saveSettings(); render(); };
   $('sFlDep').oninput = function () { S.flDep = this.value; saveSettings(); live = null; render(); };
@@ -821,10 +823,11 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   $('sInstall').onclick = function () { if (deferredInstall) { deferredInstall.prompt(); deferredInstall = null; $('sInstall').style.display = 'none'; } };
   segPick('tlSeg', function (v) { view.tlF = v; view.tlN = 25; renderTimeline(); });
   $('tlMore').onclick = function () { view.tlN += 25; renderTimeline(); };
+  $('sThr7').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thr7 = v; saveSettings(); postCfg(); render(); } };
   $('sThr').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thr = v; saveSettings(); postCfg(); render(); } };
   $('sThrR').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thrR = v; saveSettings(); postCfg(); render(); } };
   segPick('sAuto', function (v) { S.auto = v; saveSettings(); setAutoUi(); });
-  $('sReset').onclick = function () { try { localStorage.removeItem('iw-set'); } catch (e) {} S = loadSettings(); view.hero = view.main = view.drill = S.range; applyTheme(); buildRangeSegs(); setAutoUi(); $('sThr').value = S.thr; $('sThrR').value = S.thrR; render(); };
+  $('sReset').onclick = function () { try { localStorage.removeItem('iw-set'); } catch (e) {} S = loadSettings(); view.hero = view.main = view.drill = S.range; applyTheme(); buildRangeSegs(); setAutoUi(); $('sThr').value = S.thr; $('sThr7').value = S.thr7; $('sThrR').value = S.thrR; render(); };
   segPick('scaleSeg', function (v) { view.scale = v; renderMain(+S.thr || 7); });
   segPick('itemSeg', function (v) { view.itemF = v; renderItems(); });
   Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'), function (th) { th.onclick = function () { var k = th.getAttribute('data-s'); view.sortD = view.sortK === k ? -view.sortD : (k === 'label' ? 1 : -1); view.sortK = k; renderMarkets(cur()); }; });

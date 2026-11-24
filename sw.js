@@ -1,5 +1,5 @@
 /* Iran watch service worker: offline shell + best-effort background check (periodic sync where supported). */
-var SHELL = 'iw-shell-v7', CFG = 'iw-cfg';
+var SHELL = 'iw-shell-v8', CFG = 'iw-cfg';
 var RAW = 'https://raw.githubusercontent.com/yohasson/iran-watch/main/data.json';
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(SHELL).then(function (c) { return c.addAll(['./', './index.html', './icon.svg']); }).catch(function () {})); self.skipWaiting(); });
 self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });
@@ -10,11 +10,12 @@ self.addEventListener('fetch', function (e) {
 });
 function getCfg() { return caches.open(CFG).then(function (c) { return c.match('cfg'); }).then(function (r) { return r ? r.json() : { thr: 7, thrR: 25, lastKey: '' }; }).catch(function () { return { thr: 7, thrR: 25, lastKey: '' }; }); }
 function setCfg(o) { return caches.open(CFG).then(function (c) { return c.put('cfg', new Response(JSON.stringify(o))); }); }
-self.addEventListener('message', function (e) { if (e.data && e.data.type === 'cfg') e.waitUntil(getCfg().then(function (o) { o.thr = e.data.thr; o.thrR = e.data.thrR; return setCfg(o); })); });
+self.addEventListener('message', function (e) { if (e.data && e.data.type === 'cfg') e.waitUntil(getCfg().then(function (o) { o.thr = e.data.thr; o.thr7 = e.data.thr7 || 15; o.thrR = e.data.thrR; return setCfg(o); })); });
 function check() {
   return Promise.all([fetch(RAW + '?t=' + Date.now(), { cache: 'no-store' }).then(function (r) { return r.json(); }), getCfg()]).then(function (a) {
     var d = a[0], o = a[1], F = d.major && d.major.F, R = d.flight && d.flight.active ? d.flight.R : null, msgs = [];
-    if (F >= o.thr) msgs.push('Main estimate ' + F.toFixed(2) + '% – at or above your ' + o.thr + '% alert line');
+    if (F >= o.thr) msgs.push('24-hour chance ' + F.toFixed(2) + '% – at or above your ' + o.thr + '% alert line');
+    var F7 = d.major && d.major.F7; if (F7 != null && F7 >= (o.thr7 || 15)) msgs.push('7-day chance ' + F7.toFixed(1) + '% – at or above your ' + (o.thr7 || 15) + '% line');
     if (R != null && R >= o.thrR) msgs.push('Flight risk ' + R.toFixed(1) + '% – at or above your ' + o.thrR + '% line');
     if (d.alert && d.alert.active) msgs.push('An alert is active');
     var key = d.updated_utc + '|' + msgs.join('|');
