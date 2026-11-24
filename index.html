@@ -7,6 +7,11 @@
 <meta name="description" content="Iran strike-risk watch with a flight-risk check. Estimates only.">
 <title>Iran strike-risk watch</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="theme-color" content="#1b2b4b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Iran watch">
 <style>
 :root{
   --bg:#eef1f6;--card:#fff;--ink:#16202c;--muted:#5d6878;--line:#e1e5ec;--soft:#f6f8fb;
@@ -148,6 +153,30 @@ ul.open li:before{content:"👁 ";}
 .set label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 4px}
 .set input[type=number]{width:110px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font-size:.95rem}
 .set .hint{font-size:.8rem;color:var(--muted)}
+.h7{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.h7 b{font-size:2.1rem;font-weight:800;font-variant-numeric:tabular-nums}
+.h7 .meta{flex:1;min-width:160px}
+.lights{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
+.light{display:flex;gap:10px;align-items:flex-start;background:var(--soft);border-radius:10px;padding:9px 11px}
+.light .l{width:14px;height:14px;border-radius:50%;flex:0 0 auto;margin-top:3px}
+.light .l.green{background:var(--green);box-shadow:0 0 0 3px var(--green-bg)}.light .l.amber{background:var(--amber);box-shadow:0 0 0 3px var(--amber-bg)}.light .l.red{background:var(--red);box-shadow:0 0 0 3px var(--red-bg);animation:pulse 1.6s infinite}.light .l.grey{background:var(--muted)}
+.light b{display:block;font-size:.88rem}.light span{font-size:.78rem;color:var(--muted)}
+.cmp{display:flex;flex-direction:column;gap:7px}
+.cmp .row{display:grid;grid-template-columns:170px 1fr 54px;gap:10px;align-items:center;font-size:.85rem}
+.cmp .tr{position:relative;height:18px;background:var(--soft);border-radius:6px}
+.cmp .tr i{position:absolute;left:0;top:0;height:100%;border-radius:6px}
+.cmp .tr .al{position:absolute;top:-3px;width:2px;height:24px;background:var(--red)}
+.cmp .row.today{font-weight:800}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.sum div{background:var(--soft);border-radius:10px;padding:10px 12px}
+.sum b{display:block;font-size:1.3rem;font-variant-numeric:tabular-nums}.sum span{font-size:.76rem;color:var(--muted)}
+.advice{border-radius:12px;padding:12px 14px;font-weight:600;margin-bottom:10px}
+.fl-links{display:flex;flex-wrap:wrap;gap:8px}.fl-links a{background:var(--soft);border-radius:8px;padding:6px 10px;font-size:.85rem;text-decoration:none;font-weight:600}
+.tl-day{font-size:.78rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:12px 0 4px}
+.set input[type=text],.set input[type=datetime-local]{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font-size:.95rem}
+.sbtn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+body.rtl .hact{align-items:flex-start}body.rtl .step,body.rtl .lastchk{text-align:left}
+body.rtl .hero:before{inset:0 0 0 auto}
 footer{color:var(--muted);font-size:.8rem;margin-top:22px;line-height:1.55}
 footer details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
 footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
@@ -161,11 +190,12 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 <header class="hdr">
   <div class="hrow">
     <div>
-      <h1>🛰️ Iran strike-risk watch</h1>
-      <div class="sub">All times in Israel time · <span class="chip"><span class="d" id="liveDot"></span><span id="autoLbl">Auto-refresh on</span></span></div>
+      <h1 data-i18n="title">🛰️ Iran strike-risk watch</h1>
+      <div class="sub"><span data-i18n="tz">All times in Israel time</span> · <span class="chip"><span class="d" id="liveDot"></span><span id="autoLbl">Auto-refresh on</span></span></div>
     </div>
     <div class="hact">
       <div class="btnrow">
+        <button class="ibtn" id="langBtn" title="English / עברית" aria-label="Language">עב</button>
         <button class="ibtn" id="themeBtn" title="Dark / light mode" aria-label="Dark or light mode">🌙</button>
         <button class="ibtn" id="setBtn" title="Settings" aria-label="Settings">⚙️</button>
         <button class="btn" id="refreshBtn" type="button"><span class="spin"></span><span id="refreshLbl">Update now</span></button>
@@ -178,12 +208,13 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
 <div class="hero fade" id="hero">
   <div>
-    <div class="lbl">Chance a major US/Israeli strike campaign on Iran starts in the next 24 hours</div>
+    <div class="lbl" data-i18n="heroLbl">Chance a major US/Israeli strike campaign on Iran starts in the next 24 hours</div>
     <div class="num" id="hNum">–</div>
     <span class="status" id="hStatus"></span>
     <div class="dist" id="hDist"></div>
     <div class="hbar"><div class="f" id="hFill"></div><div class="m" id="hMark"></div><div class="pin" id="hPin"></div></div>
     <div class="hbl"><span>0%</span><span id="hThrLbl">alert</span><span id="hMaxLbl"></span></div>
+    <div class="h7"><b id="h7Num">–</b><div class="meta"><span data-i18n="h7Lbl">Within the next 7 days (rough)</span><br><span id="h7Delta"></span></div><svg id="s7" viewBox="0 0 200 46" preserveAspectRatio="none" style="width:150px;height:40px"></svg></div>
   </div>
   <div>
     <div class="ctl" style="justify-content:space-between"><div class="trend" id="hTrend"></div>
@@ -195,28 +226,43 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
 <div id="banner" class="banner info" role="status" aria-live="polite"><span class="dot"></span><div>Loading the latest check…</div></div>
 
+<div class="two fade">
+  <div class="panel"><h3>☀️ <span data-i18n="sumT">Last 24 hours at a glance</span></h3><div class="sum" id="sum"></div><div class="meta" id="sumNote" style="margin-top:8px"></div></div>
+  <div class="panel"><h3>🚦 <span data-i18n="chkT">Warning signs that came before real attacks</span></h3><div class="lights" id="lights"></div><div class="meta" style="margin-top:8px" data-i18n="chkNote">Green = not seen · amber = partial or reported · red = seen and confirmed. In past attacks these appeared 1–4 days before.</div></div>
+</div>
+
 <div class="grid fade">
   <div class="card" data-k="F" style="--c:var(--cF)"><span class="more">Details ›</span>
-    <h2>Major campaign – next 24 h</h2><div class="big" id="vF">–</div><div class="delta" id="dF"></div><svg id="sF" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
+    <h2 data-i18n="cF">Major campaign – next 24 h</h2><div class="big" id="vF">–</div><div class="delta" id="dF"></div><svg id="sF" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note">Sustained, multi-target campaign like 13 Jun 2025 or 28 Feb 2026.</div></div>
   <div class="card" data-k="L" style="--c:var(--cL)"><span class="more">Details ›</span>
-    <h2>Any US/Israeli strike on Iranian soil – 24 h</h2><div class="big" id="vL">–</div><div class="delta" id="dL"></div><svg id="sL" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
+    <h2 data-i18n="cL">Any US/Israeli strike on Iranian soil – 24 h</h2><div class="big" id="vL">–</div><div class="delta" id="dL"></div><svg id="sL" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note">Includes limited "defensive" strikes (Qeshm, Sirik). No alert on this figure.</div></div>
   <div class="card" data-k="R" id="cardR" style="--c:var(--cR)"><span class="more">Details ›</span>
     <h2 id="rTitle">Flight cancellation risk</h2><div class="big" id="vR">–</div><div class="delta" id="dR"></div>
     <div class="cd" id="cd"></div><div class="note" id="rNote"></div></div>
   <div class="card" data-k="M" style="--c:var(--cM)"><span class="more">Details ›</span>
-    <h2>Market part (from Iran airspace-closure price)</h2><div class="big" id="vM">–</div><div class="delta" id="dM"></div><svg id="sM" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
+    <h2 data-i18n="cM">Market part (from Iran airspace-closure price)</h2><div class="big" id="vM">–</div><div class="delta" id="dM"></div><svg id="sM" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note" id="mNote"></div></div>
 </div>
 
 <div class="panel fade">
-  <h3>📈 Trends<span class="sp"></span><span class="seg rangeSeg" data-target="main"></span></h3>
+  <h3>📈 <span data-i18n="trT">Trends</span><span class="sp"></span><span class="seg rangeSeg" data-target="main"></span></h3>
   <div class="ctl" id="togs"></div>
   <div class="ctl"><span class="meta">Scale:</span><span class="seg" id="scaleSeg"><button data-v="lin" class="on">Linear</button><button data-v="log">Log</button></span>
-    <span class="meta" style="margin-left:6px">Hover or tap the chart for exact values; click to pin a check.</span></div>
+    <span class="meta" style="margin-left:6px">Hover or tap the chart for exact values; click to pin a check. Dots along the bottom are news events.</span></div>
   <div class="chartwrap"><svg class="chart" id="mainChart" viewBox="0 0 900 300"></svg><div class="tip" id="mTip"></div></div>
   <div class="pinned" id="pinned"></div>
+</div>
+
+<div class="two fade">
+  <div class="panel" id="flPanel"><h3>✈️ <span data-i18n="flT">Your flight – what to do</span></h3><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div>
+  <div class="panel"><h3>📊 <span data-i18n="cmpT">Today vs. the eves of past attacks</span></h3><div class="cmp" id="cmp"></div><div class="meta" style="margin-top:8px" data-i18n="cmpNote">24-hour estimates made with the same method. Red bars = an attack started the next day; grey = false alarm. The method could not reliably tell them apart, so read this as context, not a signal.</div></div>
+</div>
+
+<div class="panel fade">
+  <h3>🗞️ <span data-i18n="tlT">Timeline of what changed</span><span class="sp"></span><span class="seg" id="tlSeg"><button data-v="all" class="on">All</button><button data-v="up">Rises</button><button data-v="down">Falls</button><button data-v="flat">No change</button></span></h3>
+  <div id="timeline"></div><button class="lnk" id="tlMore" style="margin-top:8px"></button>
 </div>
 
 <div class="two fade">
@@ -278,6 +324,12 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   <label>My alert line for the flight risk (%)</label><input type="number" id="sThrR" min="1" max="90" step="1"> <span class="hint">Default 25.</span>
   <label>Default time range</label><span class="seg" id="sRange"></span>
   <label>Auto-refresh</label><span class="seg" id="sAuto"><button data-v="on">On (data every 5 min, prices hourly)</button><button data-v="off">Off</button></span>
+  <label>🔔 Notifications on this device</label><button class="sbtn" id="sNotif">Enable notifications</button> <span class="hint" id="sNotifSt"></span>
+  <div class="hint" style="margin-top:4px">Fires when the main estimate or flight risk crosses your lines while the page or installed app is open; on Android Chrome with the app installed it also checks in the background (about hourly). For guaranteed alerts keep relying on Teams and email.</div>
+  <label>📲 Install as an app</label><button class="sbtn" id="sInstall" style="display:none">Install</button><span class="hint" id="sInstallHint">iPhone: Share → Add to Home Screen. Android: ⋮ → Install app / Add to Home screen.</span>
+  <label>✈️ My flight (kept only on this device, never published)</label>
+  <input type="text" id="sFlNo" placeholder="Flight number, e.g. W6 1234" style="width:200px"> <input type="datetime-local" id="sFlDep"> <span class="hint">Departure, Israel time</span>
+  <div class="hint">Shows the flight number, countdown and live flight-status link on this device only. Visitors without it see just "your flight".</div>
   <div style="margin-top:18px"><button class="lnk" id="sReset">Reset all settings</button></div>
 </div></div>
 
@@ -293,15 +345,15 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   var DATA_POLL_MS = 5 * 60 * 1000, LIVE_POLL_MS = 60 * 60 * 1000;
   var TZ = 'Asia/Jerusalem';
   var NOV30_END = Date.UTC(2026, 10, 30, 23, 59), DEC31_END = Date.UTC(2026, 11, 31, 23, 59);
-  var FLIGHT_T = Date.UTC(2026, 10, 27, 13, 20), FLIGHT_END = Date.UTC(2026, 10, 27, 15, 0), H_END = Date.UTC(2026, 11, 1, 4, 59);
-  var SERIES = { F: { n: 'Main estimate (24 h)', c: '--cF' }, E: { n: 'News-based part', c: '--cE' }, M: { n: 'Market-based part', c: '--cM' }, L: { n: 'Any strike (24 h)', c: '--cL' }, R: { n: 'Flight risk', c: '--cR' } };
+  var H_END = Date.UTC(2026, 11, 1, 4, 59);
+  var SERIES = { F: { n: 'Main estimate (24 h)', c: '--cF' }, F7: { n: '7-day (rough)', c: '--violet' }, E: { n: 'News-based part', c: '--cE' }, M: { n: 'Market-based part', c: '--cM' }, L: { n: 'Any strike (24 h)', c: '--cL' }, R: { n: 'Flight risk', c: '--cR' } };
   var RANGES = [['24h', 1], ['3d', 3], ['7d', 7], ['All', 0]];
 
   var data = null, live = null, nextDataAt = 0, nextLiveAt = 0, busy = false, lastCheck = { at: 0, how: '' };
   var S = loadSettings();
-  var view = { hero: S.range, main: S.range, drill: S.range, scale: 'lin', on: { F: true, E: false, M: false, L: false, R: true }, pinned: null, drillK: null, itemF: 'all', sortK: null, sortD: 1, wi: null };
+  var view = { hero: S.range, main: S.range, drill: S.range, scale: 'lin', on: { F: true, F7: false, E: false, M: false, L: false, R: true }, tlF: 'all', tlN: 25, pinned: null, drillK: null, itemF: 'all', sortK: null, sortD: 1, wi: null };
 
-  function loadSettings() { var d = { thr: 7, thrR: 25, range: '7d', auto: 'on', dark: null }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
+  function loadSettings() { var d = { thr: 7, thrR: 25, range: '7d', auto: 'on', dark: null, flNo: '', flDep: '', lang: 'en', notif: false }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
   function saveSettings() { try { localStorage.setItem('iw-set', JSON.stringify(S)); } catch (e) {} }
   function $(id) { return document.getElementById(id); }
   function css(v) { return getComputedStyle(document.body).getPropertyValue(v).trim(); }
@@ -315,6 +367,10 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function add(p, tag, text, cls) { var n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; p.appendChild(n); return n; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function dTxt(now, prev) { if (!isNum(now) || !isNum(prev)) return { t: '', c: 'flat' }; var d = now - prev; if (Math.abs(d) < 0.005) return { t: '→ no change since the previous check', c: 'flat' }; return { t: (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(2) + ' pts (was ' + pct(prev) + ')', c: d > 0 ? 'up' : 'down' }; }
+  function tzOff(ms) { var p = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(ms)), o = {}; p.forEach(function (x) { o[x.type] = +x.value; }); return Date.UTC(o.year, o.month - 1, o.day, o.hour % 24, o.minute) - ms; }
+  function flightT() { if (!S.flDep) return null; var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(S.flDep); if (!m) return null; var g = Date.UTC(+m[1], m[2] - 1, +m[3], +m[4], +m[5]); return g - tzOff(g); }
+  function priv(t) { return String(t == null ? '' : t).replace(/\b(W[469U]\s?\d{3,4}|WUK\d{3,4}|WZZ\d{3,4})\b/g, 'your flight').replace(/Wizz Air your flight/gi, 'your Wizz Air flight'); }
+  function f7(E, M) { if (!isNum(E) || !isNum(M)) return null; return inv((lo(1 - Math.pow(1 - E / 100, 7)) + lo(1 - Math.pow(1 - M / 100, 7))) / 2) * 100; }
   function bandCol(v, thr) { return v >= thr ? css('--red') : (v >= thr * 0.7 ? css('--amber') : css('--green')); }
 
   /* model */
@@ -325,8 +381,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var d = Math.max(1, (endMs - now) / 864e5), M = 1 - Math.pow(1 - Piran, 1 / d), F = inv((lo(Epct / 100) + lo(M)) / 2);
     if (floors && isNum(floors.F)) F = Math.max(F, floors.F / 100);
     var out = { M: M * 100, F: F * 100, R: null, C1: null, C2: null };
-    var h = (FLIGHT_T - now) / 36e5, H = (H_END - now) / 36e5;
-    if (now < FLIGHT_T && h > 0 && isNum(Pil) && isNum(Wpct)) {
+    var FT = flightT(), h = FT ? (FT - now) / 36e5 : 0, H = (H_END - now) / 36e5;
+    if (FT && now < FT && h > 0 && isNum(Pil) && isNum(Wpct)) {
       var C1 = 1 - Math.pow(1 - Pil, h / H), C2 = 0.9 * (1 - Math.pow(1 - F, h / 24)), C = inv((lo(C1) + lo(C2)) / 2), R = C + 0.01 + Wpct / 100;
       if (floors && isNum(floors.R)) R = Math.max(R, floors.R / 100);
       out.R = R * 100; out.C1 = C1 * 100; out.C2 = C2 * 100;
@@ -362,14 +418,15 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   /* current values */
   function cur() {
     var upd = Date.parse(data.updated_utc), useLive = live && !live.error && live.at > upd;
-    var fa = data.flight && data.flight.active && Date.now() < FLIGHT_END;
+    var FT = flightT(), fa = !!(data.flight && data.flight.active && (!FT || Date.now() < FT + 2 * 36e5));
     return { upd: upd, useLive: useLive, F: useLive ? live.F : data.major.F, M: useLive ? live.M : data.major.M, E: data.major.E, L: data.limited.L,
-      R: fa ? (useLive && isNum(live.R) ? live.R : data.flight.R) : null, fa: fa };
+      R: fa ? (useLive && isNum(live.R) ? live.R : data.flight.R) : null, fa: fa,
+      F7: isNum(data.major.F7) && !useLive ? data.major.F7 : f7(data.major.E, useLive ? live.M : data.major.M) };
   }
   function histPts(k, days, withNow) {
     var now = Date.now(), from = days ? now - days * 864e5 : 0;
-    var pts = (data.history || []).map(function (h) { return { t: Date.parse(h.utc), v: h[k] }; }).filter(function (p) { return isNum(p.v) && p.t >= from; });
-    if (withNow) { var c = cur(); if (isNum(c[k])) { var t = c.useLive && (k === 'F' || k === 'M' || k === 'R') ? live.at : c.upd; if (!pts.length || pts[pts.length - 1].t < t) pts.push({ t: t, v: c[k], live: c.useLive }); } }
+    var pts = (data.history || []).map(function (h) { return { t: Date.parse(h.utc), v: k === 'F7' ? (isNum(h.F7) ? h.F7 : f7(h.E, h.M)) : h[k] }; }).filter(function (p) { return isNum(p.v) && p.t >= from; });
+    if (withNow) { var c = cur(); if (isNum(c[k])) { var t = c.useLive && (k === 'F' || k === 'F7' || k === 'M' || k === 'R') ? live.at : c.upd; if (!pts.length || pts[pts.length - 1].t < t) pts.push({ t: t, v: c[k], live: c.useLive }); } }
     return pts;
   }
   function rangeDays(r) { for (var i = 0; i < RANGES.length; i++) if (RANGES[i][0] === r) return RANGES[i][1]; return 7; }
@@ -397,6 +454,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       s += '<path d="' + d + '" fill="none" stroke="' + se.c + '" stroke-width="2.4" stroke-linejoin="round"/>';
       var l = se.pts[se.pts.length - 1]; s += '<circle cx="' + x(l.t) + '" cy="' + y(l.v) + '" r="4.5" fill="' + se.c + '"/>';
     });
+    var evs = (opts.events || []).filter(function (e) { return e.t >= t0 && e.t <= t1; });
+    evs.forEach(function (e) { s += '<circle cx="' + x(e.t).toFixed(1) + '" cy="' + (H - PB - 5) + '" r="4" fill="' + e.c + '" stroke="' + css('--card') + '" stroke-width="1.5"/>'; });
     if (opts.pin) s += '<line x1="' + x(opts.pin) + '" x2="' + x(opts.pin) + '" y1="' + PT + '" y2="' + (H - PB) + '" stroke="' + css('--ink') + '" stroke-width="1.2" stroke-dasharray="3 3"/>';
     s += '<g id="' + svg.id + 'H" style="display:none"><line class="hl" y1="' + PT + '" y2="' + (H - PB) + '" stroke="' + mu + '" stroke-width="1"/></g><rect x="' + PL + '" y="0" width="' + (W - PL - PR) + '" height="' + H + '" fill="transparent"/>';
     svg.innerHTML = s;
@@ -411,8 +470,11 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       hg.style.display = ''; var ln = hg.querySelector('.hl'); ln.setAttribute('x1', x(n.t)); ln.setAttribute('x2', x(n.t));
       var h = '<b>' + fmtFull(n.t) + '</b>';
       series.forEach(function (se) { var p = se.pts.filter(function (q) { return q.t === n.t; })[0]; if (p) h += '<br><i style="background:' + se.c + '"></i>' + esc(se.name) + ': <b>' + pct(p.v) + '</b>' + (p.live ? ' (live)' : ''); });
+      var prevT = null; series.forEach(function (se) { se.pts.forEach(function (q) { if (q.t < n.t && (prevT == null || q.t > prevT)) prevT = q.t; }); });
+      var near2 = evs.filter(function (e) { return e.t <= n.t && (prevT == null || e.t > prevT); }).slice(-3);
+      near2.forEach(function (e) { h += '<br>📰 ' + esc(e.text.length > 70 ? e.text.slice(0, 68) + '…' : e.text); });
       if (opts.onPin) h += '<br><span style="opacity:.7">Click to pin</span>';
-      tip.innerHTML = h; tip.style.display = 'block';
+      tip.innerHTML = h; tip.style.display = 'block'; tip.style.whiteSpace = near2.length ? 'normal' : 'nowrap'; tip.style.maxWidth = '300px';
       var px = (x(n.t) / W) * n.r.width; tip.style.left = Math.min(n.r.width - tip.offsetWidth - 4, Math.max(4, px + 12)) + 'px'; tip.style.top = '8px';
     }
     svg.onmousemove = show; svg.ontouchstart = show; svg.ontouchmove = show;
@@ -434,15 +496,17 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!data) return;
     var c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
     renderHero(c, thr); renderBanner(c, thr); renderCards(c, thr, thrR); renderMain(thr); renderParts(c); if (!view.wi) wiReset(); else wiCalc();
-    renderItems(); renderMarkets(c); renderOpen(); if (view.drillK) renderDrill();
+    renderItems(); renderMarkets(c); renderOpen(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
     var F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
     $('hero').style.setProperty('--hc', col);
     var n = $('hNum'); n.textContent = pct(F);
-    var st = $('hStatus'); st.textContent = F >= thr ? 'Above alert line' : (F >= thr * 0.7 ? 'Elevated – approaching' : 'Below alert line'); st.className = 'status ' + (F >= thr ? 'bad' : F >= thr * 0.7 ? 'warn' : 'ok');
+    var st = $('hStatus'); st.textContent = F >= thr ? T('stAbove') : (F >= thr * 0.7 ? T('stElev') : T('stBelow')); st.className = 'status ' + (F >= thr ? 'bad' : F >= thr * 0.7 ? 'warn' : 'ok');
     var gap = thr - F;
-    $('hDist').textContent = gap > 0 ? gap.toFixed(1) + ' points below the ' + thr + '% alert line · ' + Math.round(F / thr * 100) + '% of the way' : 'Above the ' + thr + '% alert line by ' + (-gap).toFixed(1) + ' points';
+    var he = S.lang === 'he';
+    $('hDist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת לקו ההתרעה של ' + thr + '% · ' + Math.round(F / thr * 100) + '% מהדרך' : gap.toFixed(1) + ' points below the ' + thr + '% alert line · ' + Math.round(F / thr * 100) + '% of the way')
+      : (he ? 'מעל קו ההתרעה של ' + thr + '% ב-' + (-gap).toFixed(1) + ' נקודות' : 'Above the ' + thr + '% alert line by ' + (-gap).toFixed(1) + ' points');
     $('hDist').style.color = col;
     var f = $('hFill'); f.style.width = Math.min(100, F / max * 100) + '%'; f.style.background = col;
     $('hPin').style.left = Math.min(100, F / max * 100) + '%'; $('hPin').style.background = col;
@@ -459,7 +523,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var b = $('banner'), alertOn = data.alert && data.alert.active, stale = Date.now() - c.upd > 150 * 60000, cls, head, small = '';
     if (alertOn) { cls = 'bad'; head = '🚨 ALERT ACTIVE – main estimate ' + pct(c.F); small = data.alert.last_alert_utc ? 'Alert sent ' + fmtFull(data.alert.last_alert_utc) + ' at ' + pct(data.alert.last_alerted_pct) : ''; }
     else if (c.F >= thr * 0.7) { cls = 'warn'; head = 'Elevated – main estimate ' + pct(c.F) + ', alert line ' + thr + '%'; }
-    else { cls = 'ok'; head = '✅ No alert – ' + (data.summary || ''); }
+    else { cls = 'ok'; head = '✅ ' + T('noAlert') + ' – ' + priv(data.summary || ''); }
     var trig = (data.alert && data.alert.hard_triggers) || []; if (trig.length) small += (small ? ' · ' : '') + 'Hard triggers: ' + trig.map(function (t) { return t.text || t; }).join('; ');
     if (live && live.error) small += (small ? ' · ' : '') + 'Live prices unavailable (' + live.error + ') – showing the latest saved check.';
     else if (c.useLive) small += (small ? ' · ' : '') + 'Market part refreshed live at ' + fmt(live.at) + ' (Iran airspace by ' + live.label + ': ' + pct(live.Piran * 100, 1) + ').';
@@ -473,15 +537,15 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
   function renderCards(c, thr, thrR) {
     setCard('F', c.F, data.major.prev_F, thr); setCard('L', c.L, data.limited.prev_L); setCard('M', c.M, data.history && data.history.length > 1 ? data.history[data.history.length - 2].M : null);
     $('mNote').textContent = 'Iran full airspace closure by ' + (c.useLive ? live.label + ' = ' + pct(live.Piran * 100, 1) + ' (live)' : '30 Nov = ' + pct((data.model.P_iran_nov30 || 0) * 100, 1)) + '.';
-    var fl = data.flight || {};
+    var fl = data.flight || {}, FT = flightT();
     if (c.fa) {
-      $('rTitle').textContent = '✈️ ' + (fl.label || 'Flight') + ' – cancellation risk';
+      $('rTitle').textContent = '✈️ ' + (FT && S.flNo ? S.flNo : T('yourFlight')) + ' – ' + T('cancelRisk');
       $('vR').textContent = pct(c.R, 1); $('vR').style.color = bandCol(c.R, thrR);
-      var d = dTxt(c.R, fl.prev_R); $('dR').textContent = d.t + ' · about ' + Math.round(100 - c.R) + '% it flies'; $('dR').className = 'delta ' + d.c;
-      var ms = FLIGHT_T - Date.now(), cd = $('cd'); clear(cd);
+      var d = dTxt(c.R, fl.prev_R); $('dR').textContent = d.t + ' · ' + T('about') + ' ' + Math.round(100 - c.R) + '% ' + T('itFlies'); $('dR').className = 'delta ' + d.c;
+      var cd = $('cd'); clear(cd); var ms = FT ? FT - Date.now() : 0;
       if (ms > 0) { [[Math.floor(ms / 864e5), 'days'], [Math.floor(ms / 36e5) % 24, 'hours'], [Math.floor(ms / 6e4) % 60, 'min']].forEach(function (a) { var x = add(cd, 'div'); add(x, 'b', String(a[0])); add(x, 'span', a[1]); }); }
-      $('rNote').textContent = (fl.status_note || '') + ' Your alert line: ' + thrR + '%.';
-    } else { $('rTitle').textContent = 'Flight watch'; $('vR').textContent = 'Ended'; $('dR').textContent = ''; clear($('cd')); $('rNote').textContent = 'The flight watch has ended.'; }
+      $('rNote').textContent = priv(fl.status_note || '') + ' ' + T('yourLine') + ': ' + thrR + '%.';
+    } else { $('rTitle').textContent = T('flightWatch'); $('vR').textContent = T('ended'); $('dR').textContent = ''; clear($('cd')); $('rNote').textContent = ''; }
   }
   function renderTogs() {
     var t = $('togs'); clear(t);
@@ -492,7 +556,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     var days = rangeDays(view.main), series = [];
     Object.keys(SERIES).forEach(function (k) { if (view.on[k]) series.push({ name: SERIES[k].n, c: css(SERIES[k].c), pts: histPts(k, days, true) }); });
     var lines = []; if (view.on.F) lines.push({ v: thr, c: css('--red'), label: 'Alert ' + thr + '%' }); if (view.on.R) lines.push({ v: +S.thrR || 25, c: css('--cR'), label: 'Flight alert ' + (+S.thrR || 25) + '%' });
-    lineChart($('mainChart'), $('mTip'), series, { lines: lines, log: view.scale === 'log', pin: view.pinned, onPin: function (t) { view.pinned = view.pinned === t ? null : t; renderMain(thr); renderPinned(); } });
+    lineChart($('mainChart'), $('mTip'), series, { events: evList(), lines: lines, log: view.scale === 'log', pin: view.pinned, onPin: function (t) { view.pinned = view.pinned === t ? null : t; renderMain(thr); renderPinned(); } });
   }
   function renderPinned() {
     var p = $('pinned'); if (!view.pinned) { p.className = 'pinned'; return; }
@@ -526,7 +590,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!its.length) add(u, 'li', 'Nothing in this filter.', 'meta');
     its.forEach(function (it) { var ec = effClass(it.effect), li = add(u, 'li'); li.style.setProperty('--ec', ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--line'));
       add(li, 'div', (it.time_utc ? fmtFull(it.time_utc) + ' · ' : '') + (it.source || ''), 'it-top'); var tx = add(li, 'div'); var url = safeUrl(it.link);
-      if (url) { var a = add(tx, 'a', it.text); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = it.text || '';
+      if (url) { var a = add(tx, 'a', priv(it.text)); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = priv(it.text || '');
       if (it.effect) add(li, 'span', it.effect, 'eff e-' + ec); });
   }
   function renderMarkets(c) {
@@ -539,7 +603,112 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       bd.style.background = Math.abs(r.chg) < 0.05 ? 'var(--soft)' : 'var(--blue-bg)'; bd.style.color = Math.abs(r.chg) < 0.05 ? 'var(--muted)' : 'var(--blue)'; });
     var br = data.brent; $('brent').textContent = br ? '🛢️ Brent crude $' + br.usd + (isNum(br.change_pct_day) ? ' (' + (br.change_pct_day > 0 ? '+' : '') + br.change_pct_day + '% on the day)' : '') + (br.read_utc ? ', read ' + fmtFull(br.read_utc) : '') : '';
   }
-  function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', t); }); }
+  function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', priv(t)); }); }
+
+  /* ---------- i18n ---------- */
+  var I18N = { he: {
+    title: '🛰️ מעקב סיכון תקיפה באיראן', tz: 'כל השעות לפי שעון ישראל', heroLbl: 'הסיכוי שתתחיל מערכה גדולה של ארה״ב/ישראל נגד איראן ב-24 השעות הקרובות',
+    h7Lbl: 'בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
+    chkNote: 'ירוק = לא נראה · כתום = חלקי או מדווח · אדום = נראה ואושר. בתקיפות קודמות הם הופיעו 1–4 ימים לפני.',
+    cF: 'מערכה גדולה – 24 שעות', cL: 'כל תקיפה של ארה״ב/ישראל בשטח איראן – 24 שעות', cM: 'רכיב השוק (ממחיר סגירת המרחב האווירי באיראן)',
+    flT: 'הטיסה שלך – מה לעשות', cmpT: 'היום מול ערבי תקיפות קודמות', cmpNote: 'הערכות 24 שעות באותה שיטה. אדום = תקיפה התחילה למחרת; אפור = אזעקת שווא. השיטה לא הבחינה ביניהן היטב – הקשר בלבד.',
+    tlT: 'ציר זמן של מה שהשתנה', trT: 'מגמות', noAlert: 'אין התרעה', yourFlight: 'הטיסה שלך', cancelRisk: 'סיכון ביטול', about: 'כ-', itFlies: 'שהיא תמריא',
+    yourLine: 'הקו שלך', flightWatch: 'מעקב טיסה', ended: 'הסתיים', below: 'נקודות מתחת לקו ההתרעה של', ofway: 'מהדרך', above: 'מעל קו ההתרעה של',
+    stBelow: 'מתחת לקו ההתרעה', stElev: 'מוגבר – מתקרב', stAbove: 'מעל קו ההתרעה', upd: 'עדכן עכשיו', lastCheck: 'בדיקה אחרונה', since: 'מאז' } };
+  function T(k) { var en = { noAlert: 'No alert', yourFlight: 'Your flight', cancelRisk: 'cancellation risk', about: 'about', itFlies: 'it flies', yourLine: 'Your alert line', flightWatch: 'Flight watch', ended: 'Ended',
+    below: 'points below the', ofway: 'of the way', above: 'Above the', stBelow: 'Below alert line', stElev: 'Elevated – approaching', stAbove: 'Above alert line', upd: 'Update now', lastCheck: 'Last check', since: 'since' };
+    return (S.lang === 'he' && I18N.he[k]) || en[k] || k; }
+  var I18N_EN = {};
+  function applyLang() {
+    var he = S.lang === 'he'; document.documentElement.lang = he ? 'he' : 'en'; document.documentElement.dir = he ? 'rtl' : 'ltr'; document.body.classList.toggle('rtl', he);
+    $('langBtn').textContent = he ? 'EN' : 'עב';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (el) { var k = el.getAttribute('data-i18n'); if (!(k in I18N_EN)) I18N_EN[k] = el.textContent; el.textContent = he && I18N.he[k] ? I18N.he[k] : I18N_EN[k]; });
+    if (!busy) $('refreshLbl').textContent = T('upd');
+  }
+
+  /* ---------- new sections ---------- */
+  function evList() {
+    return (data.events || data.items || []).map(function (e) { var ec = effClass(e.effect); return { t: Date.parse(e.time_utc), c: ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--muted'), text: priv(e.text || '') }; }).filter(function (e) { return isNum(e.t); });
+  }
+  function renderH7(c) {
+    var v = c.F7, n = $('h7Num'); n.textContent = pct(v, 1); n.style.color = bandCol(v, (+S.thr || 7) * 3);
+    var pts = histPts('F7', rangeDays(view.hero), true), d = pts.length > 1 ? v - pts[0].v : null;
+    $('h7Delta').textContent = d == null ? '' : (Math.abs(d) < 0.05 ? '→ ' : d > 0 ? '▲ ' : '▼ ') + Math.abs(d).toFixed(1) + ' pts ' + T('since') + ' ' + fmtFull(pts[0].t);
+    $('h7Delta').className = d == null || Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down';
+    spark($('s7'), pts, css('--violet'));
+  }
+  function valAt(k, t) { var best = null; (data.history || []).forEach(function (h) { var ht = Date.parse(h.utc); if (ht <= t && (!best || ht > Date.parse(best.utc))) best = h; }); if (!best) best = (data.history || [])[0]; return best ? (k === 'F7' ? f7(best.E, best.M) : best[k]) : null; }
+  function renderSummary(c, thr, thrR) {
+    var el = $('sum'); clear(el); var t24 = Date.now() - 864e5;
+    var rows = [['F', 'Main estimate', c.F], ['F7', '7-day (rough)', c.F7], ['L', 'Any strike', c.L]]; if (c.fa) rows.push(['R', 'Flight risk', c.R]);
+    rows.forEach(function (r) { var then = valAt(r[0], t24), d = isNum(then) ? r[2] - then : null, x = add(el, 'div'); var b = add(x, 'b', pct(r[2], r[0] === 'F' ? 2 : 1)); b.style.color = css(SERIES[r[0]].c);
+      add(x, 'span', r[1] + (d == null ? '' : ' · ' + (Math.abs(d) < 0.01 ? '→ flat' : (d > 0 ? '▲ +' : '▼ ') + d.toFixed(2)) + ' in 24 h')); });
+    var checks = (data.history || []).filter(function (h) { return Date.parse(h.utc) >= t24; }).length, evs = (data.events || []).filter(function (e) { return Date.parse(e.time_utc) >= t24; });
+    var ups = evs.filter(function (e) { return effClass(e.effect) === 'up'; }).length, downs = evs.filter(function (e) { return effClass(e.effect) === 'down'; }).length;
+    var hi = Math.max.apply(null, histPts('F', 1, true).map(function (p) { return p.v; }).concat([c.F]));
+    $('sumNote').textContent = checks + ' automated checks · ' + evs.length + ' news events (' + ups + ' raised, ' + downs + ' lowered the risk) · 24-h high ' + pct(hi) + ' vs alert line ' + thr + '% · ' + (data.alert && data.alert.active ? 'an alert is active' : 'no alerts sent');
+  }
+  var DEFAULT_CHECK = [['order', 'Strike go-order / Situation Room on Iran'], ['embassy', 'US embassy departure order'], ['homefront', 'Home Front Command guideline change'], ['airspace', 'Airspace closure (Israel / Iran / Jordan / Iraq)'],
+    ['tankers', 'Tankers / AWACS massing over the region'], ['airlines', 'Foreign airlines suspending Israel flights'], ['deadline', 'Fixed diplomatic deadline (IAEA vote, ultimatum)'], ['call', 'Direct Trump–Netanyahu call on Iran'], ['casualties', 'US casualties or downed US aircraft'], ['iranfire', 'Iranian attacks on US bases or ships']];
+  function renderLights() {
+    var el = $('lights'); clear(el); var list = data.checklist;
+    if (!Array.isArray(list) || !list.length) list = DEFAULT_CHECK.map(function (d) { return { key: d[0], label: d[1], status: 'grey', note: 'Not yet tracked by the hourly check' }; });
+    list.forEach(function (it) { var x = add(el, 'div', null, 'light'); add(x, 'span', null, 'l ' + (it.status || 'grey')); var t = add(x, 'div'); add(t, 'b', it.label); add(t, 'span', priv(it.note || '') + (it.time_utc ? ' · ' + fmtFull(it.time_utc) : '')); });
+  }
+  var BENCH = [['12 Jun 2025 (eve of attack)', 14, true], ['14 Jan 2026 (false alarm)', 10, false], ['27 Feb 2026 (eve of attack)', 7, true], ['10 Oct 2024 (false alarm)', 6, false], ['15 Jan 2026 (false alarm)', 3, false], ['15 Apr 2024 (false alarm)', 0.5, false]];
+  function renderCmp(c, thr) {
+    var el = $('cmp'); clear(el); var rows = BENCH.concat([['Today', c.F, null]]).sort(function (a, b) { return b[1] - a[1]; }), max = 16;
+    rows.forEach(function (r) { var x = add(el, 'div', null, 'row' + (r[2] === null ? ' today' : '')); add(x, 'span', r[0]); var tr = add(x, 'div', null, 'tr'), i = add(tr, 'i');
+      i.style.width = Math.min(100, r[1] / max * 100) + '%'; i.style.background = r[2] === null ? bandCol(c.F, thr) : r[2] ? css('--red') : css('--muted'); if (r[2] !== null) i.style.opacity = '.75';
+      var al = add(tr, 'span', null, 'al'); al.style.left = (thr / max * 100) + '%'; add(x, 'span', pct(r[1], r[1] < 1 ? 1 : (r[1] < 10 ? 2 : 0)), 'n'); });
+  }
+  function renderFlight(c, thrR) {
+    var p = $('flPanel'); if (!c.fa) { p.style.display = 'none'; return; } p.style.display = '';
+    var R = c.R, a = $('advice'), FT = flightT(), msg, cls;
+    if (R >= thrR) { cls = 'bad'; msg = '⚠️ High risk: book a refundable backup now (El Al or British Airways same day) and check your Wizz Air booking for change/refund options.'; }
+    else if (R >= thrR * 0.6) { cls = 'warn'; msg = '🟠 Rising risk: line up a refundable backup option and check the Wizz Air app twice a day.'; }
+    else { cls = 'ok'; msg = '🟢 Low risk: keep your booking. Check the Wizz Air app the evening before and on the morning of the flight.'; }
+    a.className = 'advice ' + cls; a.textContent = msg + ' (' + T('about') + ' ' + Math.round(100 - R) + '% ' + T('itFlies') + ')';
+    $('flInfo').textContent = FT ? (S.flNo || 'Your flight') + ' · departs ' + fmtFull(FT) + ' Israel time · ' + ago(FT).replace(' ago', '').replace('just now', 'now') + (FT > Date.now() ? ' to go' : '') :
+      'Add your flight number and departure time in ⚙️ Settings to see a countdown and live status here (kept on this device only).';
+    if (FT && FT > Date.now()) $('flInfo').textContent = (S.flNo || 'Your flight') + ' · departs ' + fmtFull(FT) + ' Israel time';
+    var l = $('flLinks'); clear(l);
+    var links = [['📱 Wizz Air – manage booking', 'https://wizzair.com/'], ['🛫 Ben Gurion departures', 'https://www.iaa.gov.il/en/airports/ben-gurion/flight-board/']];
+    if (S.flNo) links.unshift(['🔴 Live status of ' + S.flNo, 'https://www.flightaware.com/live/flight/' + encodeURIComponent(S.flNo.replace(/\s/g, '').replace(/^W9/i, 'WUK'))]);
+    links.forEach(function (k) { var x = add(l, 'a', k[0]); x.href = k[1]; x.target = '_blank'; x.rel = 'noopener noreferrer'; });
+  }
+  function renderTimeline() {
+    var el = $('timeline'); clear(el); var evs = (data.events || data.items || []).slice().sort(function (a, b) { return Date.parse(b.time_utc) - Date.parse(a.time_utc); })
+      .filter(function (e) { return view.tlF === 'all' || effClass(e.effect) === view.tlF; });
+    var shown = evs.slice(0, view.tlN), day = '';
+    if (!shown.length) add(el, 'div', 'Nothing in this filter yet.', 'meta');
+    var ul;
+    shown.forEach(function (e) { var dd = fmt(e.time_utc, { weekday: 'long', day: 'numeric', month: 'short', hour: undefined, minute: undefined }); if (dd !== day) { day = dd; add(el, 'div', dd, 'tl-day'); ul = add(el, 'ul', null, 'items'); }
+      var ec = effClass(e.effect), li = add(ul, 'li'); li.style.setProperty('--ec', ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--line'));
+      add(li, 'div', fmt(e.time_utc) + ' · ' + (e.source || ''), 'it-top'); var tx = add(li, 'div'), u = safeUrl(e.link);
+      if (u) { var a = add(tx, 'a', priv(e.text)); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = priv(e.text);
+      if (e.effect) add(li, 'span', e.effect, 'eff e-' + ec); });
+    var mb = $('tlMore'); mb.style.display = evs.length > view.tlN ? '' : 'none'; mb.textContent = 'Show more (' + (evs.length - view.tlN) + ' older)';
+  }
+
+  /* ---------- notifications + app ---------- */
+  var swReg = null, deferredInstall = null;
+  function notifSupported() { return 'Notification' in window && 'serviceWorker' in navigator; }
+  function notifUi() { var st = $('sNotifSt'); if (!notifSupported()) { st.textContent = 'Not supported in this browser (on iPhone: install to Home Screen first).'; $('sNotif').style.display = 'none'; return; }
+    st.textContent = Notification.permission === 'granted' && S.notif ? 'On ✓' : Notification.permission === 'denied' ? 'Blocked in browser settings' : 'Off'; $('sNotif').textContent = S.notif && Notification.permission === 'granted' ? 'Send a test' : 'Enable notifications'; }
+  function postCfg() { if (swReg && swReg.active) swReg.active.postMessage({ type: 'cfg', thr: +S.thr || 7, thrR: +S.thrR || 25 }); }
+  function notify(title, body) { if (!S.notif || !notifSupported() || Notification.permission !== 'granted') return; (swReg ? swReg.showNotification(title, { body: body, icon: 'icon.svg', tag: 'iw', renotify: true }) : Promise.resolve(new Notification(title, { body: body }))).catch(function () {}); }
+  function notifyCheck(c, thr, thrR) {
+    if (!S.notif) return; var msgs = [];
+    if (c.F >= thr) msgs.push('Main estimate ' + pct(c.F) + ' – at or above your ' + thr + '% line');
+    if (c.fa && c.R >= thrR) msgs.push('Flight risk ' + pct(c.R, 1) + ' – at or above your ' + thrR + '% line');
+    if (data.alert && data.alert.active) msgs.push('An alert is active');
+    var key = data.updated_utc + '|' + msgs.join('|'), last = ''; try { last = localStorage.getItem('iw-lastnote') || ''; } catch (e) {}
+    if (msgs.length && key !== last) { try { localStorage.setItem('iw-lastnote', key); } catch (e) {} notify('🚨 Iran watch', msgs.join('\n')); }
+  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').then(function (r) { swReg = r; return navigator.serviceWorker.ready; }).then(function (r) { swReg = r; postCfg();
+    if (S.notif && r.periodicSync) r.periodicSync.register('iw-check', { minInterval: 60 * 60 * 1000 }).catch(function () {}); }).catch(function () {});
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredInstall = e; $('sInstall').style.display = ''; });
 
   /* drill-down */
   function openDrill(k) { view.drillK = k; $('ovD').className = 'ov show'; renderDrill(); }
@@ -568,7 +737,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     Array.prototype.forEach.call($('sAuto').querySelectorAll('button'), function (b) { b.className = b.getAttribute('data-v') === S.auto ? 'on' : ''; }); }
 
   /* refresh */
-  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on; btn.className = 'btn' + (on ? ' busy' : ''); $('refreshLbl').textContent = on ? 'Updating…' : 'Update now'; $('topbar').className = 'topbar' + (on ? ' on' : ''); document.body.classList.toggle('updating', on); }
+  function setBusy(on) { busy = on; var btn = $('refreshBtn'); btn.disabled = on; btn.className = 'btn' + (on ? ' busy' : ''); $('refreshLbl').textContent = on ? 'Updating…' : T('upd'); $('topbar').className = 'topbar' + (on ? ' on' : ''); document.body.classList.toggle('updating', on); }
   function step(t, cls) { var e = $('step'); e.textContent = t; e.className = 'step' + (cls ? ' ' + cls : ''); }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function refreshData() {
@@ -597,19 +766,27 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (S.auto === 'on') { if (!busy && nextLiveAt && now >= nextLiveAt) { refreshAll(false); return; } if (!busy && nextDataAt && now >= nextDataAt) { refreshData().then(function () { noteCheck('auto'); render(); }); } }
     if (data) {
       var upd = Date.parse(data.updated_utc); if (upd > lastCheck.at) lastCheck = { at: upd, how: 'automated' };
-      var txt = 'Last check ' + fmtFull(lastCheck.at) + ' (' + ago(lastCheck.at) + ', ' + lastCheck.how + ')';
+      var txt = T('lastCheck') + ' ' + fmtFull(lastCheck.at) + ' (' + ago(lastCheck.at) + ', ' + lastCheck.how + ')';
       if (S.auto === 'on') { var nx = Math.max(0, Math.round((nextDataAt - now) / 1000)); txt += ' · next in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2); }
       $('tick').textContent = txt;
-      var fl = data.flight; if (fl && fl.active && now < FLIGHT_T && now % 60000 < 1000) renderCards(cur(), +S.thr || 7, +S.thrR || 25);
+      var fl = data.flight, FT = flightT(); if (fl && fl.active && FT && now < FT && now % 60000 < 1000) renderCards(cur(), +S.thr || 7, +S.thrR || 25);
     }
   }
 
   /* wire up */
-  applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi();
+  applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi(); applyLang();
   $('themeBtn').onclick = function () { S.dark = !document.body.classList.contains('dark'); saveSettings(); applyTheme(); render(); };
-  $('setBtn').onclick = function () { $('sThr').value = S.thr; $('sThrR').value = S.thrR; $('ovS').className = 'ov show'; };
-  $('sThr').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thr = v; saveSettings(); render(); } };
-  $('sThrR').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thrR = v; saveSettings(); render(); } };
+  $('setBtn').onclick = function () { $('sThr').value = S.thr; $('sThrR').value = S.thrR; $('sFlNo').value = S.flNo || ''; $('sFlDep').value = S.flDep || ''; notifUi(); $('ovS').className = 'ov show'; };
+  $('langBtn').onclick = function () { S.lang = S.lang === 'he' ? 'en' : 'he'; saveSettings(); render(); applyLang(); tick(); };
+  $('sFlNo').oninput = function () { S.flNo = this.value.trim().toUpperCase(); saveSettings(); render(); };
+  $('sFlDep').oninput = function () { S.flDep = this.value; saveSettings(); live = null; render(); };
+  $('sNotif').onclick = function () { if (!notifSupported()) return; if (S.notif && Notification.permission === 'granted') { notify('🔔 Iran watch – test', 'Notifications work on this device. Main estimate now ' + pct(cur().F) + '.'); return; }
+    Notification.requestPermission().then(function (p) { S.notif = p === 'granted'; saveSettings(); notifUi(); postCfg(); if (S.notif) { if (swReg && swReg.periodicSync) swReg.periodicSync.register('iw-check', { minInterval: 3600000 }).catch(function () {}); notify('🔔 Iran watch', 'Notifications are on for this device.'); } }); };
+  $('sInstall').onclick = function () { if (deferredInstall) { deferredInstall.prompt(); deferredInstall = null; $('sInstall').style.display = 'none'; } };
+  segPick('tlSeg', function (v) { view.tlF = v; view.tlN = 25; renderTimeline(); });
+  $('tlMore').onclick = function () { view.tlN += 25; renderTimeline(); };
+  $('sThr').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thr = v; saveSettings(); postCfg(); render(); } };
+  $('sThrR').oninput = function () { var v = parseFloat(this.value); if (v > 0) { S.thrR = v; saveSettings(); postCfg(); render(); } };
   segPick('sAuto', function (v) { S.auto = v; saveSettings(); setAutoUi(); });
   $('sReset').onclick = function () { try { localStorage.removeItem('iw-set'); } catch (e) {} S = loadSettings(); view.hero = view.main = view.drill = S.range; applyTheme(); buildRangeSegs(); setAutoUi(); $('sThr').value = S.thr; $('sThrR').value = S.thrR; render(); };
   segPick('scaleSeg', function (v) { view.scale = v; renderMain(+S.thr || 7); });
@@ -627,7 +804,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 
   refreshAll(false);
   setInterval(tick, 1000);
-  window.__iranWatch = { computeModel: computeModel };
+  window.__iranWatch = { computeModel: computeModel, f7: f7 };
 })();
 </script>
 </body>
