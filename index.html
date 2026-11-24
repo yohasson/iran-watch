@@ -223,7 +223,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       <div class="step" id="step" role="status" aria-live="polite"></div>
       <div class="fprog" id="fprog"><div class="fb"><i id="fbar"></i></div><div class="fl"><span id="fstage">Starting…</span><span id="fpct">0%</span></div><div class="fs" id="fsteps"></div><div class="fnow" id="fnow"></div><ul class="fplan" id="fplan"></ul><div class="flog" id="flog"></div><div class="fl" style="margin-top:6px"><span id="feta"></span><button hidden class="lnk" id="fstop" type="button" style="color:inherit;text-decoration:underline;background:none;border:0;cursor:pointer;font:inherit;font-size:.78rem">Stop waiting</button></div></div>
       <div class="lastchk" id="tick">Loading…</div>
-      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Tue 24 Nov 2026, 23:42 Israel time</div>
+      <div class="lastchk" id="pgVer" style="opacity:.75;font-size:.72rem">Page version: Wed 25 Nov 2026, 00:02 Israel time</div>
     </div>
   </div>
 </header>
@@ -447,7 +447,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       var now = Date.now(), pNov = yesPrice(res[0], RE_NOV30), pDec = yesPrice(res[0], RE_DEC31), Piran, endMs, label;
       if (isNum(pNov) && now < NOV30_END) { Piran = pNov; endMs = NOV30_END; label = '30 Nov'; } else if (isNum(pDec)) { Piran = pDec; endMs = DEC31_END; label = '31 Dec'; } else throw new Error('price not found');
       var Pil = res[1] ? yesPrice(res[1], RE_NOV30) : null; if (!isNum(Pil)) Pil = data.model && data.model.P_il_nov30;
-      var md = data.model || {}, r = computeModel(md.E != null ? md.E : data.major.E, Piran, endMs, Pil, md.W, now, { F: md.F_floor, R: md.R_floor });
+      var md = data.model || {}, r = computeModel(isNum(data.major.E) ? data.major.E : (md.E < 1 ? md.E * 100 : md.E), Piran, endMs, Pil, md.W, now, { F: md.F_floor, R: md.R_floor });
       live = { at: now, Piran: Piran, label: label, Pil: Pil, M: r.M, F: r.F, R: r.R, C1: r.C1, C2: r.C2, error: null };
     }).catch(function (e) { live = { at: Date.now(), error: e && e.message ? e.message : 'unavailable' }; });
   }
