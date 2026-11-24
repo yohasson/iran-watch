@@ -60,7 +60,7 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .panel h3 .sp{flex:1}
 .meta{color:var(--muted);font-size:.85rem}
 /* hero */
-.hero{padding:22px 24px;margin-bottom:14px;display:grid;grid-template-columns:minmax(300px,1.25fr) minmax(300px,1fr);gap:18px 30px;align-items:center;position:relative;overflow:hidden}
+.hero{padding:22px 24px;margin-bottom:14px;display:block;grid-template-columns:1fr;gap:18px 30px;align-items:center;position:relative;overflow:hidden}
 .hero:before{content:"";position:absolute;inset:0 auto 0 0;width:7px;background:var(--hc,var(--green))}
 .hero .lbl{font-size:.95rem;color:var(--muted);font-weight:600}
 .hero .num{font-size:5.4rem;font-weight:800;letter-spacing:-2px;line-height:1;margin:8px 0 6px;font-variant-numeric:tabular-nums;color:var(--hc,var(--green))}
@@ -159,6 +159,11 @@ ul.open li:before{content:"👁 ";}
 .duo>div{min-width:0}
 .duo .sep{border-left:1px dashed var(--line);padding-left:22px}
 .duo .num{font-size:4.6rem}
+.duo .col{display:flex;flex-direction:column}
+.duo .lbl{min-height:2.9em}
+.duo .dist{min-height:2.7em}
+.duo .trend{margin-top:14px;min-height:1.5em}
+.hhead{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin-bottom:6px}
 .h7meta{font-size:.85rem;margin-top:6px}
 @media (max-width:640px){.duo{grid-template-columns:1fr}.duo .sep{border-left:0;padding-left:0;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}.duo .num{font-size:3.8rem}}
 .lights{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px}
@@ -212,30 +217,30 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 </header>
 
 <div class="hero fade" id="hero">
+  <div class="hhead"><span class="ctitle" id="hRangeLbl">Trend range</span><span class="seg rangeSeg" data-target="hero"></span></div>
   <div class="duo">
-   <div>
+   <div class="col">
     <div class="lbl" data-i18n="heroLbl">Chance a major US/Israeli strike campaign on Iran starts in the next 24 hours</div>
     <div class="num" id="hNum">–</div>
     <span class="status" id="hStatus"></span>
     <div class="dist" id="hDist"></div>
     <div class="hbar"><div class="f" id="hFill"></div><div class="m" id="hMark"></div><div class="pin" id="hPin"></div></div>
-    <div class="hbl"><span>0%</span><span id="hThrLbl">alert</span><span id="hMaxLbl"></span></div>
+    <div class="hbl"><span>0%</span><span id="hThrLbl"></span><span id="hMaxLbl"></span></div>
+    <div class="trend" id="hTrend"></div>
+    <div class="chartwrap"><svg class="chart" id="hSpark" data-h="170"></svg><div class="tip" id="hTip"></div></div>
+    <div class="tsub" id="hTsub"></div>
    </div>
-   <div class="sep">
+   <div class="col sep">
     <div class="lbl" data-i18n="h7Lbl2">Chance it starts within the next 7 days (rough)</div>
     <div class="num" id="h7Num">–</div>
     <span class="status" id="h7Status"></span>
     <div class="dist" id="h7Dist"></div>
-    <div class="hbar"><div class="f" id="h7Fill"></div><div class="m" id="h7Mark" style="background:var(--violet)"></div><div class="pin" id="h7Pin"></div></div>
+    <div class="hbar"><div class="f" id="h7Fill"></div><div class="m" id="h7Mark"></div><div class="pin" id="h7Pin"></div></div>
     <div class="hbl"><span>0%</span><span id="h7RefLbl"></span><span id="h7MaxLbl"></span></div>
-    <div class="h7meta"><span id="h7Delta"></span> <svg id="s7" viewBox="0 0 200 46" preserveAspectRatio="none" style="width:130px;height:30px;vertical-align:middle"></svg></div>
+    <div class="trend" id="h7Trend"></div>
+    <div class="chartwrap"><svg class="chart" id="h7Chart" data-h="170"></svg><div class="tip" id="h7Tip"></div></div>
+    <div class="tsub" id="h7Tsub"></div>
    </div>
-  </div>
-  <div>
-    <div class="ctl" style="justify-content:space-between"><div class="trend" id="hTrend"></div>
-      <div class="seg rangeSeg" data-target="hero"></div></div>
-    <div class="chartwrap"><div class="ctitle" id="hCT"></div><svg class="chart" id="hSpark" data-h="170"></svg><div class="tip" id="hTip"></div></div>
-    <div class="tsub" id="hTsub"></div>
   </div>
 </div>
 
@@ -528,8 +533,8 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     $('hDist').style.color = col;
     var f = $('hFill'); f.style.width = Math.min(100, F / max * 100) + '%'; f.style.background = col;
     $('hPin').style.left = Math.min(100, F / max * 100) + '%'; $('hPin').style.background = col;
-    $('hMark').style.left = (thr / max * 100) + '%'; $('hThrLbl').textContent = thr + '% alert'; $('hMaxLbl').textContent = max + '%';
-    $('hCT').textContent = he ? 'מגמת הסיכוי ל-24 שעות' : 'Trend of the 24-hour chance';
+    $('hMark').style.left = (thr / max * 100) + '%'; $('hThrLbl').textContent = (he ? 'התרעה ' : 'alert ') + thr + '%'; $('hMaxLbl').textContent = max + '%';
+    $('hRangeLbl').textContent = he ? 'טווח המגמות' : 'Trend range';
     var pts = histPts('F', rangeDays(view.hero), true), tr = $('hTrend');
     if (pts.length < 2) { tr.textContent = 'Trend: not enough history yet'; $('hSpark').innerHTML = ''; $('hTsub').textContent = ''; return; }
     var first = pts[0], d = F - first.v, rel = first.v ? d / first.v * 100 : 0, wanted = rangeDays(view.hero), span = (Date.now() - first.t) / 864e5;
@@ -659,11 +664,14 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     $('h7Dist').style.color = col;
     var f = $('h7Fill'); f.style.width = Math.min(100, v / max * 100) + '%'; f.style.background = col;
     $('h7Pin').style.left = Math.min(100, v / max * 100) + '%'; $('h7Pin').style.background = col;
-    $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = he ? '15% פבר׳ 26' : '15% Feb-26 ref'; $('h7MaxLbl').textContent = max + '%';
-    var pts = histPts('F7', rangeDays(view.hero), true), d = pts.length > 1 ? v - pts[0].v : null;
-    $('h7Delta').textContent = d == null ? '' : (he ? '7 ימים: ' : '7-day: ') + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(1) + ' ' + T('pts')) + ' ' + T('since') + ' ' + fmtFull(pts[0].t);
-    $('h7Delta').className = d == null || Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down';
-    spark($('s7'), pts, css('--violet'));
+    $('h7Mark').style.left = (REF7 / max * 100) + '%'; $('h7RefLbl').textContent = he ? 'פבר׳ 26 15%' : 'Feb-26 15%'; $('h7MaxLbl').textContent = max + '%';
+    var pts = histPts('F7', rangeDays(view.hero), true), tr = $('h7Trend');
+    if (pts.length < 2) { tr.textContent = ''; $('h7Chart').innerHTML = ''; $('h7Tsub').textContent = ''; return; }
+    var first = pts[0], d = v - first.v, rel = first.v ? d / first.v * 100 : 0, wanted = rangeDays(view.hero), span = (Date.now() - first.t) / 864e5;
+    tr.innerHTML = '<span class="' + (Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down') + '">' + (he ? '7 ימים: ' : '7-day: ') + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(2) + ' ' + T('pts') + ' (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)') + '</span> <span class="meta">' + T('since') + ' ' + fmtFull(first.t) + (wanted && span < wanted - 0.2 ? ' (' + T('wstart') + ')' : '') + '</span>';
+    var vs = pts.map(function (p) { return p.v; });
+    $('h7Tsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs), 1) + ' · גבוה ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' בדיקות · קו מקווקו = 15% (7 ימים לפני פבר׳ 2026)' : 'Low ' + pct(Math.min.apply(null, vs), 1) + ' · high ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' checks · dashed line = 15% (7 days before Feb 2026)';
+    lineChart($('h7Chart'), $('h7Tip'), [{ name: he ? '7 ימים' : '7-day chance', c: col, pts: pts }], { lines: [{ v: REF7, c: css('--red'), label: (he ? 'פבר׳ 26 ' : 'Feb-26 ') + REF7 + '%' }], area: true, padL: 40 });
   }
   function valAt(k, t) { var best = null; (data.history || []).forEach(function (h) { var ht = Date.parse(h.utc); if (ht <= t && (!best || ht > Date.parse(best.utc))) best = h; }); if (!best) best = (data.history || [])[0]; return best ? (k === 'F7' ? f7(best.E, best.M) : best[k]) : null; }
   function renderSummary(c, thr, thrR) {
