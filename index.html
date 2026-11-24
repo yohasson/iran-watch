@@ -257,10 +257,16 @@
   }
 
   /* ---------- data loading ---------- */
-  function fetchJson(url, headers) {
-    return fetch(url, { cache: 'no-store', headers: headers || {} }).then(function (r) {
+  function fetchJson(url, headers, ms) {
+    var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function () { ctl.abort(); }, ms || 12000) : null;
+    return fetch(url, { cache: 'no-store', headers: headers || {}, signal: ctl ? ctl.signal : undefined }).then(function (r) {
+      if (timer) clearTimeout(timer);
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
+    }, function (e) {
+      if (timer) clearTimeout(timer);
+      throw new Error(e && e.name === 'AbortError' ? 'timed out' : 'blocked or offline');
     });
   }
   function loadData() {
@@ -529,7 +535,12 @@
     return refreshData()
       .then(function () { return loadLive(); })
       .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; render(); })
-      .then(function () { setBusy(false); }, function () { setBusy(false); });
+      .then(function () { setBusy(false); }, function () { setBusy(false); })
+      .then(function () {
+        var b = $('refreshLbl');
+        b.textContent = (live && !live.error) ? 'Updated ' + fmt(Date.now()) : (live && live.error ? 'Prices unavailable – retry' : 'Update now');
+        setTimeout(function () { if (!busy) b.textContent = 'Update now'; }, 8000);
+      });
   }
   function tick() {
     var now = Date.now();
