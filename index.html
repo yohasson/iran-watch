@@ -177,6 +177,7 @@ ul.open li:before{content:"👁 ";}
 .cmp .tr i{position:absolute;left:0;top:0;height:100%;border-radius:6px}
 .cmp .tr .al{position:absolute;top:-3px;width:2px;height:24px;background:var(--red)}
 .cmp .row.today{font-weight:800}
+.glh{margin:16px 0 8px;font-size:14px;font-weight:700}.gln{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.gln li{background:var(--soft,rgba(127,127,127,.08));border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.35}.gln .gm{display:block;font-size:11.5px;opacity:.7;margin-top:2px}.gln .ge{float:right;font-size:11px;font-weight:700;padding:1px 7px;border-radius:9px;margin-inline-start:6px}.ge.up{background:rgba(220,80,40,.15);color:#c2410c}.ge.dn{background:rgba(22,163,74,.15);color:#15803d}.ge.nc{background:rgba(127,127,127,.15)}.glw li{padding:6px 10px}
 .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 .sum div{background:var(--soft);border-radius:10px;padding:10px 12px}
 .sum b{display:block;font-size:1.3rem;font-variant-numeric:tabular-nums}.sum span{font-size:.76rem;color:var(--muted)}
@@ -247,7 +248,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
 <div id="banner" class="banner info" role="status" aria-live="polite"><span class="dot"></span><div>Loading the latest check…</div></div>
 
 <div class="two fade">
-  <div class="panel"><h3>☀️ <span data-i18n="sumT">Last 24 hours at a glance</span></h3><div class="sum" id="sum"></div><div class="meta" id="sumNote" style="margin-top:8px"></div></div>
+  <div class="panel"><h3>☀️ <span data-i18n="sumT">Last 24 hours at a glance</span></h3><div class="sum" id="sum"></div><div class="meta" id="sumNote" style="margin-top:8px"></div><h4 class="glh">📰 <span data-i18n="glNews">Latest updates</span></h4><ul class="gln" id="glNews"></ul><h4 class="glh">👀 <span data-i18n="glWatch">What to watch next</span></h4><ul class="gln glw" id="glWatch"></ul></div>
   <div class="panel"><h3>🚦 <span data-i18n="chkT">Warning signs that came before real attacks</span></h3><div class="lights" id="lights"></div><div class="meta" style="margin-top:8px" data-i18n="chkNote">Green = not seen · amber = partial or reported · red = seen and confirmed. In past attacks these appeared 1–4 days before.</div></div>
 </div>
 
@@ -523,7 +524,7 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
     if (!data) return;
     var c = cur(), thr = +S.thr || 7, thrR = +S.thrR || 25;
     renderHero(c, thr); renderBanner(c, thr); renderCards(c, thr, thrR); renderMain(thr); renderParts(c); if (!view.wi) wiReset(); else wiCalc();
-    renderItems(); renderMarkets(c); renderOpen(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
+    renderItems(); renderMarkets(c); renderOpen(); renderGlance(); renderH7(c); renderSummary(c, thr, thrR); renderLights(); renderCmp(c, thr); renderFlight(c, thrR); renderTimeline(); applyLang(); notifyCheck(c, thr, thrR); if (view.drillK) renderDrill();
   }
   function renderHero(c, thr) {
     var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
@@ -631,12 +632,21 @@ footer summary{cursor:pointer;font-weight:700;color:var(--ink)}
       bd.style.background = Math.abs(r.chg) < 0.05 ? 'var(--soft)' : 'var(--blue-bg)'; bd.style.color = Math.abs(r.chg) < 0.05 ? 'var(--muted)' : 'var(--blue)'; });
     var br = data.brent; $('brent').textContent = br ? '🛢️ Brent crude $' + br.usd + (isNum(br.change_pct_day) ? ' (' + (br.change_pct_day > 0 ? '+' : '') + br.change_pct_day + '% on the day)' : '') + (br.read_utc ? ', read ' + fmtFull(br.read_utc) : '') : '';
   }
+  function renderGlance() {
+    var u = $('glNews'); if (!u) return; clear(u);
+    (data.items || []).slice(0, 4).forEach(function (it) {
+      var li = add(u, 'li'), e = String(it.effect || ''), cls = /rise/i.test(e) ? 'up' : /fall/i.test(e) ? 'dn' : 'nc';
+      add(li, 'span', e || 'No change', 'ge ' + cls); add(li, 'span', priv(it.text));
+      add(li, 'span', fmt(Date.parse(it.time_utc)) + ' · ' + priv(it.source), 'gm');
+    });
+    var w = $('glWatch'); clear(w); (data.open_items || []).slice(0, 3).forEach(function (t) { add(w, 'li', priv(t)); });
+  }
   function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', priv(t)); }); }
 
   /* ---------- i18n ---------- */
   var I18N = { he: {
     title: '🛰️ מעקב סיכון תקיפה באיראן', tz: 'כל השעות לפי שעון ישראל', heroLbl: 'הסיכוי שתתחיל מערכה גדולה של ארה״ב/ישראל נגד איראן ב-24 השעות הקרובות',
-    h7Lbl2: 'הסיכוי שתתחיל בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
+    h7Lbl2: 'הסיכוי שתתחיל בתוך 7 הימים הקרובים (הערכה גסה)', sumT: '24 השעות האחרונות במבט אחד', glNews: 'עדכונים אחרונים', glWatch: 'למה לשים לב בהמשך', chkT: 'סימני אזהרה שהופיעו לפני תקיפות אמיתיות',
     chkNote: 'ירוק = לא נראה · כתום = חלקי או מדווח · אדום = נראה ואושר. בתקיפות קודמות הם הופיעו 1–4 ימים לפני.',
     cF: 'מערכה גדולה – 24 שעות', cL: 'כל תקיפה של ארה״ב/ישראל בשטח איראן – 24 שעות', cM: 'רכיב השוק (ממחיר סגירת המרחב האווירי באיראן)',
     flT: 'הטיסה שלך – מה לעשות', cmpT: 'היום מול ערבי תקיפות קודמות', cmpNote: 'הערכות 24 שעות באותה שיטה. אדום = תקיפה התחילה למחרת; אפור = אזעקת שווא. השיטה לא הבחינה ביניהן היטב – הקשר בלבד.',
