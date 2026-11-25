@@ -1,0 +1,30 @@
+name: Publish dashboard page patch
+on:
+  push:
+    branches: [main]
+    paths: ["tools/page_patch.json"]
+permissions:
+  contents: write
+concurrency:
+  group: page-patch
+  cancel-in-progress: false
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch gh-pages index.html
+        run: |
+          git config user.name "iran-watch-bot"
+          git config user.email "iran-watch-bot@users.noreply.github.com"
+          cp tools/page_patch.json tools/apply_page_patch.py /tmp/
+          git fetch origin gh-pages && git checkout -B gh-pages origin/gh-pages
+          python3 /tmp/apply_page_patch.py /tmp/page_patch.json index.html
+          cp index.html /tmp/index.html
+          git add index.html
+          git commit -m "Dashboard v8.1 – Hebrew fixes (patch)" || echo "no change"
+          for i in 1 2 3; do git push origin gh-pages && break; git pull --rebase origin gh-pages; sleep 5; done
+          git fetch origin main && git checkout -B main origin/main
+          cp /tmp/index.html index.html && git add index.html
+          git commit -m "Dashboard v8.1 – Hebrew fixes (patch)" || echo "no change"
+          for i in 1 2 3; do git push origin main && break; git pull --rebase origin main; sleep 5; done
