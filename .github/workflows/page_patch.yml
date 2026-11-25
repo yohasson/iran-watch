@@ -2,7 +2,7 @@ name: Publish dashboard page patch
 on:
   push:
     branches: [main]
-    paths: ["tools/page_patch.json"]
+    paths: ["tools/page_patch.json", "tools/apply_page_patch.py"]
 permissions:
   contents: write
 concurrency:
