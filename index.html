@@ -113,7 +113,7 @@ body.updating .fade{opacity:.45;transition:opacity .2s}
 .card .big{font-size:2.3rem;font-weight:800;letter-spacing:-.6px;line-height:1.1;margin-top:4px;color:var(--c);font-variant-numeric:tabular-nums}
 .card .delta{font-size:.84rem;margin-top:2px}
 .card .note{font-size:.8rem;color:var(--muted);margin-top:auto;padding-top:10px}
-.card .more{position:absolute;right:12px;top:12px;font-size:.72rem;color:var(--muted)}
+.card .more{position:absolute;inset-inline-end:12px;top:12px;font-size:.72rem;color:var(--muted)}
 .card svg{width:100%;height:46px;margin-top:8px}
 .up{color:var(--red)}.down{color:var(--green)}.flat{color:var(--muted)}
 .cd{display:flex;gap:8px;margin-top:8px}
@@ -309,6 +309,10 @@ tr.passed td{opacity:.6}
 .btn.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);box-shadow:none}
 #btPanel th,#hTab th{white-space:normal}
 
+.tagline{font-size:.82rem;opacity:.85;margin-top:2px;max-width:640px}
+#vDo a{white-space:nowrap}
+body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
+@media (max-width:480px){.wiout{display:grid;grid-template-columns:repeat(2,1fr)}.tagline{font-size:.74rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
 </style>
 </head>
 <body>
@@ -319,6 +323,7 @@ tr.passed td{opacity:.6}
   <div class="hrow">
     <div class="hl">
       <h1 data-i18n="title">🛰️ Iran strike-risk watch</h1>
+      <div class="tagline" data-m="sub">Hourly estimate of the chance the US or Israel starts a major strike campaign on Iran, from public news, official sources and betting markets.</div>
       <div class="sub"><span class="chip"><span class="d" id="liveDot"></span><span id="autoLbl">Auto-refresh on</span></span> <span id="tick">Loading…</span></div>
     </div>
     <div class="hact">
@@ -507,18 +512,18 @@ tr.passed td{opacity:.6}
 </footer>
 </div>
 
-<div class="ov" id="ovD"><div class="modal">
+<div class="ov" id="ovD"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dTitle">
   <div class="mh"><h3 id="dTitle"></h3><span class="sp"></span><span class="seg rangeSeg" data-target="drill"></span><button class="x" data-close>✕</button></div>
   <div class="stats" id="dStats"></div>
   <div class="chartwrap"><svg class="chart" id="dChart" data-h="250"></svg><div class="tip" id="dTip"></div></div>
   <div class="scroll"><table><thead><tr><th>Check (Israel time)</th><th class="n">Value</th><th class="n">Change</th></tr></thead><tbody id="dRows"></tbody></table></div>
 </div></div>
 
-<div class="ov" id="ovS"><div class="modal set" style="max-width:520px">
+<div class="ov" id="ovS"><div class="modal set" role="dialog" aria-modal="true" aria-label="Settings" style="max-width:520px">
   <div class="mh"><h3>⚙️ Settings</h3><span class="sp"></span><button class="x" data-close>✕</button></div>
   <div class="hint">Saved on this device only.</div>
   <label>My alert line – 24-hour chance (%)</label><input type="number" id="sThr" min="0.5" max="50" step="0.5"> <span class="hint">Default 7 – matches the Teams/email alerts.</span>
-  <label>My alert line – 7-day chance (%)</label><input type="number" id="sThr7" min="1" max="90" step="0.5"> <span class="hint">Default 15 – the 7-day level 7 days before the Feb 2026 attack. Page only; not used for Teams/email.</span>
+  <label>My alert line – 7-day chance (%)</label><input type="number" id="sThr7" min="1" max="90" step="0.5"> <span class="hint">Default 15 – a working alert line, not calibrated. Page only; not used for Teams/email.</span>
   <label>My alert line – flight risk (%)</label><input type="number" id="sThrR" min="1" max="90" step="1"> <span class="hint">Default 25.</span>
   <label>Default time range</label><span class="seg" id="sRange"></span>
   <label>Auto-refresh</label><span class="seg" id="sAuto"><button data-v="on">On (data every 5 min, prices hourly)</button><button data-v="off">Off</button></span>
@@ -549,7 +554,7 @@ tr.passed td{opacity:.6}
 
   var data = null, live = null, nextDataAt = 0, nextLiveAt = 0, busy = false, lastCheck = { at: 0, how: '' };
   var S = loadSettings();
-  (function () { if (S.mig1 || !S.flDep) return; var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(S.flDep); if (m && +m[3] === 27 && +m[2] === 11 && (+m[4]) * 60 + (+m[5]) === 980) { var t = 920; S.flDep = m[1] + '-' + m[2] + '-' + m[3] + 'T' + ('0' + Math.floor(t / 60)).slice(-2) + ':' + ('0' + t % 60).slice(-2); } S.mig1 = 1; saveSettings(); })();
+  
   var view = { hero: S.range, main: S.range, drill: S.range, scale: 'lin', on: { F: true, F7: true, E: false, M: false, L: false, R: false }, tlF: 'chg', tlN: 15, pinned: null, drillK: null, itemF: 'all', sortK: null, sortD: 1, wi: null };
 
   function loadSettings() { var d = { thr: 7, thr7: 15, thrR: 25, range: '7d', auto: 'on', dark: null, flNo: '', flDep: '', lang: 'en', notif: false }; try { var s = JSON.parse(localStorage.getItem('iw-set') || '{}'); for (var k in s) d[k] = s[k]; } catch (e) {} return d; }
@@ -565,7 +570,7 @@ tr.passed td{opacity:.6}
   function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
   function add(p, tag, text, cls) { var n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; p.appendChild(n); return n; }
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function dTxt(now, prev) { if (!isNum(now) || !isNum(prev)) return { t: '', c: 'flat' }; var d = now - prev; if (Math.abs(d) < 0.005) return { t: '→ no change since the previous check', c: 'flat' }; return { t: (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(2) + ' pts (was ' + pct(prev) + ')', c: d > 0 ? 'up' : 'down' }; }
+  function dTxt(now, prev) { if (!isNum(now) || !isNum(prev)) return { t: '', c: 'flat' }; var d = now - prev; if (Math.abs(d) < 0.005) return { t: S.lang === 'he' ? '→ ללא שינוי מהבדיקה הקודמת' : '→ no change since the previous check', c: 'flat' }; return { t: (S.lang === 'he' ? (d > 0 ? '▲ עלייה של ' : '▼ ירידה של ') + Math.abs(d).toFixed(2) + ' נק׳ (היה ' + pct(prev) + ')' : (d > 0 ? '▲ up ' : '▼ down ') + Math.abs(d).toFixed(2) + ' pts (was ' + pct(prev) + ')'), c: d > 0 ? 'up' : 'down' }; }
   function tzOff(ms) { var p = new Intl.DateTimeFormat('en-US', { timeZone: TZ, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).formatToParts(new Date(ms)), o = {}; p.forEach(function (x) { o[x.type] = +x.value; }); return Date.UTC(o.year, o.month - 1, o.day, o.hour % 24, o.minute) - ms; }
   function flightT() { if (!S.flDep) return null; var m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(S.flDep); if (!m) return null; var g = Date.UTC(+m[1], m[2] - 1, +m[3], +m[4], +m[5]); return g - tzOff(g); }
   function priv(t) { return String(t == null ? '' : t).replace(/\b(W[469U]\s?\d{3,4}|WUK\d{3,4}|WZZ\d{3,4})\b/g, 'your flight').replace(/Wizz Air your flight/gi, 'your Wizz Air flight'); }
@@ -754,7 +759,7 @@ tr.passed td{opacity:.6}
     var fl = data.flight || {}, FT = flightT();
     if ($('sR')) { $('sR').style.display = c.fa ? '' : 'none'; if (c.fa) spark($('sR'), histPts('R', rangeDays(view.main), true), css(SERIES.R.c), thrR); }
     if (c.fa) {
-      $('rTitle').textContent = '✈️ ' + (FT && S.flNo ? S.flNo : T('yourFlight')) + ' – ' + T('cancelRisk');
+      $('rTitle').textContent = '✈️ ' + (FT && S.flNo ? S.flNo : (S.flDep ? T('yourFlight') : (S.lang === 'he' ? 'טיסה במעקב' : 'Tracked flight'))) + ' – ' + T('cancelRisk');
       $('vR').textContent = pct(c.R, 1); $('vR').style.color = bandCol(c.R, thrR);
       var d = dTxt(c.R, fl.prev_R); $('dR').textContent = d.t + ' · ' + T('about') + ' ' + Math.round(100 - c.R) + '% ' + T('itFlies'); $('dR').className = 'delta ' + d.c;
       var cd = $('cd'); clear(cd); var ms = FT ? FT - Date.now() : 0;
@@ -801,7 +806,7 @@ tr.passed td{opacity:.6}
   function wiScUi() {
     var box = $('wiSc'); clear(box); view.wiSc = view.wiSc || {};
     WISC.forEach(function (x) { var b = add(box, 'button', x[1], (x[2] && x[2] < 1 ? 'dn' : '') + (view.wiSc[x[0]] ? ' on' : '')); b.type = 'button';
-      b.onclick = function () { view.wiSc[x[0]] = !view.wiSc[x[0]]; wiScUi(); wiCalc(); }; });
+      b.onclick = function () { view.wiTouched = true; view.wiSc[x[0]] = !view.wiSc[x[0]]; wiScUi(); wiCalc(); }; });
   }
   function wiReset() {
     var c = cur(), md = data.model || {};
@@ -821,9 +826,12 @@ tr.passed td{opacity:.6}
     var Lw = inv(lo(Math.min(99, Math.max(0.5, w.L)) / 100) + Math.log(oddsL)) * 100; $('wiLv').textContent = pct(w.L, 1) + (oddsL !== 1 ? ' → ' + pct(Lw, 1) : '');
     var r = computeModel(E, P, now < NOV30_END ? NOV30_END : DEC31_END, I, W, now, floor ? { F: floor } : {});
     var F7v = f7(E, r.M); if (floor) F7v = Math.max(F7v, 60); Lw = Math.max(Lw, r.F + 5);
+    var md0 = data.model || {}, b0 = computeModel(c.E, (c.useLive ? live.Piran : md0.P_iran_nov30), now < NOV30_END ? NOV30_END : DEC31_END, (c.useLive && isNum(live.Pil) ? live.Pil : md0.P_il_nov30), md0.W != null ? md0.W : 5, now, {});
+    function anc(x, base, now0) { return isNum(x) && isNum(base) && isNum(now0) ? Math.max(0, Math.min(100, now0 + (x - base))) : x; }
+    var F70 = f7(c.E, b0.M); r = { F: anc(r.F, b0.F, c.F), M: anc(r.M, b0.M, c.M), R: anc(r.R, b0.R, c.R) }; F7v = anc(F7v, F70, c.F7); if (floor) { r.F = Math.max(r.F, 25); F7v = Math.max(F7v, 60); }
     var o = $('wiOut'); clear(o);
     function box(t, v, col, sub) { var a = add(o, 'div'); add(a, 'div', t, 'meta'); var b = add(a, 'b', v); if (col) b.style.color = col; add(a, 'div', sub, 'meta'); }
-    function dl(x, y) { return (x - y >= 0 ? '+' : '') + (x - y).toFixed(2) + ' vs now'; }
+    function dl(x, y) { var d = x - y; return Math.abs(d) < 0.005 ? 'same as now' : (d > 0 ? '+' : '') + d.toFixed(2) + ' vs now'; }
     box('Major campaign – 24 h', pct(r.F), bandCol(r.F, thr), dl(r.F, c.F) + (r.F >= thr ? ' · ⚠ alert' : ''));
     box('Major campaign – 7 days', pct(F7v, 1), bandCol(F7v, thr7), dl(F7v, c.F7 || f7(c.E, c.M)));
     box('Any strike – 24 h', pct(Lw, 1), null, dl(Lw, c.L));
@@ -866,7 +874,7 @@ tr.passed td{opacity:.6}
       var big = Math.abs(r.gap) >= Math.max(2, 0.25 * Math.max(r.now, r.ours, 1));
       gb.style.background = Math.abs(r.gap) < 0.5 ? 'var(--soft)' : big ? 'rgba(234,88,12,.15)' : 'var(--blue-bg)'; gb.style.color = Math.abs(r.gap) < 0.5 ? 'var(--muted)' : big ? '#c2410c' : 'var(--blue)';
       var n2 = p.next24 || {}, t24 = add(tr, 'td', null, 'n n24 hide-s'); if (isNum(n2.up)) { add(t24, 'span', '▲' + n2.up + '%', 'u'); add(t24, 'span', ' '); add(t24, 'span', '▼' + n2.down + '%', 'd'); t24.title = 'Experimental – no proven skill in the hindsight test'; t24.style.opacity = '.6'; }
-      if (r.passed) tr.className += ' passed'; var tc = add(tr, 'td'), cl = r.passed ? 'Awaiting result' : ((p.trade || {}).call || '–'); add(tc, 'span', cl, 'call ' + (/^Buy/.test(cl) ? 'buy' : /^Lean/.test(cl) ? 'lean' : 'out')); if ((p.trade || {}).ev_pct != null && /^(Buy|Lean)/.test(cl)) add(tc, 'small', ' +' + p.trade.ev_pct + '% exp.');
+      if (r.passed) tr.className += ' passed'; var tc = add(tr, 'td'), cl = r.passed ? 'Awaiting result' : ((p.trade || {}).call || '–'); add(tc, 'span', cl, 'call ' + (/^Buy/.test(cl) ? 'buy' : /^Lean/.test(cl) ? 'lean' : 'out')); var tq = (p.trade || {}).price, tpw = (p.trade || {}).side === 'Yes' ? p.watch_pct / 100 : 1 - p.watch_pct / 100; if (isNum(tq) && tq > 0 && /^(Buy|Lean)/.test(cl)) { var evx = (tpw / (tq / 100) - 1) * 100; add(tc, 'small', ' ' + (evx >= 0 ? '+' : '') + evx.toFixed(1) + '% exp.'); }
       var sc0 = p.score || {}, tp = add(tr, 'td', null, 'n'); if (isNum(sc0.first_pl)) add(tp, 'span', (sc0.first_pl >= 0 ? '+$' : '−$') + Math.abs(sc0.first_pl).toFixed(2), sc0.first_pl >= 0 ? 'plp' : 'pln'); else tp.textContent = '–';
       tr.onclick = function () { view.prOpen[p.key] = !view.prOpen[p.key]; renderMarkets(cur()); }; tr.tabIndex = 0; tr.setAttribute('role', 'button'); tr.setAttribute('aria-expanded', view.prOpen[p.key] ? 'true' : 'false'); tr.onkeydown = function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tr.onclick(); } };
       if (view.prOpen[p.key]) {
@@ -947,7 +955,7 @@ tr.passed td{opacity:.6}
     var first = pts[0], d = v - first.v, rel = first.v ? d / first.v * 100 : 0, wanted = rangeDays(view.hero), span = (Date.now() - first.t) / 864e5;
     tr.innerHTML = '<span class="' + (Math.abs(d) < 0.05 ? 'flat' : d > 0 ? 'up' : 'down') + '">' + '' + (Math.abs(d) < 0.05 ? T('flat') : (d > 0 ? T('upW') : T('downW')) + ' ' + Math.abs(d).toFixed(2) + ' ' + T('pts') + ' (' + (d > 0 ? '+' : '−') + Math.abs(rel).toFixed(0) + '%)') + '</span> <span class="meta">' + T('since') + ' ' + fmtFull(first.t) + (wanted && span < wanted - 0.2 ? ' (' + T('wstart') + ')' : '') + '</span>';
     var vs = pts.map(function (p) { return p.v; });
-    $('h7Tsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs), 1) + ' · גבוה ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' בדיקות · קו מקווקו = קו ההתרעה ' + REF7 + '%' : 'Low ' + pct(Math.min.apply(null, vs), 1) + ' · high ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' checks · dashed line = your ' + REF7 + '% alert' + (isDef7 ? ' (the level 7 days before the Feb 2026 attack)' : '');
+    $('h7Tsub').textContent = he ? 'נמוך ' + pct(Math.min.apply(null, vs), 1) + ' · גבוה ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' בדיקות · קו מקווקו = קו ההתרעה ' + REF7 + '%' : 'Low ' + pct(Math.min.apply(null, vs), 1) + ' · high ' + pct(Math.max.apply(null, vs), 1) + ' · ' + pts.length + ' checks · dashed line = your ' + REF7 + '% alert' + '';
     lineChart($('h7Chart'), $('h7Tip'), [{ name: he ? '7 ימים' : '7-day chance', c: col, pts: pts }], { lines: [{ v: REF7, c: css('--red'), label: (he ? 'התרעה ' : 'Alert ') + REF7 + '%' }], area: true, padL: 40 });
   }
   function valAt(k, t) { var best = null; (data.history || []).forEach(function (h) { var ht = Date.parse(h.utc); if (ht <= t && (!best || ht > Date.parse(best.utc))) best = h; }); if (!best) best = (data.history || [])[0]; return best ? (k === 'F7' ? f7(best.E, best.M) : best[k]) : null; }
@@ -1025,7 +1033,7 @@ tr.passed td{opacity:.6}
   window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferredInstall = e; $('sInstall').style.display = ''; });
 
   /* drill-down */
-  function openDrill(k) { view.drillK = k; $('ovD').className = 'ov show'; renderDrill(); }
+  function openDrill(k) { view.drillK = k; view.lastFocus = document.activeElement; $('ovD').className = 'ov show'; renderDrill(); var x = document.querySelector('#ovD .x'); if (x) x.focus(); }
   function renderDrill() {
     var k = view.drillK, se = SERIES[k], pts = histPts(k, rangeDays(view.drill), true), thr = k === 'F' ? (+S.thr || 7) : k === 'R' ? (+S.thrR || 25) : null;
     $('dTitle').textContent = se.n;
@@ -1064,7 +1072,7 @@ tr.passed td{opacity:.6}
     if (busy) return Promise.resolve(); var quiet = !manual; if (!quiet) setBusy(true); else busy = true; var t0 = Date.now();
     if (!quiet) step('Loading the latest saved check…');
     return refreshData().then(function () { if (!quiet) step('Reading live market prices…'); return loadLive(); })
-      .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; view.wi = null; render(); })
+      .then(function () { nextLiveAt = Date.now() + LIVE_POLL_MS; if (!view.wiTouched) view.wi = null; render(); })
       .then(function () { var l = quiet ? 0 : 600 - (Date.now() - t0); return l > 0 ? wait(l) : null; })
       .then(function () { if (quiet) busy = false; else setBusy(false); }, function () { if (quiet) busy = false; else setBusy(false); })
       .then(function () {
@@ -1078,7 +1086,7 @@ tr.passed td{opacity:.6}
     if (S.auto === 'on') { if (!busy && nextLiveAt && now >= nextLiveAt) { refreshAll(false); return; } if (!busy && nextDataAt && now >= nextDataAt) { refreshData().then(function () { noteCheck('auto'); render(); }); } }
     if (data) {
       noteCheck();
-      var txt = T('lastCheck') + ' ' + fmtFull(lastCheck.at) + (S.lang === 'he' ? ' (שעון ישראל)' : ' Israel time') + ' (' + ago(lastCheck.at) + ', ' + lastCheck.how + ')';
+      var txt = T('lastCheck') + ' ' + fmtFull(lastCheck.at) + (S.lang === 'he' ? ' (שעון ישראל)' : ' Israel time') + ' (' + ago(lastCheck.at) + (isOwner() ? ', ' + lastCheck.how : '') + ')';
       if (S.auto === 'on') { var nx = Math.max(0, Math.round((nextDataAt - now) / 1000)); $('tick').title = 'Page refresh in ' + Math.floor(nx / 60) + ':' + ('0' + (nx % 60)).slice(-2); }
       $('tick').textContent = txt;
       var fl = data.flight, FT = flightT(); if (fl && fl.active && FT && now < FT && now % 60000 < 1000) renderCards(cur(), +S.thr || 7, +S.thrR || 25);
@@ -1106,7 +1114,8 @@ tr.passed td{opacity:.6}
     var heads = he ? ['אין סימן לתקיפה קרובה', 'סיכון רקע – אין שבוע מסוים בסימון', 'סיכון מוגבר – שווה לעקוב מקרוב', 'סיכון גבוה – ייתכן שתקיפה קרובה']
       : ['No sign of an imminent strike', 'Background risk – no specific week flagged', 'Elevated risk – worth watching closely', 'High risk – a strike may be close'];
     var pk0 = (data.checklist || []).filter(function (x) { return PRED_KEYS[x.key] && (x.status === 'amber' || x.status === 'red'); }).length;
-    $('vHead').textContent = (lv.i === 1 && pk0 >= 2) ? L2('Background risk – ' + pk0 + ' of 3 early-warning signs partly lit', 'סיכון רקע – ' + pk0 + ' מתוך 3 סימני אזהרה מוקדמים דולקים חלקית') : heads[lv.i];
+    var pkr = (data.checklist || []).filter(function (x) { return PRED_KEYS[x.key] && x.status === 'red'; }).length;
+    $('vHead').textContent = (lv.i <= 1 && pkr) ? L2('Watch closely – ' + pkr + ' classic early-warning sign' + (pkr > 1 ? 's' : '') + ' confirmed', pkr === 1 ? 'לעקוב מקרוב – סימן אזהרה קלאסי אחד אושר' : 'לעקוב מקרוב – ' + pkr + ' סימני אזהרה קלאסיים אושרו') : heads[lv.i];
     var stH = (Date.now() - c.upd) / 36e5, al = $('autoLbl'), ld = $('liveDot');
     if (stH > 2.5) { $('vHead').textContent = L2('⚠ Data is ' + Math.floor(stH) + ' h old – ', '⚠ הנתונים בני ' + Math.floor(stH) + ' שעות – ') + $('vHead').textContent; if (al) al.textContent = L2('Data ' + Math.floor(stH) + ' h old', 'נתונים בני ' + Math.floor(stH) + ' ש׳'); if (ld) ld.style.background = css('--amber'); }
     else if (ld) ld.style.background = '';
@@ -1114,13 +1123,13 @@ tr.passed td{opacity:.6}
     if (lv.n) why += L2(lv.red + ' of ' + lv.n + ' warning signs red, ' + lv.amb + ' amber.', lv.red + ' מתוך ' + lv.n + ' סימני אזהרה באדום, ' + lv.amb + ' בכתום.');
     var pk = (data.checklist || []).filter(function (x) { return PRED_KEYS[x.key] && (x.status === 'amber' || x.status === 'red'); });
     var PKN = { embassy: ['US embassy alert', 'התרעת שגרירות'], deadline: ['loose deadline', 'מועד לא קבוע'], call: ['Trump–Netanyahu contact', 'קשר טראמפ–נתניהו'] };
-    if (pk.length >= 2) why += L2(' ' + pk.length + ' of the 3 classic early-warning signs are partly lit: ' + pk.map(function (x) { return PKN[x.key][0]; }).join(', ') + '.', ' ' + pk.length + ' מתוך 3 סימני האזהרה הקלאסיים דולקים חלקית: ' + pk.map(function (x) { return PKN[x.key][1]; }).join(', ') + '.');
+    if (pk.length >= 2) why += L2(' The 3 classic early-warning signs: ' + pk.length + ' at watch level, ' + pk.filter(function (x) { return x.status === 'red'; }).length + ' confirmed.', ' 3 סימני האזהרה הקלאסיים: ' + pk.length + ' ברמת מעקב, ' + pk.filter(function (x) { return x.status === 'red'; }).length + ' מאושרים.');
     $('vWhy').textContent = why;
     var acts = he ? ['שגרה רגילה. אין צורך לעשות דבר.', 'שגרה רגילה. כדאי לדעת איפה המרחב המוגן הקרוב ולהשאיר את אפליקציית פיקוד העורף פעילה.', 'בדקו את הנחיות פיקוד העורף, ודאו שהמרחב המוגן זמין והטלפון טעון. מי שטס – לבדוק את הטיסה.', 'פעלו לפי הנחיות פיקוד העורף עכשיו.']
       : ['Normal routine. Nothing to do.', 'Normal routine. Know where your nearest shelter is and keep the Home Front Command app on.', 'Check Home Front Command guidance, make sure your shelter is ready and your phone charged. Travellers: check your flight.', 'Follow Home Front Command instructions now.'];
     var d = $('vDo'); clear(d); add(d, 'span', (he ? 'מה לעשות: ' : 'What to do: ') + acts[lv.i] + ' ');
     var a = add(d, 'a', he ? 'פיקוד העורף ↗' : 'Home Front Command ↗'); a.href = 'https://www.oref.org.il/'; a.target = '_blank'; a.rel = 'noopener noreferrer';
-    if (c.fa && isNum(c.R) && S.flDep) { var thrR = +S.thrR || 25; add(d, 'div', (he ? '✈️ הטיסה שלך: ' : '✈️ Your flight: ') + (c.R < thrR * 0.6 ? (he ? 'סיכון נמוך (' + pct(c.R, 0) + ') – לשמור על ההזמנה' : 'low risk (' + pct(c.R, 0) + ' cancel) – keep your booking') : c.R < thrR ? (he ? 'סיכון בינוני (' + pct(c.R, 0) + ') – לעקוב' : 'medium risk (' + pct(c.R, 0) + ') – keep checking') : (he ? 'סיכון גבוה (' + pct(c.R, 0) + ') – לבדוק חלופות' : 'high risk (' + pct(c.R, 0) + ') – look at alternatives'))); }
+    if (c.fa && isNum(c.R)) { var thrR = +S.thrR || 25; add(d, 'div', S.flDep ? (he ? '✈️ הטיסה שלך: ' : '✈️ Your flight: ') : (he ? '✈️ הטיסה במעקב: ' : '✈️ Tracked flight: ') + (c.R < thrR * 0.6 ? (he ? 'סיכון נמוך (' + pct(c.R, 0) + ') – לשמור על ההזמנה' : 'low risk (' + pct(c.R, 0) + ' cancel) – keep your booking') : c.R < thrR ? (he ? 'סיכון בינוני (' + pct(c.R, 0) + ') – לעקוב' : 'medium risk (' + pct(c.R, 0) + ') – keep checking') : (he ? 'סיכון גבוה (' + pct(c.R, 0) + ') – לבדוק חלופות' : 'high risk (' + pct(c.R, 0) + ') – look at alternatives'))); }
     var sc = $('vScale'); clear(sc); LEVELS.forEach(function (x, i) { var s = add(sc, 'span', he ? x[2] : x[1]); if (i === lv.i) { s.className = 'on'; s.style.background = css(x[3]); } });
   }
   function renderChanges(c) {
@@ -1128,7 +1137,7 @@ tr.passed td{opacity:.6}
     var since = Date.now() - 24 * 36e5, evs = (data.events || []).filter(function (e) { return Date.parse(e.time_utc) >= since; });
     var mvAll = evs.filter(function (e) { return effClass(e.effect) !== 'flat'; }).sort(function (a, b) { return Date.parse(b.time_utc) - Date.parse(a.time_utc); }), mv = mvAll.slice(0, 3);
     if (!mv.length) add(el, 'div', L2('No news event moved the estimate in the last 24 hours.', 'אף אירוע חדשותי לא הזיז את ההערכה ב-24 השעות האחרונות.'), 'meta');
-    mv.forEach(function (e) { var r = add(el, 'div', null, 'row'), ec = effClass(e.effect); add(r, 'span', fmt(Date.parse(e.time_utc)), 't'); var m = add(r, 'div', null, 'ltr'), u = safeUrl(e.link);
+    mv.forEach(function (e) { var r = add(el, 'div', null, 'row'), ec = effClass(e.effect); add(r, 'span', fmt(Date.parse(e.time_utc), { weekday: 'short' }), 't'); var m = add(r, 'div', null, 'ltr'), u = safeUrl(e.link);
       if (u) { var a = add(m, 'a', priv(e.text)); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else add(m, 'span', priv(e.text)); add(m, 'span', priv(e.source || ''), 'src'); add(r, 'span', effTx(e.effect), 'eff e-' + ec); });
     var flat = evs.length - mvAll.length, more = mvAll.length - mv.length, ft = add(el, 'div', null, 'meta'); ft.style.marginTop = '6px';
     ft.textContent = (more > 0 ? L2('+' + more + ' more changes · ', '+' + more + ' שינויים נוספים · ') : '') + L2(flat + ' other news items in the last 24 hours did not change the estimate.', flat + ' ידיעות נוספות ב-24 השעות האחרונות לא שינו את ההערכה.');
@@ -1180,6 +1189,7 @@ tr.passed td{opacity:.6}
     Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function (b) { var on = b.getAttribute('data-tab') === t; b.className = on ? 'on' : ''; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on ? 0 : -1; var o = b.querySelector('.bdg'); if (o) b.appendChild(o); });
     Array.prototype.forEach.call(document.querySelectorAll('.tabp'), function (p) { p.className = 'tabp' + (p.getAttribute('data-tab') === t ? ' on' : ''); });
     if (push !== false) { try { history.replaceState(null, '', t === 'now' ? location.pathname + location.search : '#' + t); } catch (e) {} }
+    if (t === 'bets' && window.__histAuto && !window.__histDone) { window.__histDone = 1; window.__histAuto(); }
     if (data) render();
   }
   function toast(m) { var t = $('toastEl'); if (!t) { t = add(document.body, 'div', '', 'toast'); t.id = 'toastEl'; t.setAttribute('role', 'status'); } t.textContent = m; t.className = 'toast on'; clearTimeout(t._h); t._h = setTimeout(function () { t.className = 'toast'; }, 2200); }
@@ -1195,22 +1205,23 @@ tr.passed td{opacity:.6}
     Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function (b) { var k = TABLBL[b.getAttribute('data-tab')], sp = b.querySelector('span:not(.bdg)'); if (k && sp) sp.textContent = k[i]; });
     var al = $('autoLbl'); if (al && i) al.textContent = S.auto === 'on' ? 'רענון אוטומטי' : 'רענון כבוי';
   }
-  function flightGate(c) { var show = c.fa && !!S.flDep, cr = $('cardR'), h = $('flHint'); if (cr) cr.style.display = show ? '' : 'none';
-    if (h) { h.style.display = c.fa && !S.flDep ? '' : 'none'; h.textContent = L2('✈️ A flight watch is running. To see your own flight\'s cancellation risk here, add its departure time in ⚙️ Settings (kept on this device only).', '✈️ מעקב טיסה פעיל. כדי לראות כאן את סיכון הביטול של הטיסה שלך, הוסיפו את מועד ההמראה בהגדרות ⚙️ (נשמר רק במכשיר הזה).'); } }
+  function flightGate(c) { var show = c.fa, cr = $('cardR'), h = $('flHint'); if (cr) cr.style.display = show ? '' : 'none';
+    if (h) { h.style.display = 'none'; } }
   function agoTx(ms) { var m = Math.max(0, Math.round((Date.now() - ms) / 60000)); if (!HE()) return null; if (m < 1) return 'עכשיו'; if (m < 60) return 'לפני ' + m + ' דק׳'; return 'לפני ' + Math.floor(m / 60) + ' ש׳ ו-' + (m % 60) + ' דק׳'; }
-  var MORELBL = { full: ['Full timeline ›', 'ציר הזמן המלא ›'], det: ['Details ›', 'פרטים ›'], lcav: ['Mostly small, targeted strikes (like Qeshm or Sirik), not a wider war. No alert on this figure.', 'בעיקר תקיפות קטנות וממוקדות (כמו בקשם או סיריק), לא מלחמה רחבה. אין התרעה על המספר הזה.'], foot: ['Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.', 'הערכות בלבד, לא תחזית ולא ייעוץ. ללא קשר לפולימרקט או לממשלה כלשהי.'], top: ['Back to top ↑', 'חזרה למעלה ↑'] };
+  var MORELBL = { sub: ['Hourly estimate of the chance the US or Israel starts a major strike campaign on Iran, from public news, official sources and betting markets.', 'הערכה שעתית של הסיכוי שארה״ב או ישראל יפתחו במערכת תקיפות רחבה באיראן, על סמך חדשות, מקורות רשמיים ושווקי הימורים.'], full: ['Full timeline ›', 'ציר הזמן המלא ›'], det: ['Details ›', 'פרטים ›'], lcav: ['Mostly small, targeted strikes (like Qeshm or Sirik), not a wider war. No alert on this figure.', 'בעיקר תקיפות קטנות וממוקדות (כמו בקשם או סיריק), לא מלחמה רחבה. אין התרעה על המספר הזה.'], foot: ['Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.', 'הערכות בלבד, לא תחזית ולא ייעוץ. ללא קשר לפולימרקט או לממשלה כלשהי.'], top: ['Back to top ↑', 'חזרה למעלה ↑'] };
   function postRender(c) { var i = HE() ? 1 : 0;
     Array.prototype.forEach.call(document.querySelectorAll('[data-m]'), function (e) { var k = MORELBL[e.getAttribute('data-m')]; if (k) e.textContent = k[i]; });
     [['hMark', 'hThrLbl'], ['h7Mark', 'h7RefLbl']].forEach(function (x) { var m = $(x[0]), l = $(x[1]); if (m && l) l.style.left = m.style.left; });
-    var own = !!S.flDep; Array.prototype.forEach.call(document.querySelectorAll('#open li'), function (li) { if (!own && /^your flight/i.test(li.textContent)) li.style.display = 'none'; });
+    var own = !!S.flDep; Array.prototype.forEach.call(document.querySelectorAll('#open li'), function (li) {  });
     var w = $('wiW'); if (w && w.parentNode) w.parentNode.style.display = own ? '' : 'none';
     var rb = $('refreshBtn'); if (rb) { var hasKey = false; try { hasKey = !!localStorage.getItem('iw-key'); } catch (e) {} rb.classList.toggle('ghost', !hasKey); rb.title = hasKey ? '' : L2('Starts a full check – owner password needed', 'מפעיל בדיקה מלאה – נדרשת סיסמת בעלים'); }
   }
+  function isOwner() { try { return !!localStorage.getItem('iw-key'); } catch (e) { return false; } }
 
   /* wire up */
   applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi(); applyLang();
   $('themeBtn').onclick = function () { S.dark = !document.body.classList.contains('dark'); saveSettings(); applyTheme(); render(); };
-  $('setBtn').onclick = function () { $('sThr').value = S.thr; $('sThr7').value = S.thr7; $('sThrR').value = S.thrR; $('sFlNo').value = S.flNo || ''; $('sFlDep').value = S.flDep || ''; notifUi(); $('ovS').className = 'ov show'; };
+  $('setBtn').onclick = function () { view.lastFocus = document.activeElement; setTimeout(function () { var f = $('sThr'); if (f) f.focus(); }, 30); $('sThr').value = S.thr; $('sThr7').value = S.thr7; $('sThrR').value = S.thrR; $('sFlNo').value = S.flNo || ''; $('sFlDep').value = S.flDep || ''; notifUi(); $('ovS').className = 'ov show'; };
   $('langBtn').onclick = function () { S.lang = S.lang === 'he' ? 'en' : 'he'; saveSettings(); render(); applyLang(); tick(); };
   $('sFlNo').oninput = function () { S.flNo = this.value.trim().toUpperCase(); saveSettings(); render(); };
   $('sFlDep').oninput = function () { S.flDep = this.value; saveSettings(); live = null; render(); };
@@ -1227,8 +1238,8 @@ tr.passed td{opacity:.6}
   segPick('scaleSeg', function (v) { view.scale = v; renderMain(+S.thr || 7); });
   segPick('itemSeg', function (v) { view.itemF = v; renderItems(); });
   Array.prototype.forEach.call(document.querySelectorAll('th[data-s]'), function (th) { th.onclick = function () { var k = th.getAttribute('data-s'); view.sortD = view.sortK === k ? -view.sortD : (k === 'label' ? 1 : -1); view.sortK = k; renderMarkets(cur()); }; });
-  ['E', 'P', 'I', 'W', 'L'].forEach(function (k) { $('wi' + k).oninput = function () { view.wi[k] = parseFloat(this.value); wiCalc(); }; });
-  $('wiReset').onclick = function () { wiReset(); };
+  ['E', 'P', 'I', 'W', 'L'].forEach(function (k) { $('wi' + k).oninput = function () { view.wiTouched = true; view.wi[k] = parseFloat(this.value); wiCalc(); }; });
+  $('wiReset').onclick = function () { view.wiTouched = false; wiReset(); };
   ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
   (function () { var p = $('parts'); if (p) { p.style.cursor = 'pointer'; p.title = 'Market part details'; p.onclick = function () { openDrill('M'); }; } })();
   ['hNum','h7Num'].forEach(function (id) { var e = $(id); if (e) { e.style.cursor = 'pointer'; e.title = 'Details'; e.onclick = function () { openDrill('F'); }; } });
@@ -1331,7 +1342,7 @@ tr.passed td{opacity:.6}
     Object.keys(HIST).forEach(function (k) { var h = HIST[k]; h.pts.forEach(function (q) { rows.push('"' + h.slug + '","' + h.outcome + '",' + new Date(q[0]).toISOString() + ',' + q[1].toFixed(2)); }); });
     var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([rows.join('\n')], { type: 'text/csv' })); a.download = 'polymarket_price_history.csv'; document.body.appendChild(a); a.click(); a.remove();
   }
-  $('hLoad').onclick = histLoad; $('hLoad').hidden = true; setTimeout(histLoadAuto, 1500); $('hCsv').onclick = histCsv; $('hSel').onchange = histRender;
+  $('hLoad').onclick = histLoad; $('hLoad').hidden = true; window.__histAuto = histLoadAuto; $('hCsv').onclick = histCsv; $('hSel').onchange = histRender;
 
   /* ---- full check progress ---- */
   var PROG_URL = 'https://api.github.com/repos/' + OWNER + '/' + REPO + '/contents/progress.json?ref=main', PROG_RAW = 'https://raw.githubusercontent.com/' + OWNER + '/' + REPO + '/main/progress.json';
@@ -1404,11 +1415,11 @@ tr.passed td{opacity:.6}
         if (pg.stage === 'skipped') { full.skipped = true; }
         else if (stageIdx(pg.stage) > stageIdx(full.stage)) { if (full.stage === 'sent') flog('The check has started and is reporting progress'); full.stage = pg.stage; }
       }
-    }).catch(function () {}).then(function () { return refreshData(); }).then(function () {
+    }).catch(function () {}).then(function () { full.n = (full.n || 0) + 1; if (stageIdx(full.stage) >= stageIdx('publishing') || full.n % 4 === 1) return refreshData(); }).then(function () {
       if (!full) return;
       var upd = data ? Date.parse(data.updated_utc) : 0;
       if (data && data.updated_utc !== full.before && upd > full.t0 - 15 * 60000) {
-        noteCheck('manual'); view.wi = null; render();
+        noteCheck('manual'); if (!view.wiTouched) view.wi = null; render();
         fullEnd('✓ Full check done ' + fmt(upd) + ' – main estimate ' + pct(cur().F), 'done'); return;
       }
       if (full.skipped) { fullEnd('✓ A full check finished minutes ago – showing it (results are already current).', 'done'); return; }
@@ -1471,6 +1482,10 @@ tr.passed td{opacity:.6}
   $('fTop').onclick = function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
   window.addEventListener('hashchange', function () { showTab((location.hash || '').slice(1), false); });
   (function () { var h = (location.hash || '').slice(1); if (TABS.indexOf(h) > 0) showTab(h, false); })();
+  Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.tabIndex = 0; c.setAttribute('role', 'button'); c.setAttribute('aria-label', 'Details: ' + ((c.querySelector('h2') || {}).textContent || '')); c.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); c.click(); } }); });
+  document.addEventListener('keydown', function (e) { var ov = document.querySelector('.ov.show');
+    if (e.key === 'Tab' && ov) { var fs = ov.querySelectorAll('button,input,select,a[href],[tabindex="0"]'); if (fs.length) { var f0 = fs[0], f1 = fs[fs.length - 1]; if (e.shiftKey && document.activeElement === f0) { e.preventDefault(); f1.focus(); } else if (!e.shiftKey && document.activeElement === f1) { e.preventDefault(); f0.focus(); } } }
+    if (e.key === 'Escape' && ov && view.lastFocus && view.lastFocus.focus) { setTimeout(function () { try { view.lastFocus.focus(); } catch (x) {} }, 0); } });
   refreshAll(false).then(resumeFull);
   setInterval(tick, 1000);
   window.__iranWatch = { computeModel: computeModel, f7: f7 };
