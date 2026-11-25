@@ -508,7 +508,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
 </div>
 
 <footer>
-  <div class="fmeta"><span data-m="foot">Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.</span> · <span id="pgVer" title="Published 2026-11-25T00:33:42Z">Page version 8 · published Wed 25 Nov 2026, 02:33 Israel time</span> · <a href="#" id="fTop" data-m="top">Back to top ↑</a></div>
+  <div class="fmeta"><span data-m="foot">Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.</span> · <a href="#" id="fNotif" data-m="notif">🔔 Alerts on this device</a> · <span id="pgVer">Page version 8 · 25 Nov 2026</span> · <a href="#" id="fTop" data-m="top">Back to top ↑</a></div>
 </footer>
 </div>
 
@@ -713,7 +713,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     if (curTab === 'bets') { safeRun('best', function () { renderBest(c); }); safeRun('markets', function () { renderMarkets(c); }); safeRun('hist', histRender); }
     if (curTab === 'record') safeRun('bt', renderBacktest);
     if (curTab === 'model') { safeRun('parts', function () { renderParts(c); }); safeRun('wi', function () { if (!view.wi) wiReset(); else wiCalc(); }); }
-    safeRun('lang', function () { applyLang(); txAll(); renderLabels(); }); safeRun('post', function () { postRender(c); }); safeRun('notify', function () { notifyCheck(c, thr, thrR); }); if (view.drillK) safeRun('drill', renderDrill);
+    safeRun('lang', function () { applyLang(); txAll(); renderLabels(); }); safeRun('post', function () { postRender(c); }); safeRun('a11y', a11yLang); safeRun('notify', function () { notifyCheck(c, thr, thrR); }); if (view.drillK) safeRun('drill', renderDrill);
   }
   function renderHero(c, thr) {
     var he = S.lang === 'he', F = c.F, max = Math.max(10, Math.ceil(Math.max(F, thr) * 1.25)), col = bandCol(F, thr);
@@ -724,7 +724,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     var he = S.lang === 'he';
     $('hDist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת לקו ההתרעה של ' + thr + '%' : gap.toFixed(1) + ' points below the ' + thr + '% alert line')
       : (he ? 'מעל קו ההתרעה של ' + thr + '% ב-' + (-gap).toFixed(1) + ' נקודות' : 'Above the ' + thr + '% alert line by ' + (-gap).toFixed(1) + ' points');
-    $('hDist').style.color = col;
+    $('hDist').textContent += d24('F', F); $('hDist').style.color = col;
     var f = $('hFill'); f.style.width = Math.min(100, F / max * 100) + '%'; f.style.background = col;
     $('hPin').style.left = Math.min(100, F / max * 100) + '%'; $('hPin').style.background = col;
     $('hMark').style.left = (thr / max * 100) + '%'; $('hThrLbl').textContent = (he ? 'התרעה ' : 'alert ') + thr + '%'; $('hMaxLbl').textContent = max + '%';
@@ -942,7 +942,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   function renderH7(c) {
     var REF7 = +S.thr7 || 15, isDef7 = REF7 === 15;
     var v = c.F7, he = S.lang === 'he', n = $('h7Num'); if (!isNum(v)) { n.textContent = '–'; return; }
-    var col = bandCol(v, REF7); n.textContent = pct(v, 1); n.style.color = col;
+    var col = bandCol(v, REF7); n.textContent = pct(v, 1); n.style.color = col; setTimeout(function () { var hd = $('h7Dist'); if (hd && hd.textContent.indexOf('24') < 0) hd.textContent += d24('F7', v); }, 0);
     var st = $('h7Status'); st.textContent = v >= REF7 ? T('stAbove') : (v >= REF7 * 0.7 ? T('stElev') : T('stBelow')); st.className = 'status ' + (v >= REF7 ? 'bad' : v >= REF7 * 0.7 ? 'warn' : 'ok');
     var max = Math.max(Math.ceil(REF7 * 1.4), Math.ceil(Math.max(v, REF7) * 1.25)), gap = REF7 - v;
     $('h7Dist').textContent = gap > 0 ? (he ? gap.toFixed(1) + ' נקודות מתחת לקו ההתרעה של ' + REF7 + '%' : gap.toFixed(1) + ' points below the ' + REF7 + '% alert line') : (he ? 'מעל קו ההתרעה של ' + REF7 + '% ב-' + (-gap).toFixed(1) + ' נקודות' : 'Above the ' + REF7 + '% alert line by ' + (-gap).toFixed(1) + ' points');
@@ -1208,7 +1208,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   function flightGate(c) { var show = c.fa, cr = $('cardR'), h = $('flHint'); if (cr) cr.style.display = show ? '' : 'none';
     if (h) { h.style.display = 'none'; } }
   function agoTx(ms) { var m = Math.max(0, Math.round((Date.now() - ms) / 60000)); if (!HE()) return null; if (m < 1) return 'עכשיו'; if (m < 60) return 'לפני ' + m + ' דק׳'; return 'לפני ' + Math.floor(m / 60) + ' ש׳ ו-' + (m % 60) + ' דק׳'; }
-  var MORELBL = { sub: ['Hourly estimate of the chance the US or Israel starts a major strike campaign on Iran, from public news, official sources and betting markets.', 'הערכה שעתית של הסיכוי שארה״ב או ישראל יפתחו במערכת תקיפות רחבה באיראן, על סמך חדשות, מקורות רשמיים ושווקי הימורים.'], full: ['Full timeline ›', 'ציר הזמן המלא ›'], det: ['Details ›', 'פרטים ›'], lcav: ['Mostly small, targeted strikes (like Qeshm or Sirik), not a wider war. No alert on this figure.', 'בעיקר תקיפות קטנות וממוקדות (כמו בקשם או סיריק), לא מלחמה רחבה. אין התרעה על המספר הזה.'], foot: ['Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.', 'הערכות בלבד, לא תחזית ולא ייעוץ. ללא קשר לפולימרקט או לממשלה כלשהי.'], top: ['Back to top ↑', 'חזרה למעלה ↑'] };
+  var MORELBL = { notif: ['🔔 Alerts on this device', '🔔 התרעות במכשיר הזה'], sub: ['Hourly estimate of the chance the US or Israel starts a major strike campaign on Iran, from public news, official sources and betting markets.', 'הערכה שעתית של הסיכוי שארה״ב או ישראל יפתחו במערכת תקיפות רחבה באיראן, על סמך חדשות, מקורות רשמיים ושווקי הימורים.'], full: ['Full timeline ›', 'ציר הזמן המלא ›'], det: ['Details ›', 'פרטים ›'], lcav: ['Mostly small, targeted strikes (like Qeshm or Sirik), not a wider war. No alert on this figure.', 'בעיקר תקיפות קטנות וממוקדות (כמו בקשם או סיריק), לא מלחמה רחבה. אין התרעה על המספר הזה.'], foot: ['Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.', 'הערכות בלבד, לא תחזית ולא ייעוץ. ללא קשר לפולימרקט או לממשלה כלשהי.'], top: ['Back to top ↑', 'חזרה למעלה ↑'] };
   function postRender(c) { var i = HE() ? 1 : 0;
     Array.prototype.forEach.call(document.querySelectorAll('[data-m]'), function (e) { var k = MORELBL[e.getAttribute('data-m')]; if (k) e.textContent = k[i]; });
     [['hMark', 'hThrLbl'], ['h7Mark', 'h7RefLbl']].forEach(function (x) { var m = $(x[0]), l = $(x[1]); if (m && l) l.style.left = m.style.left; });
@@ -1217,6 +1217,9 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     var rb = $('refreshBtn'); if (rb) { var hasKey = false; try { hasKey = !!localStorage.getItem('iw-key'); } catch (e) {} rb.classList.toggle('ghost', !hasKey); rb.title = hasKey ? '' : L2('Starts a full check – owner password needed', 'מפעיל בדיקה מלאה – נדרשת סיסמת בעלים'); }
   }
   function isOwner() { try { return !!localStorage.getItem('iw-key'); } catch (e) { return false; } }
+  function d24(k, v) { var was = nearAgo(k, 24); if (!isNum(was) || !isNum(v)) return ''; var d = v - was; return ' · ' + (Math.abs(d) < 0.05 ? L2('same as 24 h ago', 'כמו לפני 24 ש׳') : (d > 0 ? '▲ +' : '▼ −') + Math.abs(d).toFixed(1) + L2(' vs 24 h ago', ' מול לפני 24 ש׳')); }
+  function a11yLang() { var he = HE(); Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.setAttribute('aria-label', (he ? 'פרטים: ' : 'Details: ') + ((c.querySelector('h2') || {}).textContent || '')); });
+    var st = document.querySelector('#ovS .modal'); if (st) st.setAttribute('aria-label', he ? 'הגדרות' : 'Settings'); var tb = $('tabs'); if (tb) tb.setAttribute('aria-label', he ? 'אזורים' : 'Sections'); }
 
   /* wire up */
   applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi(); applyLang();
@@ -1479,6 +1482,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   $('tabs').addEventListener('keydown', function (e) { var i = TABS.indexOf(curTab); if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { var d = (e.key === 'ArrowRight') !== (S.lang === 'he') ? 1 : -1; var n = TABS[(i + d + TABS.length) % TABS.length]; showTab(n); var bt = document.querySelector('.tabs [data-tab="' + n + '"]'); if (bt) bt.focus(); e.preventDefault(); } });
   Array.prototype.forEach.call(document.querySelectorAll('[data-go]'), function (b) { b.onclick = function (e) { e.preventDefault(); e.stopPropagation(); showTab(b.getAttribute('data-go')); var t = $('tabs'); if (t) t.scrollIntoView({ behavior: 'smooth' }); }; });
   $('shareBtn').onclick = doShare;
+  $('fNotif').onclick = function (e) { e.preventDefault(); $('setBtn').click(); setTimeout(function () { var b = $('sNotif'); if (b) { b.scrollIntoView({ block: 'center' }); b.focus(); } }, 60); };
   $('fTop').onclick = function (e) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); };
   window.addEventListener('hashchange', function () { showTab((location.hash || '').slice(1), false); });
   (function () { var h = (location.hash || '').slice(1); if (TABS.indexOf(h) > 0) showTab(h, false); })();
