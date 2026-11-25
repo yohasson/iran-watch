@@ -399,7 +399,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
 
   <div class="two fade" id="sigRow">
   <div class="panel mini" id="sigMini"><h3><span class="ico" aria-hidden="true">🚦</span> <span data-l="sigMiniT">Warning signs</span><span class="sp"></span><button class="lnk" data-go="signals" data-m="det">Details ›</button></h3><div id="sigDots"></div></div>
-    <div class="card" data-k="L" style="--c:var(--violet)"><span class="more">Details ›</span>
+    <div class="card" data-k="L" style="--c:var(--violet)"><span class="more" data-m="det">Details ›</span>
     <h2 data-i18n="cL">Any US/Israeli strike on Iranian soil – 24 h</h2><div class="big" id="vL">–</div><div class="delta" id="dL"></div><svg id="sL" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note"><span data-m="lcav">Mostly small, targeted strikes (like Qeshm or Sirik), not a wider war. No alert on this figure.</span></div></div>
   </div>
@@ -409,7 +409,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     <div class="panel" id="watchPanel"><h3><span class="ico" aria-hidden="true">👀</span> <span data-i18n="glWatch">What to watch next</span></h3><ul class="gln glw" id="open"></ul><div class="meta" id="sumNote" style="margin-top:8px"></div></div>
   </div>
   <div class="two fade" id="cardsRow">
-    <div class="card" data-k="R" id="cardR" style="--c:var(--cR)"><span class="more">Details ›</span>
+    <div class="card" data-k="R" id="cardR" style="--c:var(--cR)"><span class="more" data-m="det">Details ›</span>
     <h2 id="rTitle">Flight cancellation risk</h2><div class="big" id="vR">–</div><div class="delta" id="dR"></div><svg id="sR" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="cd" id="cd"></div><div class="note" id="rNote"></div><div id="flPanel" class="flmerge"><div class="advice" id="advice"></div><div class="meta" id="flInfo" style="margin-bottom:10px"></div><div class="fl-links" id="flLinks"></div></div></div>
   </div>
@@ -495,10 +495,10 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
 
 <div id="retired" hidden style="display:none">
   <div class="sum" id="sum"></div><ul id="glNews"></ul><ul id="glWatch"></ul>
-  <div class="card" data-k="F" style="--c:var(--cF)"><span class="more">Details ›</span>
+  <div class="card" data-k="F" style="--c:var(--cF)"><span class="more" data-m="det">Details ›</span>
     <h2 data-i18n="cF">Major campaign – next 24 h</h2><div class="big" id="vF">–</div><div class="delta" id="dF"></div><svg id="sF" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note">Sustained, multi-target campaign like 13 Jun 2025 or 28 Feb 2026.</div></div>
-  <div class="card" data-k="M" style="--c:var(--cM)"><span class="more">Details ›</span>
+  <div class="card" data-k="M" style="--c:var(--cM)"><span class="more" data-m="det">Details ›</span>
     <h2 data-i18n="cM">Market part (from Iran airspace-closure price)</h2><div class="big" id="vM">–</div><div class="delta" id="dM"></div><svg id="sM" viewBox="0 0 200 46" preserveAspectRatio="none"></svg>
     <div class="note" id="mNote"></div></div>
   <div class="panel">
@@ -508,7 +508,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
 </div>
 
 <footer>
-  <div class="fmeta"><span data-m="foot">Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.</span> · <a href="#" id="fNotif" data-m="notif">🔔 Alerts on this device</a> · <span id="pgVer" title="Published 2026-11-25T06:52:39Z">Page version 8 · published Wed 25 Nov 2026, 08:52 Israel time</span> · <a href="#" id="fTop" data-m="top">Back to top ↑</a></div>
+  <div class="fmeta"><span data-m="foot">Estimates only, not predictions or advice. Not affiliated with Polymarket or any government.</span> · <a href="#" id="fNotif" data-m="notif">🔔 Alerts on this device</a> · <span id="pgVer">Page version 8.1 · published Wed 25 Nov 2026, 09:01 Israel time</span> · <a href="#" id="fTop" data-m="top">Back to top ↑</a></div>
 </footer>
 </div>
 
@@ -744,7 +744,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     else if (c.F >= thr * 0.7) { cls = 'warn'; head = 'Elevated – main estimate ' + pct(c.F) + ', alert line ' + thr + '%'; }
     else { cls = 'ok'; head = (S.lang === 'he' ? 'הבדיקה האחרונה (' : 'Latest check (') + fmt(c.upd) + '): ' + cleanSummary(data.summary); }
     var trig = (data.alert && data.alert.hard_triggers) || []; if (trig.length) small += (small ? ' · ' : '') + 'Hard triggers: ' + trig.map(function (t) { return t.text || t; }).join('; ');
-    if (live && live.error) small += (small ? ' · ' : '') + 'Live prices unavailable (' + live.error + ') – showing the latest saved check.';
+    if (live && live.error) small += (small ? ' · ' : '') + (S.lang === 'he' ? 'מחירי השוק החיים לא זמינים כרגע – מוצגת הבדיקה השמורה האחרונה.' : 'Live market prices unavailable right now – showing the latest saved check.');
     else if (c.useLive) small += (small ? ' · ' : '') + 'Market part refreshed live at ' + fmt(live.at) + ' (Iran airspace by ' + live.label + ': ' + pct(live.Piran * 100, 1) + ').';
     if (stale) small += (small ? ' · ' : '') + 'No new automated check for ' + ago(c.upd).replace(' ago', '') + ' – the hourly watch may be paused.';
     b.className = 'banner ' + (stale && !alertOn ? 'warn' : cls); clear(b); add(b, 'span', null, 'dot'); var bd = add(b, 'div', head); if (small) add(bd, 'small', small);
@@ -967,7 +967,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     var checks = (data.history || []).filter(function (h) { return Date.parse(h.utc) >= t24; }).length, evs = (data.events || []).filter(function (e) { return Date.parse(e.time_utc) >= t24; });
     var ups = evs.filter(function (e) { return effClass(e.effect) === 'up'; }).length, downs = evs.filter(function (e) { return effClass(e.effect) === 'down'; }).length;
     var hi = Math.max.apply(null, histPts('F', 1, true).map(function (p) { return p.v; }).concat([c.F]));
-    $('sumNote').textContent = (S.lang === 'he' ? 'ב-24 השעות האחרונות: ' : 'Last 24 hours: ') + checks + ' checks · ' + evs.length + ' news events (' + ups + ' raised, ' + downs + ' lowered the risk) · 24-h high ' + pct(hi) + ' vs alert line ' + thr + '% · ' + (data.alert && data.alert.active ? 'an alert is active' : 'no alerts sent');
+    $('sumNote').textContent = S.lang === 'he' ? 'ב-24 השעות האחרונות: ' + checks + ' בדיקות · ' + evs.length + ' ידיעות (' + ups + ' העלו, ' + downs + ' הורידו את הסיכון) · שיא 24 ש׳ ' + pct(hi) + ' מול קו התרעה ' + thr + '% · ' + (data.alert && data.alert.active ? 'התרעה פעילה' : 'לא נשלחו התרעות') : 'Last 24 hours: ' + checks + ' checks · ' + evs.length + ' news events (' + ups + ' raised, ' + downs + ' lowered the risk) · 24-h high ' + pct(hi) + ' vs alert line ' + thr + '% · ' + (data.alert && data.alert.active ? 'an alert is active' : 'no alerts sent');
   }
   var DEFAULT_CHECK = [['order', 'Strike go-order / Situation Room on Iran'], ['embassy', 'US embassy departure order'], ['homefront', 'Home Front Command guideline change'], ['airspace', 'Airspace closure (Israel / Iran / Jordan / Iraq)'],
     ['tankers', 'Tankers / AWACS massing over the region'], ['airlines', 'Foreign airlines suspending Israel flights'], ['deadline', 'Fixed diplomatic deadline (IAEA vote, ultimatum)'], ['call', 'Direct Trump–Netanyahu call on Iran'], ['casualties', 'US casualties or downed US aircraft'], ['iranfire', 'Iranian attacks on US bases or ships']];
@@ -976,25 +976,25 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     if (!Array.isArray(list) || !list.length) list = DEFAULT_CHECK.map(function (d) { return { key: d[0], label: d[1], status: 'grey', note: 'Not yet tracked by the hourly check' }; });
     list.forEach(function (it) { var x = add(el, 'div', null, 'light'); add(x, 'span', null, 'l ' + (it.status || 'grey')); var t = add(x, 'div'); add(t, 'b', sigLabel(it)); add(t, 'span', priv(heOr(it, 'note') || '') + (it.time_utc ? ' · ' + fmtFull(it.time_utc) : '') + (isNum(it.weight_pts) && it.weight_pts ? (S.lang === 'he' ? ' · השפעה: ' : ' · effect on news part: ') + (it.weight_pts > 0 ? '+' : '') + it.weight_pts + (S.lang === 'he' ? ' נק׳' : ' pts') : '')); var lu = safeUrl(it.link); if (lu) { var la = add(t, 'a', S.lang === 'he' ? ' מקור ↗' : ' source ↗'); la.href = lu; la.target = '_blank'; la.rel = 'noopener noreferrer'; la.style.fontSize = '.78rem'; } });
   }
-  var BENCH = [['12 Jun 2025 (eve of attack)', 14, true], ['14 Jan 2026 (false alarm)', 10, false], ['27 Feb 2026 (eve of attack)', 7, true], ['10 Oct 2024 (false alarm)', 6, false], ['15 Jan 2026 (false alarm)', 3, false], ['15 Apr 2024 (4 days before strike)', 0.5, false]];
+  var BENCH = [['12 Jun 2025 (eve of attack)', 14, true], ['14 Jan 2026 (false alarm)', 10, false], ['27 Feb 2026 (eve of attack)', 7, true], ['10 Oct 2024 (false alarm)', 6, false], ['15 Jan 2026 (false alarm)', 3, false], ['15 Apr 2024 (4 days before strike)', 0.5, 'near']];
   function renderCmp(c, thr) {
     var el = $('cmp'); clear(el); var rows = BENCH.concat([['Today', c.F, null]]).sort(function (a, b) { return b[1] - a[1]; }), max = 16;
     rows.forEach(function (r) { var x = add(el, 'div', null, 'row' + (r[2] === null ? ' today' : '')); add(x, 'span', r[0]); var tr = add(x, 'div', null, 'tr'), i = add(tr, 'i');
-      i.style.width = Math.min(100, r[1] / max * 100) + '%'; i.style.background = r[2] === null ? bandCol(c.F, thr) : r[2] ? css('--red') : css('--muted'); if (r[2] !== null) i.style.opacity = '.75';
+      i.style.width = Math.min(100, r[1] / max * 100) + '%'; i.style.background = r[2] === null ? bandCol(c.F, thr) : r[2] === 'near' ? css('--amber') : r[2] ? css('--red') : css('--muted'); if (r[2] !== null) i.style.opacity = '.75';
       var al = add(tr, 'span', null, 'al'); al.style.left = (thr / max * 100) + '%'; add(x, 'span', pct(r[1], r[1] < 1 ? 1 : (r[1] < 10 ? 2 : 0)), 'n'); });
   }
   function renderFlight(c, thrR) {
     var p = $('flPanel'); if (!c.fa) { p.style.display = 'none'; return; } p.style.display = '';
     var R = c.R, a = $('advice'), FT = flightT(), msg, cls;
-    if (R >= thrR) { cls = 'bad'; msg = '⚠️ High risk: book a refundable backup now (El Al or British Airways same day) and check your Wizz Air booking for change/refund options.'; }
-    else if (R >= thrR * 0.6) { cls = 'warn'; msg = '🟠 Rising risk: line up a refundable backup option and check the Wizz Air app twice a day.'; }
-    else { cls = 'ok'; msg = '🟢 Low risk: keep your booking. Check the Wizz Air app the evening before and on the morning of the flight.'; }
+    if (R >= thrR) { cls = 'bad'; msg = S.lang === 'he' ? '⚠️ סיכון גבוה: הזמינו עכשיו חלופה עם החזר (אל על או בריטיש איירווייז באותו יום) ובדקו אפשרויות שינוי או החזר בהזמנת וויז אייר.' : '⚠️ High risk: book a refundable backup now (El Al or British Airways same day) and check your Wizz Air booking for change/refund options.'; }
+    else if (R >= thrR * 0.6) { cls = 'warn'; msg = S.lang === 'he' ? '🟠 סיכון עולה: הכינו חלופה עם החזר ובדקו את אפליקציית וויז אייר פעמיים ביום.' : '🟠 Rising risk: line up a refundable backup option and check the Wizz Air app twice a day.'; }
+    else { cls = 'ok'; msg = S.lang === 'he' ? '🟢 סיכון נמוך: שמרו על ההזמנה. בדקו את אפליקציית וויז אייר בערב שלפני ובבוקר הטיסה.' : '🟢 Low risk: keep your booking. Check the Wizz Air app the evening before and on the morning of the flight.'; }
     a.className = 'advice ' + cls; a.textContent = msg + ' (' + T('about') + ' ' + Math.round(100 - R) + '% ' + T('itFlies') + ')';
     $('flInfo').textContent = FT ? (S.flNo || 'Your flight') + ' · departs ' + fmtFull(FT) + ' Israel time · ' + ago(FT).replace(' ago', '').replace('just now', 'now') + (FT > Date.now() ? ' to go' : '') :
-      'Add your flight number and departure time in ⚙️ Settings to see a countdown and live status here (kept on this device only).';
-    if (FT && FT > Date.now()) $('flInfo').textContent = (S.flNo || 'Your flight') + ' · departs ' + fmtFull(FT) + ' Israel time';
+      (S.lang === 'he' ? 'הוסיפו מספר טיסה ושעת המראה בהגדרות ⚙️ כדי לראות כאן ספירה לאחור וסטטוס חי (נשמר רק במכשיר הזה).' : 'Add your flight number and departure time in ⚙️ Settings to see a countdown and live status here (kept on this device only).');
+    if (FT && FT > Date.now()) $('flInfo').textContent = (S.flNo || (S.lang === 'he' ? 'הטיסה שלך' : 'Your flight')) + (S.lang === 'he' ? ' · המראה ' + fmtFull(FT) + ' שעון ישראל' : ' · departs ' + fmtFull(FT) + ' Israel time');
     var l = $('flLinks'); clear(l);
-    var links = [['📱 Wizz Air – manage booking', 'https://wizzair.com/'], ['🛫 Ben Gurion departures', 'https://www.iaa.gov.il/en/airports/ben-gurion/flight-board/']];
+    var links = [[S.lang === 'he' ? '📱 וויז אייר – ניהול הזמנה' : '📱 Wizz Air – manage booking', 'https://wizzair.com/'], [S.lang === 'he' ? '🛫 המראות בנתב״ג' : '🛫 Ben Gurion departures', S.lang === 'he' ? 'https://www.iaa.gov.il/airports/ben-gurion/flight-board/' : 'https://www.iaa.gov.il/en/airports/ben-gurion/flight-board/']];
     if (S.flNo) links.unshift(['🔴 Live status of ' + S.flNo, 'https://www.flightaware.com/live/flight/' + encodeURIComponent(S.flNo.replace(/\s/g, '').replace(/^W9/i, 'WUK'))]);
     links.forEach(function (k) { var x = add(l, 'a', k[0]); x.href = k[1]; x.target = '_blank'; x.rel = 'noopener noreferrer'; });
   }
@@ -1009,7 +1009,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
       add(li, 'div', fmt(e.time_utc) + ' · ' + (e.source || ''), 'it-top'); var tx = add(li, 'div'), u = safeUrl(e.link);
       if (u) { var a = add(tx, 'a', priv(heOr(e, 'text'))); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = priv(heOr(e, 'text'));
       if (e.effect) add(li, 'span', e.effect, 'eff e-' + ec); });
-    var mb = $('tlMore'); mb.style.display = evs.length > view.tlN ? '' : 'none'; mb.textContent = 'Show more (' + (evs.length - view.tlN) + ' older)';
+    var mb = $('tlMore'); mb.style.display = evs.length > view.tlN ? '' : 'none'; mb.textContent = S.lang === 'he' ? 'הצג עוד (' + (evs.length - view.tlN) + ' ישנים יותר)' : 'Show more (' + (evs.length - view.tlN) + ' older)';
   }
 
   /* ---------- notifications + app ---------- */
@@ -1203,6 +1203,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   function renderLabels() { var i = HE() ? 1 : 0;
     Array.prototype.forEach.call(document.querySelectorAll('[data-l]'), function (e) { var k = NEWLBL[e.getAttribute('data-l')]; if (k) e.textContent = k[i]; });
     Array.prototype.forEach.call(document.querySelectorAll('.tabs button'), function (b) { var k = TABLBL[b.getAttribute('data-tab')], sp = b.querySelector('span:not(.bdg)'); if (k && sp) sp.textContent = k[i]; });
+    Array.prototype.forEach.call(document.querySelectorAll('.rangeSeg button, #sRange button'), function (b) { if (!b.dataset.en) b.dataset.en = b.textContent; b.textContent = i && b.dataset.en === 'All' ? 'הכל' : b.dataset.en; });
     var al = $('autoLbl'); if (al && i) al.textContent = S.auto === 'on' ? 'רענון אוטומטי' : 'רענון כבוי';
   }
   function flightGate(c) { var show = c.fa, cr = $('cardR'), h = $('flHint'); if (cr) cr.style.display = show ? '' : 'none';
