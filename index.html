@@ -764,7 +764,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
       var d = dTxt(c.R, fl.prev_R); $('dR').textContent = d.t + ' · ' + T('about') + ' ' + Math.round(100 - c.R) + '% ' + T('itFlies'); $('dR').className = 'delta ' + d.c;
       var cd = $('cd'); clear(cd); var ms = FT ? FT - Date.now() : 0;
       if (ms > 0) { [[Math.floor(ms / 864e5), 'days'], [Math.floor(ms / 36e5) % 24, 'hours'], [Math.floor(ms / 6e4) % 60, 'min']].forEach(function (a) { var x = add(cd, 'div'); add(x, 'b', String(a[0])); add(x, 'span', a[1]); }); }
-      $('rNote').textContent = priv(fl.status_note || '') + ' ' + T('yourLine') + ': ' + thrR + '%.';
+      $('rNote').textContent = priv(heOr(fl, 'status_note') || '') + ' ' + T('yourLine') + ': ' + thrR + '%.';
     } else { $('rTitle').textContent = T('flightWatch'); $('vR').textContent = T('ended'); $('dR').textContent = ''; clear($('cd')); $('rNote').textContent = ''; }
   }
   function renderTogs() {
@@ -902,7 +902,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     });
     var w = $('glWatch'); clear(w); (data.open_items || []).slice(0, 3).forEach(function (t) { add(w, 'li', priv(t)); });
   }
-  function renderOpen() { var u = $('open'); clear(u); (data.open_items || []).forEach(function (t) { add(u, 'li', priv(t)); }); }
+  function renderOpen() { var u = $('open'); clear(u); ((S.lang === 'he' && Array.isArray(data.open_items_he) && data.open_items_he.length) ? data.open_items_he : (data.open_items || [])).forEach(function (t) { add(u, 'li', priv(t)); }); }
 
   /* ---------- i18n ---------- */
   var HE_TX = {"Markets vs. our predictions": "השווקים מול התחזית שלנו", "Tap a row for the reasoning · tap a column to sort": "הקש על שורה להסבר · על עמודה למיון", "Market": "שוק", "Our view": "התחזית שלנו", "Gap": "פער", "Polymarket question": "שאלה ב-Polymarket", "Date passed – awaiting result": "התאריך עבר – ממתין לתוצאה", "Range": "טווח", "ours was": "שלנו היה", "models": "מודלים", "sources": "מקורות", "updated": "עודכן", "open on Polymarket": "פתח ב-Polymarket", "new": "חדש", "Predictions will appear after the next check.": "התחזיות יופיעו אחרי הבדיקה הבאה.", "* live price. ": "* מחיר חי. ", "Iran full airspace closure by": "סגירה מלאה של המרחב האווירי של איראן עד", "Israeli airspace closed by": "סגירת המרחב האווירי של ישראל עד", "Israel–Iran ceasefire holds through": "הפסקת האש ישראל–איראן נמשכת עד", "US–Iran 2-week pause begins by": "הפסקה של שבועיים ארה״ב–איראן מתחילה עד", "Airlines halt Israel flights": "חברות תעופה מפסיקות טיסות לישראל", "Saudi airspace closed": "סגירת המרחב האווירי של סעודיה", "US ground offensive in Iran": "מתקפה קרקעית אמריקאית באיראן", "Nov": "נוב׳", "Dec": "דצמ׳", "Jan": "ינו׳", "by": "עד", "Request sent": "הבקשה נשלחה", "Check started": "הבדיקה התחילה", "Reading sources": "קורא מקורות", "Calculating": "מחשב", "Publishing": "מפרסם", "Done": "הסתיים", "✕ Cancel check": "✕ ביטול בדיקה", "Now: waiting for the automation to start the check": "עכשיו: ממתין שהאוטומציה תתחיל את הבדיקה", "Now: ": "עכשיו: ", "You pressed Update now": "לחצת על עדכן עכשיו", "Request accepted by the automation service – waiting for the check to start (usually 20–60 s)": "הבקשה התקבלה – ממתין שהבדיקה תתחיל (בדרך כלל 20–60 שניות)", "The check has started and is reporting progress": "הבדיקה התחילה ומדווחת התקדמות", "Usually takes about 3 min": "בדרך כלל לוקח כ-3 דקות", "Full check running – this page will update by itself. You can leave it open.": "בדיקה מלאה רצה – הדף יתעדכן לבד. אפשר להשאיר אותו פתוח.", "Check cancelled. You can start a new one now.": "הבדיקה בוטלה. אפשר להתחיל בדיקה חדשה.", "Starting the full check…": "מתחיל בדיקה מלאה…", "Scenarios – tap to add or remove a new signal (same weights the hourly check uses):": "תרחישים – הקש כדי להוסיף או להסיר אות חדש (אותם משקלים כמו בבדיקה השעתית):", "Major campaign – 24 h": "מתקפה רחבה – 24 שעות", "Major campaign – 7 days": "מתקפה רחבה – 7 ימים", "Any strike – 24 h": "כל תקיפה – 24 שעות", "Flight risk": "סיכון לטיסה", "Market part": "רכיב השוק", "from Iran airspace price": "ממחיר המרחב האווירי של איראן", "vs now": "לעומת עכשיו", "⚠ alert": "⚠ התרעה", "⚠ flight alert": "⚠ התרעת טיסה", "it flies": "שהטיסה תצא", "about": "בערך", "Move the sliders or tap scenarios to see how the figures would change.": "הזז את המחוונים או הקש על תרחישים כדי לראות איך המספרים ישתנו.", "🎯 Strike go-order reported": "🎯 דווח על פקודת תקיפה", "✈️ Tankers / AWACS massing": "✈️ ריכוז מטוסי תדלוק / AWACS", "🏛️ US embassy departure order": "🏛️ הוראת עזיבה של שגרירות ארה״ב", "🚨 Home Front guideline change": "🚨 שינוי בהנחיות פיקוד העורף", "🛑 Regional airspace closure": "🛑 סגירת מרחב אווירי אזורי", "💥 US casualties / jet downed": "💥 נפגעים אמריקאים / מטוס הופל", "🚀 Iran hits US base or ship": "🚀 איראן פוגעת בבסיס או ספינה אמריקאית", "🎯 US limited strike on Iran": "🎯 תקיפה אמריקאית מוגבלת באיראן", "🛫 Foreign airlines cancel Israel": "🛫 חברות זרות מבטלות טיסות לישראל", "🔥 Major campaign begins": "🔥 מתקפה רחבה מתחילה", "🕊️ Talks announced / calming": "🕊️ הוכרזו שיחות / הרגעה", "😴 Quiet 24 hours": "😴 24 שעות שקטות", "Any US/Israeli strike, 24 h (L)": "כל תקיפה אמריקאית/ישראלית, 24 שעות (L)", "Reset to current": "איפוס למצב הנוכחי"};
@@ -974,7 +974,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   function renderLights() {
     var el = $('lights'); clear(el); var list = data.checklist;
     if (!Array.isArray(list) || !list.length) list = DEFAULT_CHECK.map(function (d) { return { key: d[0], label: d[1], status: 'grey', note: 'Not yet tracked by the hourly check' }; });
-    list.forEach(function (it) { var x = add(el, 'div', null, 'light'); add(x, 'span', null, 'l ' + (it.status || 'grey')); var t = add(x, 'div'); add(t, 'b', sigLabel(it)); add(t, 'span', priv(it.note || '') + (it.time_utc ? ' · ' + fmtFull(it.time_utc) : '')); });
+    list.forEach(function (it) { var x = add(el, 'div', null, 'light'); add(x, 'span', null, 'l ' + (it.status || 'grey')); var t = add(x, 'div'); add(t, 'b', sigLabel(it)); add(t, 'span', priv(heOr(it, 'note') || '') + (it.time_utc ? ' · ' + fmtFull(it.time_utc) : '') + (isNum(it.weight_pts) && it.weight_pts ? (S.lang === 'he' ? ' · השפעה: ' : ' · effect on news part: ') + (it.weight_pts > 0 ? '+' : '') + it.weight_pts + (S.lang === 'he' ? ' נק׳' : ' pts') : '')); var lu = safeUrl(it.link); if (lu) { var la = add(t, 'a', S.lang === 'he' ? ' מקור ↗' : ' source ↗'); la.href = lu; la.target = '_blank'; la.rel = 'noopener noreferrer'; la.style.fontSize = '.78rem'; } });
   }
   var BENCH = [['12 Jun 2025 (eve of attack)', 14, true], ['14 Jan 2026 (false alarm)', 10, false], ['27 Feb 2026 (eve of attack)', 7, true], ['10 Oct 2024 (false alarm)', 6, false], ['15 Jan 2026 (false alarm)', 3, false], ['15 Apr 2024 (4 days before strike)', 0.5, false]];
   function renderCmp(c, thr) {
@@ -1007,7 +1007,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     shown.forEach(function (e) { var dd = fmt(e.time_utc, { weekday: 'long', day: 'numeric', month: 'short', hour: undefined, minute: undefined }); if (dd !== day) { day = dd; add(el, 'div', dd, 'tl-day'); ul = add(el, 'ul', null, 'items'); }
       var ec = effClass(e.effect), li = add(ul, 'li'); li.style.setProperty('--ec', ec === 'up' ? css('--red') : ec === 'down' ? css('--green') : css('--line'));
       add(li, 'div', fmt(e.time_utc) + ' · ' + (e.source || ''), 'it-top'); var tx = add(li, 'div'), u = safeUrl(e.link);
-      if (u) { var a = add(tx, 'a', priv(e.text)); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = priv(e.text);
+      if (u) { var a = add(tx, 'a', priv(heOr(e, 'text'))); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else tx.textContent = priv(heOr(e, 'text'));
       if (e.effect) add(li, 'span', e.effect, 'eff e-' + ec); });
     var mb = $('tlMore'); mb.style.display = evs.length > view.tlN ? '' : 'none'; mb.textContent = 'Show more (' + (evs.length - view.tlN) + ' older)';
   }
@@ -1106,7 +1106,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     else if (c.F >= thr * 0.35 || (isNum(c.F7) && c.F7 >= thr7 * 0.6) || amb >= 3) i = 1;
     return { i: i, k: LEVELS[i][0], red: red, amb: amb, n: ck.length, trig: trig };
   }
-  function cleanSummary(s) { return priv(String(s || '')).replace(/^(On-demand|Hourly|Automatic|Manual)?\s*check[^–:-]*[–:-]\s*/i, '').replace(/^\d{1,2}:\d{2}\s*Israel time\s*[–-]\s*/i, ''); }
+  function cleanSummary(s) { if (HE() && data && data.summary_he) s = data.summary_he; return priv(String(s || '')).replace(/^(On-demand|Hourly|Automatic|Manual)?\s*check[^–:-]*[–:-]\s*/i, '').replace(/^\d{1,2}:\d{2}\s*Israel time\s*[–-]\s*/i, ''); }
   function nearAgo(k, hours) { var h = data.history || [], t = Date.now() - hours * 36e5, best = null; for (var i = 0; i < h.length; i++) { var ti = Date.parse(h[i].utc); if (ti <= t && isNum(h[i][k])) best = h[i]; } return best ? best[k] : null; }
   function renderVerdict(c) {
     var lv = levelOf(c), L = LEVELS[lv.i], col = css(L[3]), v = $('verdict'), he = HE();
@@ -1138,7 +1138,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
     var mvAll = evs.filter(function (e) { return effClass(e.effect) !== 'flat'; }).sort(function (a, b) { return Date.parse(b.time_utc) - Date.parse(a.time_utc); }), mv = mvAll.slice(0, 3);
     if (!mv.length) add(el, 'div', L2('No news event moved the estimate in the last 24 hours.', 'אף אירוע חדשותי לא הזיז את ההערכה ב-24 השעות האחרונות.'), 'meta');
     mv.forEach(function (e) { var r = add(el, 'div', null, 'row'), ec = effClass(e.effect); add(r, 'span', fmt(Date.parse(e.time_utc), { weekday: 'short' }), 't'); var m = add(r, 'div', null, 'ltr'), u = safeUrl(e.link);
-      if (u) { var a = add(m, 'a', priv(e.text)); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else add(m, 'span', priv(e.text)); add(m, 'span', priv(e.source || ''), 'src'); add(r, 'span', effTx(e.effect), 'eff e-' + ec); });
+      if (u) { var a = add(m, 'a', priv(heOr(e, 'text'))); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; } else add(m, 'span', priv(heOr(e, 'text'))); add(m, 'span', priv(e.source || ''), 'src'); add(r, 'span', effTx(e.effect), 'eff e-' + ec); });
     var flat = evs.length - mvAll.length, more = mvAll.length - mv.length, ft = add(el, 'div', null, 'meta'); ft.style.marginTop = '6px';
     ft.textContent = (more > 0 ? L2('+' + more + ' more changes · ', '+' + more + ' שינויים נוספים · ') : '') + L2(flat + ' other news items in the last 24 hours did not change the estimate.', flat + ' ידיעות נוספות ב-24 השעות האחרונות לא שינו את ההערכה.');
   }
@@ -1220,6 +1220,7 @@ body.dark .vscale span.on,body.dark #vLvl{color:#0f141b}
   function d24(k, v) { var was = nearAgo(k, 24); if (!isNum(was) || !isNum(v)) return ''; var d = v - was; return ' · ' + (Math.abs(d) < 0.05 ? L2('same as 24 h ago', 'כמו לפני 24 ש׳') : (d > 0 ? '▲ +' : '▼ −') + Math.abs(d).toFixed(1) + L2(' vs 24 h ago', ' מול לפני 24 ש׳')); }
   function a11yLang() { var he = HE(); Array.prototype.forEach.call(document.querySelectorAll('.card[data-k]'), function (c) { c.setAttribute('aria-label', (he ? 'פרטים: ' : 'Details: ') + ((c.querySelector('h2') || {}).textContent || '')); });
     var st = document.querySelector('#ovS .modal'); if (st) st.setAttribute('aria-label', he ? 'הגדרות' : 'Settings'); var tb = $('tabs'); if (tb) tb.setAttribute('aria-label', he ? 'אזורים' : 'Sections'); }
+  function heOr(o, k) { if (HE() && o && typeof o[k + '_he'] === 'string' && o[k + '_he']) return o[k + '_he']; return o ? o[k] : ''; }
 
   /* wire up */
   applyTheme(); buildRangeSegs(); renderTogs(); setAutoUi(); applyLang();
