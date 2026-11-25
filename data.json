@@ -1,19 +1,19 @@
 {
  "schema": 1,
- "updated_utc": "2026-11-25T17:00:03Z",
- "summary": "Hourly check: still no sign of a major US or Israeli strike on Iran in the next day, though the risk edged up slightly. Main reason: Netanyahu will convene the security cabinet on Thursday evening (26 Nov) amid reported Israeli and US preparations for a possible operation against Iran (Times of Israel, 18:20 Israel time), and the IRGC claims an LNG tanker hit a mine near Hormuz (unconfirmed); there is still no strike order, embassy departure or Home Front change, and the Iran airspace market is steady at about 3% for 30 Nov. Next to watch: the security cabinet meeting on Thursday evening. Main 24-hour estimate 1.5% (was 1.4%), well under the 7% alert line; checked 19:00 Israel time, no alert sent.",
+ "updated_utc": "2026-11-25T18:07:36Z",
+ "summary": "Hourly check: no change – still no sign of a major US or Israeli strike on Iran in the next day. Main reason: nothing new since 19:00 Israel time beyond political rhetoric (Netanyahu told the Knesset Israel faces \"massive, immediate dangers\") and a Chinese call for US–Iran talks; there is still no strike order, embassy departure or Home Front change, and the Iran airspace market is steady at about 3% for 30 Nov. Next to watch: the security cabinet meeting on Thursday evening (26 Nov). Main 24-hour estimate 1.5% (was 1.5%), well under the 7% alert line; checked 20:07 Israel time, no alert sent.",
  "message_sent": "none",
  "major": {
   "F": 1.52,
-  "prev_F": 1.4,
+  "prev_F": 1.52,
   "E": 3.88,
-  "M": 0.58,
-  "F7": 10.36,
+  "M": 0.59,
+  "F7": 10.4,
   "threshold": 7
  },
  "limited": {
   "L": 32.91,
-  "prev_L": 31.62
+  "prev_L": 32.91
  },
  "alert": {
   "active": false,
@@ -24,12 +24,12 @@
  "flight": {
   "active": true,
   "label": "Your flight to London",
-  "R": 7.79,
-  "prev_R": 7.76,
+  "R": 7.76,
+  "prev_R": 7.79,
   "baseline": 17,
   "alert_at": 25,
-  "C1": 1.28,
-  "C2": 2.51,
+  "C1": 1.25,
+  "C2": 2.45,
   "W": 5,
   "triggers": [],
   "status_note": "Your flight's daily service has operated every day for the past two weeks (today's on time); no airline has suspended Israel flights and Ben Gurion is open.",
@@ -90,27 +90,27 @@
   {
    "label": "US–Iran 2-week pause begins by 31 Dec",
    "now": 89.5,
-   "prev": 86.5,
+   "prev": 89.5,
    "url": "https://polymarket.com/event/us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108"
   }
  ],
  "brent": {
-  "usd": 93.37,
-  "prev_usd": 93.24,
-  "change_pct_day": 2.16,
-  "read_utc": "2026-11-25T16:41:00Z"
+  "usd": 93.87,
+  "prev_usd": 93.37,
+  "change_pct_day": 2.7,
+  "read_utc": "2026-11-25T17:51:00Z"
  },
  "items": [
   {
-   "time_utc": "2026-11-25T17:00:03Z",
+   "time_utc": "2026-11-25T18:07:36Z",
    "source": "Polymarket",
-   "text": "Iran full airspace closure by 30 Nov steady at 3.05%; Israeli airspace closed by 30 Nov steady at 3.75%; US–Iran 2-week pause by 31 Dec 86.5% → 89.5%.",
-   "text_he": "סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר יציבה על 3.05%; סגירת המרחב האווירי של ישראל עד 30 בנובמבר יציבה על 3.75%; הפסקה של שבועיים בין ארה\"ב לאיראן עד 31 בדצמבר: 86.5% ← 89.5%.",
+   "text": "Iran full airspace closure by 30 Nov steady at 3.05%; Israeli airspace closed by 30 Nov steady at 3.75%; US invades Iran before 2027 5.75% → 5.5%.",
+   "text_he": "סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר יציבה על 3.05%; סגירת המרחב האווירי של ישראל עד 30 בנובמבר יציבה על 3.75%; פלישה אמריקנית לאיראן לפני 2027: 5.75% ← 5.5%.",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-25T17:00:03Z",
+   "time_utc": "2026-11-25T18:07:36Z",
    "source": "Flight-status page and airline news",
    "text": "Your flight's daily service has operated every day for the past two weeks, today's on time; no foreign airline has suspended Israel flights and Ben Gurion is open.",
    "text_he": "השירות היומי של הטיסה שלך פעל בכל יום בשבועיים האחרונים, והטיסה של היום בזמן; אף חברת תעופה זרה לא השעתה טיסות לישראל ונתב\"ג פתוח.",
@@ -118,36 +118,36 @@
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-25T16:41:00Z",
-   "source": "Financial Times markets data",
-   "text": "Brent crude $93.37, up 2.16% on the day (18:41 Israel time); previous read $93.24.",
-   "text_he": "נפט ברנט 93.37 דולר, עלייה של 2.16% ביום (18:41 שעון ישראל); קריאה קודמת 93.24 דולר.",
+   "time_utc": "2026-11-25T18:07:36Z",
+   "source": "Home Front Command",
+   "text": "No change in Home Front Command guidelines; the latest updates on its site are routine safety notices from 20 Nov.",
+   "text_he": "אין שינוי בהנחיות פיקוד העורף; העדכונים האחרונים באתר הם הודעות בטיחות שגרתיות מ-20 בנובמבר.",
+   "link": "https://www.oref.org.il/eng",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T17:51:00Z",
+   "source": "Financial Times markets",
+   "text": "Brent crude at $93.87, up 2.7% on the day (19:51 Israel time) – context only.",
+   "text_he": "נפט ברנט ב-93.87 דולר, עלייה של 2.7% ביום (19:51 שעון ישראל) – רקע בלבד.",
    "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-25T16:30:00Z",
-   "source": "Al Jazeera live (Iran's foreign minister)",
-   "text": "Araghchi rejects Israel's chemical-weapons accusation and says Israel is trying to deceive the US into war (18:30 Israel time). Rhetoric, no new action.",
-   "text_he": "עראקצ'י דוחה את האשמת ישראל בנשק כימי ואומר שישראל מנסה להונות את ארה\"ב כדי לגרור אותה למלחמה (18:30 שעון ישראל). רטוריקה, ללא צעד חדש.",
-   "link": "https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order",
+   "time_utc": "2026-11-25T17:30:00Z",
+   "source": "Times of Israel liveblog",
+   "text": "Netanyahu, in a Knesset speech (about 19:30 Israel time), says Israel faces \"massive, immediate dangers\" and calls for unity – political rhetoric, no new military step.",
+   "text_he": "נתניהו בנאום בכנסת (בסביבות 19:30 שעון ישראל) אומר שישראל ניצבת בפני \"סכנות עצומות ומיידיות\" וקורא לאחדות – רטוריקה פוליטית, ללא צעד צבאי חדש.",
+   "link": "https://www.timesofisrael.com/liveblog-november-25-2026/",
    "effect": "No change"
   },
   {
-   "time_utc": "2026-11-25T16:20:00Z",
-   "source": "Times of Israel",
-   "text": "Netanyahu will convene the security cabinet on Thursday evening (26 Nov), amid reported Israeli and US preparations for a possible military operation against Iran and warnings of a possible Iranian surprise attack (18:20 Israel time). A Hebrew outlet confirms the meeting; no strike decision reported.",
-   "text_he": "נתניהו יכנס את הקבינט הביטחוני ביום חמישי בערב (26 בנובמבר), על רקע דיווחים על היערכות ישראלית ואמריקנית לפעולה צבאית אפשרית נגד איראן ואזהרות מפני מתקפת פתע איראנית (18:20 שעון ישראל). אתר חדשות בעברית מאשר את הישיבה; לא דווח על החלטה לתקוף.",
-   "link": "https://www.timesofisrael.com/liveblog_entry/netanyahu-to-convene-security-cabinet-on-thursday-evening/",
-   "effect": "Small rise"
-  },
-  {
-   "time_utc": "2026-11-25T15:50:00Z",
-   "source": "Times of Israel liveblog (IRGC statement via Reuters)",
-   "text": "The IRGC claims an LNG tanker hit a naval mine in Hormuz and caught fire (about 17:50 Israel time). Iranian claim, no UKMTO or independent confirmation.",
-   "text_he": "משמרות המהפכה טוענים שמכלית גז טבעי נוזלי עלתה על מוקש ימי בהורמוז ועלתה באש (בסביבות 17:50 שעון ישראל). טענה איראנית, ללא אישור של UKMTO או של מקור בלתי תלוי.",
-   "link": "https://www.timesofisrael.com/liveblog-november-25-2026/",
-   "effect": "Small rise"
+   "time_utc": "2026-11-25T17:00:00Z",
+   "source": "Iran International",
+   "text": "China's envoy urges the US and Iran to return to talks and give peace a chance – a call, not newly announced talks.",
+   "text_he": "שליח סין קורא לארה\"ב ולאיראן לחזור לשיחות ולתת סיכוי לשלום – קריאה בלבד, לא שיחות חדשות שהוכרזו.",
+   "link": "https://www.iranintl.com/en",
+   "effect": "No change"
   }
  ],
  "open_items": [
@@ -1057,9 +1057,58 @@
    "L": 32.91,
    "R": 7.79,
    "F7": 10.36
+  },
+  {
+   "utc": "2026-11-25T18:07:36Z",
+   "F": 1.52,
+   "E": 3.88,
+   "M": 0.59,
+   "L": 32.91,
+   "R": 7.76,
+   "F7": 10.4
   }
  ],
  "events": [
+  {
+   "time_utc": "2026-11-25T18:07:36Z",
+   "source": "Polymarket",
+   "text": "Iran full airspace closure by 30 Nov steady at 3.05%; Israeli airspace closed by 30 Nov steady at 3.75%; US invades Iran before 2027 5.75% → 5.5%.",
+   "text_he": "סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר יציבה על 3.05%; סגירת המרחב האווירי של ישראל עד 30 בנובמבר יציבה על 3.75%; פלישה אמריקנית לאיראן לפני 2027: 5.75% ← 5.5%.",
+   "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T18:07:36Z",
+   "source": "Flight-status page and airline news",
+   "text": "Your flight's daily service has operated every day for the past two weeks, today's on time; no foreign airline has suspended Israel flights and Ben Gurion is open.",
+   "text_he": "השירות היומי של הטיסה שלך פעל בכל יום בשבועיים האחרונים, והטיסה של היום בזמן; אף חברת תעופה זרה לא השעתה טיסות לישראל ונתב\"ג פתוח.",
+   "link": "https://www.flightaware.com/live/airport/LLBG",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T18:07:36Z",
+   "source": "Home Front Command",
+   "text": "No change in Home Front Command guidelines; the latest updates on its site are routine safety notices from 20 Nov.",
+   "text_he": "אין שינוי בהנחיות פיקוד העורף; העדכונים האחרונים באתר הם הודעות בטיחות שגרתיות מ-20 בנובמבר.",
+   "link": "https://www.oref.org.il/eng",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T17:51:00Z",
+   "source": "Financial Times markets",
+   "text": "Brent crude at $93.87, up 2.7% on the day (19:51 Israel time) – context only.",
+   "text_he": "נפט ברנט ב-93.87 דולר, עלייה של 2.7% ביום (19:51 שעון ישראל) – רקע בלבד.",
+   "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T17:30:00Z",
+   "source": "Times of Israel liveblog",
+   "text": "Netanyahu, in a Knesset speech (about 19:30 Israel time), says Israel faces \"massive, immediate dangers\" and calls for unity – political rhetoric, no new military step.",
+   "text_he": "נתניהו בנאום בכנסת (בסביבות 19:30 שעון ישראל) אומר שישראל ניצבת בפני \"סכנות עצומות ומיידיות\" וקורא לאחדות – רטוריקה פוליטית, ללא צעד צבאי חדש.",
+   "link": "https://www.timesofisrael.com/liveblog-november-25-2026/",
+   "effect": "No change"
+  },
   {
    "time_utc": "2026-11-25T17:00:03Z",
    "source": "Polymarket",
@@ -1074,6 +1123,14 @@
    "text": "Your flight's daily service has operated every day for the past two weeks, today's on time; no foreign airline has suspended Israel flights and Ben Gurion is open.",
    "text_he": "השירות היומי של הטיסה שלך פעל בכל יום בשבועיים האחרונים, והטיסה של היום בזמן; אף חברת תעופה זרה לא השעתה טיסות לישראל ונתב\"ג פתוח.",
    "link": "https://www.flightaware.com/live/airport/LLBG",
+   "effect": "No change"
+  },
+  {
+   "time_utc": "2026-11-25T17:00:00Z",
+   "source": "Iran International",
+   "text": "China's envoy urges the US and Iran to return to talks and give peace a chance – a call, not newly announced talks.",
+   "text_he": "שליח סין קורא לארה\"ב ולאיראן לחזור לשיחות ולתת סיכוי לשלום – קריאה בלבד, לא שיחות חדשות שהוכרזו.",
+   "link": "https://www.iranintl.com/en",
    "effect": "No change"
   },
   {
@@ -2096,7 +2153,7 @@
    "label": "Strike go-order / Situation Room on Iran",
    "status": "green",
    "note": "None reported; NBC (24 Nov): leadership-strike and renewed-strike options debated, no decision",
-   "time_utc": "2026-11-25T17:00:03Z",
+   "time_utc": "2026-11-25T18:07:36Z",
    "note_he": "לא דווח; NBC (24 בנובמבר): נבחנות אפשרויות לתקיפת בכירים ולחידוש התקיפות, ללא החלטה",
    "link": "https://www.nbcnews.com/",
    "weight_pts": 0.28
@@ -2119,7 +2176,7 @@
    "note_he": "אין שינוי; צה\"ל: ההנחיות לציבור ללא שינוי (העדכונים השגרתיים האחרונים מ-20 בנובמבר)",
    "link": "https://www.oref.org.il/eng/articles/security-threats/rockets-missles/1108",
    "weight_pts": 0.0,
-   "time_utc": "2026-11-25T17:00:03Z"
+   "time_utc": "2026-11-25T18:07:36Z"
   },
   {
    "key": "airspace",
@@ -2129,7 +2186,7 @@
    "note_he": "אין סגירה כללית; לאיראן יש הגבלות חלקיות על נתיבים",
    "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
    "weight_pts": 0.0,
-   "time_utc": "2026-11-25T17:00:03Z"
+   "time_utc": "2026-11-25T18:07:36Z"
   },
   {
    "key": "tankers",
@@ -2138,7 +2195,7 @@
    "note": "No credible reports",
    "note_he": "אין דיווחים אמינים",
    "weight_pts": 0.0,
-   "time_utc": "2026-11-25T17:00:03Z",
+   "time_utc": "2026-11-25T18:07:36Z",
    "link": "https://www.timesofisrael.com/liveblog-november-25-2026/"
   },
   {
@@ -2149,7 +2206,7 @@
    "note_he": "אין; טיסת אתיחאד חזרה על עקבותיה ב-24 בנובמבר אחרי שינוי נתיב מעל סעודיה (לדברי החברה: לא ביטחוני)",
    "link": "https://www.timesofisrael.com/liveblog_entry/etihad-flight-from-abu-dhabi-to-tel-aviv-forced-to-turn-back-after-two-attempts/",
    "weight_pts": 0.0,
-   "time_utc": "2026-11-25T17:00:03Z"
+   "time_utc": "2026-11-25T18:07:36Z"
   },
   {
    "key": "deadline",
@@ -2179,7 +2236,7 @@
    "note_he": "לא אושרו; טענות איראניות על הפלת כטב\"מים לא אומתו",
    "link": "https://www.ajnet.me/news/liveblog/2026/11/25/%D8%A5%D9%8A%D8%B1%D8%A7%D9%86-%D9%85%D8%A8%D8%A7%D8%B4%D8%B1-%D8%B7%D9%87%D8%B1%D8%A7%D9%86-%D8%AA%D8%B9%D9%84%D9%86-%D8%A5%D8%B3%D9%82%D8%A7%D8%B7-%D9%85%D8%B3%D9%8A%D8%B1%D8%AA%D9%8A%D9%86",
    "weight_pts": 0.42,
-   "time_utc": "2026-11-25T17:00:03Z"
+   "time_utc": "2026-11-25T18:07:36Z"
   },
   {
    "key": "iranfire",
@@ -2249,8 +2306,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 1.9,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 2.0,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 3.05,
    "tickets": [
     {
@@ -2299,7 +2356,7 @@
    "next24": {
     "up": 26,
     "down": 50,
-    "flat": 24,
+    "flat": 23,
     "call": "down"
    },
    "trade": {
@@ -2374,8 +2431,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 10.1,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 10.6,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 13.5,
    "tickets": [
     {
@@ -2499,8 +2556,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 2.7,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 2.9,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 3.75,
    "snaps": [
     {
@@ -2613,8 +2670,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 13.4,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 14.0,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 13.5,
    "tickets": [
     {
@@ -2727,8 +2784,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 96.0,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 95.8,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 93.5,
    "tickets": [
     {
@@ -2775,8 +2832,8 @@
     }
    ],
    "next24": {
-    "up": 66,
-    "down": 21,
+    "up": 67,
+    "down": 20,
     "flat": 13,
     "call": "up"
    },
@@ -2852,8 +2909,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 87.7,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 87.1,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 81.5,
    "tickets": [
     {
@@ -2977,8 +3034,8 @@
    "F7_0": 8.6,
    "L0": 27.5,
    "created_utc": "2026-11-24T20:00:00Z",
-   "prev_watch_pct": 79.8,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 78.8,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 73.5,
    "tickets": [
     {
@@ -3094,9 +3151,9 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:57:46Z",
-   "prev_watch_pct": 57.7,
-   "updated_utc": "2026-11-25T17:00:03Z",
-   "prev_market_pct": 58.5,
+   "prev_watch_pct": 57.8,
+   "updated_utc": "2026-11-25T18:07:36Z",
+   "prev_market_pct": 61.5,
    "snaps": [
     {
      "t": "2026-11-24T20:00:00Z",
@@ -3200,8 +3257,8 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:57:46Z",
-   "prev_watch_pct": 69.6,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 68.6,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 73.5,
    "tickets": [
     {
@@ -3317,9 +3374,9 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:57:46Z",
-   "prev_watch_pct": 86.6,
-   "updated_utc": "2026-11-25T17:00:03Z",
-   "prev_market_pct": 86.5,
+   "prev_watch_pct": 87.0,
+   "updated_utc": "2026-11-25T18:07:36Z",
+   "prev_market_pct": 89.5,
    "tickets": [
     {
      "day": "2026-11-24",
@@ -3441,8 +3498,8 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:52:58Z",
-   "prev_watch_pct": 3.7,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 3.8,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 6.5,
    "tickets": [
     {
@@ -3565,8 +3622,8 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:52:58Z",
-   "prev_watch_pct": 17.9,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 18.7,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 26.5,
    "tickets": [
     {
@@ -3689,9 +3746,9 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:52:58Z",
-   "prev_watch_pct": 30.2,
-   "updated_utc": "2026-11-25T17:00:03Z",
-   "prev_market_pct": 40.0,
+   "prev_watch_pct": 31.2,
+   "updated_utc": "2026-11-25T18:07:36Z",
+   "prev_market_pct": 39.5,
    "tickets": [
     {
      "day": "2026-11-24",
@@ -3738,7 +3795,7 @@
    ],
    "next24": {
     "up": 32,
-    "down": 57,
+    "down": 58,
     "flat": 10,
     "call": "down"
    },
@@ -3813,8 +3870,8 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:52:58Z",
-   "prev_watch_pct": 3.0,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 3.2,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 5.5,
    "tickets": [
     {
@@ -3891,11 +3948,11 @@
    "slug": "will-the-us-invade-iran-before-2027",
    "outcome": "Yes",
    "date_utc": "2027-01-01T04:59:00Z",
-   "market_pct": 5.75,
-   "watch_pct": 3.5,
+   "market_pct": 5.5,
+   "watch_pct": 3.4,
    "range_pct": [
-    2.8,
-    4.2
+    2.7,
+    4.1
    ],
    "why": "Counts only a US offensive meant to take and hold Iranian ground – an island seizure (Kharg, Abu Musa, the Tunbs) would count; air strikes don't. No ground operation in 9 months of war, Trump's decision is pushed to after the new year, and the Kharg island market sits at 3%. About 3%, below the 6% market, which has been falling (24% in July, 15% in Sep, 11.5% early Nov).",
    "models": [
@@ -3937,8 +3994,8 @@
    "F7_0": 9.17,
    "L0": 28.52,
    "created_utc": "2026-11-24T21:52:58Z",
-   "prev_watch_pct": 3.3,
-   "updated_utc": "2026-11-25T17:00:03Z",
+   "prev_watch_pct": 3.5,
+   "updated_utc": "2026-11-25T18:07:36Z",
    "prev_market_pct": 5.75,
    "tickets": [
     {
@@ -3949,8 +4006,8 @@
      "entry": 94.25,
      "ours": 3.5,
      "stake": 100,
-     "value": 100.0,
-     "pl": 0.0
+     "value": 100.27,
+     "pl": 0.27
     },
     {
      "day": "2026-11-25",
@@ -3960,8 +4017,8 @@
      "entry": 94.25,
      "ours": 3.4,
      "stake": 100,
-     "value": 100.0,
-     "pl": 0.0
+     "value": 100.27,
+     "pl": 0.27
     }
    ],
    "snaps": [
@@ -3987,27 +4044,27 @@
    "next24": {
     "up": 29,
     "down": 47,
-    "flat": 23,
+    "flat": 24,
     "call": "down"
    },
    "trade": {
     "call": "Lean No",
     "side": "No",
-    "ev_pct": 1.8,
-    "price": 94.25,
+    "ev_pct": 1.7,
+    "price": 94.5,
     "note": ""
    },
    "score": {
     "dir_calls": 0,
     "dir_hits": 0,
-    "pl_all": 0.0,
-    "pl_buy_only": 0.0,
+    "pl_all": 0.54,
+    "pl_buy_only": 0.27,
     "n_tickets": 2,
-    "first_pl": 0.0
+    "first_pl": 0.27
    }
   }
  ],
- "summary_he": "עדיין אין סימן לתקיפה אמריקנית או ישראלית רחבה באיראן ביממה הקרובה, אם כי הסיכון עלה מעט. הסיבה העיקרית: נתניהו יכנס את הקבינט הביטחוני ביום חמישי בערב (26 בנובמבר) על רקע דיווחים על היערכות ישראלית ואמריקנית לפעולה צבאית אפשרית נגד איראן (טיימס אוף ישראל, 18:20 שעון ישראל), ומשמרות המהפכה טוענים שמכלית גז טבעי נוזלי עלתה על מוקש ליד הורמוז (לא מאומת); עדיין אין הוראת תקיפה, אין פינוי שגרירות ואין שינוי בהנחיות פיקוד העורף, ושוק המרחב האווירי של איראן יציב על כ-3% עד 30 בנובמבר. מה לעקוב: ישיבת הקבינט הביטחוני ביום חמישי בערב. ההערכה ל-24 שעות 1.5% (קודם 1.4%), הרבה מתחת לסף ההתרעה של 7%; נבדק ב-19:00 שעון ישראל, לא נשלחה התרעה.",
+ "summary_he": "אין שינוי – עדיין אין סימן לתקיפה אמריקנית או ישראלית רחבה באיראן ביממה הקרובה. הסיבה העיקרית: אין חדש מאז 19:00 שעון ישראל מלבד רטוריקה פוליטית (נתניהו אמר בכנסת שישראל ניצבת בפני \"סכנות עצומות ומיידיות\") וקריאה סינית לשיחות בין ארה\"ב לאיראן; עדיין אין הוראת תקיפה, אין פינוי שגרירות ואין שינוי בהנחיות פיקוד העורף, ושוק המרחב האווירי של איראן יציב על כ-3% עד 30 בנובמבר. מה לעקוב: ישיבת הקבינט הביטחוני ביום חמישי בערב (26 בנובמבר). ההערכה ל-24 שעות 1.5% (קודם 1.5%), הרבה מתחת לסף ההתרעה של 7%; נבדק ב-20:07 שעון ישראל, לא נשלחה התרעה.",
  "open_items_he": [
   "ישיבת הקבינט הביטחוני ביום חמישי בערב (26 בנובמבר) וכל החלטה או הדלפה שתבוא אחריה",
   "תשובת איראן למועד של ארבעה ימים שארה\"ב קבעה לפי הדיווח להצעת ההסכם",
