@@ -1,18 +1,18 @@
 {
   "schema": 1,
-  "updated_utc": "2026-11-27T06:33:10Z",
-  "summary": "No sign of a major US or Israeli strike on Iran in the next day. Main reason: still no strike order, embassy departure or Home Front change; a ynet report (about 00:00 Israel time) says the Mossad chief now backs striking Iran alone if needed, but the IDF chief prefers to wait for Trump and says the threat is not imminent; the market price for a full Iranian airspace closure by 30 Nov edged up to about 4.4% (was 4.25%). Next to watch: any US move over the Kuwait attack. Main 24-hour estimate 2.43% (was 2.35%), under the 7% alert line; checked 08:33 Israel time, no alert sent.",
+  "updated_utc": "2026-11-27T07:43:13Z",
+  "summary": "No sign of a major US or Israeli strike on Iran in the next day. Main reason: still no strike order, embassy departure or Home Front change; Iran's Revolutionary Guards claim (about 09:00 Israel time, unconfirmed) that warning shots turned back a US F-16 near Hengam island, while the market price for a full Iranian airspace closure by 30 Nov eased to about 3.85% (was 4.4%). Next to watch: any US move over the Kuwait attack or the Hengam claim. Main 24-hour estimate 2.3% (was 2.43%), under the 7% alert line; checked 09:43 Israel time, no alert sent.",
   "message_sent": "none",
   "major": {
-    "F": 2.43,
-    "prev_F": 2.35,
-    "E": 4.85,
-    "M": 1.2,
-    "F7": 16.08,
+    "F": 2.3,
+    "prev_F": 2.43,
+    "E": 4.9,
+    "M": 1.06,
+    "F7": 15.31,
     "threshold": 7
   },
   "limited": {
-    "L": 42.49,
+    "L": 43.21,
     "prev_L": 42.49
   },
   "alert": {
@@ -24,22 +24,22 @@
   "flight": {
     "active": true,
     "label": "Your flight to London",
-    "R": 6.39,
-    "prev_R": 6.44,
+    "R": 6.32,
+    "prev_R": 6.39,
     "baseline": 17,
     "alert_at": 25,
-    "C1": 0.24,
-    "C2": 0.62,
+    "C1": 0.2,
+    "C2": 0.49,
     "W": 5.0,
     "triggers": [],
     "status_note": "Your flight is still listed as scheduled, not cancelled, and its route operated as normal every day this week, including Thursday. No airline has announced a new Israel suspension and Ben Gurion is open.",
     "status_note_he": "הטיסה שלך עדיין מופיעה כמתוכננת, לא בוטלה, והקו שלה פעל כרגיל בכל יום השבוע, כולל ביום חמישי. אף חברת תעופה לא הודיעה על השעיה חדשה של טיסות לישראל, ונתב\"ג פתוח."
   },
   "model": {
-    "E": 0.0485,
-    "P_iran_nov30": 0.044,
+    "E": 0.049,
+    "P_iran_nov30": 0.0385,
     "P_iran_dec31": 0.135,
-    "P_il_nov30": 0.033,
+    "P_il_nov30": 0.0335,
     "W": 5.0,
     "F_floor": null,
     "R_floor": null
@@ -47,8 +47,8 @@
   "markets": [
     {
       "label": "Iran full airspace closure by 30 Nov",
-      "now": 4.4,
-      "prev": 4.25,
+      "now": 3.85,
+      "prev": 4.4,
       "url": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028"
     },
     {
@@ -59,8 +59,8 @@
     },
     {
       "label": "Israeli airspace closed by 30 Nov",
-      "now": 3.3,
-      "prev": 3.25,
+      "now": 3.35,
+      "prev": 3.3,
       "url": "https://polymarket.com/event/israeli-airspace-closed-by"
     },
     {
@@ -95,30 +95,30 @@
     }
   ],
   "brent": {
-    "usd": 97.3,
-    "prev_usd": 96.7,
-    "change_pct_day": 0.77,
-    "read_utc": "2026-11-27T06:18:00Z"
+    "usd": 97.6,
+    "prev_usd": 97.3,
+    "change_pct_day": 1.07,
+    "read_utc": "2026-11-27T07:19:00Z"
   },
   "items": [
     {
-      "time_utc": "2026-11-27T06:33:10Z",
+      "time_utc": "2026-11-27T07:43:13Z",
       "source": "Polymarket",
-      "text": "Iran full airspace closure by 30 Nov about 4.4% (was 4.25%; by 31 Dec unchanged at 13.5%); Israeli airspace closed by 30 Nov about 3.3% (was 3.25%; 31 Dec unchanged at 15.5%); Israel–Iran ceasefire through 30 Nov unchanged at 95.5%; US–Iran 2-week pause by 30 Nov unchanged at 72.5% (by 31 Dec 85.5%); major airlines suspending Ben Gurion by 30 Nov about 8.35% on a thin order book (was 9.65%); Brent about $97.30 (+0.77%).",
-      "text_he": "פולימרקט: סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר כ-4.4% (היה 4.25%; עד 31 בדצמבר ללא שינוי, 13.5%); סגירת המרחב האווירי של ישראל עד 30 בנובמבר כ-3.3% (היה 3.25%; עד 31 בדצמבר ללא שינוי, 15.5%); הפסקת האש בין ישראל לאיראן עד 30 בנובמבר ללא שינוי, 95.5%; הפוגה של שבועיים בין ארה\"ב לאיראן עד 30 בנובמבר ללא שינוי, 72.5% (עד 31 בדצמבר 85.5%); השעיית טיסות של חברות תעופה גדולות לנתב\"ג עד 30 בנובמבר כ-8.35% במסחר דליל (היה 9.65%); ברנט כ-97.30$ (‎+0.77%).",
+      "text": "Iran full airspace closure by 30 Nov about 3.85% (was 4.4%; by 31 Dec unchanged at 13.5%); Israeli airspace closed by 30 Nov about 3.35% (was 3.3%; 31 Dec unchanged at 15.5%); Israel–Iran ceasefire through 30 Nov unchanged at 95.5%; US–Iran 2-week pause by 30 Nov unchanged at 72.5% (by 31 Dec 85.5%); major airlines suspending Ben Gurion by 30 Nov about 7.7% on a thin order book (was 8.35%); Brent about $97.60 (+1.07%).",
+      "text_he": "פולימרקט: סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר כ-3.85% (היה 4.4%; עד 31 בדצמבר ללא שינוי, 13.5%); סגירת המרחב האווירי של ישראל עד 30 בנובמבר כ-3.35% (היה 3.3%; עד 31 בדצמבר ללא שינוי, 15.5%); הפסקת האש בין ישראל לאיראן עד 30 בנובמבר ללא שינוי, 95.5%; הפוגה של שבועיים בין ארה\"ב לאיראן עד 30 בנובמבר ללא שינוי, 72.5% (עד 31 בדצמבר 85.5%); השעיית טיסות של חברות תעופה גדולות לנתב\"ג עד 30 בנובמבר כ-7.7% במסחר דליל (היה 8.35%); ברנט כ-97.60$ (‎+1.07%).",
       "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
-      "effect": "No change"
+      "effect": "Small fall"
     },
     {
-      "time_utc": "2026-11-27T06:33:10Z",
+      "time_utc": "2026-11-27T07:43:13Z",
       "source": "Flight-status listings / airline news",
-      "text": "Your flight is still listed as scheduled, not cancelled; its route operated as normal every day this week, including Thursday, and the airline's other Tel Aviv departures this morning are listed as scheduled. No airline has announced a new Israel suspension and Ben Gurion is open.",
-      "text_he": "הטיסה שלך עדיין מופיעה כמתוכננת, לא בוטלה; הקו שלה פעל כרגיל בכל יום השבוע, כולל ביום חמישי, ושאר ההמראות של חברת התעופה מתל אביב הבוקר מופיעות כמתוכננות. אף חברת תעופה לא הודיעה על השעיה חדשה של טיסות לישראל, ונתב\"ג פתוח.",
-      "link": "https://www.flightradar24.com/airport/tlv/departures",
+      "text": "Your flight is still listed as scheduled, not cancelled; its route operated as normal every day this week, including Thursday. No airline has announced a new Israel suspension, flydubai still plans to resume Tel Aviv flights on 3 Dec, and Ben Gurion is open.",
+      "text_he": "הטיסה שלך עדיין מופיעה כמתוכננת, לא בוטלה; הקו שלה פעל כרגיל בכל יום השבוע, כולל ביום חמישי. אף חברת תעופה לא הודיעה על השעיה חדשה של טיסות לישראל, flydubai עדיין מתכננת לחדש את הטיסות לתל אביב ב-3 בדצמבר, ונתב\"ג פתוח.",
+      "link": "https://www.reuters.com/world/middle-east/flydubai-resume-tel-aviv-flights-early-december-2026-11-26/",
       "effect": "No change"
     },
     {
-      "time_utc": "2026-11-27T06:33:10Z",
+      "time_utc": "2026-11-27T07:43:13Z",
       "source": "Home Front Command / US Embassy Jerusalem",
       "text": "Home Front Command policy page: still no restrictions anywhere in the country. US Embassy Jerusalem: newest alert is still the 24 Nov security alert (Level 3 advisory), no departure order. No CENTCOM or White House statement on the Kuwait attack found.",
       "text_he": "דף מדיניות ההתגוננות של פיקוד העורף: עדיין \"אין הגבלות בכל הארץ\". שגרירות ארה\"ב בירושלים: ההתרעה האחרונה היא עדיין התרעת הביטחון מ-24 בנובמבר (אזהרת מסע ברמה 3), ללא הוראת פינוי. לא נמצאה הודעה של סנטקום או של הבית הלבן על התקיפה בכווית.",
@@ -126,24 +126,24 @@
       "effect": "No change"
     },
     {
-      "time_utc": "2026-11-27T06:15:00Z",
-      "source": "Al Jazeera live (English and Arabic)",
-      "text": "Turkey's Erdogan signed the Mecca defence pact with Saudi Arabia and Pakistan, under which an attack on one is an attack on all, mainly aimed at Houthi attacks on Saudi Arabia (08:15 Israel time); Oman condemned the attack on Kuwait and called for an end to all military action in the region (07:30 Israel time). Context only.",
-      "text_he": "נשיא טורקיה ארדואן חתם על ברית ההגנה של מכה עם סעודיה ופקיסטן, שלפיה תקיפה על אחת מהן היא תקיפה על כולן, בעיקר על רקע תקיפות החות'ים בסעודיה (08:15 שעון ישראל); עומאן גינתה את התקיפה בכווית וקראה להפסיק את כל הפעולות הצבאיות באזור (07:30 שעון ישראל). רקע בלבד.",
-      "link": "https://www.aljazeera.com/news/liveblog/2026/11/27/iran-war-live-irans-araghchi-calls-deadly-kuwait-attack-suspicious",
+      "time_utc": "2026-11-27T07:30:00Z",
+      "source": "Al Jazeera Arabic live (10:30 Mecca time)",
+      "text": "Trump again names the new year as the deadline for a deal with Iran or a return to major military operations, repeats the Pickaxe Mountain threat and says Patriot and Tomahawk production is being sped up (09:30 Israel time) – repeats earlier remarks, no order.",
+      "text_he": "טראמפ שב וקובע את תחילת השנה החדשה כמועד האחרון להסכם עם איראן או לחידוש מבצעים צבאיים רחבים, חוזר על האיום על \"הר המכוש\" ואומר שייצור טילי פטריוט וטומהוק מואץ (09:30 שעון ישראל) – חזרה על דברים קודמים, ללא הוראה.",
+      "link": "https://www.aljazeera.net/news/liveblog/2026/11/27/%d8%a5%d9%8a%d8%b1%d8%a7%d9%86-%d9%85%d8%a8%d8%a7%d8%b4%d8%b1-%d8%b7%d9%87%d8%b1%d8%a7%d9%86-%d8%aa%d9%86%d9%81%d9%8a-%d8%b6%d9%84%d9%88%d8%b9%d9%87%d8%a7-%d8%a8%d9%87%d8%ac%d9%88%d9%85",
       "effect": "No change"
     },
     {
-      "time_utc": "2026-11-26T22:00:00Z",
-      "source": "ynet / Yedioth Ahronoth",
-      "text": "Mossad chief Roman Gofman now backs an Israeli strike on Iran even without the US if necessary, citing Iran's alleged chemical-weapons work; IDF chief Eyal Zamir also supports a strike eventually but says the threat is not imminent and prefers to wait for a joint operation once Trump decides – 'that is not the situation right now', a security official said. Washington has not given a green light (published about 00:00 Israel time).",
-      "text_he": "ראש המוסד רומן גופמן תומך כעת בתקיפה ישראלית באיראן גם בלי ארה\"ב אם לא תהיה ברירה, על רקע החשש מתוכנית הנשק הכימי של איראן; הרמטכ\"ל אייל זמיר תומך גם הוא בתקיפה בבוא העת, אך אומר שהאיום אינו מיידי ומעדיף להמתין למבצע משותף לאחר החלטת טראמפ – \"זה לא המצב כרגע\", אמר גורם ביטחוני. וושינגטון טרם נתנה אור ירוק (פורסם בסביבות 00:00 שעון ישראל).",
-      "link": "https://www.ynetnews.com/article/bj11gkcijqe",
+      "time_utc": "2026-11-27T07:00:00Z",
+      "source": "IRGC via Tasnim (Al Jazeera live) – Iranian claim",
+      "text": "Iran's Revolutionary Guards claim their air defences fired warning shots at a US F-16 escorting 'violating' ships near Hengam island in the Strait of Hormuz, forcing it to turn away (09:00 Israel time); no US confirmation.",
+      "text_he": "משמרות המהפכה טוענים שההגנה האווירית שלהם ירתה יריות אזהרה לעבר מטוס F-16 אמריקני שליווה ספינות \"מפרות\" ליד האי הנגאם במצר הורמוז, ואילצה אותו לסגת (09:00 שעון ישראל); אין אישור אמריקני.",
+      "link": "https://www.aljazeera.com/news/liveblog/2026/11/27/iran-war-live-irans-araghchi-calls-deadly-kuwait-attack-suspicious",
       "effect": "Small rise"
     }
   ],
   "open_items": [
-    "Any US response to the deadly drone attack on Kuwait or the Hormuz tanker attacks",
+    "Any US response to the deadly drone attack on Kuwait, the Hormuz tanker attacks or Iran's claimed warning shots at a US jet near Hengam",
     "Whether the market price for a full Iranian airspace closure keeps easing, and any sign of US forces moving into strike positions",
     "Any report on the outcome of Thursday's limited Israeli security consultation and any sign of unilateral Israeli action before a new government forms",
     "Whether the US Embassy follows its 24 Nov alert with an authorized or ordered departure",
@@ -1346,9 +1346,58 @@
       "L": 42.49,
       "R": 6.39,
       "F7": 16.08
+    },
+    {
+      "utc": "2026-11-27T07:43:13Z",
+      "F": 2.3,
+      "E": 4.9,
+      "M": 1.06,
+      "L": 43.21,
+      "R": 6.32,
+      "F7": 15.31
     }
   ],
   "events": [
+    {
+      "time_utc": "2026-11-27T07:43:13Z",
+      "source": "Polymarket",
+      "text": "Iran full airspace closure by 30 Nov about 3.85% (was 4.4%; by 31 Dec unchanged at 13.5%); Israeli airspace closed by 30 Nov about 3.35% (was 3.3%; 31 Dec unchanged at 15.5%); Israel–Iran ceasefire through 30 Nov unchanged at 95.5%; US–Iran 2-week pause by 30 Nov unchanged at 72.5% (by 31 Dec 85.5%); major airlines suspending Ben Gurion by 30 Nov about 7.7% on a thin order book (was 8.35%); Brent about $97.60 (+1.07%).",
+      "text_he": "פולימרקט: סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר כ-3.85% (היה 4.4%; עד 31 בדצמבר ללא שינוי, 13.5%); סגירת המרחב האווירי של ישראל עד 30 בנובמבר כ-3.35% (היה 3.3%; עד 31 בדצמבר ללא שינוי, 15.5%); הפסקת האש בין ישראל לאיראן עד 30 בנובמבר ללא שינוי, 95.5%; הפוגה של שבועיים בין ארה\"ב לאיראן עד 30 בנובמבר ללא שינוי, 72.5% (עד 31 בדצמבר 85.5%); השעיית טיסות של חברות תעופה גדולות לנתב\"ג עד 30 בנובמבר כ-7.7% במסחר דליל (היה 8.35%); ברנט כ-97.60$ (‎+1.07%).",
+      "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
+      "effect": "Small fall"
+    },
+    {
+      "time_utc": "2026-11-27T07:43:13Z",
+      "source": "Flight-status listings / airline news",
+      "text": "Your flight is still listed as scheduled, not cancelled; its route operated as normal every day this week, including Thursday. No airline has announced a new Israel suspension, flydubai still plans to resume Tel Aviv flights on 3 Dec, and Ben Gurion is open.",
+      "text_he": "הטיסה שלך עדיין מופיעה כמתוכננת, לא בוטלה; הקו שלה פעל כרגיל בכל יום השבוע, כולל ביום חמישי. אף חברת תעופה לא הודיעה על השעיה חדשה של טיסות לישראל, flydubai עדיין מתכננת לחדש את הטיסות לתל אביב ב-3 בדצמבר, ונתב\"ג פתוח.",
+      "link": "https://www.reuters.com/world/middle-east/flydubai-resume-tel-aviv-flights-early-december-2026-11-26/",
+      "effect": "No change"
+    },
+    {
+      "time_utc": "2026-11-27T07:43:13Z",
+      "source": "Home Front Command / US Embassy Jerusalem",
+      "text": "Home Front Command policy page: still no restrictions anywhere in the country. US Embassy Jerusalem: newest alert is still the 24 Nov security alert (Level 3 advisory), no departure order. No CENTCOM or White House statement on the Kuwait attack found.",
+      "text_he": "דף מדיניות ההתגוננות של פיקוד העורף: עדיין \"אין הגבלות בכל הארץ\". שגרירות ארה\"ב בירושלים: ההתרעה האחרונה היא עדיין התרעת הביטחון מ-24 בנובמבר (אזהרת מסע ברמה 3), ללא הוראת פינוי. לא נמצאה הודעה של סנטקום או של הבית הלבן על התקיפה בכווית.",
+      "link": "https://www.oref.org.il/12487-15896-he/Pakar.aspx",
+      "effect": "No change"
+    },
+    {
+      "time_utc": "2026-11-27T07:30:00Z",
+      "source": "Al Jazeera Arabic live (10:30 Mecca time)",
+      "text": "Trump again names the new year as the deadline for a deal with Iran or a return to major military operations, repeats the Pickaxe Mountain threat and says Patriot and Tomahawk production is being sped up (09:30 Israel time) – repeats earlier remarks, no order.",
+      "text_he": "טראמפ שב וקובע את תחילת השנה החדשה כמועד האחרון להסכם עם איראן או לחידוש מבצעים צבאיים רחבים, חוזר על האיום על \"הר המכוש\" ואומר שייצור טילי פטריוט וטומהוק מואץ (09:30 שעון ישראל) – חזרה על דברים קודמים, ללא הוראה.",
+      "link": "https://www.aljazeera.net/news/liveblog/2026/11/27/%d8%a5%d9%8a%d8%b1%d8%a7%d9%86-%d9%85%d8%a8%d8%a7%d8%b4%d8%b1-%d8%b7%d9%87%d8%b1%d8%a7%d9%86-%d8%aa%d9%86%d9%81%d9%8a-%d8%b6%d9%84%d9%88%d8%b9%d9%87%d8%a7-%d8%a8%d9%87%d8%ac%d9%88%d9%85",
+      "effect": "No change"
+    },
+    {
+      "time_utc": "2026-11-27T07:00:00Z",
+      "source": "IRGC via Tasnim (Al Jazeera live) – Iranian claim",
+      "text": "Iran's Revolutionary Guards claim their air defences fired warning shots at a US F-16 escorting 'violating' ships near Hengam island in the Strait of Hormuz, forcing it to turn away (09:00 Israel time); no US confirmation.",
+      "text_he": "משמרות המהפכה טוענים שההגנה האווירית שלהם ירתה יריות אזהרה לעבר מטוס F-16 אמריקני שליווה ספינות \"מפרות\" ליד האי הנגאם במצר הורמוז, ואילצה אותו לסגת (09:00 שעון ישראל); אין אישור אמריקני.",
+      "link": "https://www.aljazeera.com/news/liveblog/2026/11/27/iran-war-live-irans-araghchi-calls-deadly-kuwait-attack-suspicious",
+      "effect": "Small rise"
+    },
     {
       "time_utc": "2026-11-27T06:33:10Z",
       "source": "Polymarket",
@@ -2906,46 +2955,6 @@
       "text_he": "נפט ברנט 90.74 דולר, ירידה של 0.72% ביום (הקריאה הקודמת: 91.38 דולר).",
       "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
       "effect": "No change"
-    },
-    {
-      "time_utc": "2026-11-25T10:23:00Z",
-      "source": "Flight-status listings",
-      "text": "Your flight's airline is flying from Tel Aviv as normal today; no airline has suspended Israel flights, no new EASA bulletin, Ben Gurion open.",
-      "text_he": "חברת התעופה של הטיסה שלך ממריאה מתל אביב כרגיל היום; אף חברת תעופה לא השעתה טיסות לישראל, אין עדכון חדש של EASA, ונתב\"ג פתוח.",
-      "link": "https://www.iaa.gov.il/en/airports/ben-gurion/flight-board/",
-      "effect": "No change"
-    },
-    {
-      "time_utc": "2026-11-25T10:15:00Z",
-      "source": "Al Jazeera live (citing Fars)",
-      "text": "Iran's army spokesman Akraminia says surveillance of the Strait of Hormuz will be tightened (rhetoric, no new action).",
-      "text_he": "דובר צבא איראן, אכרמי-ניא, אומר שהמעקב אחר מצר הורמוז יוגבר (רטוריקה, ללא פעולה חדשה).",
-      "link": "https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order",
-      "effect": "No change"
-    },
-    {
-      "time_utc": "2026-11-25T09:45:00Z",
-      "source": "Polymarket",
-      "text": "Iran full airspace closure by 30 Nov 3.2% → 3.05% (31 Dec unchanged at 12.5%); Israel–Iran ceasefire through 30 Nov 92.5% → 93.5%; US–Iran 2-week pause by 30 Nov 73% → 75%; Israeli airspace markets unchanged.",
-      "text_he": "סגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר: 3.2% ← 3.05% (עד 31 בדצמבר ללא שינוי, 12.5%); הפסקת האש בין ישראל לאיראן עד 30 בנובמבר: 92.5% ← 93.5%; הפוגה של שבועיים בין ארה\"ב לאיראן עד 30 בנובמבר: 73% ← 75%; שווקי המרחב האווירי של ישראל ללא שינוי.",
-      "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
-      "effect": "No change"
-    },
-    {
-      "time_utc": "2026-11-25T09:38:00Z",
-      "source": "Financial Times markets",
-      "text": "Brent crude $91.38, flat on the day (−0.02%); the earlier $89.66 read looks like a feed glitch.",
-      "text_he": "נפט ברנט 91.38 דולר, ללא שינוי ביום (−0.02%); הקריאה הקודמת של 89.66 דולר נראית כתקלה בנתונים.",
-      "link": "https://markets.ft.com/data/commodities/tearsheet/summary?c=Brent+Crude+Oil",
-      "effect": "No change"
-    },
-    {
-      "time_utc": "2026-11-25T09:30:00Z",
-      "source": "Al Jazeera live",
-      "text": "An Iranian diplomat in Cairo says ships will not pass Hormuz while the US blockade continues (rhetoric, no new action).",
-      "text_he": "דיפלומט איראני בקהיר אומר שספינות לא יעברו בהורמוז כל עוד המצור האמריקני נמשך (רטוריקה, ללא צעד חדש).",
-      "link": "https://www.aljazeera.com/news/liveblog/2026/11/25/iran-war-live-houthis-threaten-saudi-ports-over-coalitions-hodeidah-order",
-      "effect": "No change"
     }
   ],
   "checklist": [
@@ -2954,10 +2963,10 @@
       "label": "Strike go-order / Situation Room on Iran",
       "status": "green",
       "note": "None reported; on a Thanksgiving call (about 02:30 Israel time) Trump said the US had sent \"an extra aircraft carrier\" and was \"loaded up\", and would strike Pickaxe Mountain if military action resumes – a conditional threat, no order; still no CENTCOM or White House statement on the Kuwait attack",
-      "time_utc": "2026-11-27T06:33:10Z",
+      "time_utc": "2026-11-27T07:43:13Z",
       "note_he": "לא דווח; בשיחת חג ההודיה (בסביבות 02:30 שעון ישראל) אמר טראמפ שארה\"ב שלחה \"נושאת מטוסים נוספת\" ושהיא \"טעונה ומוכנה\", ושתתקוף את \"הר המכוש\" (Pickaxe Mountain) אם הפעולה הצבאית תתחדש – איום מותנה, ללא הוראה; עדיין אין הודעה של סנטקום או של הבית הלבן על התקיפה בכווית",
       "link": "https://www.iranintl.com/en/liveblog/202611214578",
-      "weight_pts": 0.47
+      "weight_pts": 0.48
     },
     {
       "key": "embassy",
@@ -2967,7 +2976,7 @@
       "time_utc": "2026-11-24T20:47:00Z",
       "note_he": "התרעת ביטחון אזורית חדשה של שגרירות ארה\"ב ב-24 בנובמבר (22:47 שעון ישראל): ערנות מוגברת, ייתכנו שיבושי טיסות – אין הוראת פינוי.",
       "link": "https://il.usembassy.gov/category/alert/",
-      "weight_pts": 0.42
+      "weight_pts": 0.43
     },
     {
       "key": "homefront",
@@ -2977,7 +2986,7 @@
       "note_he": "אין שינוי; דף מדיניות ההתגוננות של פיקוד העורף עדיין מציג \"אין הגבלות בכל הארץ\"; דובר צה\"ל (26 בנובמבר בבוקר) אמר שההנחיות לא השתנו",
       "link": "https://www.oref.org.il/12487-15896-he/Pakar.aspx",
       "weight_pts": 0.0,
-      "time_utc": "2026-11-27T06:33:10Z"
+      "time_utc": "2026-11-27T07:43:13Z"
     },
     {
       "key": "airspace",
@@ -2987,7 +2996,7 @@
       "note_he": "אין סגירה כללית; לאיראן יש הגבלות חלקיות על נתיבים, והטענה שסגרה את המרחב האווירי המערבי שלה ב-26 בנובמבר לא אומתה; נתב\"ג פועל כרגיל",
       "link": "https://polymarket.com/event/iran-full-airspace-closure-byptptpt-20260625195253028",
       "weight_pts": 0.0,
-      "time_utc": "2026-11-27T06:33:10Z"
+      "time_utc": "2026-11-27T07:43:13Z"
     },
     {
       "key": "tankers",
@@ -2996,18 +3005,18 @@
       "note": "No credible reports",
       "note_he": "אין דיווחים אמינים",
       "weight_pts": 0.0,
-      "time_utc": "2026-11-27T06:33:10Z",
+      "time_utc": "2026-11-27T07:43:13Z",
       "link": "https://www.timesofisrael.com/liveblog-november-26-2026/"
     },
     {
       "key": "airlines",
       "label": "Foreign airlines suspending Israel flights",
       "status": "green",
-      "note": "None; your airline's Tel Aviv flights keep operating; no foreign airline has announced a new Israel suspension, flydubai plans to resume Tel Aviv flights on 3 Dec, and EASA's Israel note (medium risk, revised 16 Nov) is unchanged",
-      "note_he": "אין; הטיסות של חברת התעופה שלך מתל אביב ממשיכות לפעול; אף חברה זרה לא הודיעה על השעיה חדשה של טיסות לישראל, פליידובאי מתכננת לחזור לתל אביב ב-3 בדצמבר, והודעת EASA על ישראל (סיכון בינוני, עודכנה ב-16 בנובמבר) ללא שינוי",
-      "link": "https://www.easa.europa.eu/en/domains/air-operations/czibs",
+      "note": "None; your airline's Tel Aviv flights keep operating; no foreign airline has announced a new Israel suspension, flydubai plans to resume Tel Aviv flights on 3 Dec (Reuters), and EASA's Israel note (medium risk, revised 16 Nov) is unchanged",
+      "note_he": "אין; הטיסות של חברת התעופה שלך לתל אביב ממשיכות לפעול; אף חברת תעופה זרה לא הודיעה על השעיה חדשה של טיסות לישראל, flydubai מתכננת לחדש את הטיסות לתל אביב ב-3 בדצמבר (רויטרס), והערת EASA על ישראל (סיכון בינוני, עודכנה ב-16 בנובמבר) לא השתנתה",
+      "link": "https://www.reuters.com/world/middle-east/flydubai-resume-tel-aviv-flights-early-december-2026-11-26/",
       "weight_pts": 0.0,
-      "time_utc": "2026-11-27T06:33:10Z"
+      "time_utc": "2026-11-27T07:43:13Z"
     },
     {
       "key": "deadline",
@@ -3016,7 +3025,7 @@
       "note": "Israeli opposition officials say Washington has signalled that Trump does not favour military action now (Jerusalem Post, 26 Nov); earlier single report: US gave Iran four days to answer a deal proposal; Trump: war 'funded' through January",
       "note_he": "גורמים באופוזיציה בישראל אומרים שוושינגטון איתתה שטראמפ אינו תומך כעת בפעולה צבאית ('ג'רוזלם פוסט', 26 בנובמבר); דיווח יחיד קודם: ארה\"ב נתנה לאיראן ארבעה ימים להשיב להצעת הסכם; טראמפ: המלחמה \"ממומנת\" עד סוף ינואר",
       "link": "https://www.jpost.com/israel-news/politics-and-diplomacy/article-916202",
-      "weight_pts": -0.65,
+      "weight_pts": -0.66,
       "time_utc": "2026-11-26T10:46:00Z"
     },
     {
@@ -3025,7 +3034,7 @@
       "status": "amber",
       "note": "Mossad chief now backs striking Iran alone if necessary, while the IDF chief prefers to wait for Trump and says the threat is not imminent (ynet, about 00:00 Israel time, 27 Nov); IDF spokesman (Kan, 26 Nov morning): Israel ready to strike 'at any moment', even without the US; Thursday's security cabinet on Iran was replaced by a smaller closed consultation (Kan, 25 Nov); a single report describes a tense Netanyahu–Trump call in recent days, with Trump still hesitant",
       "note_he": "ראש המוסד תומך כעת בתקיפה ישראלית עצמאית באיראן אם לא תהיה ברירה, ואילו הרמטכ\"ל מעדיף להמתין לטראמפ ואומר שהאיום אינו מיידי (ynet, בסביבות 00:00 שעון ישראל, 27 בנובמבר); דובר צה\"ל ('כאן', בוקר 26 בנובמבר): ישראל מוכנה לתקוף באיראן 'בכל רגע', גם בלי ארה\"ב; ישיבת הקבינט הביטחוני על איראן ביום חמישי הוחלפה בהתייעצות סגורה ומצומצמת ('כאן', 25 בנובמבר); דיווח יחיד מתאר שיחה מתוחה בין נתניהו לטראמפ בימים האחרונים, וטראמפ עדיין מהסס",
-      "weight_pts": 0.79,
+      "weight_pts": 0.8,
       "time_utc": "2026-11-26T22:00:00Z",
       "link": "https://www.ynetnews.com/article/bj11gkcijqe"
     },
@@ -3036,18 +3045,18 @@
       "note": "No US casualties; the Iranian drone attack on Kuwait (26 Nov) killed two Italian technicians (confirmed by Italy's foreign minister) – no US personnel reported hurt; Iranian drone-downing claims unconfirmed",
       "note_he": "אין נפגעים אמריקנים; תקיפת הכטב\"מים האיראנית בכווית (26 בנובמבר) הרגה שני טכנאים איטלקים (אישור שר החוץ של איטליה) – לא דווח על אמריקנים שנפגעו; טענות איראניות על הפלת כטב\"מים לא אומתו",
       "link": "https://kvia.com/news/us-world/cnn-world/2026/11/26/iranian-attack-on-kuwait-kills-two-italians-italys-foreign-minister-says/",
-      "weight_pts": 0.35,
-      "time_utc": "2026-11-27T04:08:44Z"
+      "weight_pts": 0.36,
+      "time_utc": "2026-11-27T07:43:13Z"
     },
     {
       "key": "iranfire",
       "label": "Iranian attacks on US bases or ships",
       "status": "amber",
-      "note": "Kuwait's Defence Ministry and Italy's foreign minister confirmed (16:21–16:53 Israel time, 26 Nov) that two Italian technicians died in the Iranian drone attack on a Kuwaiti air-defence detection station; GCC calls it a dangerous escalation; no US forces hit. UKMTO confirmed a tanker hit east of Khasab on 25 Nov; IRGC claims two more tankers hit mines today – unconfirmed",
-      "note_he": "משרד הביטחון של כווית ושר החוץ של איטליה אישרו (16:21–16:53 שעון ישראל, 26 בנובמבר) ששני טכנאים איטלקים נהרגו בתקיפת הכטב\"מים האיראנית על תחנת גילוי של ההגנה האווירית בכווית; מועצת שיתוף הפעולה של המפרץ מכנה זאת הסלמה מסוכנת; לא נפגעו כוחות אמריקניים. UKMTO אישר פגיעה במכלית מזרחית לח'סב ב-25 בנובמבר; משמרות המהפכה טוענים ששתי מכליות נוספות עלו היום על מוקשים – לא אומת",
+      "note": "Iran's Revolutionary Guards claim (09:00 Israel time, 27 Nov, Tasnim – unconfirmed) that warning shots turned back a US F-16 near Hengam island. Kuwait's Defence Ministry and Italy's foreign minister confirmed (26 Nov) that two Italian technicians died in the Iranian drone attack on a Kuwaiti air-defence detection station; GCC calls it a dangerous escalation; no US forces hit. UKMTO confirmed a tanker hit east of Khasab on 25 Nov",
+      "note_he": "משמרות המהפכה טוענים (09:00 שעון ישראל, 27 בנובמבר, טסנים – לא אומת) שירי אזהרה הרחיק מטוס F-16 אמריקני ליד האי הנגאם. משרד הביטחון של כווית ושר החוץ של איטליה אישרו (26 בנובמבר) ששני טכנאים איטלקים נהרגו בתקיפת הכטב\"מים האיראנית על תחנת גילוי של ההגנה האווירית בכווית; מועצת שיתוף הפעולה של המפרץ מכנה זאת הסלמה מסוכנת; לא נפגעו כוחות אמריקניים. UKMTO אישר פגיעה במכלית מזרחית לח'סב ב-25 בנובמבר",
       "link": "https://kvia.com/news/us-world/cnn-world/2026/11/26/iranian-attack-on-kuwait-kills-two-italians-italys-foreign-minister-says/",
-      "weight_pts": 2.62,
-      "time_utc": "2026-11-26T14:53:00Z"
+      "weight_pts": 2.67,
+      "time_utc": "2026-11-27T07:00:00Z"
     }
   ],
   "predictions": [
@@ -3060,11 +3069,11 @@
       "slug": "iran-full-airspace-closure-byptptpt-20260625195253028",
       "outcome": "November 30",
       "date_utc": "2026-12-01T04:59:00Z",
-      "market_pct": 4.4,
-      "watch_pct": 2.4,
+      "market_pct": 3.85,
+      "watch_pct": 2.2,
       "range_pct": [
-        1.4,
-        3.4
+        1.2,
+        3.2
       ],
       "why": "Iran did not close its airspace in any of the five US strike rounds since July; a general closure now basically needs a major (likely joint Israeli) campaign to start within 6 days, which the White House has signalled is at least a week away. We sit a bit below the market, which still carries a longshot premium.",
       "models": [
@@ -3107,9 +3116,9 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 2.3,
-      "updated_utc": "2026-11-27T06:33:10Z",
-      "prev_market_pct": 4.25,
+      "prev_watch_pct": 2.4,
+      "updated_utc": "2026-11-27T07:43:13Z",
+      "prev_market_pct": 4.4,
       "tickets": [
         {
           "day": "2026-11-24",
@@ -3119,8 +3128,8 @@
           "entry": 95.95,
           "ours": 2.1,
           "stake": 100,
-          "value": 99.64,
-          "pl": -0.36
+          "value": 100.21,
+          "pl": 0.21
         },
         {
           "day": "2026-11-25",
@@ -3130,8 +3139,8 @@
           "entry": 96.0,
           "ours": 2.2,
           "stake": 100,
-          "value": 99.58,
-          "pl": -0.42
+          "value": 100.16,
+          "pl": 0.16
         },
         {
           "day": "2026-11-26",
@@ -3141,8 +3150,8 @@
           "entry": 96.35,
           "ours": 2.2,
           "stake": 100,
-          "value": 99.22,
-          "pl": -0.78
+          "value": 99.79,
+          "pl": -0.21
         },
         {
           "day": "2026-11-27",
@@ -3152,8 +3161,8 @@
           "entry": 96.95,
           "ours": 2.0,
           "stake": 100,
-          "value": 98.61,
-          "pl": -1.39
+          "value": 99.17,
+          "pl": -0.83
         }
       ],
       "snaps": [
@@ -3204,28 +3213,34 @@
           "m": 5.25,
           "o": 2.7,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 3.85,
+          "o": 2.2,
+          "c": "down"
         }
       ],
       "next24": {
-        "up": 26,
-        "down": 60,
-        "flat": 13,
+        "up": 27,
+        "down": 58,
+        "flat": 15,
         "call": "down"
       },
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 1.6,
-        "price": 95.6,
+        "ev_pct": 1.2,
+        "price": 96.15,
         "note": ""
       },
       "score": {
         "dir_calls": 4,
         "dir_hits": 1,
-        "pl_all": -2.95,
+        "pl_all": -0.67,
         "pl_buy_only": 0.0,
         "n_tickets": 4,
-        "first_pl": -0.36
+        "first_pl": 0.21
       }
     },
     {
@@ -3238,10 +3253,10 @@
       "outcome": "December 31",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 13.5,
-      "watch_pct": 12.9,
+      "watch_pct": 12.6,
       "range_pct": [
-        9.5,
-        16.3
+        9.2,
+        16.0
       ],
       "why": "Trump has framed the next decision as 'after the beginning of the year', so most of the major-strike risk lies after the deadline; even if a campaign starts in December, Iran kept airspace open in the July and September US-only rounds. Only a joint Israeli strike on Tehran makes closure likely, so we are a few points below the market.",
       "models": [
@@ -3284,8 +3299,8 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 12.7,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 12.9,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 13.5,
       "tickets": [
         {
@@ -3381,10 +3396,16 @@
           "m": 19.0,
           "o": 14.7,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 13.5,
+          "o": 12.6,
+          "c": "up"
         }
       ],
       "next24": {
-        "up": 45,
+        "up": 44,
         "down": 42,
         "flat": 13,
         "call": "up"
@@ -3392,7 +3413,7 @@
       "trade": {
         "call": "Stay out",
         "side": "No",
-        "ev_pct": 0.1,
+        "ev_pct": 0.5,
         "price": 86.5,
         "note": ""
       },
@@ -3414,11 +3435,11 @@
       "slug": "israeli-airspace-closed-by",
       "outcome": "November 30",
       "date_utc": "2026-12-01T04:59:00Z",
-      "market_pct": 3.3,
-      "watch_pct": 3.0,
+      "market_pct": 3.35,
+      "watch_pct": 2.9,
       "range_pct": [
-        1.3,
-        4.7
+        1.2,
+        4.6
       ],
       "why": "Israel only closes its FIR when Iran fires heavily at Israel, which needs a major (likely joint) campaign within ~6 days, while Washington signals at least a week's delay and Israel has kept airspace open in every round since April. We sit slightly below the market's longshot price.",
       "models": [
@@ -3461,9 +3482,9 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 2.9,
-      "updated_utc": "2026-11-27T06:33:10Z",
-      "prev_market_pct": 3.25,
+      "prev_watch_pct": 3.0,
+      "updated_utc": "2026-11-27T07:43:13Z",
+      "prev_market_pct": 3.3,
       "snaps": [
         {
           "t": "2026-11-24T20:00:00Z",
@@ -3512,19 +3533,25 @@
           "m": 2.55,
           "o": 2.9,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 3.35,
+          "o": 2.9,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 25,
-        "down": 55,
-        "flat": 20,
+        "down": 56,
+        "flat": 19,
         "call": "down"
       },
       "trade": {
         "call": "Stay out",
         "side": "No",
-        "ev_pct": -0.2,
-        "price": 96.7,
+        "ev_pct": -0.1,
+        "price": 96.65,
         "note": ""
       },
       "tickets": [
@@ -3536,8 +3563,8 @@
           "entry": 96.25,
           "ours": 2.7,
           "stake": 100,
-          "value": 100.47,
-          "pl": 0.47
+          "value": 100.42,
+          "pl": 0.42
         },
         {
           "day": "2026-11-26",
@@ -3547,17 +3574,17 @@
           "entry": 96.25,
           "ours": 2.7,
           "stake": 100,
-          "value": 100.47,
-          "pl": 0.47
+          "value": 100.42,
+          "pl": 0.42
         }
       ],
       "score": {
         "dir_calls": 4,
         "dir_hits": 1,
-        "pl_all": 0.94,
+        "pl_all": 0.84,
         "pl_buy_only": 0.0,
         "n_tickets": 2,
-        "first_pl": 0.47
+        "first_pl": 0.42
       }
     },
     {
@@ -3570,10 +3597,10 @@
       "outcome": "December 31",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 15.5,
-      "watch_pct": 17.6,
+      "watch_pct": 17.2,
       "range_pct": [
-        10.7,
-        24.5
+        10.3,
+        24.1
       ],
       "why": "A joint US-Israeli campaign in December is plausible given Netanyahu's pressure, and if Iran hits Israel a short closure of up to 12 h would count; but Trump points to a decision after New Year and Iran avoided hitting Israel in the Jul-Sep rounds. We are a few points below the market, which already fell from ~28% to 17.5% on the delay reports.",
       "models": [
@@ -3616,8 +3643,8 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 17.4,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 17.6,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 15.5,
       "tickets": [
         {
@@ -3713,18 +3740,24 @@
           "m": 15.0,
           "o": 17.9,
           "c": "up"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 15.5,
+          "o": 17.2,
+          "c": "up"
         }
       ],
       "next24": {
         "up": 45,
-        "down": 41,
+        "down": 42,
         "flat": 14,
         "call": "up"
       },
       "trade": {
         "call": "Lean Yes",
         "side": "Yes",
-        "ev_pct": 10.0,
+        "ev_pct": 7.5,
         "price": 15.5,
         "note": ""
       },
@@ -3747,10 +3780,10 @@
       "outcome": "November 30",
       "date_utc": "2026-11-30T20:29:00Z",
       "market_pct": 95.5,
-      "watch_pct": 96.0,
+      "watch_pct": 96.2,
       "range_pct": [
-        94.3,
-        97.7
+        94.5,
+        97.9
       ],
       "why": "Only an Israeli or Iranian strike landing on the other's soil breaks it; US-only strikes and Iranian attacks on Gulf bases/shipping do not, and there has been no direct exchange in 5.5 months despite repeated US strike rounds. With Trump signalling after New Year, we are ~2 points above the market.",
       "models": [
@@ -3794,7 +3827,7 @@
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
       "prev_watch_pct": 96.0,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 95.5,
       "tickets": [
         {
@@ -3890,10 +3923,16 @@
           "m": 94.5,
           "o": 95.5,
           "c": "up"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 95.5,
+          "o": 96.2,
+          "c": "up"
         }
       ],
       "next24": {
-        "up": 63,
+        "up": 64,
         "down": 23,
         "flat": 14,
         "call": "up"
@@ -3901,7 +3940,7 @@
       "trade": {
         "call": "Stay out",
         "side": "Yes",
-        "ev_pct": 0.0,
+        "ev_pct": 0.2,
         "price": 95.5,
         "note": ""
       },
@@ -3924,10 +3963,10 @@
       "outcome": "December 15",
       "date_utc": "2026-12-15T20:29:00Z",
       "market_pct": 83.5,
-      "watch_pct": 84.5,
+      "watch_pct": 85.0,
       "range_pct": [
-        80.0,
-        89.0
+        80.5,
+        89.5
       ],
       "why": "The market keeps pricing a ~10-15%/month break hazard that has not materialised since July; the main risk is a joint US-Israeli campaign, which Washington has pushed back. We sit ~8 points above the market but keep Netanyahu/Mossad pressure and a caretaker government as real tail risks.",
       "models": [
@@ -3970,8 +4009,8 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 84.7,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 84.5,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 83.5,
       "tickets": [
         {
@@ -4067,18 +4106,24 @@
           "m": 83.5,
           "o": 84.0,
           "c": "up"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 83.5,
+          "o": 85.0,
+          "c": "up"
         }
       ],
       "next24": {
         "up": 51,
-        "down": 37,
+        "down": 36,
         "flat": 12,
         "call": "up"
       },
       "trade": {
         "call": "Lean Yes",
         "side": "Yes",
-        "ev_pct": 0.6,
+        "ev_pct": 1.2,
         "price": 83.5,
         "note": ""
       },
@@ -4101,10 +4146,10 @@
       "outcome": "December 31",
       "date_utc": "2026-12-31T20:29:00Z",
       "market_pct": 73.5,
-      "watch_pct": 73.5,
+      "watch_pct": 74.2,
       "range_pct": [
-        67.0,
-        80.0
+        67.7,
+        80.7
       ],
       "why": "Most major-strike risk sits after New Year per Trump, and Israel would most likely act jointly; Eisenkot's coalition talks and IDF's 'no urgency' briefing lower unilateral odds. We are ~9 points above the market, which has systematically overpriced breaks on earlier rungs.",
       "models": [
@@ -4147,8 +4192,8 @@
       "F7_0": 8.6,
       "L0": 27.5,
       "created_utc": "2026-11-24T20:00:00Z",
-      "prev_watch_pct": 73.9,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 73.5,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 73.5,
       "tickets": [
         {
@@ -4244,18 +4289,24 @@
           "m": 73.5,
           "o": 72.7,
           "c": "up"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 73.5,
+          "o": 74.2,
+          "c": "up"
         }
       ],
       "next24": {
-        "up": 47,
-        "down": 42,
+        "up": 48,
+        "down": 41,
         "flat": 11,
         "call": "up"
       },
       "trade": {
         "call": "Stay out",
         "side": "Yes",
-        "ev_pct": -0.7,
+        "ev_pct": 0.3,
         "price": 73.5,
         "note": ""
       },
@@ -4277,11 +4328,11 @@
       "slug": "us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108",
       "outcome": "November 22",
       "date_utc": "2026-12-01T20:29:00Z",
-      "market_pct": 61.0,
-      "watch_pct": 52.7,
+      "market_pct": 62.0,
+      "watch_pct": 52.9,
       "range_pct": [
-        43.7,
-        61.7
+        43.9,
+        61.9
       ],
       "why": "Pays Yes only if no US air or missile strike hits Iranian land from 18 Nov through 1 Dec. The last confirmed US strike was 17 Nov (Qeshm); Iran itself blamed the 20 Nov Qeshm blast on ordnance disposal. Iranian attacks on Bahrain, Kuwait or tankers and blockade actions at sea do not break it. Half the window is already clean; the risk is a US reprisal in the next week.",
       "models": [
@@ -4316,9 +4367,9 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:57:46Z",
-      "prev_watch_pct": 52.9,
-      "updated_utc": "2026-11-27T06:33:10Z",
-      "prev_market_pct": 61.5,
+      "prev_watch_pct": 52.7,
+      "updated_utc": "2026-11-27T07:43:13Z",
+      "prev_market_pct": 61.0,
       "snaps": [
         {
           "t": "2026-11-24T20:00:00Z",
@@ -4367,19 +4418,25 @@
           "m": 59.5,
           "o": 51.9,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 62.0,
+          "o": 52.9,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 17,
-        "down": 81,
+        "down": 82,
         "flat": 2,
         "call": "down"
       },
       "trade": {
-        "call": "Lean No",
+        "call": "Buy No",
         "side": "No",
-        "ev_pct": 19.7,
-        "price": 39.0,
+        "ev_pct": 22.3,
+        "price": 38.0,
         "note": ""
       },
       "tickets": [
@@ -4391,8 +4448,8 @@
           "entry": 51.5,
           "ours": 56.7,
           "stake": 100,
-          "value": 118.45,
-          "pl": 18.45
+          "value": 120.39,
+          "pl": 20.39
         },
         {
           "day": "2026-11-26",
@@ -4402,8 +4459,8 @@
           "entry": 51.5,
           "ours": 54.5,
           "stake": 100,
-          "value": 118.45,
-          "pl": 18.45
+          "value": 120.39,
+          "pl": 20.39
         },
         {
           "day": "2026-11-27",
@@ -4413,17 +4470,17 @@
           "entry": 40.5,
           "ours": 52.8,
           "stake": 100,
-          "value": 96.3,
-          "pl": -3.7
+          "value": 93.83,
+          "pl": -6.17
         }
       ],
       "score": {
         "dir_calls": 4,
-        "dir_hits": 2,
-        "pl_all": 33.2,
+        "dir_hits": 1,
+        "pl_all": 34.61,
         "pl_buy_only": 0.0,
         "n_tickets": 3,
-        "first_pl": 18.45
+        "first_pl": 20.39
       }
     },
     {
@@ -4436,10 +4493,10 @@
       "outcome": "November 30",
       "date_utc": "2026-12-01T04:59:00Z",
       "market_pct": 72.5,
-      "watch_pct": 59.5,
+      "watch_pct": 59.3,
       "range_pct": [
-        49.5,
-        69.5
+        49.3,
+        69.3
       ],
       "why": "Same strict test: any 14 straight days with no US strike on Iranian land, starting by 30 Nov. The current clean run started 18 Nov. In this war 7 of 10 gaps between US land strikes ran past 14 days, though none did in the Oct–Nov reprisal run. About 70%, slightly above the market.",
       "models": [
@@ -4474,8 +4531,8 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:57:46Z",
-      "prev_watch_pct": 59.8,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 59.5,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 72.5,
       "tickets": [
         {
@@ -4571,18 +4628,24 @@
           "m": 74.5,
           "o": 60.4,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 72.5,
+          "o": 59.3,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 15,
         "down": 84,
-        "flat": 1,
+        "flat": 0,
         "call": "down"
       },
       "trade": {
         "call": "Buy No",
         "side": "No",
-        "ev_pct": 44.6,
+        "ev_pct": 45.4,
         "price": 27.5,
         "note": ""
       },
@@ -4605,10 +4668,10 @@
       "outcome": "December 31",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 85.5,
-      "watch_pct": 81.1,
+      "watch_pct": 80.9,
       "range_pct": [
-        73.6,
-        88.6
+        73.4,
+        88.4
       ],
       "why": "Five more weeks for a 14-day clean run to start. Even with a reprisal or two, a clean fortnight before year-end is likely unless a major campaign starts in December, which Trump has signalled is after the new year. About 87%.",
       "models": [
@@ -4643,8 +4706,8 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:57:46Z",
-      "prev_watch_pct": 81.2,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 81.1,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 85.5,
       "tickets": [
         {
@@ -4740,6 +4803,12 @@
           "m": 86.5,
           "o": 81.4,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 85.5,
+          "o": 80.9,
+          "c": "down"
         }
       ],
       "next24": {
@@ -4751,7 +4820,7 @@
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 26.0,
+        "ev_pct": 27.3,
         "price": 14.5,
         "note": ""
       },
@@ -4773,11 +4842,11 @@
       "slug": "major-airlines-suspend-ben-gurion-flights-byptptpt",
       "outcome": "November 30",
       "date_utc": "2026-12-01T04:59:00Z",
-      "market_pct": 8.35,
-      "watch_pct": 4.5,
+      "market_pct": 7.7,
+      "watch_pct": 4.2,
       "range_pct": [
-        3.6,
-        5.4
+        3.3,
+        5.1
       ],
       "why": "The rules are strict: at least 3 of Delta, United, Lufthansa, Air France and BA must each stop every Tel Aviv flight for 14 days in a row, overlapping by 30 Nov. Partial cuts (like Lufthansa's no-overnight rule or BA's route trims) don't count. That basically needs a major campaign within about 5 days, which the White House has signalled is unlikely. Below the thin, noisy market.",
       "models": [
@@ -4819,9 +4888,9 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:52:58Z",
-      "prev_watch_pct": 4.6,
-      "updated_utc": "2026-11-27T06:33:10Z",
-      "prev_market_pct": 9.65,
+      "prev_watch_pct": 4.5,
+      "updated_utc": "2026-11-27T07:43:13Z",
+      "prev_market_pct": 8.35,
       "tickets": [
         {
           "day": "2026-11-24",
@@ -4831,8 +4900,8 @@
           "entry": 91.5,
           "ours": 4.3,
           "stake": 100,
-          "value": 100.16,
-          "pl": 0.16
+          "value": 100.87,
+          "pl": 0.87
         },
         {
           "day": "2026-11-25",
@@ -4842,8 +4911,8 @@
           "entry": 92.5,
           "ours": 4.1,
           "stake": 100,
-          "value": 99.08,
-          "pl": -0.92
+          "value": 99.78,
+          "pl": -0.22
         },
         {
           "day": "2026-11-26",
@@ -4853,8 +4922,8 @@
           "entry": 94.0,
           "ours": 3.9,
           "stake": 100,
-          "value": 97.5,
-          "pl": -2.5
+          "value": 98.19,
+          "pl": -1.81
         },
         {
           "day": "2026-11-27",
@@ -4864,8 +4933,8 @@
           "entry": 91.55,
           "ours": 3.8,
           "stake": 100,
-          "value": 100.11,
-          "pl": 0.11
+          "value": 100.82,
+          "pl": 0.82
         }
       ],
       "snaps": [
@@ -4916,28 +4985,34 @@
           "m": 8.4,
           "o": 4.8,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 7.7,
+          "o": 4.2,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 16,
-        "down": 78,
+        "down": 76,
         "flat": 7,
         "call": "down"
       },
       "trade": {
         "call": "Buy No",
         "side": "No",
-        "ev_pct": 3.6,
-        "price": 91.65,
+        "ev_pct": 3.2,
+        "price": 92.3,
         "note": ""
       },
       "score": {
         "dir_calls": 4,
         "dir_hits": 2,
-        "pl_all": -3.15,
-        "pl_buy_only": -0.65,
+        "pl_all": -0.34,
+        "pl_buy_only": 1.47,
         "n_tickets": 4,
-        "first_pl": 0.16
+        "first_pl": 0.87
       }
     },
     {
@@ -4950,10 +5025,10 @@
       "outcome": "December 31",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 25.5,
-      "watch_pct": 22.6,
+      "watch_pct": 22.1,
       "range_pct": [
-        17.7,
-        27.5
+        17.2,
+        27.0
       ],
       "why": "Needs a major campaign that closes Israeli airspace or scares 3 of the 5 named airlines into a full 14-day halt. In Jun 2025 and Feb 2026 all five stopped for weeks; in the Jul–Sep 2026 US-only rounds they didn't. Our major-campaign odds by year-end times about 60% gives roughly 19%. The market (~31%) trades on a $7k book and has swung 18–46% this month.",
       "models": [
@@ -4995,8 +5070,8 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:52:58Z",
-      "prev_watch_pct": 22.3,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 22.6,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 25.5,
       "tickets": [
         {
@@ -5092,18 +5167,24 @@
           "m": 25.5,
           "o": 23.2,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 25.5,
+          "o": 22.1,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 36,
-        "down": 52,
+        "down": 53,
         "flat": 11,
         "call": "down"
       },
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 3.2,
+        "ev_pct": 3.9,
         "price": 74.5,
         "note": ""
       },
@@ -5125,11 +5206,11 @@
       "slug": "major-airlines-suspend-ben-gurion-flights-byptptpt",
       "outcome": "January 31, 2027",
       "date_utc": "2027-02-01T04:59:00Z",
-      "market_pct": 43.5,
-      "watch_pct": 37.7,
+      "market_pct": 43.0,
+      "watch_pct": 37.0,
       "range_pct": [
-        30.5,
-        44.9
+        29.8,
+        44.2
       ],
       "why": "Same logic with a month more for a campaign after Trump's 'after the new year' decision point; a suspension that starts by 31 Jan can finish its 14 days later. About 30%, a little below the 38% market.",
       "models": [
@@ -5171,8 +5252,8 @@
       "F7_0": 9.17,
       "L0": 28.52,
       "created_utc": "2026-11-24T21:52:58Z",
-      "prev_watch_pct": 37.4,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "prev_watch_pct": 37.7,
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 43.5,
       "tickets": [
         {
@@ -5183,8 +5264,8 @@
           "entry": 58.0,
           "ours": 29.2,
           "stake": 100,
-          "value": 97.41,
-          "pl": -2.59
+          "value": 98.28,
+          "pl": -1.72
         },
         {
           "day": "2026-11-25",
@@ -5194,8 +5275,8 @@
           "entry": 62.0,
           "ours": 29.9,
           "stake": 100,
-          "value": 91.13,
-          "pl": -8.87
+          "value": 91.94,
+          "pl": -8.06
         },
         {
           "day": "2026-11-26",
@@ -5205,8 +5286,8 @@
           "entry": 57.5,
           "ours": 33.3,
           "stake": 100,
-          "value": 98.26,
-          "pl": -1.74
+          "value": 99.13,
+          "pl": -0.87
         },
         {
           "day": "2026-11-27",
@@ -5216,8 +5297,8 @@
           "entry": 57.5,
           "ours": 34.5,
           "stake": 100,
-          "value": 98.26,
-          "pl": -1.74
+          "value": 99.13,
+          "pl": -0.87
         }
       ],
       "snaps": [
@@ -5268,28 +5349,34 @@
           "m": 42.5,
           "o": 38.0,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 43.0,
+          "o": 37.0,
+          "c": "down"
         }
       ],
       "next24": {
         "up": 37,
-        "down": 53,
+        "down": 54,
         "flat": 10,
         "call": "down"
       },
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 9.3,
-        "price": 56.5,
+        "ev_pct": 9.6,
+        "price": 57.0,
         "note": ""
       },
       "score": {
         "dir_calls": 4,
         "dir_hits": 0,
-        "pl_all": -14.94,
-        "pl_buy_only": -14.94,
+        "pl_all": -11.52,
+        "pl_buy_only": -11.52,
         "n_tickets": 4,
-        "first_pl": -2.59
+        "first_pl": -1.72
       }
     },
     {
@@ -5302,10 +5389,10 @@
       "outcome": "December 31",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 5.5,
-      "watch_pct": 3.8,
+      "watch_pct": 3.7,
       "range_pct": [
-        3.1,
-        4.5
+        3.0,
+        4.4
       ],
       "why": "Saudi Arabia has never closed the whole Jeddah FIR, even after ~30 days of Houthi attacks on Riyadh airport since September (18 dead in October) and during the Jun 2025 and Feb 2026 wars – it uses local airport closures and NOTAMs instead. A full closure needs Iran to strike Saudi Arabia hard in a renewed war. About 3%.",
       "models": [
@@ -5348,7 +5435,7 @@
       "L0": 28.52,
       "created_utc": "2026-11-24T21:52:58Z",
       "prev_watch_pct": 3.8,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 5.5,
       "tickets": [
         {
@@ -5444,6 +5531,12 @@
           "m": 5.5,
           "o": 3.9,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 5.5,
+          "o": 3.7,
+          "c": "down"
         }
       ],
       "next24": {
@@ -5455,7 +5548,7 @@
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 1.3,
+        "ev_pct": 1.4,
         "price": 94.5,
         "note": ""
       },
@@ -5478,10 +5571,10 @@
       "outcome": "Yes",
       "date_utc": "2027-01-01T04:59:00Z",
       "market_pct": 5.5,
-      "watch_pct": 4.2,
+      "watch_pct": 4.1,
       "range_pct": [
-        3.5,
-        4.9
+        3.4,
+        4.8
       ],
       "why": "Counts only a US offensive meant to take and hold Iranian ground – an island seizure (Kharg, Abu Musa, the Tunbs) would count; air strikes don't. No ground operation in 9 months of war, Trump's decision is pushed to after the new year, and the Kharg island market sits at 3%. About 3%, below the 6% market, which has been falling (24% in July, 15% in Sep, 11.5% early Nov).",
       "models": [
@@ -5524,7 +5617,7 @@
       "L0": 28.52,
       "created_utc": "2026-11-24T21:52:58Z",
       "prev_watch_pct": 4.2,
-      "updated_utc": "2026-11-27T06:33:10Z",
+      "updated_utc": "2026-11-27T07:43:13Z",
       "prev_market_pct": 5.5,
       "tickets": [
         {
@@ -5620,6 +5713,12 @@
           "m": 5.5,
           "o": 4.3,
           "c": "down"
+        },
+        {
+          "t": "2026-11-27T07:43:13Z",
+          "m": 5.5,
+          "o": 4.1,
+          "c": "down"
         }
       ],
       "next24": {
@@ -5631,7 +5730,7 @@
       "trade": {
         "call": "Lean No",
         "side": "No",
-        "ev_pct": 0.8,
+        "ev_pct": 0.9,
         "price": 94.5,
         "note": ""
       },
@@ -5645,9 +5744,9 @@
       }
     }
   ],
-  "summary_he": "אין סימן לתקיפה אמריקנית או ישראלית רחבה באיראן ביממה הקרובה. הסיבה העיקרית: עדיין אין הוראת תקיפה, פינוי שגרירות או שינוי בהנחיות פיקוד העורף; לפי דיווח ב-ynet (בסביבות 00:00 שעון ישראל) ראש המוסד תומך כעת בתקיפה ישראלית עצמאית אם יהיה צורך, אך הרמטכ\"ל מעדיף להמתין לטראמפ ואומר שהאיום אינו מיידי; מחיר השוק לסגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר עלה מעט לכ-4.4% (היה 4.25%). מה לעקוב: כל צעד אמריקני בעקבות התקיפה בכווית. ההערכה ל-24 שעות 2.43% (הייתה 2.35%), מתחת לסף ההתרעה של 7%; נבדק ב-08:33 שעון ישראל, לא נשלחה התרעה.",
+  "summary_he": "אין סימן לתקיפה אמריקנית או ישראלית רחבה באיראן ביממה הקרובה. הסיבה העיקרית: עדיין אין הוראת תקיפה, פינוי שגרירות או שינוי בהנחיות פיקוד העורף; משמרות המהפכה טוענים (בסביבות 09:00 שעון ישראל, לא אומת) שירי אזהרה הרחיק מטוס F-16 אמריקני ליד האי הנגאם, ובמקביל מחיר השוק לסגירה מלאה של המרחב האווירי של איראן עד 30 בנובמבר ירד לכ-3.85% (היה 4.4%). מה לעקוב: כל צעד אמריקני בעקבות התקיפה בכווית או טענת הנגאם. ההערכה ל-24 שעות 2.3% (הייתה 2.43%), מתחת לסף ההתרעה של 7%; נבדק ב-09:43 שעון ישראל, לא נשלחה התרעה.",
   "open_items_he": [
-    "כל תגובה אמריקנית לתקיפת הכטב\"מים הקטלנית בכווית או לתקיפות המכליות בהורמוז",
+    "כל תגובה אמריקנית לתקיפת הכטב\"מים הקטלנית בכווית, לתקיפות המכליות בהורמוז או לירי האזהרה שאיראן טוענת שירתה לעבר מטוס אמריקני ליד הנגאם",
     "האם מחיר השוק לסגירה מלאה של המרחב האווירי של איראן ממשיך לרדת, וכל סימן לתנועת כוחות אמריקניים לעמדות תקיפה",
     "כל דיווח על תוצאות ההתייעצות הביטחונית המצומצמת בישראל ביום חמישי וכל סימן לפעולה ישראלית עצמאית לפני הקמת ממשלה חדשה",
     "האם שגרירות ארה\"ב תוסיף להתרעה מ-24 בנובמבר היתר או הוראת יציאה",
